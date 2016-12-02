@@ -1,0 +1,46 @@
+{
+  "allPlaceholder": "Address, PIN, Owner, Street or Intersection",
+  "showInfoWindowOnSelect": true,
+  "sources": [
+    {
+      "url": "http://arcgis.ashevillenc.gov/arcgis/rest/services/Geolocators/BC_address_unit/GeocodeServer",
+      "name": "Address",
+      "singleLineFieldName": "Single Line Input",
+      "placeholder": "",
+      "countryCode": "",
+      "maxResults": 6,
+      "searchInCurrentMapExtent": false,
+      "type": "locator"
+    },
+    {
+      "url": "http://arcgis.ashevillenc.gov/arcgis/rest/services/Geolocators/BC_parcel_pin_owner/GeocodeServer",
+      "name": "Parcel PIN or Owner Name",
+      "singleLineFieldName": "SingleLine",
+      "placeholder": "",
+      "countryCode": "",
+      "maxResults": 6,
+      "searchInCurrentMapExtent": false,
+      "type": "locator"
+    },
+    {
+      "url": "http://arcgis.ashevillenc.gov/arcgis/rest/services/Geolocators/BC_street_address/GeocodeServer",
+      "name": "Streets",
+      "singleLineFieldName": "Single Line Input",
+      "placeholder": "",
+      "countryCode": "",
+      "maxResults": 6,
+      "searchInCurrentMapExtent": false,
+      "type": "locator"
+    },
+    {
+      "url": "http://arcgis.ashevillenc.gov/arcgis/rest/services/Geolocators/bc_street_intersection/GeocodeServer",
+      "name": "Street Intersection",
+      "singleLineFieldName": "Single Line Input",
+      "placeholder": "Search like STREET1 & STREET2",
+      "countryCode": "",
+      "maxResults": 4,
+      "searchInCurrentMapExtent": false,
+      "type": "locator"
+    }
+  ]
+}

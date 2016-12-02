@@ -1,0 +1,26 @@
+{
+  "allPlaceholder": "Address, PIN or Owner",
+  "showInfoWindowOnSelect": true,
+  "sources": [
+    {
+      "url": "http://arcgis.ashevillenc.gov/arcgis/rest/services/Geolocators/BC_parcel_pin_owner/GeocodeServer",
+      "name": "Parcel PIN or Owner Name",
+      "singleLineFieldName": "SingleLine",
+      "placeholder": "",
+      "countryCode": "",
+      "maxResults": 6,
+      "searchInCurrentMapExtent": false,
+      "type": "locator"
+    },
+    {
+      "url": "http://arcgis.ashevillenc.gov/arcgis/rest/services/Geolocators/BC_address_point/GeocodeServer",
+      "name": "Address",
+      "singleLineFieldName": "Single Line Input",
+      "placeholder": "",
+      "countryCode": "",
+      "maxResults": 6,
+      "searchInCurrentMapExtent": false,
+      "type": "locator"
+    }
+  ]
+}

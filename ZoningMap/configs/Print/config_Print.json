@@ -1,0 +1,8 @@
+{
+  "serviceURL": "http://arcgis.ashevillenc.gov/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
+  "defaultTitle": "Zoning Map; mapAsheville",
+  "defaultAuthor": "mapAsheville User",
+  "defaultCopyright": "This map is intended for Display purposes only.",
+  "defaultFormat": "PDF",
+  "defaultLayout": "A3 Portrait"
+}

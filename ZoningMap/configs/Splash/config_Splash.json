@@ -1,0 +1,10 @@
+{
+  "splash": {
+    "splashContent": "<div style=\"text-align: center;\"><font size=\"6\" style=\"font-family: Arial;\">To view parcels, zoom in to the desired location or enter the address, PIN number, or owner's name in the search bar on the bottom left.</font><span style=\"font-family: Arial;\">  </span><br /></div>",
+    "requireConfirm": false,
+    "confirmText": "",
+    "showOption": true,
+    "confirmEverytime": true,
+    "backgroundColor": "#37ce80"
+  }
+}
