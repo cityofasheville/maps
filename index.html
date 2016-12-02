@@ -51,7 +51,15 @@
       </footer>
 
     </section>
-
+    <ul>
+      {% for map in site.data.maps %}
+      <li>
+        <a href="/{{ map.link }}">
+          {{ map.name }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
   
   </body>
 </html>
