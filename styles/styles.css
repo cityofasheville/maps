@@ -1,0 +1,29 @@
+.map-card {
+    border: 2px solid #A7BFD4;
+    border-radius: 4px;
+    margin-bottom: 30px;
+}
+
+.map-card-title{
+    color: #A7BFD4;
+}
+
+.logo {
+    margin-top: 100px;
+}
+
+.title {
+    font-family: Dawning of a New Day;
+    color: #A7BFD4;
+    font-size: 200px;
+}
+
+.title-sm {
+    font-family: Dawning of a New Day;
+    color: #A7BFD4;
+    font-size: 100px;
+}
+
+.open-map {
+    margin-bottom: 20px;
+}
