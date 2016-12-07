@@ -2,7 +2,7 @@
     <div class="formContainer">
         <div data-dojo-type="dijit/form/Form" data-dojo-attach-point="printSettingsFormDijit">
             <table cellspacing="5" style="width:100%;">
-                <tr>
+                <tr data-dojo-attach-point="titleTr">
                     <td style="width:65px;">
                         ${nls.title}:
                     </td>
@@ -70,7 +70,7 @@
                     </div>
                     <div data-dojo-type="dijit/form/Form" data-dojo-attach-point="layoutMetadataDijit">
                         <table cellspacing="5" style="width:100%;">
-                            <tr>
+                            <tr data-dojo-attach-point="authorTr">
                                 <td>
                                     ${nls.author}:
                                 </td>
@@ -79,7 +79,7 @@
                                     />
                                 </td>
                             </tr>
-                            <tr>
+                            <tr data-dojo-attach-point="copyrightTr">
                                 <td>
                                     ${nls.copyright}:
                                 </td>
@@ -96,7 +96,7 @@
                     </div>
                     <div data-dojo-type="dijit/form/Form" data-dojo-attach-point="layoutFormDijit">
                         <table cellspacing="5">
-                            <tr>
+                            <tr data-dojo-attach-point="legendTr">
                                 <td>
                                     ${nls.lncludeLegend}:
                                 </td>

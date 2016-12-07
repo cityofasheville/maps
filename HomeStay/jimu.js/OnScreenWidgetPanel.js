@@ -31,14 +31,14 @@ define(['dojo/_base/declare',
   ) {
     /* global jimuConfig */
     return declare([BaseWidgetPanel, _TemplatedMixin], {
-      baseClass: 'jimu-panel jimu-on-screen-widget-panel',
+      baseClass: 'jimu-panel jimu-on-screen-widget-panel jimu-main-background',
       _positionInfoBox: null,
       _originalBox: null,
       widgetIcon: null,
       _resizeOnOpen: true,
 
       templateString: '<div data-dojo-attach-point="boxNode">' +
-        '<div class="jimu-panel-title" data-dojo-attach-point="titleNode">' +
+        '<div class="jimu-panel-title jimu-main-background" data-dojo-attach-point="titleNode">' +
         '<div class="title-label jimu-vcenter-text jimu-float-leading jimu-leading-padding1"' +
         'data-dojo-attach-point="titleLabelNode">${label}</div>' +
         '<div class="close-btn jimu-vcenter jimu-float-trailing" ' +
@@ -103,6 +103,11 @@ define(['dojo/_base/declare',
       _onCloseBtnClicked: function(evt) {
         this.panelManager.closePanel(this);
         evt.stopPropagation();
+
+        //avoid to touchEvent pass through the closeBtn
+        if (evt.type === "touchstart") {
+          evt.preventDefault();
+        }
       },
 
       _normalizePositionObj: function(position) {
@@ -318,7 +323,10 @@ define(['dojo/_base/declare',
       },
 
       _setMobilePosition: function() {
-        html.place(this.domNode, jimuConfig.layoutId);
+        if (window.appInfo.isRunInMobile && this.domNode &&
+          this.domNode.parentNode !== html.byId(jimuConfig.layoutId)) {
+          html.place(this.domNode, jimuConfig.layoutId);
+        }
         var pos = this.panelManager.getPositionOnMobile(this);
         if (this.position.zIndex) {
           pos.zIndex = this.position.zIndex;
@@ -329,7 +337,10 @@ define(['dojo/_base/declare',
       },
 
       _setDesktopPosition: function(position) {
-        html.place(this.domNode, jimuConfig.mapId);
+        if(!window.appInfo.isRunInMobile && this.domNode &&
+          this.domNode.parentNode !== html.byId(jimuConfig.mapId)) {
+          html.place(this.domNode, jimuConfig.mapId);
+        }
 
         html.setStyle(this.domNode, {
           left: position.left + 'px',

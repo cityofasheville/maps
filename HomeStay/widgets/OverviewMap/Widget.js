@@ -52,7 +52,7 @@ define([
 
         if (this.map) {
           this.own(on(this.map, 'layer-add', lang.hitch(this, this._onMainMapBasemapChange)));
-          this.own(on(this.map, 'resize', lang.hitch(this, this._onMainMapResize)));
+          //this.own(on(this.map, 'resize', lang.hitch(this, this._onMainMapResize)));
         }
       },
 
@@ -112,6 +112,9 @@ define([
 
         var _hasMaximizeButton = 'maximizeButton' in json;
         json.maximizeButton = _hasMaximizeButton ? json.maximizeButton : true;
+        json.width = 200;
+        json.height = 200;
+        json.expandFactor = 2;
 
         this.overviewMapDijit = new OverviewMap(json);
         this._handles.push(aspect.after(
@@ -194,10 +197,10 @@ define([
         }
       },
 
-      _onMainMapResize: function() {
-        this._destroyOverviewMap();
-        this.createOverviewMap(this._showDijit);
-      },
+      //_onMainMapResize: function() {
+      //  this._destroyOverviewMap();
+      //  this.createOverviewMap(this._showDijit);
+      //},
 
       onReceiveData: function(name) {
         if (name !== "BasemapGallery") {

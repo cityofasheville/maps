@@ -25,10 +25,11 @@ define(['dojo/_base/declare',
     'jimu/BaseWidget',
     'jimu/dijit/CheckBox',
     'jimu/tokenUtils',
-    'jimu/utils'
+    'jimu/utils',
+    'esri/lang'
   ],
   function(declare, lang, html, on, query, ioquery, cookie, _WidgetsInTemplateMixin, BaseWidget,
-    CheckBox, TokenUtils, utils) {
+    CheckBox, TokenUtils, utils, esriLang) {
     function isFullWindow() {
       if (window.appInfo.isRunInMobile) {
         return true;
@@ -91,14 +92,10 @@ define(['dojo/_base/declare',
         if (!TokenUtils.isInConfigOrPreviewWindow()) {
           var isFirstKey = this._getCookieKey();
           var isfirst = cookie(isFirstKey);
-          if (isfirst && isfirst.toString() === 'false') {
+          if (esriLang.isDefined(isfirst) && isfirst.toString() === 'false') {
             this.close();
           }
         }
-      },
-
-      onClose: function() {
-        this.close();
       },
 
       getUrlParams: function() {
@@ -124,7 +121,7 @@ define(['dojo/_base/declare',
         if (!TokenUtils.isInConfigOrPreviewWindow()) {
           var isFirstKey = this._getCookieKey();
           var isfirst = cookie(isFirstKey);
-          if (isfirst && isfirst.toString() === 'false') {
+          if (esriLang.isDefined(isfirst) && isfirst.toString() === 'false') {
             this.close();
           }
         }
@@ -277,8 +274,8 @@ define(['dojo/_base/declare',
       },
 
       close: function() {
-        html.setStyle(this.domNode, 'display', 'none');
         this._isClosed = true;
+        this.widgetManager.closeWidget(this);
       }
     });
     return clazz;

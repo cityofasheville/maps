@@ -13,10 +13,7 @@
   width: 100%;
   height: 100%;
   position: absolute;
-  background-color:#fff;
-  opacity: 0.1;
-  filter: Alpha(opacity=10);
-  -ms-filter: "Alpha(opacity=10)";
+  background-color:rgba(0,0,0,0.3);
 }
 .jimu-widget-splash-desktop .splash-container .jimu-checkbox,
 .jimu-widget-splash-mobile .splash-container .jimu-checkbox{

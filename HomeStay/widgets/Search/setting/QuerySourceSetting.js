@@ -28,7 +28,9 @@ define([
   'dojo/Deferred',
   'dojo/Evented',
   'jimu/dijit/_FeaturelayerSourcePopup',
+  "jimu/portalUrlUtils",
   'esri/request',
+  "esri/lang",
   'jimu/utils',
   'jimu/dijit/Popup',
   'jimu/dijit/CheckBox',
@@ -38,7 +40,8 @@ define([
 ],
 function(declare, html, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
   template, lang, array, on, query, Deferred, Evented,
-  _FeaturelayerSourcePopup, esriRequest, jimuUtils, Popup, CheckBox) {
+  _FeaturelayerSourcePopup, portalUrlUtils, esriRequest, esriLang,
+  jimuUtils, Popup, CheckBox) {
   return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, Evented], {
     baseClass: 'jimu-widget-search-query-source-setting',
     templateString: template,
@@ -74,6 +77,8 @@ function(declare, html, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
 
       this._layerDefinition = {};
       this._fieldsCheckBox = [];
+
+      this._setMessageNodeContent("");
     },
 
     setDefinition: function(definition) {
@@ -106,14 +111,22 @@ function(declare, html, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
       this.shelter.show();
       if (this._layerDefinition.url !== url) {
         this._getDefinitionFromRemote(url).then(lang.hitch(this, function(response) {
-          if (response) {
+          if (url && (response && response.type !== 'error')) {
             this._layerDefinition = response;
             this._layerDefinition.url = url;
             this._setSourceItems();
+            this._setMessageNodeContent("");
+          } else if (url && (response && response.type === 'error')) {
+            this._setSourceItems();
+            this._disableSourceItems();
+            this._setMessageNodeContent(esriLang.substitute({
+              'URL': response.url
+            }, lang.clone(this.nls.invalidUrlTip)), true);
           }
           this.shelter.hide();
         }));
       } else {
+        this._setMessageNodeContent("");
         this._setSourceItems();
         this.shelter.hide();
       }
@@ -143,7 +156,9 @@ function(declare, html, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
         displayField: this.displayField.get('value'),// defaults to FeatureLayer.displayField
         exactMatch: this.exactMatch.getValue(),
         searchInCurrentMapExtent: this.searchInCurrentMapExtent.checked,
-        maxResults: this.maxResults.get('value'),
+        zoomScale: this.zoomScale.get('value') || 50000,
+        maxSuggestions: this.maxSuggestions.get('value') || 6,
+        maxResults: this.maxResults.get('value') || 6,
         type: 'query'
       };
 
@@ -170,6 +185,28 @@ function(declare, html, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
       this.placeholder.set('value', jimuUtils.stripHTML(this.placeholder.get('value')));
     },
 
+    _disableSourceItems: function() {
+      this.sourceName.set('disabled', true);
+      this.placeholder.set('disabled', true);
+      this.searchFields.set('disabled', true);
+      html.setStyle(this.fieldsSelectorNode, 'display', 'none');
+      this.displayField.set('disabled', true);
+      this.maxSuggestions.set('disabled', true);
+      this.maxResults.set('disabled', true);
+      this.zoomScale.set('disabled', true);
+    },
+
+    _enableSourceItems: function() {
+      this.sourceName.set('disabled', false);
+      this.placeholder.set('disabled', false);
+      this.searchFields.set('disabled', false);
+      html.setStyle(this.fieldsSelectorNode, 'display', 'inline-block');
+      this.displayField.set('disabled', false);
+      this.maxSuggestions.set('disabled', false);
+      this.maxResults.set('disabled', false);
+      this.zoomScale.set('disabled', false);
+    },
+
     _setSourceItems: function() {
       this.sourceUrl.set('value', this.config.url);
       this.sourceName.set('value', jimuUtils.stripHTML(this.config.name || ""));
@@ -180,7 +217,9 @@ function(declare, html, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
       this.displayField.set('value', this.config.displayField || "");
       this.exactMatch.setValue(!!this.config.exactMatch);
       this.searchInCurrentMapExtent.setValue(!!this.config.searchInCurrentMapExtent);
-      this.maxResults.set('value', this.config.maxResults);
+      this.zoomScale.set('value', this.config.zoomScale || 50000);
+      this.maxSuggestions.set('value', this.config.maxSuggestions || 6);
+      this.maxResults.set('value', this.config.maxResults || 6);
       this._layerId = this.config.layerId;
 
       this._suggestible = this._layerDefinition &&
@@ -191,6 +230,14 @@ function(declare, html, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
       } else {
         this._hideSuggestibleTips();
       }
+      var isPointLayer = this._layerDefinition &&
+        this._layerDefinition.geometryType === 'esriGeometryPoint';
+      if (!isPointLayer) {
+        html.setStyle(this.zoomScaleTr, 'display', 'none');
+      } else {
+        html.setStyle(this.zoomScaleTr, 'display', '');
+      }
+      this._enableSourceItems();
     },
 
     _getDefinitionFromRemote: function(url) {
@@ -205,12 +252,39 @@ function(declare, html, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
         });
       this.own(def);
       def.then(lang.hitch(this, function(response) {
-          resultDef.resolve(response);
-        }), lang.hitch(this, function(err) {
-          console.error(err);
-          resultDef.resolve(null);
-        }));
+        resultDef.resolve(response);
+      }), lang.hitch(this, function(err) {
+        console.error(err);
+        resultDef.resolve({
+          type: 'error',
+          url: this._getRequestUrl(url)
+        });
+      }));
       return resultDef.promise;
+    },
+
+    _setMessageNodeContent: function(content, err) {
+      html.empty(this.messageNode);
+      if (!content.nodeType) {
+        content = html.toDom(content);
+      }
+      html.place(content, this.messageNode);
+      if (err) {
+        html.setStyle(this.messageTr, 'display', '');
+      } else {
+        html.setStyle(this.messageTr, 'display', 'none');
+      }
+    },
+
+    _getRequestUrl: function(url) {
+      var protocol = window.location.protocol;
+      if (protocol === 'http:') {
+        return portalUrlUtils.setHttpProtocol(url);
+      } else if (protocol === 'https:'){
+        return portalUrlUtils.setHttpsProtocol(url);
+      } else {
+        return url;
+      }
     },
 
     _setSearchFields2Node: function() {
@@ -250,6 +324,11 @@ function(declare, html, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
             value: lf.name || ""
           };
         });
+      } else if (this.config && this.config.displayField) {
+        options = [{
+          label: this.config.displayField,
+          value: this.config.displayField
+        }];
       }
 
       this.displayField.set('options', options);
@@ -325,10 +404,13 @@ function(declare, html, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
           searchFields: [],
           displayField: this._layerDefinition.displayField || "",
           exactMatch: false,
+          zoomScale: 50000, //default
+          maxSuggestions: 6, //default
           maxResults: 6,//default
           type: "query"
         });
         featurePopup = null;
+        this._setMessageNodeContent("");
 
         if (this._clickSet) {
           this.emit('reselect-query-source-ok', item);
@@ -387,7 +469,8 @@ function(declare, html, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
           label: this.nls.ok,
           onClick: lang.hitch(this, '_onSearchFieldsOk')
         }, {
-          label: this.nls.cancel
+          label: this.nls.cancel,
+          classNames: ['jimu-btn-vacation']
         }],
         onClose: lang.hitch(this, function() {
           this.fieldsPopup = null;
@@ -419,10 +502,12 @@ function(declare, html, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
 
     _showSuggestibleTips: function() {
       html.addClass(this.tipsNode, 'source-tips-show');
+      html.setStyle(this.maxSuggestions.domNode, 'display', 'none');
     },
 
     _hideSuggestibleTips: function() {
       html.removeClass(this.tipsNode, 'source-tips-show');
+      html.setStyle(this.maxSuggestions.domNode, 'display', 'block');
     },
 
     _showValidationErrorTip: function(_dijit){

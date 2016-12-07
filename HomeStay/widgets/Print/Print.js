@@ -8,6 +8,7 @@ define([
   "esri/tasks/PrintTemplate",
   "esri/request",
   'esri/lang',
+  'esri/arcgis/utils',
   'dojo/_base/lang',
   'dojo/_base/array',
   'dojo/_base/html',
@@ -47,6 +48,7 @@ define([
   PrintTemplate,
   esriRequest,
   esriLang,
+  arcgisUtils,
   lang,
   array,
   html,
@@ -84,6 +86,8 @@ define([
     printTask: null,
     async: false,
 
+    _currentTemplateInfo: null,
+
     postCreate: function() {
       this.inherited(arguments);
       var printParams = {
@@ -103,9 +107,9 @@ define([
       this.shelter.startup();
       this.shelter.show();
 
-      this.titleNode.set('value', utils.sanitizeHTML(this.defaultTitle));
-      this.authorNode.set('value', utils.sanitizeHTML(this.defaultAuthor));
-      this.copyrightNode.set('value', utils.sanitizeHTML(this.defaultCopyright));
+      this.titleNode.set('value', this.defaultTitle);
+      this.authorNode.set('value', this.defaultAuthor);
+      this.copyrightNode.set('value', this.defaultCopyright);
 
       var serviceUrl = portalUrlUtils.setHttpProtocol(this.printTaskURL);
       var portalNewPrintUrl = portalUrlUtils.getNewPrintUrl(this.appConfig.portalUrl);
@@ -158,6 +162,12 @@ define([
           false);
       }
       if (this.printTask._createOperationalLayers) {
+        // if opLayers contains markerSymbol of map.infoWindow, the print job will failed
+        aspect.after(
+          this.printTask,
+          '_createOperationalLayers',
+          lang.hitch(this, '_fixInvalidSymbol')
+        );
         aspect.after(
           this.printTask,
           '_createOperationalLayers',
@@ -233,6 +243,27 @@ define([
       return def;
     },
 
+    _fixInvalidSymbol: function(opLayers) {
+      array.forEach(opLayers, function(ol) {
+        if (ol.id === 'map_graphics') {
+          var layers = lang.getObject('featureCollection.layers', false, ol);
+          if (layers && layers.length > 0) {
+            array.forEach(layers, function(layer) {
+              if (layer && layer.featureSet &&
+                layer.featureSet.geometryType === "esriGeometryPoint") {
+                array.forEach(layer.featureSet.features, function(f) {
+                  if (f && f.symbol && !f.symbol.style) {
+                    f.symbol.style = "esriSMSSquare";
+                  }
+                });
+              }
+            });
+          }
+        }
+      }, this);
+      return opLayers;
+    },
+
     _excludeInvalidLegend: function(opLayers) {
       function getSubLayerIds(legendLayer) {
         return array.filter(legendLayer.subLayerIds, lang.hitch(this, function(subLayerId) {
@@ -285,9 +316,10 @@ define([
       var pos = this.templateNames && this.templateNames.indexOf(newValue);
       if (pos > -1) {
         html.empty(this.customTextElementsTable);
-        var templateInfo = this.templateInfos[pos];
-        var customTextElements = templateInfo && templateInfo.layoutOptions &&
-          templateInfo.layoutOptions.customTextElements;
+        var templateInfo = this._currentTemplateInfo = this.templateInfos[pos];
+        var customTextElements =  lang.getObject(
+          "layoutOptions.customTextElements",
+          false, templateInfo);
         if (customTextElements && customTextElements.length > 0) {
           array.forEach(customTextElements, lang.hitch(this, function(cte) {
             for (var p in cte) {
@@ -305,6 +337,68 @@ define([
             }
           }));
         }
+
+        var hasAuthorText = lang.getObject('layoutOptions.hasAuthorText', false, templateInfo);
+        if (!hasAuthorText) {
+          html.setStyle(this.authorTr, 'display', 'none');
+        } else {
+          html.setStyle(this.authorTr, 'display', '');
+        }
+        var hasCopyrightText = lang.getObject(
+          'layoutOptions.hasCopyrightText', false, templateInfo);
+        if (!hasCopyrightText) {
+          html.setStyle(this.copyrightTr, 'display', 'none');
+        } else {
+          html.setStyle(this.copyrightTr, 'display', '');
+        }
+        var hasTitleText = lang.getObject('layoutOptions.hasTitleText', false, templateInfo);
+        if (!hasTitleText) {
+          html.setStyle(this.titleTr, 'display', 'none');
+        } else {
+          html.setStyle(this.titleTr, 'display', '');
+        }
+        var hasLegend = lang.getObject('layoutOptions.hasLegend', false, templateInfo);
+        if (!hasLegend) {
+          html.setStyle(this.legendTr, 'display', 'none');
+        } else {
+          html.setStyle(this.legendTr, 'display', '');
+        }
+      } else if (newValue === 'MAP_ONLY') {
+        html.setStyle(this.authorTr, 'display', 'none');
+        html.setStyle(this.copyrightTr, 'display', 'none');
+        html.setStyle(this.titleTr, 'display', 'none');
+        html.setStyle(this.legendTr, 'display', 'none');
+
+        this._currentTemplateInfo = {
+          layoutOptions: {
+            hasTitleText: false,
+            hasCopyrightText: false,
+            hasAuthorText: false,
+            hasLegend: false
+          }
+        };
+      } else {
+        html.setStyle(this.authorTr, 'display', '');
+        html.setStyle(this.copyrightTr, 'display', '');
+        html.setStyle(this.titleTr, 'display', '');
+        html.setStyle(this.legendTr, 'display', '');
+        this._currentTemplateInfo = {
+          layoutOptions: {
+            hasTitleText: true,
+            hasCopyrightText: true,
+            hasAuthorText: true,
+            hasLegend: true
+          }
+        };
+      }
+    },
+
+    _getMapAttribution: function() {
+      var attr = this.map.attribution;
+      if (attr && attr.domNode) {
+        return html.getProp(attr.domNode, 'textContent');
+      } else {
+        return "";
       }
     },
 
@@ -385,6 +479,23 @@ define([
           cteArray.push(cte);
         }
 
+        var templateInfo = this._currentTemplateInfo;
+        var hasAuthorText = lang.getObject('layoutOptions.hasAuthorText', false, templateInfo);
+        var hasCopyrightText = lang.getObject('layoutOptions.hasCopyrightText',
+          false, templateInfo);
+        var hasLegend = lang.getObject('layoutOptions.hasLegend', false, templateInfo);
+        var hasTitleText = lang.getObject('layoutOptions.hasTitleText', false, templateInfo);
+        var legendLayers = [];
+        if (hasLegend &&
+            this.layoutForm.legend.length > 0 && this.layoutForm.legend[0]) {
+          var legends = arcgisUtils.getLegendLayers({map: this.map, itemInfo: this.map.itemInfo});
+          legendLayers = array.map(legends, function(legend) {
+            return {
+              layerId: legend.layer.id
+            };
+          });
+        }
+
         var template = new PrintTemplate();
         template.format = form.format;
         template.layout = form.layout;
@@ -392,11 +503,10 @@ define([
         template.label = form.title;
         template.exportOptions = mapOnlyForm;
         template.layoutOptions = {
-          authorText: form.author,
-          copyrightText: form.copyright,
-          legendLayers: (this.layoutForm.legend.length > 0 && this.layoutForm.legend[0]) ?
-            null : [],
-          titleText: form.title,
+          authorText: hasAuthorText ? form.author : "",
+          copyrightText: hasCopyrightText ? (form.copyright || this._getMapAttribution()) : "",
+          legendLayers: legendLayers,
+          titleText: hasTitleText ? form.title : "",
           customTextElements: cteArray
         };
         this.printparams.template = template;
@@ -446,6 +556,7 @@ define([
     url: null,
     postCreate: function() {
       this.inherited(arguments);
+      this.progressBar.set('label', this.nls.creatingPrint);
       this.fileHandle.then(lang.hitch(this, '_onPrintComplete'), lang.hitch(this, '_onPrintError'));
     },
     _onPrintComplete: function(data) {

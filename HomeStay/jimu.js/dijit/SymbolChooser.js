@@ -173,6 +173,17 @@ function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
       return result;
     },
 
+    hideColorPicker: function () {
+      var colorPickers = ["pointColor", "pointOutlineColor", "lineColor",
+        "fillColor", "fillOutlineColor", "textColor"];
+      for (var i = 0, len = colorPickers.length; i < len; i++) {
+        var colorPickerName = colorPickers[i];
+        if (this[colorPickerName]) {
+          this[colorPickerName].hideTooltipDialog();
+        }
+      }
+    },
+
     _onBodyClicked: function(event){
       var target = event.target || event.srcElement;
       this._tryHideDropDownOfSelectDijit(target, this.pointSymClassSelect);
@@ -417,6 +428,9 @@ function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
       if (!def) {
         this._requestPointSymJson(fileName);
       }
+      var option = this.pointSymClassSelect.getOptions(fileName);
+      var label = option ? option.label : "";
+      this.pointSymClassSelect.domNode.title = label;
     },
 
     _showSelectedPointSymIconTable:function(){

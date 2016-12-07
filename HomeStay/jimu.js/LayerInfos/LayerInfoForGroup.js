@@ -26,7 +26,7 @@ define([
 LayerInfo, LayerInfoFactory) {
   var clazz = declare(LayerInfo, {
 
-    constructor: function(operLayer, map, options, noLegend) {
+    constructor: function(operLayer, map, noLegend) {
       /*jshint unused: false*/
       this.noLegend = noLegend;
     },
@@ -149,7 +149,7 @@ LayerInfo, LayerInfoFactory) {
     getLayerObject: function() {
       var def = new Deferred();
       if(this.layerObject.empty) {
-
+        // *** will improve.
         esriRequest({
           url: this.layerObject.url,
           handleAs: 'json',
@@ -160,6 +160,7 @@ LayerInfo, LayerInfoFactory) {
           var url = this.layerObject.url;
           this.layerObject = res;
           this.layerObject.url = url;
+          this.layerObject.id = this.id;
           def.resolve(this.layerObject);
         }), function(err) {
           def.reject(err);
@@ -179,6 +180,27 @@ LayerInfo, LayerInfoFactory) {
     _getShowLegendOfWebmap: function() {
       var subId = this.originOperLayer.mapService.subId;
       return this.originOperLayer.mapService.layerInfo._getSublayerShowLegendOfWebmap(subId);
+    },
+
+    getScaleRange: function() {
+      var scaleRange;
+      var mapService = this.originOperLayer.mapService;
+      var jsapiLayerInfo = mapService.layerInfo._getJsapiLayerInfoById(mapService.subId);
+
+      if(jsapiLayerInfo &&
+         (jsapiLayerInfo.minScale >= 0) &&
+         (jsapiLayerInfo.maxScale >= 0)) {
+        scaleRange = {
+          minScale: jsapiLayerInfo.minScale,
+          maxScale: jsapiLayerInfo.maxScale
+        };
+      } else {
+        scaleRange = {
+          minScale: 0,
+          maxScale: 0
+        };
+      }
+      return scaleRange;
     }
 
   });

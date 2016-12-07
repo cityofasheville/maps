@@ -30,9 +30,9 @@ define([
     'dijit/Editor',
     'jimu/utils',
     'jimu/BaseWidgetSetting',
+    "jimu/dijit/CheckBox",
     'jimu/dijit/ColorPicker',
     'dojo/NodeList-manipulate',
-    "jimu/dijit/CheckBox",
     "jimu/dijit/RadioBtn",
     'dijit/_editor/plugins/LinkDialog',
     'dijit/_editor/plugins/ViewSource',
@@ -63,7 +63,8 @@ define([
     _WidgetsInTemplateMixin,
     Editor,
     utils,
-    BaseWidgetSetting) {
+    BaseWidgetSetting,
+    CheckBox) {
     return declare([BaseWidgetSetting, _WidgetsInTemplateMixin], {
       //these two properties is defined in the BaseWidget
       baseClass: 'jimu-widget-splash-setting',
@@ -98,6 +99,19 @@ define([
 
         this.urlParams = this.getUrlParams();
 
+        this.showOption = new CheckBox({
+          label: this.nls.optionText,
+          checked: false
+        }, this.showOption);
+        this.showOption.startup();
+        html.addClass(this.showOption.domNode, 'option-text');
+        this.confirmOption = new CheckBox({
+          label: this.nls.confirmOption,
+          checked: false
+        }, this.confirmOption);
+        this.confirmOption.startup();
+        html.addClass(this.confirmOption.domNode, 'confirm-option');
+
         this.inherited(arguments);
       },
 
@@ -129,6 +143,14 @@ define([
           height: '100%'
         });
         this.editor.startup();
+
+        var instrBox = html.getMarginBox(this.instructionNode);
+        var footerBox = html.getMarginBox(this.splashFooterNode);
+
+        html.setStyle(this.editorContainer, {
+          top: instrBox.h + 4 + 'px',
+          bottom: footerBox.h + 10 + 'px'
+        });
 
         if (has('ie') !== 8) {
           this.editor.resize({

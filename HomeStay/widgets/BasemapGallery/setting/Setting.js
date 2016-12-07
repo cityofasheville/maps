@@ -57,6 +57,11 @@ define([
       editIndex: null,
       spatialRef: null,
 
+      postMixInProperties: function(){
+        this.inherited(arguments);
+        lang.mixin(this.nls, window.jimuNls.common);
+      },
+
       startup: function() {
         this.inherited(arguments);
         if (!this.map) {
@@ -225,6 +230,7 @@ define([
             onClick: lang.hitch(edit, edit._onEditOk, this)
           }, {
             label: this.nls.cancel,
+            classNames: ['jimu-btn-vacation'],
             key: keys.ESCAPE,
             onClose: lang.hitch(edit, edit._onEditClose, this)
           }]

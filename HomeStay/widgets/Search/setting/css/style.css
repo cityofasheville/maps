@@ -81,9 +81,7 @@
 }
 
 .jimu-widget-search-setting .source-setting .source-tips{
-  position: absolute;
   display: none;
-  top: -23px;
   font-size: 12px;
   color: #a0acbf;
 }
@@ -119,6 +117,7 @@
   position: absolute;
   top: 35px;
   left: 0;
+  font-size: 12px;
 }
 
 .jimu-rtl .jimu-widget-search-setting .jimu-widget-search-locator-source-setting .source-details-section .country-code-row .example{
@@ -187,12 +186,16 @@
   width: 60px;
 }
 
-.jimu-widget-search-setting .source-table > tbody > tr > .second .example{
+.jimu-widget-search-setting .source-table > tbody > tr > .second .tip{
   font-style: italic;
   font-size: 12px;
   color: #a0acbf;
   width: 100%;
   display: inline-block;
+}
+
+.jimu-widget-search-setting .source-table .error-message{
+  color: #e84b4b !important;
 }
 
 .jimu-widget-search-setting .jimu-basic-service-chooser {

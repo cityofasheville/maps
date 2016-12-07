@@ -34,8 +34,9 @@ function(declare, _WidgetBase, domStyle, domConstruct) {
         });
       }
       domStyle.set(this.domNode, {width: '100%', height: '100%'});
-      var str = '<img class="jimu-loading" src="' + require.toUrl('jimu') +
-        '/images/loading.gif">';
+
+      var str = '<div class="loading-section"><img class="jimu-loading" src="' +
+       require.toUrl('jimu') + '/images/loading2.gif"></div>';
       domConstruct.place(str, this.domNode);
     },
 

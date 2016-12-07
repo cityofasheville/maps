@@ -17,6 +17,7 @@
 define([
     'dojo/_base/declare',
     'dojo/_base/lang',
+    'dojo/_base/html',
     'dojo/Deferred',
     'jimu/BaseWidget',
     'jimu/utils',
@@ -30,6 +31,7 @@ define([
   function(
     declare,
     lang,
+    html,
     Deferred,
     BaseWidget,
     utils,
@@ -68,7 +70,12 @@ define([
 
           this.domNode.appendChild(this.scalebar.domNode);
           this._hackForhighlight();
-          // domConstruct.place(this.domNode, this,scalebar.domNode);
+
+          if (scaleJson.scalebarStyle === 'ruler') {
+            html.addClass(this.scalebar.domNode, 'ruler-style');
+          } else {
+            html.removeClass(this.scalebar.domNode, 'ruler-style');
+          }
 
           var style = {
             left: 'auto',
@@ -78,9 +85,12 @@ define([
             width: 'auto'
           };
           lang.mixin(style, this.position);
-          domStyle.set(this.scalebar.domNode, utils.getPositionStyle(style));
+          domStyle.set(this.domNode, utils.getPositionStyle(style));
           setTimeout(lang.hitch(this, function() {
-            domStyle.set(this.scalebar.domNode, utils.getPositionStyle(style));
+            if (!this.domNode) {
+              return;
+            }
+            domStyle.set(this.domNode, utils.getPositionStyle(style));
           }), 1000);
         }), lang.hitch(this, function(err) {
           new Message({

@@ -24,7 +24,10 @@
           {
             "name": "date_opened",
             "alias": "date_opened",
-            "show": true
+            "show": true,
+            "format": {
+              "dateFormat": "longMonthDayYear"
+            }
           },
           {
             "name": "record_module",
@@ -39,7 +42,10 @@
           {
             "name": "record_status_date",
             "alias": "record_status_date",
-            "show": true
+            "show": true,
+            "format": {
+              "dateFormat": "longMonthDayYear"
+            }
           },
           {
             "name": "record_type",
@@ -54,27 +60,43 @@
           {
             "name": "balance_due",
             "alias": "balance_due",
-            "show": true
+            "show": true,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
           },
           {
             "name": "date_assigned",
             "alias": "date_assigned",
-            "show": true
+            "show": true,
+            "format": {
+              "dateFormat": "longMonthDayYear"
+            }
           },
           {
             "name": "date_closed",
             "alias": "date_closed",
-            "show": true
+            "show": true,
+            "format": {
+              "dateFormat": "longMonthDayYear"
+            }
           },
           {
             "name": "date_completed",
             "alias": "date_completed",
-            "show": true
+            "show": true,
+            "format": {
+              "dateFormat": "longMonthDayYear"
+            }
           },
           {
             "name": "date_statused",
             "alias": "date_statused",
-            "show": true
+            "show": true,
+            "format": {
+              "dateFormat": "longMonthDayYear"
+            }
           },
           {
             "name": "description",
@@ -84,7 +106,11 @@
           {
             "name": "job_value",
             "alias": "job_value",
-            "show": true
+            "show": true,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
           },
           {
             "name": "record_type_group",
@@ -149,16 +175,218 @@
           {
             "name": "latitude",
             "alias": "latitude",
-            "show": true
+            "show": true,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
           },
           {
             "name": "longitude",
             "alias": "longitude",
-            "show": true
+            "show": true,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
           }
         ]
       },
       "show": true
+    },
+    {
+      "name": "Internal Only: Asheville Short Term Rental Violators",
+      "id": "AshevillePermits_9803",
+      "layer": {
+        "url": "https://gisinternal.ashevillenc.gov/arcgis/rest/services/Permits/AshevillePermits/MapServer/0",
+        "fields": [
+          {
+            "name": "objectid",
+            "alias": "OBJECTID",
+            "show": true
+          },
+          {
+            "name": "record_id",
+            "alias": "record_id",
+            "show": false
+          },
+          {
+            "name": "record_name",
+            "alias": "record_name",
+            "show": false
+          },
+          {
+            "name": "date_opened",
+            "alias": "date_opened",
+            "show": false,
+            "format": {
+              "dateFormat": "longMonthDayYear"
+            }
+          },
+          {
+            "name": "record_module",
+            "alias": "record_module",
+            "show": false
+          },
+          {
+            "name": "record_status",
+            "alias": "record_status",
+            "show": false
+          },
+          {
+            "name": "record_status_date",
+            "alias": "record_status_date",
+            "show": false,
+            "format": {
+              "dateFormat": "longMonthDayYear"
+            }
+          },
+          {
+            "name": "record_type",
+            "alias": "record_type",
+            "show": false
+          },
+          {
+            "name": "address",
+            "alias": "address",
+            "show": false
+          },
+          {
+            "name": "balance_due",
+            "alias": "balance_due",
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          },
+          {
+            "name": "date_assigned",
+            "alias": "date_assigned",
+            "show": false,
+            "format": {
+              "dateFormat": "longMonthDayYear"
+            }
+          },
+          {
+            "name": "date_closed",
+            "alias": "date_closed",
+            "show": false,
+            "format": {
+              "dateFormat": "longMonthDayYear"
+            }
+          },
+          {
+            "name": "date_completed",
+            "alias": "date_completed",
+            "show": false,
+            "format": {
+              "dateFormat": "longMonthDayYear"
+            }
+          },
+          {
+            "name": "date_statused",
+            "alias": "date_statused",
+            "show": false,
+            "format": {
+              "dateFormat": "longMonthDayYear"
+            }
+          },
+          {
+            "name": "description",
+            "alias": "description",
+            "show": false
+          },
+          {
+            "name": "job_value",
+            "alias": "job_value",
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          },
+          {
+            "name": "record_type_group",
+            "alias": "record_type_group",
+            "show": false
+          },
+          {
+            "name": "record_type_category",
+            "alias": "record_type_category",
+            "show": false
+          },
+          {
+            "name": "record_type_type",
+            "alias": "record_type_type",
+            "show": false
+          },
+          {
+            "name": "record_type_subtype",
+            "alias": "record_type_subtype",
+            "show": false
+          },
+          {
+            "name": "short_notes",
+            "alias": "short_notes",
+            "show": false
+          },
+          {
+            "name": "status",
+            "alias": "status",
+            "show": false
+          },
+          {
+            "name": "apn",
+            "alias": "apn",
+            "show": false
+          },
+          {
+            "name": "parcel_number",
+            "alias": "parcel_number",
+            "show": false
+          },
+          {
+            "name": "license_number",
+            "alias": "license_number",
+            "show": false
+          },
+          {
+            "name": "business_name",
+            "alias": "business_name",
+            "show": false
+          },
+          {
+            "name": "record_comments",
+            "alias": "record_comments",
+            "show": false
+          },
+          {
+            "name": "shape",
+            "alias": "SHAPE",
+            "show": false
+          },
+          {
+            "name": "latitude",
+            "alias": "latitude",
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          },
+          {
+            "name": "longitude",
+            "alias": "longitude",
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          }
+        ]
+      },
+      "show": false
     },
     {
       "name": "Buncombe County Addresses",
@@ -174,12 +402,20 @@
           {
             "name": "x",
             "alias": "x",
-            "show": false
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
           },
           {
             "name": "y",
             "alias": "y",
-            "show": false
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
           },
           {
             "name": "address",
@@ -189,7 +425,11 @@
           {
             "name": "number",
             "alias": "number",
-            "show": false
+            "show": false,
+            "format": {
+              "places": 0,
+              "digitSeparator": true
+            }
           },
           {
             "name": "apt",
@@ -219,17 +459,28 @@
           {
             "name": "civicaddress_id",
             "alias": "civicaddress_id",
-            "show": false
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
           },
           {
             "name": "location_type",
             "alias": "location_type",
-            "show": false
+            "show": false,
+            "format": {
+              "places": 0,
+              "digitSeparator": true
+            }
           },
           {
             "name": "change_date",
             "alias": "change_date",
-            "show": false
+            "show": false,
+            "format": {
+              "dateFormat": "longMonthDayYear"
+            }
           },
           {
             "name": "city",
@@ -239,7 +490,11 @@
           {
             "name": "zipcode",
             "alias": "zipcode",
-            "show": false
+            "show": false,
+            "format": {
+              "places": 0,
+              "digitSeparator": true
+            }
           },
           {
             "name": "maximo_type",
@@ -249,7 +504,11 @@
           {
             "name": "maximo_seq_num",
             "alias": "maximo_seq_num",
-            "show": false
+            "show": false,
+            "format": {
+              "places": 0,
+              "digitSeparator": true
+            }
           },
           {
             "name": "asset_code",
@@ -284,17 +543,29 @@
           {
             "name": "centerline_id",
             "alias": "centerline_id",
-            "show": false
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
           },
           {
             "name": "location_id",
             "alias": "location_id",
-            "show": false
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
           },
           {
             "name": "parent_location_id",
             "alias": "parent_location_id",
-            "show": false
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
           }
         ]
       },
@@ -429,7 +700,11 @@
           {
             "name": "acreage",
             "alias": "Acreage",
-            "show": true
+            "show": true,
+            "format": {
+              "places": 2,
+              "digitSeparator": false
+            }
           },
           {
             "name": "accountnumber",
@@ -444,7 +719,11 @@
           {
             "name": "stamps",
             "alias": "stamps",
-            "show": false
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
           },
           {
             "name": "instrument",
@@ -524,17 +803,29 @@
           {
             "name": "totalmarketvalue",
             "alias": "totalmarketvalue",
-            "show": false
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
           },
           {
             "name": "appraisedvalue",
             "alias": "appraisedvalue",
-            "show": false
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
           },
           {
             "name": "taxvalue",
             "alias": "taxvalue",
-            "show": false
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
           },
           {
             "name": "landuse",
@@ -549,17 +840,29 @@
           {
             "name": "landvalue",
             "alias": "landvalue",
-            "show": false
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
           },
           {
             "name": "buildingvalue",
             "alias": "buildingvalue",
-            "show": false
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
           },
           {
             "name": "improvementvalue",
             "alias": "improvementvalue",
-            "show": false
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
           },
           {
             "name": "appraisalarea",
@@ -609,22 +912,109 @@
           {
             "name": "st_area(shape)",
             "alias": "st_area(shape)",
-            "show": false
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
           },
           {
             "name": "st_length(shape)",
             "alias": "st_length(shape)",
-            "show": false
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
           }
         ]
       },
       "show": true
     },
     {
+      "name": "Asheville Neighborhoods",
+      "id": "AshevilleNeighborhoods_7998",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Planning/AshevilleNeighborhoods/MapServer/0",
+        "fields": [
+          {
+            "name": "objectid",
+            "alias": "OBJECTID",
+            "show": true
+          },
+          {
+            "name": "name",
+            "alias": "name",
+            "show": false
+          },
+          {
+            "name": "nbhd_id",
+            "alias": "nbhd_id",
+            "show": false
+          },
+          {
+            "name": "abbreviation",
+            "alias": "ABBR",
+            "show": false
+          },
+          {
+            "name": "narrative",
+            "alias": "DESCRIPTION",
+            "show": false
+          },
+          {
+            "name": "edit_date",
+            "alias": "edit_date",
+            "show": false,
+            "format": {
+              "dateFormat": "longMonthDayYear"
+            }
+          },
+          {
+            "name": "edit_by",
+            "alias": "edit_by",
+            "show": false
+          },
+          {
+            "name": "shape",
+            "alias": "SHAPE",
+            "show": false
+          },
+          {
+            "name": "st_area(shape)",
+            "alias": "st_area(shape)",
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          },
+          {
+            "name": "st_length(shape)",
+            "alias": "st_length(shape)",
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          }
+        ]
+      },
+      "show": false
+    },
+    {
       "name": "Asheville City Limits",
       "id": "AshevilleCityLimits_3213",
       "layer": {
         "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Boundaries/AshevilleCityLimits/MapServer/0"
+      },
+      "show": false
+    },
+    {
+      "name": "Aerial Imagery 2015",
+      "id": "Orthoimagery_2015_8750",
+      "layer": {
+        "url": "https://services.nconemap.gov/arcgis/rest/services/Imagery/Orthoimagery_2015/ImageServer"
       },
       "show": false
     },
@@ -702,5 +1092,6 @@
     ]
   },
   "hideExportButton": false,
-  "initiallyExpand": false
+  "initiallyExpand": false,
+  "filterByMapExtent": true
 }

@@ -1,20 +1,25 @@
 <div>
-  <div class="source-tips jimu-ellipsis" title="${nls.searchLayerTips}" data-dojo-attach-point="tipsNode">
-    <em>${nls.searchLayerTips}</em>
-  </div>
   <div class="source-url-section">
     <table class="source-table">
-      <tr>
-        <td class="first">
-          <span class="source-label">${nls.layerSource}</span>
-        </td>
-        <td class="second">
-          <div data-dojo-attach-point="sourceUrl" data-dojo-type="dijit/form/ValidationTextBox" data-dojo-props="required:true,trim:true,disabled:true,style:{width:'100%'}"></div>
-        </td>
-        <td class="third">
-          <span class="jimu-btn" data-dojo-attach-event="click:_onSetSourceClick">${nls.set}</span>
-        </td>
-      </tr>
+      <tbody>
+        <tr>
+          <td class="first">
+            <span class="source-label">${nls.layerSource}</span>
+          </td>
+          <td class="second">
+            <div data-dojo-attach-point="sourceUrl" data-dojo-type="dijit/form/ValidationTextBox" data-dojo-props="required:true,trim:true,disabled:true,style:{width:'100%'}"></div>
+          </td>
+          <td class="third">
+            <span title="${nls.set}" class="jimu-btn" data-dojo-attach-event="click:_onSetSourceClick">${nls.set}</span>
+          </td>
+        </tr>
+        <tr data-dojo-attach-point="messageTr">
+          <td class="first"></td>
+          <td class="second" colspan="2">
+            <span data-dojo-attach-point="messageNode" class="tip error-message"></span>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
   <div class="source-details-section">
@@ -57,10 +62,30 @@
       </tr>
       <tr>
         <td class="first">
+          <span class="source-label">${nls.maxSuggestions}</span>
+        </td>
+        <td class="second">
+          <div class="source-tips" title="${nls.searchLayerTips}" data-dojo-attach-point="tipsNode">
+            <em>${nls.searchLayerTips}</em>
+          </div>
+          <div data-dojo-attach-point="maxSuggestions" data-dojo-type="dijit/form/NumberTextBox" data-dojo-props="constraints:{min:1,places:0},style:{width:'100%'},value:6"></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="first">
           <span class="source-label">${nls.maxResults}</span>
         </td>
         <td class="second">
-          <div data-dojo-attach-point="maxResults" data-dojo-type="dijit/form/NumberTextBox" data-dojo-props="constraints:{min:1,places:0},style:{width:'100%'}"></div>
+          <div data-dojo-attach-point="maxResults" data-dojo-type="dijit/form/NumberTextBox" data-dojo-props="constraints:{min:1,places:0},style:{width:'100%'},value:6"></div>
+        </td>
+      </tr>
+      <tr data-dojo-attach-point="zoomScaleTr">
+        <td class="first">
+          <span class="source-label">${nls.zoomScale}</span>
+        </td>
+        <td class="second">
+          <span class="jimu-float-leading" style="line-height:30px;">1: </span>
+          <div class="jimu-float-trailing" data-dojo-attach-point="zoomScale" data-dojo-type="dijit/form/NumberTextBox" data-dojo-props="constraints:{min:1},style:{width:'96%'},value:50000"></div>
         </td>
       </tr>
     </table>

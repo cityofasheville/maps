@@ -72,6 +72,27 @@ define(['jimu/shared/BaseVersionManager'],
 
           return oldConfig;
         }
+      }, {
+        version: "2.0beta",
+        upgrader: function(oldConfig) {
+          function addMaxSuggestions(sources) {
+            for (var i = 0, len = sources.length; i < len; i++) {
+              var s = sources[i];
+              s.maxSuggestions = s.maxSuggestions || 6;
+            }
+          }
+          function addZoomScale(sources) {
+            for (var i = 0, len = sources.length; i < len; i++) {
+              var s = sources[i];
+              s.zoomScale = s.zoomScale || 50000;
+            }
+          }
+
+          addMaxSuggestions(oldConfig.sources);
+          addZoomScale(oldConfig.sources);
+
+          return oldConfig;
+        }
       }];
     }
 

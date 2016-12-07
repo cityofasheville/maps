@@ -1,5 +1,3 @@
-﻿define(
-   ({
-    _widgetLabel: "Schaltfläche \"Standardausdehnung\""
-  })
-);
+define({
+  "_widgetLabel": "Startseite"
+});

@@ -51,6 +51,7 @@ define(['dojo/_base/declare',
       showTip: true,
       goldenWidth: 400,
       goldenHeight: 400,
+      maxSize: 1024,
       format: null, // array:['image/png','image/gif','image/jpeg']
 
       // public methods
@@ -229,7 +230,7 @@ define(['dojo/_base/declare',
           return;
         }
 
-        var maxSize = has('ie') < 9 ? 23552 : 1048576; //ie8:21k others:1M
+        var maxSize = has('ie') < 9 ? 23552 : this.maxSize * 1024; //ie8:21k others:1M
         utils.file.readFile(
           evt,
           'image/*',
@@ -306,7 +307,7 @@ define(['dojo/_base/declare',
           hidden: true
         });
         var cropPopup = new Popup({
-          titleLabel: 'Crop Image',
+          titleLabel: this.nls.cropImage,
           content: cropImage,
           // autoHeight: true,
           width: 500,

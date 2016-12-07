@@ -38,12 +38,6 @@ define(function() {
     }
 
     mo.getServerByUrl = function(_url){
-      //test: http://www.arcgis.com => www.arcgis.com
-      //test: https://www.arcgis.com/ => www.arcgis.com
-      //test: //www.arcgis.com => www.arcgis.com
-      //test: http://www.arcgis.com/sharing/rest => www.arcgis.com
-      //test: http://10.112.18.151:6080/arcgis/rest/services => 10.112.18.151:6080
-      //test: //www.arcgis.com/sharing/rest => www.arcgis.com
       _url = (_url || '').trim();
       _url = _url.replace(/^(http(s?):?)\/\//gi, '');
 
@@ -55,11 +49,6 @@ define(function() {
     };
 
     mo.getServerWithProtocol = function(_url){
-      //test: http://www.arcgis.com/sharing/rest => http://www.arcgis.com
-      //test: https://www.arcgis.com/sharing/rest => https://www.arcgis.com
-      //test: //www.arcgis.com/sharing/rest => //www.arcgis.com
-      //test: http://10.112.18.151:6080/arcgis/rest/services => http://10.112.18.151:6080
-
       var result = '';
       _url = (_url || '').trim();
 
@@ -89,28 +78,42 @@ define(function() {
       return _url1.toLowerCase() === _url2.toLowerCase();
     };
 
+    mo.getDomain = function(url) {
+      var serverName, matched, result = '';
+
+      serverName = mo.getServerByUrl(url);
+      if (serverName) {
+        serverName = serverName.replace(/:\d+$/, '');
+        matched = serverName.match(/[^.]\w+\.\w+$/);
+        if (matched !== null) {
+          result = matched[0];
+          // if the url is an IP address, it isn't a vadli domain
+          if (/^\d+\.\d+$/.test(result)) {
+            result = '';
+          }
+        }
+      }
+      return result;
+    };
+
+    mo.isSameDomain = function(url1, url2) {
+      var domain1 = mo.getDomain(url1),
+        domain2 = mo.getDomain(url2);
+
+      return domain1 !== '' && domain1 === domain2;
+    };
+
     mo.isOnline = function(_url){
-      //test: http://esridevbeijing.maps.arcgis.com => true
-      //test: http://www.arcgis.com => true
       var server = mo.getServerByUrl(_url).toLowerCase();
       return server.indexOf('.arcgis.com') >= 0;
     };
 
     mo.isArcGIScom = function(_url){
-      //test: http://esridevbeijing.maps.arcgis.com => false
-      //test: http://www.arcgis.com => true
       var server = mo.getServerByUrl(_url).toLowerCase();
       return server === 'www.arcgis.com' || server === 'arcgis.com';
     };
 
     mo.getStandardPortalUrl = function(_portalUrl){
-      //test: http://www.arcgis.com/sharing/rest//// => http://www.arcgis.com
-      //test: www.arcgis.com => http://www.arcgis.com
-      //test: http://www.arcgis.com/ => http://www.arcgis.com
-      //test: https://www.arcgis.com/ => https://www.arcgis.com
-      //test: 10.112.18.151 => http://10.112.18.151/arcgis
-      //test: 10.112.18.151/gis => http://10.112.18.151/gis
-      //test: http://analysis.arcgis.com => http://analysis.arcgis.com
       var server = mo.getServerByUrl(_portalUrl);
       if (server === '') {
         return '';
@@ -172,6 +175,8 @@ define(function() {
           defaultProtocol = 'http:';
           if (url.startWith('//')) {
             url = defaultProtocol + url; //http: + //js.arcgis.com
+          } else {
+            url = defaultProtocol + "//" + url;
           }
         }
 
@@ -238,7 +243,7 @@ define(function() {
       var sharingUrl = '';
       var portalUrl = mo.getStandardPortalUrl(_portalUrl);
       if(portalUrl){
-        sharingUrl = portalUrl + '/sharing';
+        sharingUrl = portalUrl + '/sharing/rest';
       }
       return sharingUrl;
     };
@@ -247,7 +252,7 @@ define(function() {
       var oauth2Url = '';
       var portalUrl = mo.getStandardPortalUrl(_portalUrl);
       if(portalUrl){
-        oauth2Url = portalUrl + '/sharing/oauth2';
+        oauth2Url = portalUrl + '/sharing/rest/oauth2';
       }
       return oauth2Url;
     };
@@ -256,7 +261,7 @@ define(function() {
       var appIdUrl = '';
       var portalUrl = mo.getStandardPortalUrl(_portalUrl);
       if(portalUrl){
-        appIdUrl = portalUrl + '/sharing/oauth2/apps/' + _appId;
+        appIdUrl = portalUrl + '/sharing/rest/oauth2/apps/' + _appId;
       }
       return appIdUrl;
     };
@@ -275,7 +280,7 @@ define(function() {
       var portalUrl = mo.getStandardPortalUrl(_portalUrl);
       portalUrl = portalUrl.replace(/\/*$/g, '');
       if(portalUrl){
-        searchUrl = portalUrl + '/' + 'sharing/rest/search';
+        searchUrl = portalUrl + '/sharing/rest/search';
       }
       return searchUrl;
     };
@@ -309,9 +314,9 @@ define(function() {
 
     mo.getGenerateTokenUrl = function(_portalUrl){
       var tokenUrl = '';
+      _portalUrl = mo.getStandardPortalUrl(_portalUrl);
       if(_portalUrl){
-        _portalUrl = mo.getStandardPortalUrl(_portalUrl);
-        tokenUrl = _portalUrl + '/sharing/generateToken';
+        tokenUrl = _portalUrl + '/sharing/rest/generateToken';
       }
       return tokenUrl;
     };
@@ -348,7 +353,7 @@ define(function() {
       var thePortalUrl = _portalUrl || '';
       thePortalUrl = mo.getStandardPortalUrl(thePortalUrl);
       if(thePortalUrl){
-        url = thePortalUrl + '/sharing/portals/self';
+        url = thePortalUrl + '/sharing/rest/portals/self';
       }
       return url;
     };
@@ -491,6 +496,18 @@ define(function() {
       return url;
     };
 
+    mo.getHomeSceneViewerUrl = function(_portalUrl, /* optional */ itemId){
+      var url = '';
+      var thePortalUrl = mo.getStandardPortalUrl(_portalUrl);
+      if(thePortalUrl){
+        url = thePortalUrl + '/home/webscene/viewer.html';
+        if(itemId){
+          url += "?webscene=" + itemId;
+        }
+      }
+      return url;
+    };
+
     mo.getHomeGalleryUrl = function(_portalUrl){
       var url = '';
       var thePortalUrl = mo.getStandardPortalUrl(_portalUrl);
@@ -573,7 +590,7 @@ define(function() {
       var signOutUrl = "";
       var portalUrl = mo.getStandardPortalUrl(_portalUrl);
       if(portalUrl){
-        signOutUrl = portalUrl + '/sharing/oauth2/signout';//?redirect_uri=http://...
+        signOutUrl = portalUrl + '/sharing/rest/oauth2/signout';//?redirect_uri=http://...
       }
       return signOutUrl;
     };

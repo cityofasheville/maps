@@ -30,7 +30,7 @@ define([
     'jimu/dijit/SimpleTable'
   ],
   function(declare, lang, array, html, query, on, _WidgetsInTemplateMixin, BaseWidgetSetting,
-    TabContainer, jimuUtils, Select, CheckBox) {
+    TabContainer, jimuUtils, Select, CheckBox, Table) {
     return declare([BaseWidgetSetting, _WidgetsInTemplateMixin], {
       baseClass: 'jimu-widget-draw-setting',
       distanceUnits:null,
@@ -129,6 +129,55 @@ define([
 
       postCreate: function() {
         this.inherited(arguments);
+
+        var distanceFields = [{name: "label", title: this.nls.label, "class": "label", type: "empty"}, {
+          name: "abbr",
+          title: this.nls.abbr,
+          "class": "abbr",
+          type: "text",
+          editable: false
+        }, {
+          name: "conversion",
+          title: this.nls.conversion,
+          "class": "conversion",
+          type: "text",
+          editable: false
+        }, {
+          name: "actions",
+          title: this.nls.actions,
+          "class": "actions",
+          type: "actions",
+          actions: ["up", "down", "delete"]
+        }];
+        this.distanceTable = new Table({
+          fields: distanceFields
+        });
+        this.distanceTable.placeAt(this.distanceTableDiv);
+
+        var areaFields = [{name: "label", title: this.nls.label, "class": "label", type: "empty"}, {
+          name: "abbr",
+          title: this.nls.abbr,
+          "class": "abbr",
+          type: "text",
+          editable: false
+        }, {
+          name: "conversion",
+          title: this.nls.conversion,
+          "class": "conversion",
+          type: "text",
+          editable: false
+        }, {
+          name: "actions",
+          title: this.nls.actions,
+          "class": "actions",
+          type: "actions",
+          actions: ["up", "down", "delete"]
+        }];
+        this.areaTable = new Table({
+          fields: areaFields
+        });
+        this.areaTable.placeAt(this.areaTableDiv);
+
         this.cbxOperationalLayer = new CheckBox({
           label: this.nls.operationalLayer,
           style: 'margin-top:10px;'

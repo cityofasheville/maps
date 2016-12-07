@@ -22,11 +22,13 @@ define([
   'dojo/aspect',
   './LayerInfo',
   './LayerInfoForDefault',
+  './LayerInfoFactory',
   'dojo/Deferred'
-], function(declare, array, lang, graphicsUtils, aspect, LayerInfo, LayerInfoForDefault, Deferred) {
+], function(declare, array, lang, graphicsUtils, aspect, LayerInfo, LayerInfoForDefault,
+  LayerInfoFactory, Deferred) {
   return declare(LayerInfo, {
     /*jshint unused: false*/
-    constructor: function( operLayer, map) {
+    constructor: function(/*operLayer, map*/) {
       /*jshint unused: false*/
     },
 
@@ -43,6 +45,22 @@ define([
         }
       }, this);
       return fullExtent;
+    },
+
+    _resetLayerObjectVisiblity: function(layerOptions) {
+      var layerOption  = layerOptions ? layerOptions[this.id]: null;
+      if(layerOption) {
+        // check/unchek all sublayers according to subLayerOption.visible.
+        array.forEach(this.newSubLayers, function(subLayerInfo) {
+          var subLayerOption  = layerOptions ? layerOptions[subLayerInfo.id]: null;
+          if(subLayerOption) {
+            subLayerInfo.layerObject.setVisibility(subLayerOption.visible);
+          }
+        }, this);
+
+        // according to layerOption.visible to set this._visible after all sublayers setting.
+        this._setTopLayerVisible(layerOption.visible);
+      }
     },
 
     initVisible: function() {
@@ -78,14 +96,23 @@ define([
       array.forEach(layers, function(layerObj) {
         var subLayerInfo, deferred;
         if (this._getLayerIndexesInMapByLayerId(layerObj.id)) {
-          subLayerInfo = new LayerInfoForDefault({
+          // subLayerInfo = new LayerInfoForDefault({
+          //   layerObject: layerObj,
+          //   title: layerObj.label || layerObj.title || layerObj.name || layerObj.id || " ",
+          //   id: layerObj.id || " ",
+          //   collection: {"layerInfo": this},
+          //   selfType: 'kml',
+          //   parentLayerInfo: this
+          // }, this.map);
+
+          subLayerInfo = LayerInfoFactory.getInstance().create({
             layerObject: layerObj,
             title: layerObj.label || layerObj.title || layerObj.name || layerObj.id || " ",
             id: layerObj.id || " ",
             collection: {"layerInfo": this},
             selfType: 'kml',
             parentLayerInfo: this
-          }, this.map);
+          });
           newSubLayerInfos.push(subLayerInfo);
           subLayerInfo.init();
         }

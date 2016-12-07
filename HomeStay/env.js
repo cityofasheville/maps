@@ -69,11 +69,16 @@ var
   //    If it's debug mode, the app will load weinre file
   debug = false,
 
+  //deprecated, use appInfo.appPath instead
   path = null,
 
   isXT = false,
 
-  allCookies;
+  allCookies,
+
+  //This version number will be appended to URL to avoid cache.
+  //The reason we do not use wabVersion is to avoid force user to change wabVersion when they are customizing app.
+  deployVersion = '2.1';
 
 // console.time('before map');
 
@@ -86,10 +91,11 @@ var
 (function(global){
   //init API URL
   var queryObject = getQueryObject();
+  var apiVersion = '3.17';
 
   ////////uncomment the following line when downloading the app
 
-  apiUrl = '//js.arcgis.com/3.15';
+  apiUrl = '//js.arcgis.com/3.17';
 
   //////////////////////////////////////////////////////////////
   allCookies = getAllCookies();
@@ -98,11 +104,19 @@ var
     if (queryObject.apiurl) {
       apiUrl = queryObject.apiurl;
     } else if (isXT) {
-      apiUrl = '//js.arcgis.com/3.15';
+      apiUrl = '//js.arcgis.com/' + apiVersion;
     } else {
       var portalUrl = getPortalUrlFromLocation();
       if (portalUrl.indexOf('arcgis.com') > -1) {
-        apiUrl = '//js.arcgis.com/3.15';
+        // if(portalUrl.indexOf('devext.arcgis.com') > -1){
+        //   apiUrl = '//jsdev.arcgis.com/' + apiVersion;
+        // }else if(portalUrl.indexOf('qaext.arcgis.com') > -1){
+        //   apiUrl = '//jsqa.arcgis.com/' + apiVersion;
+        // }else{
+        //   apiUrl = '//js.arcgis.com/' + apiVersion;
+        // }
+
+        apiUrl = '//js.arcgis.com/' + apiVersion;
       } else {
         apiUrl = portalUrl + 'jsapi/jsapi/';
       }
@@ -266,4 +280,31 @@ var
   global._loadPolyfills = _loadPolyfills;
   global.queryObject = queryObject;
   global._setRTL = _setRTL;
+
+  global.avoidRequireCache = function(require){
+    var dojoInject = require.injectUrl;
+    require.injectUrl = function(url, callback, owner){
+      url = appendDeployVersion(url);
+      dojoInject(url, callback, owner);
+    };
+  };
+
+  global.avoidRequestCache = function (aspect, requestUtil){
+    aspect.after(requestUtil, 'parseArgs', function(args){
+      args.url = appendDeployVersion(args.url);
+      return args;
+    });
+  };
+
+  function appendDeployVersion(url){
+    if(/^http(s)?:\/\//.test(url) || /^\/proxy\.js/.test(url) || /^\/\//.test(url)){
+      return url;
+    }
+    if(url.indexOf('?') > -1){
+      url = url + '&wab_dv=' + deployVersion;
+    }else{
+      url = url + '?wab_dv=' + deployVersion;
+    }
+    return url;
+  }
 })(window);

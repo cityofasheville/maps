@@ -24,6 +24,7 @@ define([
     'dojo/_base/lang',
     'dojo/_base/Color',
     'dojo/_base/array',
+    'dojo/dom-style',
     'esri/config',
     'esri/graphic',
     'esri/geometry/Polyline',
@@ -50,7 +51,7 @@ define([
     'dijit/form/Select',
     'dijit/form/NumberSpinner'
   ],
-  function(declare, _WidgetsInTemplateMixin, BaseWidget, on, Deferred, html, lang, Color, array,
+  function(declare, _WidgetsInTemplateMixin, BaseWidget, on, Deferred, html, lang, Color, array, domStyle,
     esriConfig, Graphic, Polyline, Polygon, TextSymbol, Font, esriUnits, webMercatorUtils,
     geodesicUtils, GeometryService, AreasAndLengthsParameters, LengthsParameters, UndoManager,
     OperationBase, GraphicsLayer, FeatureLayer, ViewStack, jimuUtils, wkidUtils, LayerInfos,
@@ -227,8 +228,23 @@ define([
       },
 
       onDeActive: function(){
+        this._closeColorPicker();
         this.drawBox.deactivate();
         this.map.setInfoWindowOnClick(true);
+      },
+
+      onClose: function () {
+        this._closeColorPicker();
+      },
+
+      _closeColorPicker: function () {
+        var choosers = ["pointSymChooser", "lineSymChooser", "fillSymChooser", "textSymChooser"];
+        for (var i = 0, len = choosers.length; i < len; i++) {
+          var chooserStr = choosers[i];
+          if (this[chooserStr]) {
+            this[chooserStr].hideColorPicker();
+          }
+        }
       },
 
       _resetUnitsArrays: function(){
@@ -786,6 +802,7 @@ define([
       },
 
       _syncGraphicsToLayers: function(){
+        /*global isRTL*/
         this._pointLayer.clear();
         this._polylineLayer.clear();
         this._polygonLayer.clear();
@@ -796,9 +813,12 @@ define([
           var clonedGraphic = new Graphic(graphicJson);
           var geoType = clonedGraphic.geometry.type;
           var layer = null;
+          var isNeedRTL = false;
+
           if(geoType === 'point'){
             if(clonedGraphic.symbol && clonedGraphic.symbol.type === 'textsymbol'){
               layer = this._labelLayer;
+              isNeedRTL = isRTL;
             }else{
               layer = this._pointLayer;
             }
@@ -807,8 +827,16 @@ define([
           }else if(geoType === 'polygon' || geoType === 'extent'){
             layer = this._polygonLayer;
           }
-          if(layer){
-            layer.add(clonedGraphic);
+          if (layer) {
+            var graphic = layer.add(clonedGraphic);
+            if (true === isNeedRTL && graphic.getNode) {
+              var node = graphic.getNode();
+              if (node) {
+                //SVG <text>node can't set className by domClass.add(node, "jimu-rtl"); so set style
+                //It's not work that set "direction:rtl" to SVG<text>node in IE11, it is IE's bug
+                domStyle.set(node, "direction", "rtl");
+              }
+            }
           }
         }));
       },

@@ -39,9 +39,9 @@ function(declare, _WidgetBase, _TemplatedMixin, template, html) {
         html.setStyle(this.domNode, 'display', 'none');
       }
       html.setStyle(this.domNode, {width: '100%', height: '100%'});
-      this.loadingImg.src = require.toUrl('jimu') + '/images/loading.gif';
+      this.loadingImg.src = require.toUrl('jimu') + '/images/loading2.gif';
       if(!this.showLoading){
-        html.setStyle(this.loadingImg, 'display', 'none');
+        html.setStyle(this.imgDiv, 'display', 'none');
       }
       if(typeof this.loadingText === 'string'){
         this.textNode.innerHTML = this.loadingText;

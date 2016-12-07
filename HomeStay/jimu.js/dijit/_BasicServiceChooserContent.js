@@ -121,6 +121,8 @@ function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, templat
       if(this.url && typeof this.url === 'string'){
         this.urlInput.set('value', this.url);
       }
+
+      this.own(on(this.serviceBrowser, 'error', lang.hitch(this, this._onServiceBrowserError)));
     },
 
     //to be override,return a service browser
@@ -181,7 +183,27 @@ function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, templat
       return isValidate;
     },
 
+    _onServiceBrowserError: function(msg){
+      this._showErrorMessage(msg);
+    },
+
+    _showErrorMessage: function(msg){
+      if(msg && typeof msg === 'string'){
+        this.errorNode.innerHTML = msg;
+        html.addClass(this.errorSection, 'visible');
+      }else{
+        html.removeClass(this.errorSection, 'visible');
+      }
+    },
+
+    _clearErrorMessage: function(){
+      this.errorNode.innerHTML = '';
+      html.removeClass(this.errorSection, 'visible');
+    },
+
     _onBtnValidateClick: function(){
+      this._clearErrorMessage();
+
       var def = new Deferred();
 
       var isValidate = this.urlInput.validate();

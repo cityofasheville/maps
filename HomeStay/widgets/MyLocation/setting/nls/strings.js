@@ -3,7 +3,8 @@ define({
     timeout: "Timeout",
     highlightLocation: "Highlight location",
     useTracking: "Watch for location changes",
-    warning: "Incorrect input"
+    warning: "Incorrect input",
+    zoomScale: "Zoom Scale"
   }),
   "ar": 1,
   "cs": 1,
@@ -15,6 +16,7 @@ define({
   "fi": 1,
   "fr": 1,
   "he": 1,
+  "hr": 1,
   "it": 1,
   "ja": 1,
   "ko": 1,
@@ -27,6 +29,7 @@ define({
   "pt-pt": 1,
   "ro": 1,
   "ru": 1,
+  "sr": 1,
   "sv": 1,
   "th": 1,
   "tr": 1,

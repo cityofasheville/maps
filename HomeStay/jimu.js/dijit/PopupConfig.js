@@ -31,7 +31,7 @@ define(['dojo/_base/declare',
   'dijit/Menu'
 ],
 function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
-  template, lang, html, array, esriRequest, MenuItem) {
+  template, lang, html, array, esriRequest, MenuItem, SimpleTable) {
   return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
     _def:null,
     declaredClass: 'jimu.dijit.PopupConfig',
@@ -49,6 +49,7 @@ function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
 
     postCreate:function(){
       this.inherited(arguments);
+      this._initFieldsTable();
       this.clear();
       if(this.showTitle){
         html.setStyle(this.titleTR, 'display', '');
@@ -109,6 +110,34 @@ function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
       this.fieldsTable.clear();
       this._resetMenu();
       this._addEmptyMenuItem();
+    },
+
+    _initFieldsTable: function(){
+      html.empty(this.fieldsTableTd);
+      var fields = [{
+          name: "visibility",
+          title: this.nls.visibility,
+          type: "checkbox"
+        }, {
+          name: "name",
+          title: this.nls.name,
+          type: "text",
+          editable: false
+        }, {
+          name: "alias",
+          title: this.nls.alias,
+          type: "text",
+          editable: true
+        }, {
+          name: "actions",
+          title: this.nls.actions,
+          type: "actions",
+          actions: ["up", "down"]
+        }];
+      this.fieldsTable = new SimpleTable({
+        fields: fields
+      });
+      this.fieldsTable.placeAt(this.fieldsTableTd);
     },
 
     _resetMenu:function(){

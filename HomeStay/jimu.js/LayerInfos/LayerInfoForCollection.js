@@ -53,6 +53,22 @@ LayerInfoFactory) {
       return extent;
     },
 
+    _resetLayerObjectVisiblity: function(layerOptions) {
+      var layerOption  = layerOptions ? layerOptions[this.id]: null;
+      if(layerOption) {
+        // check/unchek all sublayers according to subLayerOption.visible.
+        array.forEach(this.newSubLayers, function(subLayerInfo) {
+          var subLayerOption  = layerOptions ? layerOptions[subLayerInfo.id]: null;
+          if(subLayerOption) {
+            subLayerInfo.layerObject.setVisibility(subLayerOption.visible);
+          }
+        }, this);
+
+        // according to layerOption.visible to set this._visible after all sublayers setting.
+        this._setTopLayerVisible(layerOption.visible);
+      }
+    },
+
     initVisible: function() {
       var visible = false, i;
       for (i = 0; i < this.newSubLayers.length; i++) {
@@ -75,7 +91,7 @@ LayerInfoFactory) {
       }, this);
 
       // feature collection can not response event of 'visibility-change'
-      // show send event at this point.
+      // so send event at this point.
       this._onVisibilityChanged();
     },
 
@@ -159,6 +175,20 @@ LayerInfoFactory) {
       //   return true if 'showLegend' has not been cnfigured in webmp
       return this.originOperLayer.featureCollection.showLegend !== undefined ?
              this.originOperLayer.featureCollection.showLegend : true;
+    },
+
+    getScaleRange: function() {
+      var scaleRange;
+      var subLayers = this.getSubLayers();
+      if(subLayers[0]) {
+        scaleRange = subLayers[0].getScaleRange();
+      } else {
+        scaleRange = {
+          minScale: 0,
+          maxScale: 0
+        };
+      }
+      return scaleRange;
     }
 
   });

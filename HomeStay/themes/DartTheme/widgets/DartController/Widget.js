@@ -38,7 +38,7 @@ define([
 
     var clazz = declare([BaseWidget, PoolControllerMixin], {
 
-      baseClass: 'dart-controller dart-bgcolor shadow',
+      baseClass: 'dart-controller dart-bgcolor jimu-main-background shadow',
       height: 54,
       minimized: false,
       collapsed: false,
@@ -479,7 +479,8 @@ define([
           top: offset,
           left: offset,
           width: 320,
-          height: 450
+          height: 450,
+          relativeTo: 'map'
         };
         return pos;
       },

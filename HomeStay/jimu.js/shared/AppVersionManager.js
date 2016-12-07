@@ -21,7 +21,8 @@ function(BaseVersionManager, utils) {
 
       upgrader: function(oldConfig){
         if(oldConfig.widgetOnScreen && oldConfig.widgetOnScreen.panel &&
-          oldConfig.widgetOnScreen.panel.uri === 'themes/FoldableTheme/panels/TitlePanel/Panel'){
+          (oldConfig.widgetOnScreen.panel.uri === 'themes/FoldableTheme/panels/TitlePanel/Panel' ||
+          oldConfig.widgetOnScreen.panel.uri === 'jimu/BaseWidgetPanel')){//In 1.0, tab theme use 'jimu/BaseWidgetPanel'
           oldConfig.widgetOnScreen.panel.uri = 'jimu/PreloadWidgetIconPanel';
         }
 
@@ -196,37 +197,39 @@ function(BaseVersionManager, utils) {
 
               var placeholder = oldConfig.widgetOnScreen.widgets[4];
 
-              if(placeholder.position.top !== undefined){
-                //default layout of FoldableTheme
-                ph_7 = {
-                  "position": {
-                    "left": 205,
-                    "top": 45
-                  }
-                };
-                ph_8 = {
-                  "position": {
-                    "left": 255,
-                    "top": 45
-                  }
-                };
-              }else{
-                //layout1 of FoldableTheme
-                ph_7 = {
-                  "position": {
-                    "left": 205,
-                    "bottom": 55
-                  }
-                };
-                ph_8 = {
-                  "position": {
-                    "left": 255,
-                    "bottom": 55
-                  }
-                };
-              }
+              if(placeholder){
+                if(placeholder.position.top !== undefined){
+                  //default layout of FoldableTheme
+                  ph_7 = {
+                    "position": {
+                      "left": 205,
+                      "top": 45
+                    }
+                  };
+                  ph_8 = {
+                    "position": {
+                      "left": 255,
+                      "top": 45
+                    }
+                  };
+                }else{
+                  //layout1 of FoldableTheme
+                  ph_7 = {
+                    "position": {
+                      "left": 205,
+                      "bottom": 55
+                    }
+                  };
+                  ph_8 = {
+                    "position": {
+                      "left": 255,
+                      "bottom": 55
+                    }
+                  };
+                }
 
-              oldConfig.widgetOnScreen.widgets.splice(7, 0, ph_7, ph_8);
+                oldConfig.widgetOnScreen.widgets.splice(7, 0, ph_7, ph_8);
+              }
             }
           }
         }
@@ -347,6 +350,47 @@ function(BaseVersionManager, utils) {
 
         return oldConfig;
       },
+      compatible: true
+    }, {
+      version: '2.0beta',
+
+      description: 'The version for Developer Edition beta 2.0.',
+
+      upgrader: function(oldConfig){
+        oldConfig.keepAppState = true;
+        return oldConfig;
+      },
+
+      compatible: true
+    }, {
+      version: '2.0',
+
+      description: 'The version for Online 4.1.',
+
+      upgrader: function(oldConfig){
+        return oldConfig;
+      },
+
+      compatible: true
+    }, {
+      version: '2.0.1',
+
+      description: 'The version for Developer Edition 2.0.',
+
+      upgrader: function(oldConfig){
+        return oldConfig;
+      },
+
+      compatible: true
+    }, {
+      version: '2.1',
+
+      description: 'The version for Online 4.2.',
+
+      upgrader: function(oldConfig){
+        return oldConfig;
+      },
+
       compatible: true
     }];
 

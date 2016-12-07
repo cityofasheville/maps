@@ -33,6 +33,7 @@ function(declare, lang, array, html, on, _WidgetBase, utils) {
         src: this.widgetConfig.icon
       }, this.domNode);
       html.setAttr(this.domNode, 'title', this.widgetConfig.label);
+      html.setAttr(this.domNode, 'data-widget-name', this.widgetConfig.name);
       this.own(on(this.domNode, 'click', lang.hitch(this, function(){
         this.onClick();
       })));

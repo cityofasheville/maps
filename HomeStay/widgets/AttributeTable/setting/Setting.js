@@ -203,9 +203,11 @@ define([
               show: true
             };
           });
+
           utils.merge(layerFields, fields, 'name', function(d, s) {
             lang.mixin(d, s);
           });
+          layerFields = utils.syncOrderWith(layerFields, fields, 'name');
           return layerFields;
         }));
       },
@@ -214,22 +216,6 @@ define([
         /*jshint unused:false*/
         var table = this._createFieldsTable(fields, idx);
         this.currentFieldTable = table;
-        this.own(on(table, 'row-click', lang.hitch(this, function(tr) {
-          var fields = table.getData();
-          var atLeastOne = array.some(fields, lang.hitch(this, function(field) {
-            return field.show;
-          }));
-          if (!atLeastOne) {
-            new Message({
-              message: this.nls.fieldCheckWarning
-            });
-            var rowData = table.getRowData(tr);
-            if (rowData) {
-              rowData.show = true;
-              table.editRow(tr, rowData);
-            }
-          }
-        })));
 
         var fieldsPopup = new Popup({
           titleLabel: this.nls.configureLayerFields,
@@ -246,6 +232,7 @@ define([
             })
           }, {
             label: this.nls.cancel,
+            classNames: ['jimu-btn-vacation'],
             onClick: lang.hitch(this, function() {
               fieldsPopup.close();
               fieldsPopup = null;
@@ -260,11 +247,28 @@ define([
       },
 
       _createFieldsTable: function(lFields) {
+        var fieldsTable = null;
         var fields = [{
           name: 'show',
           title: this.nls.fieldVisibility,
           type: 'checkbox',
-          'class': 'show'
+          'class': 'show',
+          onChange: lang.hitch(this, function(tr) {
+            var fields = fieldsTable.getData();
+            var atLeastOne = array.some(fields, lang.hitch(this, function(field) {
+              return field.show;
+            }));
+            if (!atLeastOne) {
+              new Message({
+                message: this.nls.fieldCheckWarning
+              });
+              var rowData = fieldsTable.getRowData(tr);
+              if (rowData) {
+                rowData.show = true;
+                fieldsTable.editRow(tr, rowData);
+              }
+            }
+          })
         }, {
           name: 'name',
           title: this.nls.fieldName,
@@ -291,7 +295,7 @@ define([
             'maxHeight': '300px'
           }
         };
-        var fieldsTable = new Table(args);
+        fieldsTable = new Table(args);
 
         for (var i = 0; i < lFields.length; i++) {
           if (lFields[i].show === undefined) {
@@ -386,14 +390,16 @@ define([
                 var configInfosFromMap = utils.getConfigInfosFromLayerInfos(this._layerInfos);
                 utils.merge(configInfosFromMap, this.config.layerInfos, 'id',
                   lang.hitch(this, function(mci, cli) {
-                    mci.name = cli.name;
+                    // mci.name = cli.name;
                     mci.show = cli.show;
                     mci.layer.url = cli.layer.url;
-                    if (lang.exists('layer.fields.length', mci) &&
-                      lang.exists('layer.fields.length', cli)) {
+                    if (lang.getObject('layer.fields.length', false, mci) &&
+                      lang.getObject('layer.fields.length', false, cli)) {
                       utils.merge(mci.layer.fields, cli.layer.fields, 'name', function(d, s) {
                         lang.mixin(d, s);
                       });
+                      mci.layer.fields = utils.syncOrderWith(
+                        mci.layer.fields, cli.layer.fields, 'name');
                     } else {
                       mci.layer.fields = cli.layer.fields;
                     }
@@ -493,6 +499,12 @@ define([
           this.expand.status = false;
           html.addClass(this.expand.domNode, 'disable-checkbox');
         }
+
+        if (this.config.filterByMapExtent) {
+          this.filterByMapExtent.check();
+        } else {
+          this.filterByMapExtent.uncheck();
+        }
       },
 
       _canUseOpenAtStart: function() {
@@ -549,6 +561,7 @@ define([
 
         this.config.layerInfos = table;
         this.config.hideExportButton = !this.exportcsv.getValue();
+        this.config.filterByMapExtent = this.filterByMapExtent.getValue();
 
         if (!this._canUseOpenAtStart()) {
           this.config.initiallyExpand = this.expand.getValue();

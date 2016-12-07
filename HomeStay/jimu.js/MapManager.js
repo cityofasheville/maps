@@ -14,7 +14,8 @@
 // limitations under the License.
 ///////////////////////////////////////////////////////////////////////////
 
-define(['dojo/_base/declare',
+define([
+  'dojo/_base/declare',
   'dojo/_base/lang',
   'dojo/_base/array',
   'dojo/_base/html',
@@ -22,9 +23,8 @@ define(['dojo/_base/declare',
   'dojo/on',
   'dojo/aspect',
   'dojo/keys',
-  'dojo/Deferred',
   'esri/dijit/InfoWindow',
-  "esri/dijit/PopupMobile",
+  'esri/dijit/PopupMobile',
   'esri/InfoTemplate',
   'esri/request',
   'esri/geometry/Extent',
@@ -33,12 +33,15 @@ define(['dojo/_base/declare',
   './utils',
   './dijit/LoadingShelter',
   'jimu/LayerInfos/LayerInfos',
+  'jimu/dijit/AppStatePopup',
   './MapUrlParamsHandler',
-  './AppStateManager'
-], function(declare, lang, array, html, topic, on, aspect, keys, Deferred, InfoWindow,
+  './AppStateManager',
+  './PopupManager',
+  './FilterManager'
+], function(declare, lang, array, html, topic, on, aspect, keys, InfoWindow,
   PopupMobile, InfoTemplate, esriRequest, Extent, Point, require,
-  jimuUtils, LoadingShelter, LayerInfos, MapUrlParamsHandler,
-  AppStateManager) {
+  jimuUtils, LoadingShelter, LayerInfos, AppStatePopup, MapUrlParamsHandler,
+  AppStateManager, PopupManager, FilterManager) {
   var instance = null,
     clazz = declare(null, {
       appConfig: null,
@@ -56,6 +59,9 @@ define(['dojo/_base/declare',
         this.mapDivId = mapDivId;
         this.id = mapDivId;
         this.appStateManager = AppStateManager.getInstance(this.urlParams);
+        this.popupManager = PopupManager.getInstance(this);
+        this.filterManager = FilterManager.getInstance();
+        this.nls = window.jimuNls;
         topic.subscribe("appConfigChanged", lang.hitch(this, this.onAppConfigChanged));
         topic.subscribe("changeMapPosition", lang.hitch(this, this.onChangeMapPosition));
         topic.subscribe("syncExtent", lang.hitch(this, this.onSyncExtent));
@@ -92,7 +98,9 @@ define(['dojo/_base/declare',
       },
 
       onBeforeUnload: function() {
-        this.appStateManager.saveWabAppState(this.map, this.layerInfosObj);
+        if(this.appConfig.keepAppState) {
+          this.appStateManager.saveWabAppState(this.map, this.layerInfosObj);
+        }
       },
 
       onWindowResize: function() {
@@ -214,9 +222,6 @@ define(['dojo/_base/declare',
       _publishMapEvent: function(map) {
         //add this property for debug purpose
         window._viewerMap = map;
-        if (this.loading) {
-          this.loading.destroy();
-        }
 
         MapUrlParamsHandler.postProcessUrlParams(this.urlParams, map);
 
@@ -260,6 +265,25 @@ define(['dojo/_base/declare',
           usePopupManager: true
         };
 
+        if(!window.isBuilder && !appConfig.mode && appConfig.map.appProxy &&
+            appConfig.map.appProxy.mapItemId === appConfig.map.itemId) {
+          var layerMixins = [];
+          array.forEach(appConfig.map.appProxy.proxyItems, function(proxyItem){
+            if (proxyItem.useProxy && proxyItem.proxyUrl) {
+              layerMixins.push({
+                url: proxyItem.sourceUrl,
+                mixin: {
+                  url: proxyItem.proxyUrl
+                }
+              });
+            }
+          });
+
+          if(layerMixins.length > 0) {
+            webMapOptions.layerMixins = layerMixins;
+          }
+        }
+
         var mapDeferred = jimuUtils.createWebMap(webMapPortalUrl, webMapItemId,
           this.mapDivId, webMapOptions);
 
@@ -285,49 +309,87 @@ define(['dojo/_base/declare',
 
           map._initialExtent = map.extent;
 
-          //URL parameters that affect map extent
-          var urlKeys = ['extent', 'center', 'marker', 'find', 'query', 'scale', 'level'];
-          var useAppState = true;
+          LayerInfos.getInstance(map, map.itemInfo).then(lang.hitch(this, function(layerInfosObj) {
+            this.layerInfosObj = layerInfosObj;
+            this._publishMapEvent(map);
+            setTimeout(lang.hitch(this, this._checkAppState), 500);
+            this.loading.hide();
+            this._addDataLoadingOnMapUpdate(map);
+          }));
+        }), lang.hitch(this, function() {
+          this._destroyLoadingShelter();
+          topic.publish('mapCreatedFailed');
+        }));
+      },
+
+      _addDataLoadingOnMapUpdate: function(map) {
+        var loadHtml = '<div class="load-container">' +
+        '<div class="loader">Loading...</div>' +
+        '</div>';
+        var loadContainer = html.toDom(loadHtml);
+        html.place(loadContainer, map.root);
+        on(map, 'update-start', lang.hitch(this, function() {
+          html.setStyle(loadContainer, 'display', '');
+        }));
+        on(map, 'update-end', lang.hitch(this, function() {
+          html.setStyle(loadContainer, 'display', 'none');
+        }));
+        on(map, 'unload', lang.hitch(this, function() {
+          html.destroy(loadContainer);
+          loadContainer = null;
+          this._destroyLoadingShelter();
+        }));
+      },
+
+      _destroyLoadingShelter: function() {
+        if (this.loading) {
+          this.loading.destroy();
+          this.loading = null;
+        }
+      },
+
+      _checkAppState: function() {
+        //URL parameters that affect map extent
+        var urlKeys = ['extent', 'center', 'marker', 'find', 'query', 'scale', 'level'];
+        var useAppState = this.appConfig.keepAppState;
+
+        if(useAppState) {
           array.forEach(urlKeys, function(k){
             if(k in this.urlParams){
               useAppState = false;
             }
           }, this);
+        }
 
-          if(useAppState){
-            this._applyAppState(map).then(lang.hitch(this, function() {
-              this._publishMapEvent(map);
-            }));
-          }else{
-            this._publishMapEvent(map);
-          }
-        }), lang.hitch(this, function() {
-          if (this.loading) {
-            this.loading.destroy();
-          }
-          topic.publish('mapCreatedFailed');
-        }));
+        if(useAppState){
+          this.appStateManager.getWabAppState().then(lang.hitch(this, function(stateData) {
+            if (stateData.extent || stateData.layers) {
+              var appStatePopup = new AppStatePopup({
+                nls: {
+                  title: this.nls.appState.title,
+                  restoreMap: this.nls.appState.restoreMap
+                }
+              });
+              appStatePopup.placeAt('main-page');
+              on(appStatePopup, 'applyAppState', lang.hitch(this, function() {
+                this._applyAppState(stateData, this.map);
+              }));
+              appStatePopup.startup();
+              appStatePopup.show();
+            }
+          }));
+        }
       },
 
-      _applyAppState: function(map) {
-        var def = new Deferred();
-
-        this.appStateManager.getWabAppState()
-        .then(lang.hitch(this, function(stateData) {
-          var layerOptions = stateData.layers;
-          LayerInfos.getInstance(map, map.itemInfo, {
-            layerOptions: layerOptions || null
-          }).then(lang.hitch(this, function(layerInfosObj) {
-            this.layerInfosObj = layerInfosObj;
-            if (stateData.extent) {
-              return map.setExtent(stateData.extent);
-            }
-          })).always(function() {
-            def.resolve();
-          });
-        }));
-
-        return def;
+      _applyAppState: function(stateData, map) {
+        var layerOptions = stateData.layers;
+        this.layerInfosObj.restoreState({
+          layerOptions: layerOptions || null
+        });
+        if (stateData.extent) {
+          map.setExtent(stateData.extent);
+        }
+        this._publishMapEvent(map);
       },
 
       _processMapOptions: function(mapOptions) {

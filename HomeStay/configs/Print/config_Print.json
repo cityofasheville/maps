@@ -1,8 +1,8 @@
 {
-  "serviceURL": "http://arcgis.ashevillenc.gov/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
-  "defaultTitle": "mapAsheville Web Map",
+  "serviceURL": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
+  "defaultTitle": "mapAsheville Home Stay Map",
   "defaultAuthor": "City of Asheville",
   "defaultCopyright": "",
   "defaultFormat": "PDF",
-  "defaultLayout": "MAP_ONLY"
+  "defaultLayout": "Letter ANSI A Portrait"
 }

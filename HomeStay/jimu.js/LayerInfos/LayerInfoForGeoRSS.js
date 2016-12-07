@@ -40,6 +40,22 @@ LayerInfoFactory) {
 
     },
 
+    _resetLayerObjectVisiblity: function(layerOptions) {
+      var layerOption  = layerOptions ? layerOptions[this.id]: null;
+      if(layerOption) {
+        // check/unchek all sublayers according to subLayerOption.visible.
+        array.forEach(this.newSubLayers, function(subLayerInfo) {
+          var subLayerOption  = layerOptions ? layerOptions[subLayerInfo.id]: null;
+          if(subLayerOption) {
+            subLayerInfo.layerObject.setVisibility(subLayerOption.visible);
+          }
+        }, this);
+
+        // according to layerOption.visible to set this._visible after all sublayers setting.
+        this._setTopLayerVisible(layerOption.visible);
+      }
+    },
+
     initVisible: function() {
       // var visible = false, i;
       // if (this.newSubLayers.length) {

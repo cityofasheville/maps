@@ -23,11 +23,13 @@ define(
     "dijit/_WidgetBase",
     "dijit/_TemplatedMixin",
     "dijit/_WidgetsInTemplateMixin",
+    "jimu/portalUrlUtils",
     "jimu/dijit/Message",
     "jimu/dijit/_GeocodeServiceChooserContent",
     "jimu/dijit/Popup",
     "jimu/dijit/LoadingShelter",
     "esri/request",
+    "esri/lang",
     "../utils",
     "jimu/utils",
     "dojo/text!./LocatorSourceSetting.html",
@@ -45,11 +47,13 @@ define(
     _WidgetBase,
     _TemplatedMixin,
     _WidgetsInTemplateMixin,
+    portalUrlUtils,
     Message,
     _GeocodeServiceChooserContent,
     Popup,
     LoadingShelter,
     esriRequest,
+    esriLang,
     utils,
     jimuUtils,
     template,
@@ -75,10 +79,15 @@ define(
 
       postCreate: function() {
         this.inherited(arguments);
+        this.exampleHint = this.nls.locatorExample +
+          ": http://&lt;myServerName&gt;/arcgis/rest/services/World/GeocodeServer";
+
         this.searchInCurrentMapExtent = new CheckBox({
           checked: false,
           label: this.nls.searchInCurrentMapExtent
         }, this.searchInCurrentMapExtent);
+
+        this._setMessageNodeContent(this.exampleHint);
 
         this.config = this.config ? this.config : {};
         this.setConfig(this.config);
@@ -114,15 +123,25 @@ define(
         this.shelter.show();
         if (this._locatorDefinition.url !== url) {
           this._getDefinitionFromRemote(url).then(lang.hitch(this, function(response) {
-            if (response) {
+            if (url && (response && response.type !== 'error')) {
               this._locatorDefinition = response;
               this._locatorDefinition.url = url;
               this._setSourceItems();
+
+              this._setMessageNodeContent(this.exampleHint);
+            } else if (url && (response && response.type === 'error')) {
+              this._setSourceItems();
+              this._disableSourceItems();
+
+              this._setMessageNodeContent(esriLang.substitute({
+                'URL': response.url
+              }, lang.clone(this.nls.invalidUrlTip)), true);
             }
             this.shelter.hide();
           }));
         } else {
           this._setSourceItems();
+          this._setMessageNodeContent(this.exampleHint);
           this.shelter.hide();
         }
       },
@@ -148,7 +167,9 @@ define(
           singleLineFieldName: this.singleLineFieldName,
           placeholder: jimuUtils.stripHTML(this.placeholder.get('value')),
           countryCode: jimuUtils.stripHTML(this.countryCode.get('value')),
-          maxResults: this.maxResults.get('value'),
+          zoomScale: this.zoomScale.get('value') || 50000,
+          maxSuggestions: this.maxSuggestions.get('value') || 6,
+          maxResults: this.maxResults.get('value') || 6,
           searchInCurrentMapExtent: this.searchInCurrentMapExtent.checked,
           type: "locator"
         };
@@ -165,6 +186,24 @@ define(
 
       _onCountryCodeBlur: function() {
         this.countryCode.set('value', jimuUtils.stripHTML(this.countryCode.get('value')));
+      },
+
+      _disableSourceItems: function() {
+        this.locatorName.set('disabled', true);
+        this.placeholder.set('disabled', true);
+        this.countryCode.set('disabled', true);
+        this.maxSuggestions.set('disabled', true);
+        this.maxResults.set('disabled', true);
+        this.zoomScale.set('disabled', true);
+      },
+
+      _enableSourceItems: function() {
+        this.locatorName.set('disabled', false);
+        this.placeholder.set('disabled', false);
+        this.countryCode.set('disabled', false);
+        this.maxSuggestions.set('disabled', false);
+        this.maxResults.set('disabled', false);
+        this.zoomScale.set('disabled', false);
       },
 
       _setSourceItems: function() {
@@ -197,7 +236,13 @@ define(
 
         this.searchInCurrentMapExtent.setValue(!!config.searchInCurrentMapExtent);
 
+        this.zoomScale.set('value', config.zoomScale || 50000);
+
+        this.maxSuggestions.set('value', config.maxSuggestions || 6);
+
         this.maxResults.set('value', config.maxResults || 6);
+
+        this._enableSourceItems();
       },
 
       _isEsriLocator: function(url) {
@@ -207,7 +252,6 @@ define(
 
       _getDefinitionFromRemote: function(url) {
         var resultDef = new Deferred();
-        // this._esriLocatorRegExp.lastIndex = 0;
         if (this._isEsriLocator(url)) {
           // optimize time
           resultDef.resolve({
@@ -236,11 +280,38 @@ define(
             resultDef.resolve(response);
           }), lang.hitch(this, function(err) {
             console.error(err);
-            resultDef.resolve(null);
+            resultDef.resolve({
+              type: 'error',
+              url: this._getRequestUrl(url)
+            });
           }));
         }
 
         return resultDef.promise;
+      },
+
+      _setMessageNodeContent: function(content, err) {
+        html.empty(this.messageNode);
+        if (!content.nodeType) {
+          content = html.toDom(content);
+        }
+        html.place(content, this.messageNode);
+        if (err) {
+          html.addClass(this.messageNode, 'error-message');
+        } else {
+          html.removeClass(this.messageNode, 'error-message');
+        }
+      },
+
+      _getRequestUrl: function(url) {
+        var protocol = window.location.protocol;
+        if (protocol === 'http:') {
+          return portalUrlUtils.setHttpProtocol(url);
+        } else if (protocol === 'https:'){
+          return portalUrlUtils.setHttpsProtocol(url);
+        } else {
+          return url;
+        }
       },
 
       _onSetLocatorUrlClick: function() {
@@ -308,6 +379,7 @@ define(
           if (response &&
             response.singleLineAddressField &&
             response.singleLineAddressField.name) {
+            this._enableSourceItems();
             this.locatorUrl.set('value', evt[0].url);
             if(!this.locatorName.get('value')){
               this.locatorName.set('value', utils.getGeocoderName(evt[0].url));
@@ -332,21 +404,24 @@ define(
             } else {
               this.emit('select-locator-url-ok', this.getConfig());
             }
-
             if (this.geocoderPopup) {
               this.geocoderPopup.close();
               this.geocoderPopup = null;
             }
+
+            this._setMessageNodeContent(this.exampleHint);
           } else {
             new Message({
-              message: this.nls.locatorWarning
+              'message': this.nls.locatorWarning
             });
           }
         }), lang.hitch(this, function(err) {
           console.error(err);
           this.shelter.hide();
           new Message({
-            message: this.nls.invalidUrlTip
+            'message': esriLang.substitute({
+                'URL': this._getRequestUrl(evt[0].url)
+              }, lang.clone(this.nls.invalidUrlTip))
           });
         }));
       },
@@ -371,10 +446,12 @@ define(
 
       _showSuggestibleTips: function() {
         html.addClass(this.tipsNode, 'source-tips-show');
+        html.setStyle(this.maxSuggestions.domNode, 'display', 'none');
       },
 
       _hideSuggestibleTips: function() {
         html.removeClass(this.tipsNode, 'source-tips-show');
+        html.setStyle(this.maxSuggestions.domNode, 'display', 'block');
       },
 
       _showValidationErrorTip: function(_dijit) {

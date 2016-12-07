@@ -37,7 +37,7 @@ define([
   function(
     declare, array, html, lang, query, on, when, esriLang,
     _WidgetsInTemplateMixin, BaseWidgetSetting, LayerInfos, utils, jimuUtils,
-    QuerySourceSetting, LocatorSourceSetting, CheckBox) {
+    QuerySourceSetting, LocatorSourceSetting, CheckBox, SimpleTable) {
     /*jshint maxlen: 150*/
     /*jshint smarttabs:true */
 
@@ -47,6 +47,28 @@ define([
 
       postCreate: function() {
         this.inherited(arguments);
+
+        this.sourceList = new SimpleTable({
+          autoHeight: false,
+          selectable: true,
+          fields: [{
+            name: "name",
+            title: this.nls.name,
+            width: "auto",
+            type: "text",
+            editable: false
+          }, {
+            name: "actions",
+            title: "",
+            width: "70px",
+            type: "actions",
+            actions: ["up", "down", "delete"]
+          }]
+        }, this.sourceList);
+        html.setStyle(this.sourceList.domNode, 'height', '100%');
+        this.sourceList.startup();
+        this.own(on(this.sourceList, 'row-select', lang.hitch(this, this._onSourceItemSelected)));
+        this.own(on(this.sourceList, 'row-delete', lang.hitch(this, this._onSourceItemRemoved)));
 
         this.showInfoWindowOnSelect = new CheckBox({
           checked: true,
@@ -129,6 +151,14 @@ define([
         return config;
       },
 
+      destroy: function() {
+        utils.setMap(null);
+        utils.setLayerInfosObj(null);
+        utils.setAppConfig(null);
+
+        this.inherited(arguments);
+      },
+
       _onAllPlaceholderBlur: function() {
         this.allPlaceholder.set('value', jimuUtils.stripHTML(this.allPlaceholder.get('value')));
       },
@@ -170,7 +200,8 @@ define([
 
       _createNewLocatorSourceSettingFromMenuItem: function(setting, definition) {
         var locatorSetting = new LocatorSourceSetting({
-          nls: this.nls
+          nls: this.nls,
+          map: this.map
         });
         locatorSetting.setDefinition(definition);
         locatorSetting.setConfig({
@@ -179,6 +210,8 @@ define([
           singleLineFieldName: setting.singleLineFieldName || "",
           placeholder: setting.placeholder || "",
           countryCode: setting.countryCode || "",
+          zoomScale: setting.zoomScale || 50000,
+          maxSuggestions: setting.maxSuggestions || 6,
           maxResults: setting.maxResults || 6,
           searchInCurrentMapExtent: !!setting.searchInCurrentMapExtent,
           type: "locator"
@@ -226,7 +259,8 @@ define([
         }
 
         this._currentSourceSetting = new LocatorSourceSetting({
-          nls: this.nls
+          nls: this.nls,
+          map: this.map
         });
         this._currentSourceSetting.setDefinition(definition);
         this._currentSourceSetting.setConfig({
@@ -235,6 +269,8 @@ define([
           singleLineFieldName: setting.singleLineFieldName || "",
           placeholder: setting.placeholder || "",
           countryCode: setting.countryCode || "",
+          zoomScale: setting.zoomScale || 50000,
+          maxSuggestions: setting.maxSuggestions || 6,
           maxResults: setting.maxResults || 6,
           searchInCurrentMapExtent: !!setting.searchInCurrentMapExtent,
           type: "locator"
@@ -280,6 +316,8 @@ define([
           searchFields: setting.searchFields || [],
           displayField: setting.displayField || definition.displayField || "",
           exactMatch: !!setting.exactMatch,
+          zoomScale: setting.zoomScale || 50000,
+          maxSuggestions: setting.maxSuggestions || 6,
           maxResults: setting.maxResults || 6,
           searchInCurrentMapExtent: !!setting.searchInCurrentMapExtent,
           type: "query"
@@ -341,6 +379,8 @@ define([
           searchFields: setting.searchFields || [],
           displayField: setting.displayField || definition.displayField || "",
           exactMatch: !!setting.exactMatch,
+          zoomScale: setting.zoomScale || 50000,
+          maxSuggestions: setting.maxSuggestions || 6,
           maxResults: setting.maxResults || 6,
           searchInCurrentMapExtent: !!setting.searchInCurrentMapExtent,
           type: "query"
