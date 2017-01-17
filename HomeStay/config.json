@@ -106,7 +106,8 @@
             "name": "ViewInTable",
             "uri": "actions/ViewInAttributeTableFeatureAction"
           }
-        ]
+        ],
+        "visible": false
       },
       {
         "uri": "widgets/Splash/Widget",
