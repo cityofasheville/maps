@@ -1,0 +1,65 @@
+{
+  "basemapGallery": {
+    "basemaps": [
+      {
+        "title": "Imagery",
+        "thumbnailUrl": "//avl.maps.arcgis.com/sharing/rest/content/items/86de95d4e0244cba80f0fa2c9403a7b2/info/thumbnail/tempimagery.jpg",
+        "layers": [
+          {
+            "id": "World_Imagery_2017",
+            "visibility": true,
+            "opacity": 1,
+            "url": "http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"
+          }
+        ],
+        "spatialReference": {
+          "wkid": "102100"
+        }
+      },
+      {
+        "title": "OpenStreetMap",
+        "thumbnailUrl": "//avl.maps.arcgis.com/sharing/rest/content/items/5d2bfa736f8448b3a1708e1f6be23eed/info/thumbnail/temposm.jpg",
+        "layers": [
+          {
+            "visibility": true,
+            "opacity": 1,
+            "type": "OpenStreetMap"
+          }
+        ],
+        "spatialReference": {
+          "wkid": "102100"
+        }
+      },
+      {
+        "title": "Streets",
+        "thumbnailUrl": "//avl.maps.arcgis.com/sharing/rest/content/items/d8855ee4d3d74413babfb0f41203b168/info/thumbnail/world_street_map.jpg",
+        "layers": [
+          {
+            "id": "World_Street_Map_8421",
+            "opacity": 1,
+            "visibility": true,
+            "url": "http://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"
+          }
+        ],
+        "spatialReference": {
+          "wkid": "102100"
+        }
+      },
+      {
+        "title": "Topographic",
+        "thumbnailUrl": "//avl.maps.arcgis.com/sharing/rest/content/items/6e03e8c26aad4b9c92a87c1063ddb0e3/info/thumbnail/topo_map_2.jpg",
+        "layers": [
+          {
+            "id": "defaultBasemap",
+            "opacity": 1,
+            "visibility": true,
+            "url": "http://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer"
+          }
+        ],
+        "spatialReference": {
+          "wkid": "102100"
+        }
+      }
+    ]
+  }
+}
