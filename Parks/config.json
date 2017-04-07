@@ -20,7 +20,7 @@
   "appId": "",
   "authorizedCrossOriginDomains": [],
   "title": "mapAsheville Park Finder",
-  "subtitle": "",
+  "subtitle": "Park Finder",
   "logo": "images/app-logo.png",
   "geometryService": "http://utility.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer",
   "links": [
