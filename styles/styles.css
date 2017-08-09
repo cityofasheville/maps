@@ -1,12 +1,13 @@
 .map-card {
     border: 2px solid #A7BFD4;
     border-radius: 4px;
-    min-height: 340px;
+    min-height: 345px;
     margin-bottom: 30px;
 }
 
 .map-card-title{
     color: #A7BFD4;
+    min-height: 85px;
 }
 
 .logo {
