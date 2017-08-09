@@ -1,6 +1,7 @@
 .map-card {
     border: 2px solid #A7BFD4;
     border-radius: 4px;
+    min-height: 340px;
     margin-bottom: 30px;
 }
 
