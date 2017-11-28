@@ -1,0 +1,1757 @@
+{
+  "layerInfos": [
+    {
+      "name": "COA Real Property - Strategize    YELLOW",
+      "id": "COA_Real_Property_8679",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Planning/COA_Real_Property/FeatureServer/0",
+        "fields": [
+          {
+            "name": "objectid",
+            "alias": "objectid",
+            "show": false
+          },
+          {
+            "name": "file_no_",
+            "alias": "File No",
+            "show": true
+          },
+          {
+            "name": "simplicity",
+            "alias": "simplicity",
+            "show": false
+          },
+          {
+            "name": "pin",
+            "alias": "PIN",
+            "show": true
+          },
+          {
+            "name": "street_dir",
+            "alias": "street_dir",
+            "show": false
+          },
+          {
+            "name": "street_type",
+            "alias": "street_type",
+            "show": false
+          },
+          {
+            "name": "address_no",
+            "alias": "address_no",
+            "show": false
+          },
+          {
+            "name": "street_name",
+            "alias": "street_name",
+            "show": false
+          },
+          {
+            "name": "status",
+            "alias": "status",
+            "show": false
+          },
+          {
+            "name": "classification",
+            "alias": "Classification",
+            "show": true
+          },
+          {
+            "name": "affordable_housing",
+            "alias": "affordable_housing",
+            "show": false
+          },
+          {
+            "name": "neighborhood",
+            "alias": "Neighborhood",
+            "show": true
+          },
+          {
+            "name": "site_department_stakeholders",
+            "alias": "Site Department Stakeholders",
+            "show": false
+          },
+          {
+            "name": "site_primary_use",
+            "alias": "Site Primary Use",
+            "show": true
+          },
+          {
+            "name": "site_name",
+            "alias": "Site Name",
+            "show": true
+          },
+          {
+            "name": "other_site_use_notes",
+            "alias": "Other Site Notes",
+            "show": false
+          },
+          {
+            "name": "land_area_acre",
+            "alias": "Land Area (acre)",
+            "show": false
+          },
+          {
+            "name": "acquisition_cost",
+            "alias": "Acquisition Cost",
+            "show": false
+          },
+          {
+            "name": "land_description",
+            "alias": "Land Description",
+            "show": false
+          },
+          {
+            "name": "improvements_description",
+            "alias": "Improvements Description",
+            "show": false
+          },
+          {
+            "name": "environmental_notes",
+            "alias": "Environmental Notes",
+            "show": false
+          },
+          {
+            "name": "date_acquired",
+            "alias": "Date Acquired",
+            "show": false
+          },
+          {
+            "name": "comments",
+            "alias": "Notes",
+            "show": true
+          },
+          {
+            "name": "link_to_online_file",
+            "alias": "Open Data",
+            "show": true
+          },
+          {
+            "name": "oldpin",
+            "alias": "Old PIN",
+            "show": false
+          },
+          {
+            "name": "acreage",
+            "alias": "Acreage",
+            "show": true,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          },
+          {
+            "name": "propcard",
+            "alias": "Property Card",
+            "show": true
+          },
+          {
+            "name": "platurl",
+            "alias": "Plat URL",
+            "show": true
+          },
+          {
+            "name": "deedurl",
+            "alias": "Deed URL",
+            "show": true
+          },
+          {
+            "name": "form_request",
+            "alias": "Online File",
+            "show": true
+          },
+          {
+            "name": "form_result",
+            "alias": "Website",
+            "show": true
+          }
+        ]
+      },
+      "show": true,
+      "showAttachments": false
+    },
+    {
+      "name": "COA Real Property - Review      RED",
+      "id": "COA_Real_Property_5606",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Planning/COA_Real_Property/FeatureServer/0",
+        "fields": [
+          {
+            "name": "objectid",
+            "alias": "objectid",
+            "show": false
+          },
+          {
+            "name": "file_no_",
+            "alias": "File No",
+            "show": true
+          },
+          {
+            "name": "simplicity",
+            "alias": "simplicity",
+            "show": false
+          },
+          {
+            "name": "pin",
+            "alias": "PIN",
+            "show": true
+          },
+          {
+            "name": "street_dir",
+            "alias": "street_dir",
+            "show": false
+          },
+          {
+            "name": "street_type",
+            "alias": "street_type",
+            "show": false
+          },
+          {
+            "name": "address_no",
+            "alias": "address_no",
+            "show": false
+          },
+          {
+            "name": "street_name",
+            "alias": "street_name",
+            "show": false
+          },
+          {
+            "name": "status",
+            "alias": "status",
+            "show": false
+          },
+          {
+            "name": "classification",
+            "alias": "Classification",
+            "show": true
+          },
+          {
+            "name": "affordable_housing",
+            "alias": "affordable_housing",
+            "show": false
+          },
+          {
+            "name": "neighborhood",
+            "alias": "Neighborhood",
+            "show": true
+          },
+          {
+            "name": "site_department_stakeholders",
+            "alias": "site_department_stakeholders",
+            "show": false
+          },
+          {
+            "name": "site_primary_use",
+            "alias": "Site Primary Use",
+            "show": true
+          },
+          {
+            "name": "site_name",
+            "alias": "Site Name",
+            "show": true
+          },
+          {
+            "name": "other_site_use_notes",
+            "alias": "other_site_use_notes",
+            "show": false
+          },
+          {
+            "name": "land_area_acre",
+            "alias": "land_area_acre",
+            "show": false
+          },
+          {
+            "name": "acquisition_cost",
+            "alias": "acquisition_cost",
+            "show": false
+          },
+          {
+            "name": "land_description",
+            "alias": "land_description",
+            "show": false
+          },
+          {
+            "name": "improvements_description",
+            "alias": "improvements_description",
+            "show": false
+          },
+          {
+            "name": "environmental_notes",
+            "alias": "environmental_notes",
+            "show": false
+          },
+          {
+            "name": "date_acquired",
+            "alias": "date_acquired",
+            "show": false
+          },
+          {
+            "name": "comments",
+            "alias": "Notes",
+            "show": true
+          },
+          {
+            "name": "link_to_online_file",
+            "alias": "Open Data",
+            "show": true
+          },
+          {
+            "name": "oldpin",
+            "alias": "oldpin",
+            "show": false
+          },
+          {
+            "name": "acreage",
+            "alias": "Acreage",
+            "show": true,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          },
+          {
+            "name": "propcard",
+            "alias": "Property Card",
+            "show": true
+          },
+          {
+            "name": "platurl",
+            "alias": "Plat URL",
+            "show": true
+          },
+          {
+            "name": "deedurl",
+            "alias": "Deed URL",
+            "show": true
+          },
+          {
+            "name": "form_request",
+            "alias": "Online File",
+            "show": true
+          },
+          {
+            "name": "form_result",
+            "alias": "Website",
+            "show": true
+          }
+        ]
+      },
+      "show": true,
+      "showAttachments": false
+    },
+    {
+      "name": "COA Real Property - Monitor     BROWN",
+      "id": "COA_Real_Property_4811",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Planning/COA_Real_Property/FeatureServer/0",
+        "fields": [
+          {
+            "name": "objectid",
+            "alias": "objectid",
+            "show": false
+          },
+          {
+            "name": "file_no_",
+            "alias": "File No",
+            "show": true
+          },
+          {
+            "name": "simplicity",
+            "alias": "simplicity",
+            "show": false
+          },
+          {
+            "name": "pin",
+            "alias": "PIN",
+            "show": true
+          },
+          {
+            "name": "street_dir",
+            "alias": "street_dir",
+            "show": false
+          },
+          {
+            "name": "street_type",
+            "alias": "street_type",
+            "show": false
+          },
+          {
+            "name": "address_no",
+            "alias": "address_no",
+            "show": false
+          },
+          {
+            "name": "street_name",
+            "alias": "street_name",
+            "show": false
+          },
+          {
+            "name": "status",
+            "alias": "status",
+            "show": false
+          },
+          {
+            "name": "classification",
+            "alias": "Classification",
+            "show": true
+          },
+          {
+            "name": "affordable_housing",
+            "alias": "affordable_housing",
+            "show": false
+          },
+          {
+            "name": "neighborhood",
+            "alias": "Neighborhood",
+            "show": true
+          },
+          {
+            "name": "site_department_stakeholders",
+            "alias": "site_department_stakeholders",
+            "show": false
+          },
+          {
+            "name": "site_primary_use",
+            "alias": "Site Primary Use",
+            "show": true
+          },
+          {
+            "name": "site_name",
+            "alias": "Site Name",
+            "show": true
+          },
+          {
+            "name": "other_site_use_notes",
+            "alias": "other_site_use_notes",
+            "show": false
+          },
+          {
+            "name": "land_area_acre",
+            "alias": "land_area_acre",
+            "show": false
+          },
+          {
+            "name": "acquisition_cost",
+            "alias": "acquisition_cost",
+            "show": false
+          },
+          {
+            "name": "land_description",
+            "alias": "land_description",
+            "show": false
+          },
+          {
+            "name": "improvements_description",
+            "alias": "improvements_description",
+            "show": false
+          },
+          {
+            "name": "environmental_notes",
+            "alias": "environmental_notes",
+            "show": false
+          },
+          {
+            "name": "date_acquired",
+            "alias": "date_acquired",
+            "show": false
+          },
+          {
+            "name": "comments",
+            "alias": "Notes",
+            "show": true
+          },
+          {
+            "name": "link_to_online_file",
+            "alias": "Open Data",
+            "show": true
+          },
+          {
+            "name": "oldpin",
+            "alias": "oldpin",
+            "show": false
+          },
+          {
+            "name": "acreage",
+            "alias": "Acreage",
+            "show": true,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          },
+          {
+            "name": "propcard",
+            "alias": "Property Card",
+            "show": true
+          },
+          {
+            "name": "platurl",
+            "alias": "Plat URL",
+            "show": true
+          },
+          {
+            "name": "deedurl",
+            "alias": "Deed URL",
+            "show": true
+          },
+          {
+            "name": "form_request",
+            "alias": "Online File",
+            "show": true
+          },
+          {
+            "name": "form_result",
+            "alias": "Website",
+            "show": true
+          }
+        ]
+      },
+      "show": true,
+      "showAttachments": false
+    },
+    {
+      "name": "COA Real Property - Operational     ORANGE",
+      "id": "COA_Real_Property_821",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Planning/COA_Real_Property/FeatureServer/0",
+        "fields": [
+          {
+            "name": "objectid",
+            "alias": "objectid",
+            "show": false
+          },
+          {
+            "name": "file_no_",
+            "alias": "File No",
+            "show": true
+          },
+          {
+            "name": "simplicity",
+            "alias": "simplicity",
+            "show": false
+          },
+          {
+            "name": "pin",
+            "alias": "PIN",
+            "show": true
+          },
+          {
+            "name": "street_dir",
+            "alias": "street_dir",
+            "show": false
+          },
+          {
+            "name": "street_type",
+            "alias": "street_type",
+            "show": false
+          },
+          {
+            "name": "address_no",
+            "alias": "address_no",
+            "show": false
+          },
+          {
+            "name": "street_name",
+            "alias": "street_name",
+            "show": false
+          },
+          {
+            "name": "status",
+            "alias": "status",
+            "show": false
+          },
+          {
+            "name": "classification",
+            "alias": "Classification",
+            "show": true
+          },
+          {
+            "name": "affordable_housing",
+            "alias": "affordable_housing",
+            "show": false
+          },
+          {
+            "name": "neighborhood",
+            "alias": "Neighborhood",
+            "show": true
+          },
+          {
+            "name": "site_department_stakeholders",
+            "alias": "site_department_stakeholders",
+            "show": false
+          },
+          {
+            "name": "site_primary_use",
+            "alias": "Site Primary Use",
+            "show": true
+          },
+          {
+            "name": "site_name",
+            "alias": "Site Name",
+            "show": true
+          },
+          {
+            "name": "other_site_use_notes",
+            "alias": "other_site_use_notes",
+            "show": false
+          },
+          {
+            "name": "land_area_acre",
+            "alias": "land_area_acre",
+            "show": false
+          },
+          {
+            "name": "acquisition_cost",
+            "alias": "acquisition_cost",
+            "show": false
+          },
+          {
+            "name": "land_description",
+            "alias": "land_description",
+            "show": false
+          },
+          {
+            "name": "improvements_description",
+            "alias": "improvements_description",
+            "show": false
+          },
+          {
+            "name": "environmental_notes",
+            "alias": "environmental_notes",
+            "show": false
+          },
+          {
+            "name": "date_acquired",
+            "alias": "date_acquired",
+            "show": false
+          },
+          {
+            "name": "comments",
+            "alias": "Notes",
+            "show": true
+          },
+          {
+            "name": "link_to_online_file",
+            "alias": "Open Data",
+            "show": true
+          },
+          {
+            "name": "oldpin",
+            "alias": "oldpin",
+            "show": false
+          },
+          {
+            "name": "acreage",
+            "alias": "Acreage",
+            "show": true,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          },
+          {
+            "name": "propcard",
+            "alias": "Property Card",
+            "show": true
+          },
+          {
+            "name": "platurl",
+            "alias": "Plat URL",
+            "show": true
+          },
+          {
+            "name": "deedurl",
+            "alias": "Deed URL",
+            "show": true
+          },
+          {
+            "name": "form_request",
+            "alias": "Online File",
+            "show": true
+          },
+          {
+            "name": "form_result",
+            "alias": "Website",
+            "show": true
+          }
+        ]
+      },
+      "show": true,
+      "showAttachments": false
+    },
+    {
+      "name": "COA Real Property - Stewardship    BLUE",
+      "id": "COA_Real_Property_1120",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Planning/COA_Real_Property/FeatureServer/0",
+        "fields": [
+          {
+            "name": "objectid",
+            "alias": "objectid",
+            "show": false
+          },
+          {
+            "name": "file_no_",
+            "alias": "File No",
+            "show": true
+          },
+          {
+            "name": "simplicity",
+            "alias": "simplicity",
+            "show": false
+          },
+          {
+            "name": "pin",
+            "alias": "PIN",
+            "show": true
+          },
+          {
+            "name": "street_dir",
+            "alias": "street_dir",
+            "show": false
+          },
+          {
+            "name": "street_type",
+            "alias": "street_type",
+            "show": false
+          },
+          {
+            "name": "address_no",
+            "alias": "address_no",
+            "show": false
+          },
+          {
+            "name": "street_name",
+            "alias": "street_name",
+            "show": false
+          },
+          {
+            "name": "status",
+            "alias": "status",
+            "show": false
+          },
+          {
+            "name": "classification",
+            "alias": "Classification",
+            "show": true
+          },
+          {
+            "name": "affordable_housing",
+            "alias": "affordable_housing",
+            "show": false
+          },
+          {
+            "name": "neighborhood",
+            "alias": "Neighborhood",
+            "show": true
+          },
+          {
+            "name": "site_department_stakeholders",
+            "alias": "site_department_stakeholders",
+            "show": false
+          },
+          {
+            "name": "site_primary_use",
+            "alias": "Site Primary Use",
+            "show": true
+          },
+          {
+            "name": "site_name",
+            "alias": "Site Name",
+            "show": true
+          },
+          {
+            "name": "other_site_use_notes",
+            "alias": "other_site_use_notes",
+            "show": false
+          },
+          {
+            "name": "land_area_acre",
+            "alias": "land_area_acre",
+            "show": false
+          },
+          {
+            "name": "acquisition_cost",
+            "alias": "acquisition_cost",
+            "show": false
+          },
+          {
+            "name": "land_description",
+            "alias": "land_description",
+            "show": false
+          },
+          {
+            "name": "improvements_description",
+            "alias": "improvements_description",
+            "show": false
+          },
+          {
+            "name": "environmental_notes",
+            "alias": "environmental_notes",
+            "show": false
+          },
+          {
+            "name": "date_acquired",
+            "alias": "date_acquired",
+            "show": false
+          },
+          {
+            "name": "comments",
+            "alias": "Notes",
+            "show": true
+          },
+          {
+            "name": "link_to_online_file",
+            "alias": "Open Data",
+            "show": true
+          },
+          {
+            "name": "oldpin",
+            "alias": "oldpin",
+            "show": false
+          },
+          {
+            "name": "acreage",
+            "alias": "Acreage",
+            "show": true,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          },
+          {
+            "name": "propcard",
+            "alias": "Property Card",
+            "show": true
+          },
+          {
+            "name": "platurl",
+            "alias": "Plat URL",
+            "show": true
+          },
+          {
+            "name": "deedurl",
+            "alias": "Deed URL",
+            "show": true
+          },
+          {
+            "name": "form_request",
+            "alias": "Online File",
+            "show": true
+          },
+          {
+            "name": "form_result",
+            "alias": "Website",
+            "show": true
+          }
+        ]
+      },
+      "show": true,
+      "showAttachments": false
+    },
+    {
+      "name": "Property Information",
+      "id": "BuncombeCountyProperty_8784",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Properties_Addresses/BuncombeCountyProperty/FeatureServer/0",
+        "fields": [
+          {
+            "name": "objectid",
+            "alias": "OBJECTID",
+            "show": false
+          },
+          {
+            "name": "pinnum",
+            "alias": "PIN NUMBER",
+            "show": true
+          },
+          {
+            "name": "pin",
+            "alias": "PIN",
+            "show": false
+          },
+          {
+            "name": "pinext",
+            "alias": "PIN EXT",
+            "show": false
+          },
+          {
+            "name": "owner",
+            "alias": "OWNER",
+            "show": true
+          },
+          {
+            "name": "nmptype",
+            "alias": "NMPType",
+            "show": false
+          },
+          {
+            "name": "taxyear",
+            "alias": "Tax year",
+            "show": false
+          },
+          {
+            "name": "condounit",
+            "alias": "Condo Unit",
+            "show": false
+          },
+          {
+            "name": "condobuilding",
+            "alias": "Condo Building",
+            "show": false
+          },
+          {
+            "name": "deedbook",
+            "alias": "Deed Book",
+            "show": false
+          },
+          {
+            "name": "deedpage",
+            "alias": "Deed Page",
+            "show": false
+          },
+          {
+            "name": "platbook",
+            "alias": "Plat Book",
+            "show": false
+          },
+          {
+            "name": "platpage",
+            "alias": "Plat Page",
+            "show": false
+          },
+          {
+            "name": "subname",
+            "alias": "Sub Name",
+            "show": false
+          },
+          {
+            "name": "sublot",
+            "alias": "Sub Lot",
+            "show": false
+          },
+          {
+            "name": "subblock",
+            "alias": "Sub Block",
+            "show": false
+          },
+          {
+            "name": "subsect",
+            "alias": "Sub Sect",
+            "show": false
+          },
+          {
+            "name": "updatedate",
+            "alias": "updatedate",
+            "show": false
+          },
+          {
+            "name": "housenumber",
+            "alias": "Number",
+            "show": true
+          },
+          {
+            "name": "numbersuffix",
+            "alias": "numbersuffix",
+            "show": false
+          },
+          {
+            "name": "direction",
+            "alias": "Direction",
+            "show": true
+          },
+          {
+            "name": "streetname",
+            "alias": "Street",
+            "show": true
+          },
+          {
+            "name": "streettype",
+            "alias": "Street Type",
+            "show": true
+          },
+          {
+            "name": "township",
+            "alias": "Township",
+            "show": false
+          },
+          {
+            "name": "acreage",
+            "alias": "Acreage",
+            "show": true,
+            "format": {
+              "places": 2,
+              "digitSeparator": false
+            }
+          },
+          {
+            "name": "accountnumber",
+            "alias": "accountnumber",
+            "show": false
+          },
+          {
+            "name": "deeddate",
+            "alias": "deeddate",
+            "show": false
+          },
+          {
+            "name": "stamps",
+            "alias": "stamps",
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          },
+          {
+            "name": "instrument",
+            "alias": "instrument",
+            "show": false
+          },
+          {
+            "name": "reason",
+            "alias": "reason",
+            "show": false
+          },
+          {
+            "name": "county",
+            "alias": "county",
+            "show": false
+          },
+          {
+            "name": "city",
+            "alias": "city",
+            "show": false
+          },
+          {
+            "name": "firedistrict",
+            "alias": "firedistrict",
+            "show": false
+          },
+          {
+            "name": "schooldistrict",
+            "alias": "schooldistrict",
+            "show": false
+          },
+          {
+            "name": "careof",
+            "alias": "careof",
+            "show": false
+          },
+          {
+            "name": "address",
+            "alias": "address",
+            "show": false
+          },
+          {
+            "name": "cityname",
+            "alias": "cityname",
+            "show": false
+          },
+          {
+            "name": "state",
+            "alias": "state",
+            "show": false
+          },
+          {
+            "name": "zipcode",
+            "alias": "zipcode",
+            "show": false
+          },
+          {
+            "name": "class",
+            "alias": "class",
+            "show": false
+          },
+          {
+            "name": "improved",
+            "alias": "improved",
+            "show": false
+          },
+          {
+            "name": "exempt",
+            "alias": "exempt",
+            "show": false
+          },
+          {
+            "name": "priced",
+            "alias": "priced",
+            "show": false
+          },
+          {
+            "name": "totalmarketvalue",
+            "alias": "Total Market Value",
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          },
+          {
+            "name": "appraisedvalue",
+            "alias": "Appraised Value",
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          },
+          {
+            "name": "taxvalue",
+            "alias": "Tax Value",
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          },
+          {
+            "name": "landuse",
+            "alias": "Land Use Code",
+            "show": false
+          },
+          {
+            "name": "neighborhoodcode",
+            "alias": "neighborhoodcode",
+            "show": false
+          },
+          {
+            "name": "landvalue",
+            "alias": "Land Value",
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          },
+          {
+            "name": "buildingvalue",
+            "alias": "Building Value",
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          },
+          {
+            "name": "improvementvalue",
+            "alias": "improvementvalue",
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          },
+          {
+            "name": "appraisalarea",
+            "alias": "appraisalarea",
+            "show": false
+          },
+          {
+            "name": "state_route",
+            "alias": "state_route",
+            "show": false
+          },
+          {
+            "name": "state_route_suffix",
+            "alias": "state_route_suffix",
+            "show": false
+          },
+          {
+            "name": "propcard",
+            "alias": "Property Card",
+            "show": true
+          },
+          {
+            "name": "oldpinnum",
+            "alias": "oldpinnum",
+            "show": false
+          },
+          {
+            "name": "citystatezip",
+            "alias": "citystatezip",
+            "show": false
+          },
+          {
+            "name": "deedurl",
+            "alias": "Deed URL",
+            "show": true
+          },
+          {
+            "name": "platurl",
+            "alias": "Plat URL",
+            "show": true
+          }
+        ]
+      },
+      "show": false,
+      "showAttachments": false
+    },
+    {
+      "name": "Asheville City Limits",
+      "id": "AshevilleCityLimits_2889",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Boundaries/AshevilleCityLimits/MapServer/0"
+      },
+      "show": false,
+      "showAttachments": false
+    },
+    {
+      "name": "Innovation Districts",
+      "id": "InnovationDistricts_8190",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Planning/InnovationDistricts/FeatureServer/0",
+        "fields": [
+          {
+            "name": "objectid",
+            "alias": "OBJECTID",
+            "show": true
+          },
+          {
+            "name": "name",
+            "alias": "name",
+            "show": false
+          },
+          {
+            "name": "edit_date",
+            "alias": "edit_date",
+            "show": false,
+            "format": {
+              "dateFormat": "longMonthDayYear"
+            }
+          },
+          {
+            "name": "edit_by",
+            "alias": "edit_by",
+            "show": false
+          }
+        ]
+      },
+      "show": false,
+      "showAttachments": false
+    },
+    {
+      "name": "ART Bus Stops",
+      "id": "TransportationLayers_983",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Transportation/TransportationLayers/MapServer/10",
+        "fields": [
+          {
+            "name": "objectid",
+            "alias": "OBJECTID",
+            "show": true
+          },
+          {
+            "name": "stop_id",
+            "alias": "stop_id",
+            "show": false,
+            "format": {
+              "places": 0,
+              "digitSeparator": true
+            }
+          },
+          {
+            "name": "corner",
+            "alias": "corner",
+            "show": false
+          },
+          {
+            "name": "furniture",
+            "alias": "furniture",
+            "show": false
+          },
+          {
+            "name": "narrative",
+            "alias": "narrative",
+            "show": false
+          },
+          {
+            "name": "edit_by",
+            "alias": "EDIT",
+            "show": false
+          },
+          {
+            "name": "edit_date",
+            "alias": "edit_date",
+            "show": false,
+            "format": {
+              "dateFormat": "longMonthDayYear"
+            }
+          },
+          {
+            "name": "stop_desc",
+            "alias": "stop_desc",
+            "show": false
+          },
+          {
+            "name": "street",
+            "alias": "street",
+            "show": false
+          },
+          {
+            "name": "cross_street",
+            "alias": "cross_street",
+            "show": false
+          },
+          {
+            "name": "shape",
+            "alias": "SHAPE",
+            "show": false
+          },
+          {
+            "name": "ada_pad",
+            "alias": "ada_pad",
+            "show": false
+          },
+          {
+            "name": "bench",
+            "alias": "bench",
+            "show": false
+          },
+          {
+            "name": "bike",
+            "alias": "bike",
+            "show": false
+          },
+          {
+            "name": "ramp",
+            "alias": "ramp",
+            "show": false
+          },
+          {
+            "name": "sidewalk",
+            "alias": "sidewalk",
+            "show": false
+          },
+          {
+            "name": "sign",
+            "alias": "sign",
+            "show": false
+          },
+          {
+            "name": "mapholders",
+            "alias": "mapholders",
+            "show": false
+          },
+          {
+            "name": "trash_can",
+            "alias": "trash_can",
+            "show": false
+          },
+          {
+            "name": "recycling_can",
+            "alias": "recycling_can",
+            "show": false
+          },
+          {
+            "name": "lighting",
+            "alias": "lighting",
+            "show": false
+          },
+          {
+            "name": "shelter",
+            "alias": "shelter",
+            "show": false
+          }
+        ]
+      },
+      "show": false,
+      "showAttachments": false
+    },
+    {
+      "name": "ART Bus Routes",
+      "id": "TransportationLayers_8879",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Transportation/TransportationLayers/MapServer/11",
+        "fields": [
+          {
+            "name": "objectid",
+            "alias": "OBJECTID",
+            "show": true
+          },
+          {
+            "name": "route_type",
+            "alias": "route_type",
+            "show": false
+          },
+          {
+            "name": "route_number",
+            "alias": "route_number",
+            "show": false
+          },
+          {
+            "name": "street_name",
+            "alias": "street_name",
+            "show": false
+          },
+          {
+            "name": "centerline_id",
+            "alias": "centerline_id",
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          },
+          {
+            "name": "edit_date",
+            "alias": "edit_date",
+            "show": false,
+            "format": {
+              "dateFormat": "longMonthDayYear"
+            }
+          },
+          {
+            "name": "edit_by",
+            "alias": "edit_by",
+            "show": false
+          },
+          {
+            "name": "shape",
+            "alias": "SHAPE",
+            "show": false
+          },
+          {
+            "name": "st_length(shape)",
+            "alias": "st_length(shape)",
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          },
+          {
+            "name": "route_desc",
+            "alias": "route_desc",
+            "show": false
+          },
+          {
+            "name": "trip_headsign",
+            "alias": "trip_headsign",
+            "show": false
+          }
+        ]
+      },
+      "show": false,
+      "showAttachments": false
+    },
+    {
+      "name": "Greenways",
+      "id": "Greenways_9922",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Transportation/Greenways/MapServer/0",
+        "fields": [
+          {
+            "name": "objectid",
+            "alias": "objectid",
+            "show": true
+          },
+          {
+            "name": "maintenanceentity",
+            "alias": "maintenanceentity",
+            "show": false
+          },
+          {
+            "name": "material",
+            "alias": "material",
+            "show": false
+          },
+          {
+            "name": "narrativecomments",
+            "alias": "narrativecomments",
+            "show": false
+          },
+          {
+            "name": "coasnowremoval",
+            "alias": "coasnowremoval",
+            "show": false
+          },
+          {
+            "name": "fundrecid",
+            "alias": "fundrecid",
+            "show": false
+          },
+          {
+            "name": "segmenttype",
+            "alias": "segmenttype",
+            "show": false
+          },
+          {
+            "name": "edit_date",
+            "alias": "edit_date",
+            "show": false,
+            "format": {
+              "dateFormat": "longMonthDayYear"
+            }
+          },
+          {
+            "name": "edit_by",
+            "alias": "edit_by",
+            "show": false
+          },
+          {
+            "name": "streetname",
+            "alias": "Streetname",
+            "show": false
+          },
+          {
+            "name": "shape",
+            "alias": "shape",
+            "show": false
+          },
+          {
+            "name": "st_length(shape)",
+            "alias": "st_length(shape)",
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          }
+        ]
+      },
+      "show": false,
+      "showAttachments": false
+    },
+    {
+      "name": "Schools",
+      "id": "bc_schools_9145",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Points_of_Interest/bc_schools/MapServer/0"
+      },
+      "show": false,
+      "showAttachments": false
+    },
+    {
+      "name": "City of Asheville Parks",
+      "id": "Parks_6341",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Planning/Parks/FeatureServer/0"
+      },
+      "show": false,
+      "showAttachments": false
+    },
+    {
+      "name": "MSD Pipes",
+      "id": "MSDPipes_906",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Infrastructure/MSDPipes/MapServer/0"
+      },
+      "show": false,
+      "showAttachments": false
+    },
+    {
+      "name": "MSD Structures",
+      "id": "MSDStructures_4953",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Infrastructure/MSDStructures/MapServer/0"
+      },
+      "show": false,
+      "showAttachments": false
+    },
+    {
+      "name": "Asheville Zoning Districts",
+      "id": "AshevilleZoning_4240",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Planning/AshevilleZoning/FeatureServer/0",
+        "fields": [
+          {
+            "name": "objectid",
+            "alias": "OBJECTID",
+            "show": false
+          },
+          {
+            "name": "districts",
+            "alias": "Districts",
+            "show": true
+          },
+          {
+            "name": "municodepage",
+            "alias": "MuniCode UDO",
+            "show": true
+          },
+          {
+            "name": "acreage",
+            "alias": "Acreage",
+            "show": true,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          },
+          {
+            "name": "squaremiles",
+            "alias": "Square Miles",
+            "show": true,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          },
+          {
+            "name": "pp_weight",
+            "alias": "pp_weight",
+            "show": false,
+            "format": {
+              "places": 0,
+              "digitSeparator": true
+            }
+          },
+          {
+            "name": "edit_date",
+            "alias": "edit_date",
+            "show": false,
+            "format": {
+              "dateFormat": "longMonthDayYear"
+            }
+          },
+          {
+            "name": "edit_by",
+            "alias": "edit_by",
+            "show": false
+          },
+          {
+            "name": "pid",
+            "alias": "pid",
+            "show": false,
+            "format": {
+              "places": 0,
+              "digitSeparator": true
+            }
+          },
+          {
+            "name": "max_impervious",
+            "alias": "max_impervious",
+            "show": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            }
+          }
+        ]
+      },
+      "show": false,
+      "showAttachments": false
+    },
+    {
+      "name": "City of Asheville Bicycle Routes",
+      "id": "BikeRoutes_8311_0",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Transportation/BikeRoutes/MapServer/0"
+      },
+      "show": false,
+      "showAttachments": false
+    },
+    {
+      "name": "SFHA Base Flood Elevations",
+      "id": "FloodData_3089_0",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Environmental/FloodData/MapServer/0"
+      },
+      "show": false,
+      "showAttachments": false
+    },
+    {
+      "name": "Effective Floodway",
+      "id": "FloodData_3089_1",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Environmental/FloodData/MapServer/1"
+      },
+      "show": false,
+      "showAttachments": false
+    },
+    {
+      "name": "Effective SFHA's",
+      "id": "FloodData_3089_2",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Environmental/FloodData/MapServer/2"
+      },
+      "show": false,
+      "showAttachments": false
+    },
+    {
+      "name": "Local Insterstate Highways (Buncombe County)",
+      "id": "StreetNetwork_2580_0",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Transportation/StreetNetwork/MapServer/0"
+      },
+      "show": true,
+      "showAttachments": false
+    },
+    {
+      "name": "Local US Highways (Buncombe County)",
+      "id": "StreetNetwork_2580_1",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Transportation/StreetNetwork/MapServer/1"
+      },
+      "show": true,
+      "showAttachments": false
+    },
+    {
+      "name": "Local NC Highway (Buncombe County)",
+      "id": "StreetNetwork_2580_2",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Transportation/StreetNetwork/MapServer/2"
+      },
+      "show": true,
+      "showAttachments": false
+    },
+    {
+      "name": "Local Highway Ramps (Buncombe County)",
+      "id": "StreetNetwork_2580_3",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Transportation/StreetNetwork/MapServer/3"
+      },
+      "show": true,
+      "showAttachments": false
+    },
+    {
+      "name": "Local Blue Ridge Parkway (Buncombe County)",
+      "id": "StreetNetwork_2580_4",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Transportation/StreetNetwork/MapServer/4"
+      },
+      "show": true,
+      "showAttachments": false
+    },
+    {
+      "name": "NC Interstate Highways (Generalized)",
+      "id": "StreetNetwork_2580_5",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Transportation/StreetNetwork/MapServer/5"
+      },
+      "show": false,
+      "showAttachments": false
+    },
+    {
+      "name": "Buncombe County Streets (Centerlines)",
+      "id": "StreetNetwork_2580_6",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Transportation/StreetNetwork/MapServer/6"
+      },
+      "show": false,
+      "showAttachments": false
+    },
+    {
+      "name": "Street Labels",
+      "id": "StreetNetwork_2580_7",
+      "layer": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Transportation/StreetNetwork/MapServer/7"
+      },
+      "show": false,
+      "showAttachments": false
+    }
+  ],
+  "table": {
+    "pageSizeOptions": [
+      25,
+      50,
+      100,
+      1000
+    ]
+  },
+  "hideExportButton": false,
+  "initiallyExpand": false,
+  "filterByMapExtent": true
+}
