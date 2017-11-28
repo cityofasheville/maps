@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 Esri. All Rights Reserved.
+// Copyright © 2014 - 2016 Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,10 +19,12 @@ define([
     'dojo/_base/array',
     'dojo/_base/Deferred',
     'jimu/utils',
+    'jimu/portalUrlUtils',
     'jimu/LayerInfos/LayerInfos',
-    'esri/request'
+    'esri/request',
+    'esri/kernel'
   ],
-  function(lang, array, Deferred, jimuUtils, LayerInfos, esriRequest) {
+  function(lang, array, Deferred, jimuUtils, portalUrlUtils, LayerInfos, esriRequest, esriNs) {
     var mo = {
       getDefaultPopupInfo: function(layerDefinition, showShapeField, showFieldInfos) {
         var popupInfo = {
@@ -36,7 +38,8 @@ define([
         showFieldInfos = !!showFieldInfos;
 
         if (layerDefinition.displayField) {
-          popupInfo.title = '{' + layerDefinition.displayField + '}';
+          var displayField = this._getRealFieldName(layerDefinition.displayField, layerDefinition);
+          popupInfo.title = '{' + displayField + '}';
         }else{
           var objectIdField = jimuUtils.getObjectIdField(layerDefinition);
           if(objectIdField){
@@ -61,6 +64,18 @@ define([
         popupInfo.fieldInfos = portalFieldInfos;
 
         return popupInfo;
+      },
+
+      _getRealFieldName: function(fieldName, layerDefinition){
+        fieldName = fieldName.toUpperCase();
+        if(layerDefinition.fields && layerDefinition.fields.length > 0){
+          for(var i = 0; i < layerDefinition.fields.length; i++){
+            if(layerDefinition.fields[i].name.toUpperCase() === fieldName){
+              return layerDefinition.fields[i].name;
+            }
+          }
+        }
+        return "";
       },
 
       getPortalFieldInfosWithoutShape: function(layerDefinition, portalFieldInfos){
@@ -147,9 +162,6 @@ define([
               }
             }
           }));
-          // popupInfo.fieldInfos = array.filter(popupInfo.fieldInfos, lang.hitch(this, function(portalFieldInfo) {
-          //   return !portalFieldInfo.shouldDelete;
-          // }));
         }
         return popupInfo;
       },
@@ -163,11 +175,9 @@ define([
       },
 
       getConfigWithValidDataSource: function(config){
-        var validConfig = {
-          queries: []
-        };
+        var validConfig = lang.clone(config);
         var layerInfosObj = LayerInfos.getInstanceSync();
-        validConfig.queries = array.filter(config.queries, lang.hitch(this, function(singleConfig){
+        validConfig.queries = array.filter(validConfig.queries, lang.hitch(this, function(singleConfig){
           var layerId = singleConfig.webMapLayerId;
           if(layerId){
             var layerInfo = layerInfosObj.getLayerInfoById(layerId);
@@ -205,17 +215,25 @@ define([
           try{
             var objectId = graphic.attributes[objectIdField];
             var url = serviceUrl + "/" + objectId + "/attachments";
-
-            esriRequest({
+            var args = {
               url: url,
               content: {
                 f: 'json'
               },
               callbackParamName: "callback"
-            }).then(function(response) {
+            };
+
+            var withToken = "";
+            var credential = esriNs.id.findCredential(serviceUrl);
+
+            if(credential && credential.token){
+              withToken = "?token=" + credential.token;
+            }
+
+            esriRequest(args).then(function(response) {
               var infos = response.attachmentInfos;
               array.forEach(infos, function(info) {
-                info.url = url + "/" + info.id;
+                info.url = url + "/" + info.id + withToken;
                 info.objectId = objectId;
               });
               def.resolve(infos);
@@ -254,10 +272,11 @@ define([
         //currentVersion is added from 10.0 SP1
         //typeIdField is added from 10.0
         var currentVersion = 0;
+        var objectIdField = jimuUtils.getObjectIdField(layerDefinition);
         if(layerDefinition.currentVersion){
           currentVersion = parseFloat(layerDefinition.currentVersion);
         }
-        return currentVersion >= 10.0 || layerDefinition.hasOwnProperty('typeIdField');
+        return !!objectIdField && (currentVersion >= 10.0 || layerDefinition.hasOwnProperty('typeIdField'));
       },
 
       getQueryType: function(layerDefinition){
@@ -271,6 +290,52 @@ define([
           queryType = 3;
         }
         return queryType;
+      },
+
+      getWebMapPopupInfoByUrl: function(webMapItemData, layerUrl){
+        var popupInfo = null;
+        layerUrl = layerUrl.replace(/\/*$/g, '');
+        var layerUrlWithoutProtocol = portalUrlUtils.removeProtocol(layerUrl);
+        var operationalLayers = webMapItemData.operationalLayers;
+        array.some(operationalLayers, lang.hitch(this, function(info){
+          if(info && info.url){
+            var urlWithoutProtocol = portalUrlUtils.removeProtocol(info.url.replace(/\/*$/g, ''));
+            if(info.popupInfo){
+              if(urlWithoutProtocol === layerUrlWithoutProtocol){
+                popupInfo = info.popupInfo;
+                return true;
+              }
+            }else if(info.layers && info.layers.length > 0){
+              return array.some(info.layers, lang.hitch(this, function(item){
+                var fullUrl = urlWithoutProtocol + "/" + item.id;
+                if(fullUrl === layerUrlWithoutProtocol){
+                  popupInfo = info.popupInfo;
+                  return true;
+                }else{
+                  return false;
+                }
+              }));
+            }
+          }
+          return false;
+        }));
+        return popupInfo;
+      },
+
+      getPopupInfoForRelatedLayer: function(webMapItemData, layerUrl, layerDefinition){
+        var popupInfo = this.getWebMapPopupInfoByUrl(webMapItemData, layerUrl);
+        if(!popupInfo){
+          popupInfo = this.getDefaultPopupInfo(layerDefinition, false, true);
+        }
+
+        if(!popupInfo.title){
+          var objectIdField = jimuUtils.getObjectIdField(layerDefinition);
+          if (objectIdField) {
+            popupInfo.title = '{' + objectIdField + '}';
+          }
+        }
+
+        return popupInfo;
       }
 
     };

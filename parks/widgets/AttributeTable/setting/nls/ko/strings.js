@@ -11,7 +11,7 @@ define({
   "back": "뒤로",
   "exportCSV": "CSV로 내보내기 허용",
   "expand": "초기에 위젯 확장",
-  "filterByExtent": "기본 설정에 따라 맵 범위별 필터링 사용",
+  "filterByExtent": "기본 설정에 따라 맵 범위별 필터링 활성화",
   "restore": "기본 값으로 복원",
   "ok": "확인",
   "cancel": "취소",
@@ -25,5 +25,6 @@ define({
   "fieldName": "이름",
   "fieldAlias": "별칭",
   "fieldVisibility": "가시성",
-  "fieldActions": "작업"
+  "fieldActions": "작업",
+  "showAttachments": "첨부 파일 표시"
 });

@@ -18,5 +18,19 @@ define({
   "invalidTitle2": "' finns redan. Välj en annan titel.",
   "invalidBasemapUrl1": "Den här typen av lager går inte att använda som baskarta.",
   "invalidBasemapUrl2": "Den baskarta du lägger till har en annan geografisk referens än den aktuella kartan.",
-  "addBaselayer": "Lägg till baskartlager"
+  "addBaselayer": "Lägg till baskartlager",
+  "repectOnline": "Synkronisera alltid med organisationens baskartgalleriinställning",
+  "customBasemap": "Konfigurera anpassade baskartor",
+  "basemapTips": "Klicka på ${import} eller ${createNew} för att lägga till baskartor.",
+  "importBasemap": "Importera",
+  "createBasemap": "Skapa ny",
+  "importTitle": "Importera baskartor",
+  "createTitle": "Ny baskarta",
+  "selectGroupTip": "Välj en grupp vars webbkartor kan användas som baskartor.",
+  "noBasemaps": "Inga baskartor.",
+  "defaultGroup": "Esri-standard",
+  "defaultOrgGroup": "Organisationsstandard",
+  "warningTitle": "Varning",
+  "confirmDelete": "Vill du radera de markerade baskartorna?",
+  "noBasemapAvailable": "Det finns inga tillgängliga baskartor eftersom alla baskartor har en annan geografisk referens eller ett annat tiling-schema än den aktuella kartan."
 });

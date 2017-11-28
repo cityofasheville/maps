@@ -1,9 +1,11 @@
 define({
   "_widgetLabel": "Imprimir",
-  "title": "Título de mapa",
+  "title": "Título del mapa",
   "format": "Formato",
   "layout": "Diseño",
   "settings": "Avanzado",
+  "labels": "Etiquetas",
+  "showLabels": "Mostrar etiquetas",
   "mapScaleExtent": "Escala/extensión de mapa",
   "preserve": "Preservar",
   "mapScale": "escala de mapa",

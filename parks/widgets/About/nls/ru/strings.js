@@ -1,3 +1,3 @@
 define({
-  "_widgetLabel": "О"
+  "_widgetLabel": "Описание"
 });

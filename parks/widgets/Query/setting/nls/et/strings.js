@@ -75,7 +75,7 @@ define({
   "feet": "Jalad",
   "meters": "Meetrid",
   "yards": "Jardid",
-  "nauticalMiles": "Meremiilid",
+  "nauticalMiles": "Meremiili",
   "availableSpatialRelationships": "Vali ruumilise seose reeglid",
   "setSpatialRelationships": "Määra ruumilised seosed",
   "availability": "Saadavus",
@@ -97,7 +97,8 @@ define({
   "sortingFields": "Sordi tulemusi",
   "setDisplayFields": "Määra kuvamise väljad",
   "symbol": "Sümbol",
-  "setSymbol": "Määra kohandatud sümbol",
+  "setSymbol": "Kasuta kohandatud sümbolit",
+  "changeSymbolAtRuntime": "Luba sümboleid käituse ajal muuta",
   "serviceSymbolTip": "Kasuta kihi kaudu määratud sümboleid",
   "exportTip": "Luba tulemused eksportida",
   "keepResultsTip": "Säilita tulemused kaardil pärast vidina sulgemist",
@@ -113,7 +114,7 @@ define({
   "customPopupTip": "Konfigureeri kohandatud sisu",
   "showResultsSetActions": "Kuva toimingud määratud tulemuste kohta",
   "zoomTo": "Suumi",
-  "openAttributeTable": "Ava atribuutide tabelis",
+  "openAttributeTable": "Vaata atribuuditabelis",
   "content": "Sisu",
   "displaySQLTip": "Kuva lõppkasutajatele SQL-avaldis",
   "useLayerDefaultSymbol": "Kasuta kihi vaikesümbolit",
@@ -122,5 +123,9 @@ define({
   "uploadImage": "Laadi üles pilt",
   "attributeCriteira": "Atribuudi kriteeriumid",
   "specifyFilterAtRuntimeTip": "Kasutajad peavad määratlema selle avaldise jaoks parameetrid.",
-  "value": "VÄÄRTUS"
+  "value": "VÄÄRTUS",
+  "hideLayersTip": "Kui vidin on suletud, lülitage päringu tulemkihid välja.",
+  "tabLabels": "Vahekaardi märgised",
+  "tasks": "Toimingud",
+  "queryCriteira": "Päringu kriteeriumid"
 });

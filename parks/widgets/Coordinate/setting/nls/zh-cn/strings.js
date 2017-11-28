@@ -5,7 +5,7 @@ define({
   "wkid": "输出 WKID",
   "label": "输出坐标系名称",
   "transformationWkid": "变换 WKID",
-  "transformationLabel": "变换标签",
+  "transformationLabel": "变换标注",
   "transformForward": "正向变换",
   "actions": "操作",
   "warning": "请输入有效的空间参考 WKID!",
@@ -18,7 +18,7 @@ define({
   "edit": "编辑坐标系",
   "output": "输出坐标系",
   "cName": "坐标系名称",
-  "units": "显示单位: ",
+  "units": "显示单位： ",
   "datum": "基准面变换",
   "tName": "变换名称",
   "tWKIDPlaceHolder": "变换的 WKID",
@@ -39,7 +39,11 @@ define({
   "Kilometers": "千米",
   "Decimeters": "分米",
   "Decimal_Degrees": "十进制度",
+  "Degrees_Decimal_Minutes": "度十进制分",
   "Degree_Minutes_Seconds": "度分秒",
   "MGRS": "MGRS",
-  "USNG": "USNG"
+  "USNG": "USNG",
+  "displayOrderLonLatTips": "坐标显示顺序：",
+  "lonLatTips": "经度/纬度(X,Y)",
+  "latLonTips": "纬度/经度(Y,X)"
 });

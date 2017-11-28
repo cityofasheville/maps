@@ -1,6 +1,6 @@
 define({
-  "left": "Poravnaj na levu stranu",
-  "right": "Poravnaj na desnu stranu",
+  "left": "Poravnaj levo",
+  "right": "Poravnaj desno",
   "arrangement": "Raspored",
   "autoUpdate": "Automatsko ažuriranje",
   "respectCurrentMapScale": "Poštuj razmeru trenutne mape"

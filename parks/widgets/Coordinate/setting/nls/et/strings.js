@@ -39,7 +39,11 @@ define({
   "Kilometers": "Kilomeetrit",
   "Decimeters": "Detsimeetrit",
   "Decimal_Degrees": "Kümnendkraadid",
-  "Degree_Minutes_Seconds": "Kraadi, minutit, sekundit",
+  "Degrees_Decimal_Minutes": "Kraadid kümnendminutid",
+  "Degree_Minutes_Seconds": "Kraadid minutid sekundid",
   "MGRS": "MGRS",
-  "USNG": "USNG"
+  "USNG": "USNG",
+  "displayOrderLonLatTips": "Koordinaatide kuvamise järjekord:",
+  "lonLatTips": "Pikkuskraad/laiuskraad(X, Y)",
+  "latLonTips": "Laiuskraad/pikkuskraad(Y, X)"
 });

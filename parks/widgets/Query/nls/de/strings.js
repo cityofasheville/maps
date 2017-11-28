@@ -5,7 +5,7 @@ define({
   "queryParams": "Optionen",
   "parameters": "OPTIONEN",
   "queries": "ABFRAGEN",
-  "apply": "ÜBERNEHMEN",
+  "apply": "Übernehmen",
   "queryResults": "Ergebnisse",
   "clear": "Löschen",
   "noResults": "Kein Feature gefunden.",
@@ -76,12 +76,15 @@ define({
   "back": "Zurück",
   "execute": "Ausführen",
   "zoomTo": "Zoomen auf",
-  "openAttributeTable": "In Attributtabelle öffnen",
+  "openAttributeTable": "In Attributtabelle anzeigen",
   "noResult": "Kein Ergebnis.",
   "noTask": "Kein Task.",
   "removeThisResult": "Dieses Ergebnis entfernen",
   "attributeCriteira": "Attributkriterien",
   "spatialFilter": "Räumlicher Filter",
   "value": "WERT",
-  "noAttributeSpatialFilterTip": "Keine Filter definiert. Alle Features werden zurückgegeben."
+  "noAttributeSpatialFilterTip": "Keine Filter definiert. Alle Features werden zurückgegeben.",
+  "showAllRelatedRecords": "Alle zugehörigen Datensätze anzeigen",
+  "changeSymbol": "Symbol ändern",
+  "queryCriteira": "Abfragekriterien"
 });

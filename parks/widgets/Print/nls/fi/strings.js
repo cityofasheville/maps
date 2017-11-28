@@ -4,6 +4,8 @@ define({
   "format": "Tiedostomuoto",
   "layout": "Asettelu",
   "settings": "Lisäasetukset",
+  "labels": "Tunnustekstit",
+  "showLabels": "Näytä tunnustekstit",
   "mapScaleExtent": "Kartan mittakaava/laajuus",
   "preserve": "Säilytä",
   "mapScale": "Kartan mittakaava",
@@ -30,6 +32,6 @@ define({
   "height": "Korkeus (px)",
   "print": "Tulosta",
   "clearList": "Tyhjennä tulosteet",
-  "creatingPrint": "Tulosteen luominen",
+  "creatingPrint": "Luodaan tulostetta",
   "printError": "Virhe, yritä uudelleen"
 });

@@ -4,6 +4,8 @@ define({
   "format": "Format",
   "layout": "Mise en page",
   "settings": "Avancé",
+  "labels": "Etiquettes",
+  "showLabels": "Afficher les étiquettes",
   "mapScaleExtent": "Echelle/étendue de la carte",
   "preserve": "Conserver",
   "mapScale": "échelle de la carte",
@@ -21,7 +23,7 @@ define({
   "unitsMeters": "Mètres",
   "unitsFeet": "Pieds",
   "unitsYards": "Yards",
-  "unitsNauticalMiles": "Milles nautiques",
+  "unitsNauticalMiles": "Milles marins",
   "lncludeLegend": "Inclure la légende",
   "printQualityOptions": "Qualité d’impression",
   "dpi": "PPP",
@@ -29,7 +31,7 @@ define({
   "width": "Largeur (px)",
   "height": "Hauteur (px)",
   "print": "Imprimer",
-  "clearList": "Supprimer les impressions",
-  "creatingPrint": "Création d’une impression",
+  "clearList": "Effacer les impressions",
+  "creatingPrint": "Création d'une impression",
   "printError": "Erreur, réessayez"
 });

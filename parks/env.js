@@ -76,9 +76,11 @@ var
 
   allCookies,
 
+  verboseLog = true,
+
   //This version number will be appended to URL to avoid cache.
   //The reason we do not use wabVersion is to avoid force user to change wabVersion when they are customizing app.
-  deployVersion = '2.1';
+  deployVersion = '2.5';
 
 // console.time('before map');
 
@@ -88,35 +90,46 @@ var
 
 /////////////////////////////////////
 
+
+/////Build scripts will uncomment this line to disable verboseLog.
+
+//verboseLog = false;
+
+/////////////////////////////////////
+
 (function(global){
   //init API URL
   var queryObject = getQueryObject();
-  var apiVersion = '3.17';
+  var apiVersion = '3.21';
 
   ////////uncomment the following line when downloading the app
 
-  apiUrl = '//js.arcgis.com/3.17';
+  apiUrl = 'https://js.arcgis.com/3.21';
 
   //////////////////////////////////////////////////////////////
   allCookies = getAllCookies();
   window.appInfo = {isRunInPortal: !isXT};
   if (!apiUrl) {
     if (queryObject.apiurl) {
+      if(!checkApiUrl(queryObject.apiurl)){
+        console.error('?apiurl must point to an ULR that is in the app or in esri.com/arcgis.com domain.');
+        return;
+      }
       apiUrl = queryObject.apiurl;
     } else if (isXT) {
-      apiUrl = '//js.arcgis.com/' + apiVersion;
+      apiUrl = 'https://js.arcgis.com/' + apiVersion;
     } else {
       var portalUrl = getPortalUrlFromLocation();
       if (portalUrl.indexOf('arcgis.com') > -1) {
         // if(portalUrl.indexOf('devext.arcgis.com') > -1){
-        //   apiUrl = '//jsdev.arcgis.com/' + apiVersion;
-        // }else if(portalUrl.indexOf('qaext.arcgis.com') > -1){
+        //   apiUrl = '//js.arcgis.com/' + apiVersion;
+        // }else if(portalUrl.indexOf('qa.arcgis.com') > -1){
         //   apiUrl = '//jsqa.arcgis.com/' + apiVersion;
         // }else{
         //   apiUrl = '//js.arcgis.com/' + apiVersion;
         // }
 
-        apiUrl = '//js.arcgis.com/' + apiVersion;
+        apiUrl = 'https://js.arcgis.com/' + apiVersion;
       } else {
         apiUrl = portalUrl + 'jsapi/jsapi/';
       }
@@ -142,6 +155,14 @@ var
       }
     }
     return cookies;
+  }
+
+  function checkApiUrl(url){
+    if(/^\/\//.test(url) || /^https?:\/\//.test(url)){
+      return /(?:[\w\-\_]+\.)+(?:esri|arcgis)\.com/.test(url); //api url must be in esri.com or arcgis.com
+    }else{
+      return true;
+    }
   }
 
   function getPortalUrlFromLocation(){
@@ -240,6 +261,14 @@ var
       }, {
         test: typeof Blob !== 'undefined',
         failure: prePath + "libs/polyfills/FileSaver.ie9.js",
+        callback: completeCb
+      }, {
+        test: window.Blob,
+        failure: prePath + "libs/polyfills/Blob.js",
+        callback: completeCb
+      }, {
+        test: window.ArrayBuffer,
+        failure: prePath + "libs/polyfills/typedarray.js",
         callback: completeCb
       }];
 

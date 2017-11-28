@@ -52,6 +52,7 @@ define([
                 defaultTitle: this.config.defaultTitle,
                 defaultFormat: this.config.defaultFormat,
                 defaultLayout: this.config.defaultLayout,
+                // showAdvancedOption: this.config.showAdvancedOption !== false,
                 nls: this.nls,
                 async: async
               });

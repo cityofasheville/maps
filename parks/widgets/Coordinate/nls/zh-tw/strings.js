@@ -14,7 +14,7 @@ define({
   "Foot": "英呎",
   "Yards": "碼",
   "Miles": "英里",
-  "Nautical_Miles": "海哩",
+  "Nautical_Miles": "海浬",
   "Millimeters": "公釐",
   "Centimeters": "公分",
   "Meter": "公尺",

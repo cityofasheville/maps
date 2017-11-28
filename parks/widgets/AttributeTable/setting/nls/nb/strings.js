@@ -2,16 +2,16 @@ define({
   "instruction": "Velg og konfigurer lag som skal vises i attributttabellen i begynnelsen.",
   "label": "Lag",
   "show": "Vis",
-  "actions": "Konfigurer lagfelter",
+  "actions": "Konfigurer lagfelt",
   "field": "Felt",
   "alias": "Alias",
   "visible": "Synlig",
-  "linkField": "LinkField",
+  "linkField": "Lenkefelt",
   "noLayers": "Ingen tilgjengelige geoobjektlag",
   "back": "Tilbake",
   "exportCSV": "Tillat eksport til CSV",
   "expand": "Utvid widget i begynnelsen",
-  "filterByExtent": "Aktiver alternativet Filtrer etter kartutstrekning som standardinnstilling",
+  "filterByExtent": "Aktiver filter etter kartutstrekning som standard",
   "restore": "Gjenopprett til standardverdi",
   "ok": "OK",
   "cancel": "Avbryt",
@@ -25,5 +25,6 @@ define({
   "fieldName": "Navn",
   "fieldAlias": "Alias",
   "fieldVisibility": "Synlighet",
-  "fieldActions": "Handlinger"
+  "fieldActions": "Handlinger",
+  "showAttachments": "Vis vedlegg"
 });

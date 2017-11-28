@@ -6,12 +6,12 @@ define({
   "field": "Lauks",
   "alias": "Aizstājvārds",
   "visible": "Redzams",
-  "linkField": "Saites lauks",
+  "linkField": "Saistīt lauku",
   "noLayers": "Nav pieejams neviens elementu slānis",
   "back": "Atpakaļ",
   "exportCSV": "Atļaut eksportēt uz CSV",
   "expand": "Sākotnēji izvērst logrīku",
-  "filterByExtent": "Aktivizēt filtrēšanu pēc kartes pārklājuma pēc noklusējuma",
+  "filterByExtent": "Aktivizēt filtrēšanu atbilstoši kartes pārklājumam pēc noklusējuma",
   "restore": "Atjaunot uz noklusējuma vērtību",
   "ok": "Labi",
   "cancel": "Atcelt",
@@ -25,5 +25,6 @@ define({
   "fieldName": "Nosaukums",
   "fieldAlias": "Aizstājvārds",
   "fieldVisibility": "Redzamība",
-  "fieldActions": "Darbības"
+  "fieldActions": "Darbības",
+  "showAttachments": "Rādīt pielikumus"
 });

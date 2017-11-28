@@ -5,7 +5,7 @@ define({
   "transparency": "Transparant",
   "controlPopup": "Pop-up inschakelen / uitschakelen",
   "moveUpAndDown": "Omhoog / omlaag",
-  "attributeTable": "Attributentabel openen",
+  "attributeTable": "Bekijken in Attribuuttabel",
   "url": "Beschrijving / Itemdetails weergeven / Downloaden",
   "layerSelectorTitle": "Kies welke lagen worden aangegeven op de lijst."
 });

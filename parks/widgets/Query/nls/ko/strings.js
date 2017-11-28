@@ -76,12 +76,15 @@ define({
   "back": "뒤로",
   "execute": "실행",
   "zoomTo": "확대/축소",
-  "openAttributeTable": "속성 테이블에서 열기",
+  "openAttributeTable": "속성 테이블에서 보기",
   "noResult": "결과가 없습니다.",
   "noTask": "작업이 없습니다.",
   "removeThisResult": "이 결과 제거",
   "attributeCriteira": "속성 기준",
   "spatialFilter": "공간 필터",
   "value": "값",
-  "noAttributeSpatialFilterTip": "필터가 정의되지 않았습니다. 모든 피처가 반환됩니다."
+  "noAttributeSpatialFilterTip": "필터가 정의되지 않았습니다. 모든 피처가 반환됩니다.",
+  "showAllRelatedRecords": "릴레이트된 모든 레코드 보기",
+  "changeSymbol": "심볼 변경",
+  "queryCriteira": "쿼리 기준"
 });

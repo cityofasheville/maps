@@ -2,16 +2,16 @@ define({
   "instruction": "Seleccione e configure camadas que irão ser mostrados inicialmente na Tabela de Atributo.",
   "label": "Camada",
   "show": "Exibir",
-  "actions": "Configurar Campos de Camadas",
+  "actions": "Configurar campos de camadas",
   "field": "Campo",
   "alias": "Nome Alternativo",
   "visible": "Visível",
-  "linkField": "Campo da ligação",
+  "linkField": "Campo de ligação",
   "noLayers": "Não há camadas de elementos disponíveis",
   "back": "Regressar",
   "exportCSV": "Permitir exportar para CSV",
   "expand": "Expandir o widget inicialmente",
-  "filterByExtent": "Permitir Filtrar por Extensão de Mapa por omissão",
+  "filterByExtent": "Ativar Filtrar por extensão de mapa por defeito",
   "restore": "Restaurar para valor padrão",
   "ok": "OK",
   "cancel": "Cancelar",
@@ -25,5 +25,6 @@ define({
   "fieldName": "Nome",
   "fieldAlias": "Nome Alternativo",
   "fieldVisibility": "Visibilidade",
-  "fieldActions": "Ações"
+  "fieldActions": "Ações",
+  "showAttachments": "Exibir anexos"
 });

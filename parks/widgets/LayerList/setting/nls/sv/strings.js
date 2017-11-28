@@ -5,7 +5,7 @@ define({
   "transparency": "Transparens",
   "controlPopup": "Aktivera/inaktivera popupfönster",
   "moveUpAndDown": "Flytta uppåt/Flytta nedåt",
-  "attributeTable": "Öppna attributtabell",
+  "attributeTable": "Visa i attributtabell",
   "url": "Beskrivning/Visa objektinformation/Hämta",
   "layerSelectorTitle": "Välj vilka lager som ska visas i listan."
 });

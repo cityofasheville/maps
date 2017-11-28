@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 Esri. All Rights Reserved.
+// Copyright © 2014 - 2016 Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,26 +18,34 @@ define([
   'dojo/on',
   'dojo/sniff',
   'dojo/query',
-  'dojo/_base/declare',
+  'dojo/Deferred',
   'dojo/_base/lang',
   'dojo/_base/html',
   'dojo/_base/array',
+  'dojo/promise/all',
+  'dojo/_base/declare',
   'dijit/_WidgetsInTemplateMixin',
+  'esri/lang',
   'jimu/BaseWidgetSetting',
   'jimu/dijit/_QueryableLayerSourcePopup',
   'jimu/utils',
   'jimu/filterUtils',
+  'jimu/ServiceDefinitionManager',
   '../utils',
   './SingleQuerySetting',
-  'jimu/dijit/TabContainer'
+  'jimu/dijit/CheckBox',
+  'jimu/dijit/TabContainer',
+  'dijit/form/TextBox'
 ],
-function(on, sniff, query, declare, lang, html, array, _WidgetsInTemplateMixin, BaseWidgetSetting,
-  _QueryableLayerSourcePopup, jimuUtils, FilterUtils, queryUtils, SingleSetting) {
+function(on, sniff, query, Deferred, lang, html, array, all, declare, _WidgetsInTemplateMixin, esriLang,
+  BaseWidgetSetting, _QueryableLayerSourcePopup, jimuUtils, FilterUtils, ServiceDefinitionManager, queryUtils,
+  SingleSetting) {
 
   return declare([BaseWidgetSetting, _WidgetsInTemplateMixin], {
     baseClass: 'jimu-widget-query-setting',
     singleSetting: null,
     noQueryNls: '',
+    sdm: null,
 
     postMixInProperties: function(){
       this.inherited(arguments);
@@ -46,14 +54,7 @@ function(on, sniff, query, declare, lang, html, array, _WidgetsInTemplateMixin, 
         this._updateConfig();
       }
       this.noQueryNls = this.nls.noTasksTip;
-      var placeHolders = ['"${newQuery}""', '"${newQuery}"', '„${newQuery}”', '„${newQuery}“', '${newQuery}'];
-      array.some(placeHolders, lang.hitch(this, function(placeHolder){
-        if(this.noQueryNls.indexOf(placeHolder) > 0){
-          this.noQueryNls = this.noQueryNls.replace(placeHolder, "<span>" + this.nls.newQuery + "</span>");
-          return true;
-        }
-        return false;
-      }));
+      this.noQueryNls = esriLang.substitute({newQuery: "<span>" + this.nls.newQuery + "</span>"}, this.noQueryNls);
     },
 
     _updateConfig: function() {
@@ -79,7 +80,9 @@ function(on, sniff, query, declare, lang, html, array, _WidgetsInTemplateMixin, 
 
     postCreate:function(){
       this.inherited(arguments);
+      this.sdm = ServiceDefinitionManager.getInstance();
       this.noQueryTip.innerHTML = this.noQueryNls;
+      this.cbxHideLayersAfterWidgetClosed.setLabel(this.nls.hideLayersTip);
       if(this.config){
         this.setConfig(this.config);
       }
@@ -88,6 +91,31 @@ function(on, sniff, query, declare, lang, html, array, _WidgetsInTemplateMixin, 
       }else{
         html.addClass(this.domNode, 'not-mac');
       }
+    },
+
+    getDataSources: function(){
+      var config = this.getConfig();
+      if(!config || config.queries.length === 0){
+        var def = new Deferred();
+        def.resolve([]);
+        return def;
+      }else{
+        var defs = array.map(config.queries, lang.hitch(this, function(singleConfig, i){
+          return this._getSingleDataSource(singleConfig, i);
+        }));
+        return all(defs);
+      }
+    },
+
+    _getSingleDataSource: function(singleConfig, index){
+      return this.sdm.getServiceDefinition(singleConfig.url).then(lang.hitch(this, function(definition){
+        return {
+          id: index,
+          type: 'Features',
+          label: singleConfig.name,
+          dataSchema: jimuUtils.getDataSchemaFromLayerDefinition(definition)
+        };
+      }));
     },
 
     _onBtnAddItemClicked: function(){
@@ -130,16 +158,6 @@ function(on, sniff, query, declare, lang, html, array, _WidgetsInTemplateMixin, 
         this._createSingleSetting(target, null);
 
         var queryName = item.name || "";
-
-        // var expr = null;
-        // if (layerSourceType === 'map') {
-        //   if (item.layerInfo) {
-        //     var layerObject = item.layerInfo.layerObject;
-        //     if (layerObject && typeof layerObject.getDefinitionExpression === 'function') {
-        //       expr = layerObject.getDefinitionExpression();
-        //     }
-        //   }
-        // }
         //we don't save current layer's definition expression, we just read it at runtime
         this.singleSetting.setNewLayerDefinition(item, layerSourceType, queryName);
       })));
@@ -254,6 +272,13 @@ function(on, sniff, query, declare, lang, html, array, _WidgetsInTemplateMixin, 
     },
 
     setConfig: function(config){
+      this.cbxHideLayersAfterWidgetClosed.setValue(config.hideLayersAfterWidgetClosed);
+      if(config.labelTasks){
+        this.labelTasksTextBox.set("value", config.labelTasks);
+      }
+      if(config.labelResults){
+        this.labelResultsTextBox.set("value", config.labelResults);
+      }
       var firstTarget = null;
       array.forEach(config.queries, lang.hitch(this, function(singleConfig, index){
         var target = this._createTarget(singleConfig.name);
@@ -277,6 +302,9 @@ function(on, sniff, query, declare, lang, html, array, _WidgetsInTemplateMixin, 
       }
       var targets = query('.item', this.listContent);
       var config = {
+        hideLayersAfterWidgetClosed: this.cbxHideLayersAfterWidgetClosed.getValue(),
+        labelTasks: this.labelTasksTextBox.get("value"),
+        labelResults: this.labelResultsTextBox.get("value"),
         queries: []
       };
       config.queries = array.map(targets, lang.hitch(this, function(target){

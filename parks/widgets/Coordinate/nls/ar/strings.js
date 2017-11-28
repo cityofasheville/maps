@@ -14,14 +14,14 @@ define({
   "Foot": "قدم",
   "Yards": "ياردات",
   "Miles": "أميال",
-  "Nautical_Miles": "ميل بحري",
+  "Nautical_Miles": "أميال بحرية",
   "Millimeters": "ميليمتر",
   "Centimeters": "سنتيمتر",
   "Meter": "مترات",
   "Kilometers": "كيلومترات",
   "Decimeters": "ديسيميتر",
   "Decimal_Degrees": "درجات",
-  "Degree_Minutes_Seconds": "درجات دقائق ثوان",
+  "Degree_Minutes_Seconds": "الدرجات بالدقائق والثواني",
   "MGRS": "MGRS",
   "USNG": "USNG"
 });

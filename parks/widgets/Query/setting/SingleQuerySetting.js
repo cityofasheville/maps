@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 Esri. All Rights Reserved.
+// Copyright © 2014 - 2016 Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,22 +15,24 @@
 ///////////////////////////////////////////////////////////////////////////
 
 define([
-  'dojo/_base/declare',
-  'dijit/_WidgetBase',
-  'dijit/_TemplatedMixin',
-  'dijit/_WidgetsInTemplateMixin',
-  'dojo/text!./SingleQuerySetting.html',
-  'dojo/_base/lang',
-  'dojo/_base/html',
   'dojo/on',
   'dojo/query',
   'dojo/Evented',
   'dojo/Deferred',
+  'dojo/_base/lang',
+  'dojo/_base/html',
+  'dijit/_WidgetBase',
+  'dojo/_base/declare',
+  'dijit/_TemplatedMixin',
+  'dijit/_WidgetsInTemplateMixin',
+  'dojo/text!./SingleQuerySetting.html',
   'jimu/utils',
   'jimu/dijit/Popup',
   'jimu/dijit/CheckBox',
   'jimu/dijit/TabContainer3',
   'jimu/dijit/Message',
+  // 'jimu/dijit/DataSource',
+  // 'jimu/dijit/_DataSourcePopup',
   'jimu/dijit/_QueryableLayerSourcePopup',
   '../utils',
   './PopupConfig',
@@ -43,10 +45,9 @@ define([
   'jimu/dijit/ImageChooser',
   'dijit/form/ValidationTextBox'
 ],
-function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template, lang,
-  html, on, query, Evented, Deferred, jimuUtils, Popup, CheckBox, TabContainer3, Message,
-  _QueryableLayerSourcePopup, queryUtils, PopupConfig, SpatialFilterConfig, esriRequest, esriSymbolJsonUtils,
-  Filter) {
+function(on, query, Evented, Deferred, lang, html, _WidgetBase, declare,  _TemplatedMixin, _WidgetsInTemplateMixin,
+  template, jimuUtils, Popup, CheckBox, TabContainer3, Message, _QueryableLayerSourcePopup, queryUtils, PopupConfig,
+  SpatialFilterConfig, esriRequest, esriSymbolJsonUtils, Filter) {
 
   return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, Evented], {
     baseClass: 'jimu-widget-single-query-setting',
@@ -128,8 +129,7 @@ function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, templat
           }
           this._layerDefinition = response;
           this._layerDefinition.url = url;
-          this._resetByConfig(this.config, this._layerDefinition)
-          .promise.always(lang.hitch(this, function(){
+          this._resetByConfig(this.config, this._layerDefinition).promise.always(lang.hitch(this, function(){
             this.hideBigShelter();
             this.tab.hideShelter();
           }));
@@ -155,6 +155,7 @@ function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, templat
         orderByFields: [],
         useLayerSymbol: true,
         resultsSymbol:'',
+        canModifySymbol: this.cbxModifySymbol.getValue(),
         keepResultsOnMapAfterCloseWidget: true,
         enableExport: false,
         singleResultLayer: true,
@@ -245,7 +246,7 @@ function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, templat
       }
 
       //options
-      config.keepResultsOnMapAfterCloseWidget = this.cbxKeepResults.getValue();
+      //config.keepResultsOnMapAfterCloseWidget = this.cbxKeepResults.getValue();
       config.singleResultLayer = this.radioOneLayerPerTask.checked;
       config.enableExport = this.cbxExport.getValue();
 
@@ -431,6 +432,8 @@ function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, templat
       jimuUtils.combineRadioCheckBoxWithLabel(this.radioServiceSymbol, this.labelServiceSymbol);
       jimuUtils.combineRadioCheckBoxWithLabel(this.radioCustomSymbol, this.labelCustomSymbol);
       jimuUtils.groupRadios([this.radioServiceSymbol, this.radioCustomSymbol]);
+      this.cbxModifySymbol.setLabel(this.nls.changeSymbolAtRuntime);
+      this.cbxModifySymbol.uncheck();
     },
 
     _initPopupConfig: function(){
@@ -454,13 +457,14 @@ function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, templat
 
     _initOptionsTab: function(){
       //init checkboxes
-      this.cbxKeepResults = new CheckBox({
+      /*this.cbxKeepResults = new CheckBox({
         label: this.nls.keepResultsTip
       });
-      this.cbxKeepResults.placeAt(this.cbxKeepResultsDiv);
+      this.cbxKeepResults.placeAt(this.cbxKeepResultsDiv);*/
 
       this.cbxExport = new CheckBox({label: this.nls.exportTip});
       this.cbxExport.placeAt(this.exportSection);
+      html.addClass(this.cbxExport.domNode, 'small-font-size');
 
       //init raidos
       jimuUtils.combineRadioCheckBoxWithLabel(this.radioOneLayerPerTask,
@@ -502,24 +506,40 @@ function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, templat
       this.radioServiceSymbol.disabled = false;
       this.radioCustomSymbol.checked = true;
       this.layerSymbolPicker.reset();
+      this.cbxModifySymbol.uncheck();
 
       //reset options tab
-      this.cbxKeepResults.uncheck();
+      //this.cbxKeepResults.uncheck();
       this.radioOneLayerPerTask.checked = true;
       this.cbxExport.uncheck();
     },
 
     _onBtnSetSourceClicked: function(){
+      /*var args = {
+        titleLabel: this.nls.setDataSource,
+
+        dijitArgs: {
+          style: {
+            height: '100%'
+          },
+          types: DataSource.createQueryableLayerTypes({
+            createMapResponse: this.map.webMapResponse,
+            portalUrl: this.appConfig.portalUrl
+          })
+        }
+      };
+      var sourcePopup = new _DataSourcePopup(args);*/
+
       var args = {
         titleLabel: this.nls.setDataSource,
 
         dijitArgs: {
-          multiple: false,
-          createMapResponse: this.map.webMapResponse,
-          portalUrl: this.appConfig.portalUrl,
           style: {
             height: '100%'
-          }
+          },
+          multiple: false,
+          createMapResponse: this.map.webMapResponse,
+          portalUrl: this.appConfig.portalUrl
         }
       };
 
@@ -530,15 +550,6 @@ function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, templat
         sourcePopup.close();
         sourcePopup = null;
         var queryName = null;
-        // var expr = null;
-        // if(layerSourceType === 'map'){
-        //   if(item.layerInfo){
-        //     var layerObject = item.layerInfo.layerObject;
-        //     if(layerObject && typeof layerObject.getDefinitionExpression === 'function'){
-        //       expr = layerObject.getDefinitionExpression();
-        //     }
-        //   }
-        // }
         //we don't save current layer's definition expression, we just read it at runtime
         this.setNewLayerDefinition(item, layerSourceType, queryName);
       })));
@@ -609,6 +620,7 @@ function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, templat
 
       //reset symbol
       this._handleSymbolSection(definition);
+      this.cbxModifySymbol.uncheck();
     },
 
     _handleSymbolSection: function(layerInfo, /*optional*/ symbol){
@@ -660,7 +672,7 @@ function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, templat
       this.urlTextBox.set('value', config.url);
       this.queryNameTextBox.set('value', config.name || '');
       if(config.icon){
-        this.imageChooser.setDefaultSelfSrc(config.icon);
+        this.imageChooser.setDefaultSelfSrc(jimuUtils.processUrlInWidgetConfig(config.icon, this.folderUrl));
       }else{
         this._setDefaultTaskIcon();
       }
@@ -713,9 +725,10 @@ function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, templat
       if(config.useLayerSymbol){
         this.radioServiceSymbol.checked = true;
       }
+      this.cbxModifySymbol.setValue(config.canModifySymbol);
 
       //reset options
-      this.cbxKeepResults.setValue(config.keepResultsOnMapAfterCloseWidget);
+      //this.cbxKeepResults.setValue(config.keepResultsOnMapAfterCloseWidget);
       if(config.singleResultLayer){
         this.radioOneLayerPerTask.checked = true;
       }else{

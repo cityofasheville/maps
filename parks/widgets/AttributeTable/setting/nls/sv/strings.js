@@ -11,7 +11,7 @@ define({
   "back": "Bakåt",
   "exportCSV": "Tillåt export till CSV",
   "expand": "Börja med att expandera widgeten",
-  "filterByExtent": "Aktivera filter efter kartutbredning som standard",
+  "filterByExtent": "Aktivera filter enligt kartutbredning som standard",
   "restore": "Återställ till standardvärde",
   "ok": "OK",
   "cancel": "Avbryt",
@@ -25,5 +25,6 @@ define({
   "fieldName": "Namn",
   "fieldAlias": "Alias",
   "fieldVisibility": "Synlighet",
-  "fieldActions": "Åtgärder"
+  "fieldActions": "Åtgärder",
+  "showAttachments": "Visa bifogade filer"
 });

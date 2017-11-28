@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 Esri. All Rights Reserved.
+// Copyright © 2014 - 2016 Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,10 +22,9 @@ define([
     'jimu/utils',
     'esri/tasks/query',
     'esri/tasks/QueryTask',
-    'esri/layers/FeatureLayer',
-    'esri/tasks/RelationshipQuery'
+    'esri/layers/FeatureLayer'
   ],
-  function(declare, lang, array, Deferred, jimuUtils, EsriQuery, QueryTask, FeatureLayer, RelationshipQuery) {
+  function(declare, lang, array, Deferred, jimuUtils, EsriQuery, QueryTask, FeatureLayer) {
 
     function getCleanCurrentAttrsTemplate(){
       //important!
@@ -74,6 +73,9 @@ define([
       constructor: function(map, currentAttrs){
         this.map = map;
         this.currentAttrs = currentAttrs;
+        if(this.currentAttrs.layerInfo.maxRecordCount > 0){
+          this.currentAttrs.query.maxRecordCount = this.currentAttrs.layerInfo.maxRecordCount;
+        }
       },
 
       resetCurrentAttrs: function(){
@@ -199,37 +201,42 @@ define([
         return finalName;
       },
 
+      getObjectIdsForAllRelatedRecordsAction: function(){
+        var def = new Deferred();
+        if(this.currentAttrs.query.objectIds && this.currentAttrs.query.objectIds.length > 0){
+          def.resolve(this.currentAttrs.query.objectIds);
+        }else if(this.currentAttrs.queryType === 1){
+          def = this._queryIds(this.currentAttrs.query.where,
+                               this.currentAttrs.query.geometry,
+                               this.currentAttrs.query.relationship);
+        }else if(this.currentAttrs.queryType === 3){
+          var objectIdField = this.currentAttrs.config.objectIdField;
+          var features = this.currentAttrs.query.resultLayer.graphics;
+          var objectIds = array.map(features, lang.hitch(this, function(feature){
+            return parseInt(feature.attributes[objectIdField], 10);
+          }));
+          def.resolve(objectIds);
+        }
+        return def;
+      },
+
       /*--------------------query support OrderBy and Pagination--------------------*/
       //resolve features
       doQuery_SupportOrderByAndPagination: function(where, geometry){
         var resultDef = new Deferred();
-        // html.setStyle(this.resultsNumberDiv, 'display', 'block');
-
-        //var resultLayer = this.currentAttrs.query.resultLayer;
 
         var onErrorHandler = lang.hitch(this, function(err) {
           console.error(err);
           resultDef.reject(err);
-          // if (!this.domNode) {
-          //   return;
-          // }
-          // this.shelter.hide();
-          // if (resultLayer) {
-          //   this.map.removeLayer(resultLayer);
-          // }
-          // resultLayer = null;
         });
 
-        // this.shelter.show();
         var relationship  = this.currentAttrs.query.relationship;
         var defCount = this._queryCount(where, geometry, relationship);
         defCount.then(lang.hitch(this, function(allCount){
-          //this.numSpan.innerHTML = jimuUtils.localizeNumber(allCount);
 
           this.currentAttrs.query.allCount = allCount;
 
           if(allCount === 0){
-            //resultDef.resolve(this._getQueryResultTemplate());
             resultDef.resolve([]);
             return;
           }
@@ -238,7 +245,6 @@ define([
 
           var resultOffset = 0;
           var recordCount = this.currentAttrs.query.maxRecordCount;
-          //var objectIdField = this.currentAttrs.config.objectIdField;
 
           var def = this._queryWithPaginationAndOrder(where, geometry, resultOffset, recordCount, relationship);
           def.then(lang.hitch(this, function(response){
@@ -258,7 +264,6 @@ define([
         var allCount = this.currentAttrs.query.allCount;
 
         if(resultOffset >= allCount){
-          //resultDef.resolve(this._getQueryResultTemplate());
           resultDef.resolve([]);
           return resultDef;
         }
@@ -268,12 +273,9 @@ define([
           resultDef.reject(err);
         });
 
-        // var resultLayer = this.currentAttrs.query.resultLayer;
-
         var recordCount = this.currentAttrs.query.maxRecordCount;
         var where = this.currentAttrs.query.where;
         var geometry = this.currentAttrs.query.geometry;
-        //var objectIdField = this.currentAttrs.config.objectIdField;
         var relationship  = this.currentAttrs.query.relationship;
 
         var def = this._queryWithPaginationAndOrder(where, geometry, resultOffset, recordCount, relationship);
@@ -290,16 +292,10 @@ define([
       //resolve features
       doQuery_SupportObjectIds: function(where, geometry){
         var resultDef = new Deferred();
-        //html.setStyle(this.resultsNumberDiv, 'display', 'block');
-        //var resultLayer = this.currentAttrs.query.resultLayer;
 
         var onErrorHandler = lang.hitch(this, function(err) {
           console.error(err);
           resultDef.reject(err);
-          // if (resultLayer) {
-          //   this.map.removeLayer(resultLayer);
-          // }
-          // resultLayer = null;
         });
         var relationship  = this.currentAttrs.query.relationship;
         var defIDs = this._queryIds(where, geometry, relationship);
@@ -310,18 +306,13 @@ define([
 
           if(!hasResults){
             this.currentAttrs.query.allCount = 0;
-            //resultDef.resolve(this._getQueryResultTemplate());
             resultDef.resolve([]);
             return;
           }
 
           this.currentAttrs.query.allCount = objectIds.length;
 
-          // if(resultLayer instanceof FeatureLayer){
-          //   this._addOperationalLayer(resultLayer);
-          // }
           var allCount = objectIds.length;
-          // this.numSpan.innerHTML = jimuUtils.localizeNumber(allCount);
           this.currentAttrs.query.objectIds = objectIds;
           this.currentAttrs.query.nextIndex = 0;//reset nextIndex
           var maxRecordCount = this.currentAttrs.query.maxRecordCount;
@@ -337,7 +328,6 @@ define([
           var def = this._queryByObjectIds(partialIds, true, relationship);
           def.then(lang.hitch(this, function(response){
             var features = response.features;
-            this.currentAttrs.query.maxRecordCount = features.length;
             this.currentAttrs.query.nextIndex += features.length;
             resultDef.resolve(features);
           }), lang.hitch(this, function(err){
@@ -356,12 +346,10 @@ define([
         var nextIndex = this.currentAttrs.query.nextIndex;
 
         if(nextIndex >= allCount){
-          //resultDef.resolve(this._getQueryResultTemplate());
           resultDef.resolve([]);
           return;
         }
 
-        //var resultLayer = this.currentAttrs.query.resultLayer;
         var maxRecordCount = this.currentAttrs.query.maxRecordCount;
 
         var countLeft = allObjectIds.length - nextIndex;
@@ -390,8 +378,6 @@ define([
       //resolve features
       doQuery_NotSupportObjectIds: function(where, geometry){
         var resultDef = new Deferred();
-        //html.setStyle(this.resultsNumberDiv, 'display', 'none');
-        //var resultLayer = this.currentAttrs.query.resultLayer;
         var relationship  = this.currentAttrs.query.relationship;
         this._query(where, geometry, true, relationship).then(lang.hitch(this, function(response){
           var features = response.features;
@@ -399,10 +385,6 @@ define([
           resultDef.resolve(features);
         }), lang.hitch(this, function(err){
           console.error(err);
-          // if(resultLayer){
-          //   this.map.removeLayer(resultLayer);
-          // }
-          // resultLayer = null;
           resultDef.reject(err);
         }));
 
@@ -412,17 +394,15 @@ define([
 
       /*-------------------------getOutputFields----------------------------------*/
 
-      _getObjectIdField: function(){
-        return this.currentAttrs.config.objectIdField;
-      },
-
       //include necessaryfields: renderer related fields, popupInfo fields
       getOutputFields: function(){
-        var result = [];
+        /*var result = [];
         var outFields = [];
         //objectIdField
         var objectIdField = this.currentAttrs.config.objectIdField;
-        outFields.push(objectIdField);
+        if(objectIdField){
+          outFields.push(objectIdField);
+        }
         //renderer related fields
         var rendererFields = this._getRequiredFieldNames();
         outFields = outFields.concat(rendererFields);
@@ -435,7 +415,28 @@ define([
             result.push(fieldName);
           }
         }));
+        if(result.indexOf("*") >= 0){
+          //sometimes the query will fail if outFields includes '*' and other fields.
+          result = [];
+          array.forEach(this.currentAttrs.layerInfo.fields, lang.hitch(this, function(fieldInfo){
+            if(fieldInfo && fieldInfo.name && fieldInfo.type !== 'esriFieldTypeGeometry'){
+              result.push(fieldInfo.name);
+            }
+          }));
+        }
+        return result;*/
+
+        var result = [];
+        array.forEach(this.currentAttrs.layerInfo.fields, lang.hitch(this, function(fieldInfo) {
+          if (fieldInfo && fieldInfo.name && fieldInfo.type !== 'esriFieldTypeGeometry') {
+            result.push(fieldInfo.name);
+          }
+        }));
         return result;
+      },
+
+      _getObjectIdField: function(){
+        return this.currentAttrs.config.objectIdField;
       },
 
       //include objectIdField,typeIdField,startTimeField,endTimeField,trackIdField,rendererFields
@@ -546,6 +547,7 @@ define([
         queryParams.returnGeometry = !!returnGeometry;
         queryParams.spatialRelationship = relationship;
         queryParams.outFields = this.getOutputFields();
+        //queryParams.maxRecordCount = this.currentAttrs.query.maxRecordCount;
         var queryTask = new QueryTask(this.currentAttrs.config.url);
         return queryTask.execute(queryParams);
       },
@@ -651,62 +653,6 @@ define([
 
         var queryTask = new QueryTask(this.currentAttrs.config.url);
         return queryTask.execute(queryParams);
-      },
-
-      /*----------------------------------related records---------------------------------------*/
-
-      _getCurrentRelationships: function(){
-        return this.currentAttrs.layerInfo.relationships || [];
-      },
-
-      _queryRelatedFeaturesById: function(objectIds){
-        var promises = [];
-        var relationships = this._getCurrentRelationships();
-        if(relationships && relationships.length > 0){
-          var queryTask = new QueryTask(this.currentAttrs.config.url);
-
-          array.forEach(relationships, lang.hitch(this, function(relationship){
-            var relationParam = new RelationshipQuery();
-            relationParam.objectIds = objectIds;
-            relationParam.relationshipId = relationship.id;
-
-            var outFields = array.map(relationship.fields, function(fieldInfo){
-              return fieldInfo.name;
-            });
-
-            relationParam.outFields = outFields;
-            relationParam.returnGeometry = false;
-
-            var defered = queryTask.executeRelationshipQuery(relationParam);
-            promises.push({
-              relationshipId: relationship.id,
-              promise: defered
-            });
-          }));
-        }
-        return promises;
-      },
-
-      _findRelationshipInfo: function(relationshipId){
-        var relationships = this._getCurrentRelationships();
-        for(var i = 0; i < relationships.length; i++){
-          if(relationships[i].id === relationshipId){
-            return relationships[i];
-          }
-        }
-        return null;
-      },
-
-      _findRelationshipFields: function(relationshipId){
-        var fields = [];
-
-        var relationship = this._findRelationshipInfo(relationshipId);
-
-        if(relationship){
-          fields = relationship.fields;
-        }
-
-        return fields;
       }
 
     });

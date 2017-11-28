@@ -76,12 +76,15 @@ define({
   "back": "返回",
   "execute": "執行",
   "zoomTo": "縮放至",
-  "openAttributeTable": "在屬性表中開啟",
+  "openAttributeTable": "屬性表中的視圖",
   "noResult": "無結果。",
   "noTask": "無任務。",
   "removeThisResult": "移除此結果",
   "attributeCriteira": "屬性準則",
   "spatialFilter": "空間篩選器",
   "value": "值",
-  "noAttributeSpatialFilterTip": "無定義的篩選器。將傳回所有圖徵。"
+  "noAttributeSpatialFilterTip": "無定義的篩選器。將傳回所有圖徵。",
+  "showAllRelatedRecords": "顯示所有相關記錄",
+  "changeSymbol": "變更符號",
+  "queryCriteira": "查詢條件"
 });

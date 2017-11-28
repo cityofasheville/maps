@@ -30,6 +30,7 @@ define({
   "meters": "メートル",
   "feet": "フィート",
   "yards": "ヤード",
+  "nauticalmiles": "海里",
   "squareKilometers": "平方キロメートル",
   "squareMiles": "平方マイル",
   "acres": "エーカー",

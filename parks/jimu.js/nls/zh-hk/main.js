@@ -6,6 +6,7 @@ define({
     "yes": "是",
     "no": "否",
     "next": "下一步",
+    "previous": "上一頁",
     "back": "上一步",
     "selected": "選取",
     "name": "名稱",
@@ -48,11 +49,34 @@ define({
     "scene": "場景",
     "reset": "重設",
     "icon": "圖示",
+    "folder": "文件夾",
     "share": "分享",
     "view": "檢視",
     "newText": "新建",
     "edit": "編輯",
-    "wkid": "WKID"
+    "wkid": "WKID",
+    "table": "表",
+    "zoomIn": "放大",
+    "zoomOut": "縮小",
+    "continue1": "繼續",
+    "longitude": "經度",
+    "latitude": "緯度",
+    "custom": "自訂",
+    "image": "影像",
+    "font": "字型",
+    "text": "文字",
+    "all": "全部",
+    "number": "編號",
+    "percentage": "百分比",
+    "unit": "單位",
+    "thousand": "千",
+    "billion": "十億",
+    "million": "百萬",
+    "none": "無",
+    "field": "欄位",
+    "operation": "操作",
+    "disableUpdateGeometry": "停用更新幾何",
+    "preview": "預覽"
   },
   "errorCode": "代碼",
   "errorMessage": "訊息",
@@ -96,7 +120,10 @@ define({
     "dash": "虛線",
     "dot": "點",
     "dashDot": "虛線",
-    "dashDotDot": "虛線點點"
+    "dashDotDot": "虛線點點",
+    "customImage": "自訂圖片",
+    "chooseFile": "選擇檔案",
+    "noFileChoosen": "未選擇檔案。"
   },
   "transparency": {
     "opaque": "不透明",
@@ -109,7 +136,7 @@ define({
     "uniqueSymbol": "唯一符號",
     "color": "顏色",
     "size": "大小",
-    "toShow": "顯示",
+    "toShow": "要顯示",
     "colors": "顏色",
     "classes": "類別",
     "symbolSize": "符號大小",
@@ -131,7 +158,7 @@ define({
     "circle": "圓形",
     "ellipse": "橢圓",
     "polygon": "面",
-    "freehandPolygon": "手繪面",
+    "freehandPolygon": "手繪多邊形",
     "text": "文字",
     "clear": "清除"
   },
@@ -157,11 +184,11 @@ define({
     "invalidUrlTip": "您輸入的 URL 無效或不可存取。"
   },
   "serviceBrowser": {
-    "noGpFound": "未找到任何地理處理服務。",
+    "noGpFound": "找不到任何地理處理服務。",
     "unableConnectTo": "無法連接至"
   },
   "layerServiceBrowser": {
-    "noServicesFound": "未找到任何地圖服務或圖徵服務",
+    "noServicesFound": "找不到任何地圖服務或圖徵服務。",
     "unableConnectTo": "無法連接至"
   },
   "basicServiceChooser": {
@@ -176,8 +203,8 @@ define({
     "invalidUrl": "URL 無效。"
   },
   "filterBuilder": {
-    "addAnotherExpression": "新增篩選表達式",
-    "addSet": "新增表達式集合",
+    "addAnotherExpression": "新增表達式",
+    "addSet": "新增集合",
     "matchMsg": "取得圖層中與以下 ${any_or_all} 表達式相符的圖徵",
     "matchMsgSet": "此集合中的以下 ${any_or_all} 表達式為 true",
     "all": "全部",
@@ -202,9 +229,14 @@ define({
     "dateOperatorIsNotOn": "不在",
     "dateOperatorIsBefore": "早於",
     "dateOperatorIsAfter": "晚於",
+    "dateOperatorIsOnOrBefore": "在該日期或早於",
+    "dateOperatorIsOnOrAfter": "在該日期或晚於",
+    "dateOperatorMinutes": "分鐘",
+    "dateOperatorHours": "小時",
     "dateOperatorDays": "天",
     "dateOperatorWeeks": "週",
     "dateOperatorMonths": "月",
+    "dateOperatorYears": "年",
     "dateOperatorInTheLast": "最後",
     "dateOperatorNotInTheLast": "不是最後",
     "dateOperatorIsBetween": "介於",
@@ -222,7 +254,7 @@ define({
     "numberOperatorIsBlank": "為空",
     "numberOperatorIsNotBlank": "不為空",
     "string": "字串",
-    "number": "編號",
+    "number": "數值",
     "date": "日期",
     "askForValues": "請求值",
     "prompt": "提示",
@@ -230,44 +262,49 @@ define({
     "error": {
       "invalidParams": "無效的參數。",
       "invalidUrl": "無效的 URL。",
-      "noFilterFields": "圖層不包含可用於篩選的欄位。",
+      "noFilterFields": "圖層沒有可用於建立篩選器的欄位。",
       "invalidSQL": "SQL 表達式無效。",
       "cantParseSQL": "無法解析 SQL 表達式。"
     },
     "caseSensitive": "區分大小寫",
     "notSupportCaseSensitiveTip": "託管的服務不支援區分大小寫的查詢。",
-    "setFilterTip": "請正確設定篩選程式。"
+    "setFilterTip": "請正確設定篩選器。",
+    "listValues": "清單值",
+    "cascadeFilterTip": "僅顯示先前的表達式所篩選的值。",
+    "noneCascadeFilterTip": "此欄位的所有唯一值",
+    "previousCascadeFilterTip": "先前的表達式所篩選的值",
+    "allCascadeFilterTip": "其他所有表達式所篩選的值"
   },
   "featureLayerSource": {
     "layer": "圖層",
     "browse": "瀏覽",
-    "selectFromMap": "從地圖中選擇",
-    "selectFromPortal": "從 Portal for ArcGIS 新增",
-    "addServiceUrl": "新增服務 URL",
+    "selectFromMap": "繪圖",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "服務 URL",
     "inputLayerUrl": "輸入圖層 URL",
     "selectLayer": "從目前地圖中選擇圖徵圖層。",
     "chooseItem": "選擇圖徵圖層項目。",
     "setServiceUrl": "輸入圖徵服務 URL 或地圖服務。",
-    "selectFromOnline": "從 ArcGIS Online 新增",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "選擇圖徵圖層。"
   },
   "queryableLayerSource": {
     "layer": "圖層",
     "browse": "瀏覽",
-    "selectFromMap": "從地圖中選擇",
-    "selectFromPortal": "從 Portal for ArcGIS 新增",
-    "addServiceUrl": "新增服務 URL",
+    "selectFromMap": "繪圖",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "服務 URL",
     "inputLayerUrl": "輸入圖層 URL",
     "selectLayer": "從目前地圖中選擇圖層。",
     "chooseItem": "選擇項目。",
     "setServiceUrl": "輸入服務的 URL。",
-    "selectFromOnline": "從 ArcGIS Online 新增",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "選擇圖層。"
   },
   "gpSource": {
-    "selectFromPortal": "從 Portal for ArcGIS 新增",
-    "addServiceUrl": "新增服務 URL",
-    "selectFromOnline": "從 ArcGIS Online 新增",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "服務 URL",
+    "selectFromOnline": "ArcGIS Online",
     "setServiceUrl": "輸入地理處理服務的 URL。",
     "chooseItem": "選擇地理處理服務項目。",
     "chooseTask": "選擇地理處理任務。"
@@ -293,7 +330,11 @@ define({
     "owner": "擁有者",
     "signInTo": "登入到",
     "lastModified": "上次修改時間",
-    "moreDetails": "更多詳細資訊"
+    "moreDetails": "詳細資訊",
+    "mostRecent": "最新",
+    "mostViewed": "最高檢視次數",
+    "highestRated": "最高評級",
+    "viewItemDetails": "查看項目的詳細資訊"
   },
   "featureLayerChooserFromPortal": {
     "notSupportQuery": "服務不支援查詢。"
@@ -313,16 +354,16 @@ define({
     "itemMoveDown": "下移",
     "itemDesc": "描述",
     "itemDownload": "下載",
-    "itemToAttributeTable": "打開屬性表"
+    "itemToAttributeTable": "屬性表中的視圖"
   },
   "imageChooser": {
-    "unsupportReaderAPI": "待辦：瀏覽器不支援 FileReader API",
+    "unsupportReaderAPI": "待辦: 瀏覽器不支援檔案讀取器 API",
     "readError": "讀取檔案失敗。",
     "unknowError": "無法完成操作",
     "invalidType": "無效的檔案類型。",
     "cropImage": "裁切圖像",
     "exceed": "檔案大小不得超過 1024 KB",
-    "enableFlash": "待辦：請啟用閃爍。",
+    "enableFlash": "請先啟用 Adobe Flash 再瀏覽到圖片。",
     "cropWaining": "請選擇至少擁有 ${width} x ${height} 像素的照片。",
     "toolTip": "為獲得最佳效果，圖片的寬度應為 ${width} 像素，高度應為 ${height} 像素。其他大小將調整為適應此大小。可接受的圖片格式包括: PNG、GIF 和 JPEG。"
   },
@@ -347,6 +388,7 @@ define({
     "restoreMap": "按一下以還原離開時的地圖範圍和圖層可見度。"
   },
   "featureActions": {
+    "featureActions": "圖徵動作",
     "ZoomTo": "縮放至",
     "PanTo": "平移至",
     "Flash": "快閃",
@@ -357,7 +399,11 @@ define({
     "ExportToCSV": "匯出到 CSV 檔案",
     "ShowSelectedFeature": "顯示所選圖徵",
     "ExportToFeatureCollection": "匯出至圖徵集合",
-    "ExportToGeoJSON": "匯出至 GeoJSON"
+    "ExportToGeoJSON": "匯出至 GeoJSON",
+    "EditAttributes": "編輯屬性",
+    "AddMarker": "新增標記",
+    "RemoveMarker": "移除標記",
+    "SaveToMyContent": "儲存到我的內容"
   },
   "spatialFilterByFeatures": {
     "relatedLayer": "相關圖層",
@@ -373,11 +419,37 @@ define({
   },
   "units": {
     "miles": "英里",
+    "milesAbbr": "mi",
     "kilometers": "公里",
+    "kilometersAbbr": "km",
     "feet": "英呎",
+    "feetAbbr": "ft",
     "meters": "公尺",
+    "metersAbbr": "m",
     "yards": "碼",
-    "nauticalMiles": "海浬"
+    "yardsAbbr": "yd",
+    "acres": "英畝",
+    "acresAbbr": "英畝",
+    "nauticalMiles": "海浬",
+    "nauticalMilesAbbr": "nmi",
+    "uSSurveyFeet": "美國調查英呎",
+    "uSSurveyFeetAbbr": "ftUS",
+    "decimalDegree": "十進制度",
+    "decimalDegreeAbbr": "dd",
+    "degreeMinuteSeconds": "度分秒",
+    "degreeMinuteSecondsAbbr": "d-m-s",
+    "squareMiles": "平方英里",
+    "squareMilesAbbr": "sq mi",
+    "squareKilometer": "平方公里",
+    "squareKilometerAbbr": "sq km",
+    "squareFeet": "平方英呎",
+    "squareFeetAbbr": "sq ft",
+    "squareMeters": "平方公尺",
+    "squareMetersAbbr": "sq m",
+    "squareYards": "平方碼",
+    "squareYardsAbbr": "sq yd",
+    "squareUSSurveyFeet": "平方美國調查英呎",
+    "squareUSSurveyFeetAbbr": "sq ftUS"
   },
   "featureSetChooser": {
     "select": "選擇",
@@ -389,7 +461,13 @@ define({
     "addSelectionTip": "增加到選擇內容",
     "removeSelectionTip": "從選取中移除",
     "selectFromCurrentSelectionTip": "從目前選擇中選擇",
-    "unselectAllSelectionTip": "取消選擇目前選擇的所有圖徵"
+    "unselectAllSelectionTip": "取消選擇目前選擇的所有圖徵",
+    "selectByPolygon": "按多邊形選擇",
+    "selectByCircle": "按圓形選擇",
+    "selectByLine": "按線條選擇",
+    "chooseSelectingTools": "選擇選擇工具",
+    "darw": "繪製",
+    "drawShap": "繪製形狀"
   },
   "widgetManager": {
     "createWidgetError": "建立 widget 錯誤",
@@ -422,7 +500,7 @@ define({
     "customSize": "自訂",
     "embed": "將此應用程式嵌入到網站中",
     "more": "嵌入選項",
-    "changeShareSettings": "更改共用設定",
+    "changeShareSettings": "變更分享設定",
     "shareLinkText": "分享此應用程式的連結",
     "linkOptions": "連結選項",
     "linkOptionsUrlParameters": "選擇連結中包含的 URL 參數",
@@ -448,5 +526,86 @@ define({
   },
   "webSceneLoader": {
     "webglSupportTip": "3D Web 應用程式不受您的瀏覽器支援。"
-  }
+  },
+  "map": {
+    "basemapNotAvailable": "底圖無法使用。",
+    "displayDefaultBasemap": "正在改為顯示預設底圖。",
+    "layerLoadedError": "圖層 ${layers} 無法增加到地圖中。"
+  },
+  "popup": {
+    "relatedTables": "相關表格:",
+    "relatedRecords": "相關記錄:",
+    "noRelatedRecotds": "找不到相關記錄。",
+    "chooseFieldTip": "選擇要顯示清單的屬性",
+    "saveAsPopupTitle": "與快顯標題相同"
+  },
+  "queryFeatures": {
+    "tooManyFeaturesTip": "您的選擇中有太多圖徵。可能需耗費冗長的時間才能在地圖上擷取和顯示它們。",
+    "askForContinue": "是否要繼續?"
+  },
+  "colorPalette": {
+    "transparent": "透明",
+    "custom": "自訂"
+  },
+  "temperature": {
+    "celsius": "攝氏",
+    "fahrenheit": "華氏"
+  },
+  "report": {
+    "printButtonLabel": "列印",
+    "reportDimensionsMsg": "這份報告是設計以 ${paperSize} 紙張列印",
+    "unableToPrintMapMsg": "列印地圖時發生錯誤。",
+    "notesHint": "在這裡輸入評論",
+    "landscape": "景觀",
+    "portrait": "縱向",
+    "mapOnly": "MAP_ONLY",
+    "a0": "A0",
+    "a1": "A1",
+    "a2": "A2",
+    "a3": "A3",
+    "a4": "A4",
+    "a5": "A5",
+    "letterANSIA": "Letter ANSI A",
+    "tabloidANSIB": "Tabloid ANSI B",
+    "letter": "Letter",
+    "legal": "合法",
+    "tabloid": "Tabloid",
+    "ansi_a": "ANSI A",
+    "ansi_b": "ANSI B",
+    "ansi_c": "ANSI C",
+    "ansi_d": "ANSI D",
+    "ansi_e": "ANSI E"
+  },
+  "snapshot": {
+    "snapshot_complete": "已成功建立快照集。",
+    "snapshot_failed": "建立快照集失敗。",
+    "snapshot_append": "快照集",
+    "utc": "UTC"
+  },
+  "statisticsChart": {
+    "enlarge": "放大",
+    "setting": "設定",
+    "count": "計數",
+    "horizontalAxis": "水平軸",
+    "verticalAxis": "垂直軸",
+    "dataLabels": "資料標籤",
+    "color": "顏色"
+  },
+  "frameworkDatasource": {
+    "setDataSource": "設定資料來源",
+    "customDataSource": "額外資料來源",
+    "selectCustomDataTip": "從此應用程式選擇資料來源。",
+    "widgetOutputs": "Widget 輸出",
+    "noExtraDsAvailable": "無額外的可用資料來源。",
+    "addExtraDsTip": "移至建立器的「屬性」頁籤，並按一下「額外資料來源」以新增資料。",
+    "widgetOutpusListTip": "這裡也會列出 Widget 輸出 (若有的話)。"
+  },
+  "gridLayout": {
+    "addWidgetTip": "透過 Widget 頁籤從這裡新增 widget",
+    "modifyLayout": "修改版面配置",
+    "dragToAdd": "拖曳以新增",
+    "mapArea": "地圖區域"
+  },
+  "noEditPrivileges": "您的帳號沒有建立或修改資料的權限。",
+  "invalidConfiguration": "未配置 widget，或配置中的圖層已從地圖中消失。請在建構器模式中開啟應用程式，並重新配置 widget。"
 });

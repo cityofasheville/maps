@@ -21,7 +21,7 @@ define({
   "Kilometers": "Kilometriä",
   "Decimeters": "desimetriä",
   "Decimal_Degrees": "Asteet",
-  "Degree_Minutes_Seconds": "astetta, minuuttia, sekuntia",
+  "Degree_Minutes_Seconds": "Astetta minuuttia sekuntia",
   "MGRS": "MGRS",
   "USNG": "USNG"
 });

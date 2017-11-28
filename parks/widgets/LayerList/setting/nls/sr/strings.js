@@ -5,7 +5,7 @@ define({
   "transparency": "Prozirnost",
   "controlPopup": "Omogući / onemogući iskačuće prozore",
   "moveUpAndDown": "Pomeraj se na gore / na dole",
-  "attributeTable": "Otvori tabelu atributa",
+  "attributeTable": "Prikaži u tabeli atributa",
   "url": "Opis / Prikaži detalje stavke / Preuzmi",
   "layerSelectorTitle": "Odaberite koji slojevi će biti prikazani u listi."
 });

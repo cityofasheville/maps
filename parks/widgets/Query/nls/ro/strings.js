@@ -5,7 +5,7 @@ define({
   "queryParams": "Opţiuni",
   "parameters": "OPŢIUNI",
   "queries": "INTEROGĂRI",
-  "apply": "APLICARE",
+  "apply": "Aplicare",
   "queryResults": "Rezultate",
   "clear": "Golire",
   "noResults": "Nu a fost găsit niciun obiect spaţial.",
@@ -76,12 +76,15 @@ define({
   "back": "Înapoi",
   "execute": "Executare",
   "zoomTo": "Transfocare la",
-  "openAttributeTable": "Deschidere în tabelul de atribute",
+  "openAttributeTable": "Vizualizare în tabelul de atribute",
   "noResult": "Niciun rezultat.",
   "noTask": "Nicio operaţie.",
   "removeThisResult": "Se elimină acest rezultat",
   "attributeCriteira": "Atribuiţi criterii",
   "spatialFilter": "Filtru spaţial",
   "value": "VALOARE",
-  "noAttributeSpatialFilterTip": "Niciun filtru definit. Vor fi returnate toate obiectele spaţiale."
+  "noAttributeSpatialFilterTip": "Niciun filtru definit. Vor fi returnate toate obiectele spaţiale.",
+  "showAllRelatedRecords": "Afişare toate înregistrările corelate",
+  "changeSymbol": "Modificare simbol",
+  "queryCriteira": "Criterii interogare"
 });

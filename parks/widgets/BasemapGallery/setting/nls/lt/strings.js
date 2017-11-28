@@ -18,5 +18,19 @@ define({
   "invalidTitle2": "' jau yra. Pasirinkite kitą pavadinimą.",
   "invalidBasemapUrl1": "Šis sluoksnio tipas negali būti naudojamas kaip pagrindo žemėlapis.",
   "invalidBasemapUrl2": "Pagrindo žemėlapis, kurį norite įtraukti, esamame žemėlapyje yra kitoje koordinačių sistemoje.",
-  "addBaselayer": "Pridėti pagrindo žemėlapio sluoksnį"
+  "addBaselayer": "Pridėti pagrindo žemėlapio sluoksnį",
+  "repectOnline": "Visada sinchronizuokite su organizacijos pagrindo žemėlapių galerijos parametru",
+  "customBasemap": "Konfigūruoti adaptuotus pagrindo žemėlapius",
+  "basemapTips": "Paspauskite \"${import}\" arba \"${createNew}\", kad pridėtumėte pagrindo žemėlapių.",
+  "importBasemap": "Importuoti",
+  "createBasemap": "Sukurti naują",
+  "importTitle": "Importuoti pagrindo žemėlapius",
+  "createTitle": "Naujas pagrindo žemėlapis",
+  "selectGroupTip": "Pasirinkite grupę, kurios internetinius žemėlapius galima naudoti kaip pagrindo žemėlapius.",
+  "noBasemaps": "Nėra pagrindo žemėlapių.",
+  "defaultGroup": "Esri numatytasis",
+  "defaultOrgGroup": "Organizacijos numatytasis",
+  "warningTitle": "Įspėjimas",
+  "confirmDelete": "Ar norite pašalinti pasirinktus pagrindo žemėlapius?",
+  "noBasemapAvailable": "Pagrindo žemėlapių nėra, nes jie visi turi skirtingas koordinačių sistemas arba išklotinių schemas negu esamas žemėlapis."
 });

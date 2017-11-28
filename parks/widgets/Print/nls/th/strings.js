@@ -1,9 +1,11 @@
 define({
   "_widgetLabel": "พิมพ์",
-  "title": "ชื่อเรื่องแผนที่",
+  "title": "ชื่อแผนที่",
   "format": "รูปแบบ",
   "layout": "แบบร่าง",
   "settings": "ระดับสูง",
+  "labels": "ป้ายชื่อ",
+  "showLabels": "แสดงตัวหนังสือ",
   "mapScaleExtent": "มาตราส่วนแผนที่/ขอบเขต",
   "preserve": "เก็บ",
   "mapScale": "มาตราส่วนแผนที่",
@@ -29,7 +31,7 @@ define({
   "width": "ความกว้าง (px)",
   "height": "ความสูง (px)",
   "print": "พิมพ์",
-  "clearList": "ยกเลิกการพิมพ์",
-  "creatingPrint": "การสร้างการพิมพ์",
+  "clearList": "ล้างภาพพิมพ์",
+  "creatingPrint": "การสร้างงานพิมพ์",
   "printError": "ข้อผิดพลาด ลองอีกครั้ง"
 });

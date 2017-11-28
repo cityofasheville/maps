@@ -5,7 +5,7 @@ define({
   "transparency": "Průhlednost",
   "controlPopup": "Povolit/zakázat vyskakovací okna",
   "moveUpAndDown": "Posunout nahoru / dolů",
-  "attributeTable": "Otevřít atributovou tabulku",
+  "attributeTable": "Zobrazit v atributové tabulce",
   "url": "Popis / Zobrazit podrobnosti položky / Stahování",
   "layerSelectorTitle": "Zvolte, které vrstvy se mají zobrazit v seznamu."
 });

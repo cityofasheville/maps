@@ -11,7 +11,7 @@ define({
   "itemMoveDown": "下移",
   "itemDesc": "描述",
   "itemDownload": "下载",
-  "itemToAttributeTable": "打开属性表",
+  "itemToAttributeTable": "在属性表中查看",
   "itemShowItemDetails": "显示项目详细信息",
   "empty": "空",
   "removePopup": "禁用弹出窗口",

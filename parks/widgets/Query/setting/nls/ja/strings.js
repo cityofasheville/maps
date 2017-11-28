@@ -4,7 +4,7 @@ define({
   "newQuery": "新規クエリ",
   "queryLayer": "クエリ レイヤー",
   "setSource": "設定",
-  "setDataSource": "データ ソースの設定",
+  "setDataSource": "データソースの設定",
   "name": "名前",
   "querySource": "データ ソース",
   "queryName": "タスク名",
@@ -97,7 +97,8 @@ define({
   "sortingFields": "結果アイテムの並べ替え",
   "setDisplayFields": "表示フィールドの設定",
   "symbol": "シンボル",
-  "setSymbol": "カスタム シンボルの設定",
+  "setSymbol": "カスタム シンボルの使用",
+  "changeSymbolAtRuntime": "実行時にシンボルの変更を許可",
   "serviceSymbolTip": "レイヤーで定義されたシンボルを使用",
   "exportTip": "結果のエクスポートを許可",
   "keepResultsTip": "ウィジェットを閉じた後にマップ上の結果を維持する",
@@ -113,7 +114,7 @@ define({
   "customPopupTip": "カスタム コンテンツの構成",
   "showResultsSetActions": "結果セットに対するアクションの表示",
   "zoomTo": "ズーム",
-  "openAttributeTable": "属性テーブルで開く",
+  "openAttributeTable": "属性テーブルの表示",
   "content": "コンテンツ",
   "displaySQLTip": "エンド ユーザー用の SQL 式の表示",
   "useLayerDefaultSymbol": "レイヤーのデフォルト シンボルの使用",
@@ -122,5 +123,9 @@ define({
   "uploadImage": "画像のアップロード",
   "attributeCriteira": "属性条件",
   "specifyFilterAtRuntimeTip": "ユーザーはこの条件式のパラメーターを指定する必要があります。",
-  "value": "値"
+  "value": "値",
+  "hideLayersTip": "ウィジェットを閉じるときにクエリの結果レイヤーをオフにします。",
+  "tabLabels": "タブのラベル",
+  "tasks": "タスク",
+  "queryCriteira": "クエリ条件"
 });

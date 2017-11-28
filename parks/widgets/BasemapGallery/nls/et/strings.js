@@ -1,3 +1,5 @@
 define({
-  "_widgetLabel": "Aluskaardi galerii"
+  "_widgetLabel": "Aluskaardi galerii",
+  "chooseWebScene": "Vali veebistseen",
+  "chooseWebMap": "Valige veebikaart"
 });

@@ -5,7 +5,7 @@ define({
   "queryParams": "Parinktys",
   "parameters": "PARINKTYS",
   "queries": "UŽKLAUSOS",
-  "apply": "TAIKYTI",
+  "apply": "Taikyti",
   "queryResults": "Rezultatai",
   "clear": "Valyti",
   "noResults": "Elementų nerasta.",
@@ -76,12 +76,15 @@ define({
   "back": "Atgal",
   "execute": "Vykdyti",
   "zoomTo": "Pritraukti iki",
-  "openAttributeTable": "Atidaryti atributų lentelę",
+  "openAttributeTable": "Peržiūrėti atributų lentelėje",
   "noResult": "Nėra rezultato.",
   "noTask": "Nėra užduoties.",
   "removeThisResult": "Pašalinti šį rezultatą",
   "attributeCriteira": "Atributo kriterijai",
   "spatialFilter": "Erdvinis filtras",
   "value": "REIKŠMĖ",
-  "noAttributeSpatialFilterTip": "Nenurodyta jokių filtrų. Visi elementai bus grąžinti."
+  "noAttributeSpatialFilterTip": "Nenurodyta jokių filtrų. Visi elementai bus grąžinti.",
+  "showAllRelatedRecords": "Rodyti visus susijusius įrašus",
+  "changeSymbol": "Pakeisti simbolį",
+  "queryCriteira": "Užklausos kriterijai"
 });

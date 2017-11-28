@@ -1,9 +1,11 @@
 define({
   "_widgetLabel": "Imprimir",
-  "title": "Título do Mapa",
+  "title": "Título do mapa",
   "format": "Formato",
   "layout": "Layout",
   "settings": "Avançado",
+  "labels": "Rótulos",
+  "showLabels": "Mostrar rótulos",
   "mapScaleExtent": "Extensão/escala do mapa",
   "preserve": "Preservar",
   "mapScale": "escala do mapa",
@@ -21,7 +23,7 @@ define({
   "unitsMeters": "Metros",
   "unitsFeet": "Pés",
   "unitsYards": "Jardas",
-  "unitsNauticalMiles": "Milhas Náuticas",
+  "unitsNauticalMiles": "Milhas náuticas",
   "lncludeLegend": "Incluir legenda",
   "printQualityOptions": "Qualidade da impressão",
   "dpi": "DPI",
@@ -29,7 +31,7 @@ define({
   "width": "Largura (px)",
   "height": "Altura (px)",
   "print": "Imprimir",
-  "clearList": "Limpar Impressões",
-  "creatingPrint": "Criando Impressão",
+  "clearList": "Limpar impressões",
+  "creatingPrint": "Criando impressão",
   "printError": "Erro, tente novamente"
 });

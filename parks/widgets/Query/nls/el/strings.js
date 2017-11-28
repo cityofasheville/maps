@@ -5,7 +5,7 @@ define({
   "queryParams": "Επιλογές",
   "parameters": "ΕΠΙΛΟΓΕΣ",
   "queries": "ΕΡΩΤΗΜΑΤΑ",
-  "apply": "ΕΦΑΡΜΟΓΗ",
+  "apply": "Εφαρμογή",
   "queryResults": "Αποτελέσματα",
   "clear": "Απαλοιφή",
   "noResults": "Δεν εντοπίστηκε κανένα στοιχείο.",
@@ -76,12 +76,15 @@ define({
   "back": "Πίσω",
   "execute": "Εκτέλεση",
   "zoomTo": "Εστίαση",
-  "openAttributeTable": "Άνοιγμα στον πίνακα περιγραφικών γνωρισμάτων",
+  "openAttributeTable": "Προβολή στον πίνακα περιγραφικών γνωρισμάτων",
   "noResult": "Κανένα αποτέλεσμα.",
   "noTask": "Καμία εργασία.",
   "removeThisResult": "Κατάργηση αυτού του αποτελέσματος",
   "attributeCriteira": "Κριτήρια γνωρίσματος",
   "spatialFilter": "Χωρικό φίλτρο",
   "value": "ΤΙΜΗ",
-  "noAttributeSpatialFilterTip": "Δεν έχουν οριστεί φίλτρα. Θα επιστραφούν όλα τα στοιχεία."
+  "noAttributeSpatialFilterTip": "Δεν έχουν οριστεί φίλτρα. Θα επιστραφούν όλα τα στοιχεία.",
+  "showAllRelatedRecords": "Εμφάνιση όλων των συναφών εγγραφών",
+  "changeSymbol": "Αλλαγή συμβόλου",
+  "queryCriteira": "Κριτήρια ερωτήματος"
 });

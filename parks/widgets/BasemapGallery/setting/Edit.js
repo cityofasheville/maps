@@ -5,6 +5,7 @@ define(
     'dojo/_base/html',
     "dojo/on",
     "dojo/query",
+    'dojo/Deferred',
     "dijit/_WidgetsInTemplateMixin",
     "dijit/registry",
     "jimu/BaseWidgetSetting",
@@ -22,6 +23,7 @@ define(
     html,
     on,
     query,
+    Deferred,
     _WidgetsInTemplateMixin,
     registry,
     BaseWidgetSetting,
@@ -66,13 +68,15 @@ define(
       },
 
       startup: function() {
-        var thumbnailUrl;
+        var thumbnailUrl, reg = /data:image/;
         if (this.basemap && this.basemap.title) {
           this.title.set('value', this.basemap.title);
         }
         if (this.basemap && this.basemap.thumbnailUrl) {
-          if (this.basemap.thumbnailUrl.indexOf('//') === 0) {
-            thumbnailUrl = this.basemap.thumbnailUrl + this.token;
+          if (reg.test(this.basemap.thumbnailUrl)) {
+            thumbnailUrl = this.basemap.thumbnailUrl;
+          } else if (this.basemap.thumbnailUrl.indexOf('//') === 0) {
+            thumbnailUrl = this.basemap.thumbnailUrl;
           } else {
             thumbnailUrl = jimuUtils.processUrlInWidgetConfig(this.basemap.thumbnailUrl,
               this.folderUrl);
@@ -83,10 +87,14 @@ define(
         this.imageChooser.setDefaultSelfSrc(thumbnailUrl);
 
         if (this.basemap && this.basemap.layers) {
-          if (utils.isNoUrlLayerMap(this.basemap)) {
+          if (utils.isNoUrlLayerMap(this.basemap.layers)) {
             html.destroy(this.urlPart);
-            html.setStyle(this.secondTable, 'display', 'none');
-            html.setStyle(this.settingContentDiv, 'height', '150px');
+            query(".delete-layer-url", this.urlEditSection).forEach(lang.hitch(this, function(dom) {
+              html.addClass(dom, 'invisible');
+            }));
+            query(".add-layer-url", this.urlEditSection).forEach(lang.hitch(this, function(dom) {
+              html.addClass(dom, 'invisible');
+            }));
           } else {
             var numLayer = this.basemap.layers.length;
             if (this.basemap.layers[0] && this.basemap.layers[0].url) {
@@ -158,6 +166,7 @@ define(
         var result = false;
         var errorMessage = null;
         var url = evt.url.replace(/\/*$/g, '');
+        var wider = (this.map.width > this.map.height) ? this.map.width : this.map.height;
         if (this._isStringEndWith(url, '/MapServer') ||
           this._isStringEndWith(url, '/ImageServer')) {
           var curMapSpatialRefObj = this.map.spatialReference;
@@ -166,8 +175,9 @@ define(
             evt.data.initialExtent.spatialReference ||
             evt.data.fullExtent.spatialReference;
           if (curMapSpatialRefObj &&
-            basemapSpatialRefObj &&
-            SRUtils.isSameSR(curMapSpatialRefObj.wkid, basemapSpatialRefObj.wkid)) {
+              basemapSpatialRefObj &&
+              SRUtils.isSameSR(curMapSpatialRefObj.wkid, basemapSpatialRefObj.wkid) &&
+              utils.tilingSchemeCompatible(this.map.__tileInfo, evt.data.tileInfo, wider)) {
             urlDijit.proceedValue = true;
             result = true;
           } else {
@@ -197,66 +207,58 @@ define(
 
       addLayerUrl: function(url) {
         /*jshint unused: false*/
-        var urlTrDom = html.create('tr', {}, this.body);
-        var urlFirstTdDom = html.create('td', {
-          'class': 'first'
-        }, urlTrDom);
-        var urlSecondTdDom = html.create('td', {
-          'class': 'second'
-        }, urlTrDom);
-
-        var urlThirdTdDom = html.create('td', {
-          'class': 'third'
-        }, urlTrDom);
+        var urlDom = html.create('div', {'class': 'input-url'}, this.urlEditSection);
 
         var urlInput = new ServiceURLInput({
           placeHolder: this.nls.urlPH,
           required: true,
           proceedValue: 0,
           style: {
-            width: "100%"
+            width: "95%"
           }
-        }).placeAt(urlSecondTdDom);
+        }).placeAt(urlDom);
         html.addClass(urlInput.domNode, "url_field_dom");
 
         if (url) {
           urlInput.set('value', url);
         }
 
-        var deleteSpanDom = html.create('span', {
-          'class': 'delete-layer-url-icon'
-        }, urlThirdTdDom);
+        var deleteSpanDom = html.create('div', {
+          'class': 'delete-layer-url'
+        }, urlDom);
+        this.own(on(deleteSpanDom, 'click', lang.hitch(this, '_onDeleteClick', urlDom)));
 
         urlInput.setProcessFunction(lang.hitch(this, '_onServiceFetch', urlInput),
           lang.hitch(this, '_onServiceFetchError'));
-        this.own(on(deleteSpanDom, 'click', lang.hitch(this, '_onDeleteClick', urlTrDom)));
+
         this._checkProceed();
       },
 
-      _onDeleteClick: function(urlTrDom) {
-        html.destroy(urlTrDom);
+      _onDeleteClick: function(urlDom) {
+        html.destroy(urlDom);
         this._checkProceed();
       },
 
       _getUrlDijits: function() {
         var urlDijits = [];
-        query(".url_field_dom", this.firstTable).forEach(lang.hitch(this, function(urlDom) {
+        query(".url_field_dom", this.urlEditSection).forEach(lang.hitch(this, function(urlDom) {
           urlDijits.push(registry.byNode(urlDom));
         }));
         return urlDijits;
       },
 
       _getEditedBaseMap: function() {
+        var def = new Deferred(), reg = /data:image/;
+
         var basemap = {
           title: jimuUtils.stripHTML(this.title.value),
-          thumbnailUrl: utils.getStanderdUrl(this.imageChooser.imageData),
           layers: [],
           spatialReference: (this.basemap && this.basemap.spatialReference) ||
             this.map.spatialReference
         };
 
         // do not update basmaps if map is bingMap or openstreetMap
-        if (utils.isNoUrlLayerMap(this.basemap)) {
+        if (utils.isNoUrlLayerMap(this.basemap ? this.basemap.layers : [])) {
           basemap.layers = this.basemap.layers;
         } else {
           array.forEach(this._getUrlDijits(), function(urlDijit) {
@@ -266,20 +268,36 @@ define(
           }, this);
         }
 
-        return basemap;
+        if (reg.test(this.imageChooser.imageData)) {
+          basemap.thumbnailUrl = this.imageChooser.imageData;
+          def.resolve(basemap);
+        } else {
+          jimuUtils.getBase64Data(utils.getStanderdUrl(this.imageChooser.imageData))
+          .then(lang.hitch(this, function(data) {
+            if (data) {
+              basemap.thumbnailUrl = data;
+            } else {
+              basemap.thumbnailUrl = this.folderUrl + "images/default.jpg";
+            }
+            def.resolve(basemap);
+          }));
+        }
+
+        return def;
       },
 
       _onEditOk: function(settingWidget) {
         if (this.basemap) {
           //this.basemap = this._getEditedBaseMap();
-          settingWidget.basemaps[settingWidget._findBaseMapByTitle(this.basemap.title)] =
-            this._getEditedBaseMap();
+          this._getEditedBaseMap().then(lang.hitch(this, function(basemap) {
+            settingWidget.updateBasemap(this.basemap.title, basemap);
+          }));
         } else {
-          settingWidget.basemaps.push(this._getEditedBaseMap());
+          this._getEditedBaseMap().then(lang.hitch(this, function(basemap) {
+            settingWidget.addNewBasemap(basemap);
+          }));
         }
         settingWidget.popup.close();
-
-        settingWidget.refreshMapGallary();
       },
 
       _onEditClose: function(settingWidget) {

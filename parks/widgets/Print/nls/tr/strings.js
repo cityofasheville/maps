@@ -1,9 +1,11 @@
 define({
   "_widgetLabel": "Yazdır",
-  "title": "Harita Başlığı",
+  "title": "Harita başlığı",
   "format": "Biçim",
   "layout": "Düzen",
   "settings": "Gelişmiş",
+  "labels": "Etiketler",
+  "showLabels": "Etiketleri göster",
   "mapScaleExtent": "Harita ölçeği/yayılımı",
   "preserve": "Koru",
   "mapScale": "harita ölçeği",
@@ -21,7 +23,7 @@ define({
   "unitsMeters": "Metre",
   "unitsFeet": "Fit",
   "unitsYards": "Yarda",
-  "unitsNauticalMiles": "Deniz Mili",
+  "unitsNauticalMiles": "Deniz mili",
   "lncludeLegend": "Gösterim ekle",
   "printQualityOptions": "Baskı kalitesi",
   "dpi": "DPI",
@@ -29,7 +31,7 @@ define({
   "width": "Genişlik (px)",
   "height": "Yükseklik (px)",
   "print": "Yazdır",
-  "clearList": "Baskıları Temizle",
-  "creatingPrint": "Baskı Oluşturuluyor",
+  "clearList": "Baskıları temizle",
+  "creatingPrint": "Baskı oluşturuluyor",
   "printError": "Hata, yeniden deneyin"
 });

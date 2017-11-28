@@ -1,7 +1,7 @@
 define({
   "_widgetLabel": "Sluoksniai",
   "titleBasemap": "Pagrindo žemėlapiai",
-  "titleLayers": "Darbiniai sluoksniai",
+  "titleLayers": "Darbiniai sluoksniai",
   "labelLayer": "Sluoksnio pavadinimas",
   "itemZoomTo": "Parodyti visą",
   "itemTransparency": "Permatomumas",
@@ -11,7 +11,7 @@ define({
   "itemMoveDown": "Nuleisti žemyn",
   "itemDesc": "Aprašas",
   "itemDownload": "Atsiųsti",
-  "itemToAttributeTable": "Atidaryti atributų lentelę",
+  "itemToAttributeTable": "Peržiūrėti atributų lentelėje",
   "itemShowItemDetails": "Rodyti elemento aprašą",
   "empty": "tuščia",
   "removePopup": "Išjungti iškylančius langus",
@@ -20,8 +20,8 @@ define({
   "turnAllLayersOn": "Įjungti visus sluoksnius",
   "expandAllLayers": "Išskleisti visus sluoksnius",
   "collapseAlllayers": "Sutraukti visus sluoksnius",
-  "turnAllLabelsOff": "Išjungti visas tekstines žymes",
-  "turnAllLabelsOn": "Įjungti visas tekstines žymes",
+  "turnAllLabelsOff": "Išjungti visas žymes",
+  "turnAllLabelsOn": "Įjungti visas žymes",
   "showLabels": "Rodyti žymes",
-  "hideLables": "Slėpti tekstines žymes"
+  "hideLables": "Slėpti žymes"
 });

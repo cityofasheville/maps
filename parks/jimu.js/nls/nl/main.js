@@ -6,6 +6,7 @@ define({
     "yes": "Ja",
     "no": "Nee",
     "next": "Volgende",
+    "previous": "Vorige",
     "back": "Vorige",
     "selected": "geselecteerd",
     "name": "Naam",
@@ -48,11 +49,34 @@ define({
     "scene": "Scene",
     "reset": "Opnieuw instellen",
     "icon": "Pictogram",
+    "folder": "Folder",
     "share": "Delen",
     "view": "Weergeven",
     "newText": "Nieuw",
     "edit": "Bewerken",
-    "wkid": "WKID"
+    "wkid": "WKID",
+    "table": "Tabel",
+    "zoomIn": "Inzoomen",
+    "zoomOut": "Uitzoomen",
+    "continue1": "Doorgaan",
+    "longitude": "Lengte",
+    "latitude": "Breedte",
+    "custom": "Aangepast",
+    "image": "Afbeelding",
+    "font": "Lettertype",
+    "text": "Tekst",
+    "all": "Alle",
+    "number": "Nummer",
+    "percentage": "Percentage",
+    "unit": "Eenheid",
+    "thousand": "Duizend",
+    "billion": "Miljard",
+    "million": "Miljoen",
+    "none": "Geen",
+    "field": "Veld",
+    "operation": "Werk",
+    "disableUpdateGeometry": "Geometrie bijwerken uitschakelen",
+    "preview": "Voorbeeld"
   },
   "errorCode": "Code",
   "errorMessage": "Bericht",
@@ -67,7 +91,7 @@ define({
     "min": "Minimum",
     "max": "Maximum",
     "ave": "Average",
-    "stddev": "Standaarddeviatie"
+    "stddev": "Standaardafwijking"
   },
   "symbolChooser": {
     "preview": "Voorbeeld",
@@ -84,7 +108,7 @@ define({
     "symbolSize": "Symboolgrootte",
     "color": "Kleur",
     "alpha": "Alpha",
-    "outlineColor": "Kleur omtreklijn",
+    "outlineColor": "Omtrekkleur",
     "outlineWidth": "Breedte omtreklijn",
     "style": "Stijl",
     "width": "Breedte",
@@ -96,7 +120,10 @@ define({
     "dash": "Streep",
     "dot": "Punt",
     "dashDot": "Streep punt",
-    "dashDotDot": "Streep punt punt"
+    "dashDotDot": "Streep punt punt",
+    "customImage": "Aangepaste afbeelding",
+    "chooseFile": "Bestand kiezen",
+    "noFileChoosen": "Geen bestand gekozen."
   },
   "transparency": {
     "opaque": "Niet transparant",
@@ -114,8 +141,8 @@ define({
     "classes": "Klassen",
     "symbolSize": "Symboolgrootte",
     "addValue": "Waarde toevoegen",
-    "setDefaultSymbol": "Standaardsymbool instellen",
-    "defaultSymbol": "Standaard symbool",
+    "setDefaultSymbol": "Standaard symbool instellen",
+    "defaultSymbol": "Standaardsymbool",
     "selectedSymbol": "Geselecteerd symbool",
     "value": "Waarde",
     "label": "Label",
@@ -131,7 +158,7 @@ define({
     "circle": "Cirkel",
     "ellipse": "Ellips",
     "polygon": "Polygoon",
-    "freehandPolygon": "Vlak in vrije stijl",
+    "freehandPolygon": "Vrije hand-vlak",
     "text": "Tekst",
     "clear": "Wissen"
   },
@@ -152,16 +179,16 @@ define({
     "loading": "Laden"
   },
   "basicServiceBrowser": {
-    "noServicesFound": "Er zijn geen services gevonden.",
+    "noServicesFound": "Er is geen service gevonden.",
     "unableConnectTo": "Kan geen verbinding maken met",
     "invalidUrlTip": "De URL die u hebt ingevoerd, is ongeldig of ontoegankelijk."
   },
   "serviceBrowser": {
-    "noGpFound": "Er zijn geen geoprocessingservices gevonden.",
+    "noGpFound": "Er is geen geoprocessingservice gevonden.",
     "unableConnectTo": "Kan geen verbinding maken met"
   },
   "layerServiceBrowser": {
-    "noServicesFound": "Er zijn geen mapservices of featureservices gevonden",
+    "noServicesFound": "Er zijn geen mapservices of featureservices gevonden.",
     "unableConnectTo": "Kan geen verbinding maken met"
   },
   "basicServiceChooser": {
@@ -176,8 +203,8 @@ define({
     "invalidUrl": "Ongeldige URL."
   },
   "filterBuilder": {
-    "addAnotherExpression": "Een filterexpressie toevoegen",
-    "addSet": "Een expressieset toevoegen",
+    "addAnotherExpression": "Een expressie toevoegen",
+    "addSet": "Een set toevoegen",
     "matchMsg": "Objecten in de kaartlaag ophalen die overeenkomen met ${any_or_all} van de volgende expressies",
     "matchMsgSet": "${any_or_all} van de volgende expressies in deze set zijn waar",
     "all": "Alle",
@@ -202,9 +229,14 @@ define({
     "dateOperatorIsNotOn": "is niet op",
     "dateOperatorIsBefore": "is voor",
     "dateOperatorIsAfter": "is na",
+    "dateOperatorIsOnOrBefore": "is op of voor",
+    "dateOperatorIsOnOrAfter": "is op of na",
+    "dateOperatorMinutes": "minuten",
+    "dateOperatorHours": "uur",
     "dateOperatorDays": "dagen",
     "dateOperatorWeeks": "weken",
     "dateOperatorMonths": "maanden",
+    "dateOperatorYears": "jaren",
     "dateOperatorInTheLast": "in de afgelopen",
     "dateOperatorNotInTheLast": "niet in de afgelopen",
     "dateOperatorIsBetween": "is tussen",
@@ -230,44 +262,49 @@ define({
     "error": {
       "invalidParams": "Ongeldige parameters.",
       "invalidUrl": "Ongeldige URL.",
-      "noFilterFields": "De kaartlaag heeft geen velden die kunnen worden gebruikt om te filteren.",
+      "noFilterFields": "De laag heeft geen velden die kunnen worden gebruikt om filters te maken.",
       "invalidSQL": "Ongeldige SQL-expressie.",
       "cantParseSQL": "Kan de SQL-expressie niet parseren."
     },
-    "caseSensitive": "Hoofdletter gevoelig",
+    "caseSensitive": "Hoofdlettergevoelig",
     "notSupportCaseSensitiveTip": "Hosted services ondersteunen geen hoofdlettergevoelige query.",
-    "setFilterTip": "Stel het filter correct in."
+    "setFilterTip": "Stel filters correct in.",
+    "listValues": "Waarden vermelden",
+    "cascadeFilterTip": "Alleen waarden tonen gefilterd door vorige expressies.",
+    "noneCascadeFilterTip": "Alle unieke waarden van dit veld",
+    "previousCascadeFilterTip": "Waarden gefilterd door vorige expressies",
+    "allCascadeFilterTip": "Waarden gefilterd door alle andere expressies"
   },
   "featureLayerSource": {
     "layer": "Kaartlaag",
     "browse": "Bladeren",
-    "selectFromMap": "Selecteren in kaart",
-    "selectFromPortal": "Toevoegen vanuit Portal for ArcGIS",
-    "addServiceUrl": "Service-URL toevoegen",
+    "selectFromMap": "Kaart",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Service-URL",
     "inputLayerUrl": "URL van invoerlaag",
     "selectLayer": "Selecteer een objectlaag in de huidige kaart.",
     "chooseItem": "Kies een objectlaagitem.",
-    "setServiceUrl": "Voer de URL van de featureservice of mapservice in.",
-    "selectFromOnline": "Toevoegen vanuit ArcGIS Online",
+    "setServiceUrl": "Voer de URL van een featureservice of mapservice in.",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Kies een objectlaag."
   },
   "queryableLayerSource": {
     "layer": "Kaartlaag",
     "browse": "Bladeren",
-    "selectFromMap": "Selecteren in kaart",
-    "selectFromPortal": "Toevoegen vanuit Portal for ArcGIS",
-    "addServiceUrl": "Service-URL toevoegen",
+    "selectFromMap": "Kaart",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Service-URL",
     "inputLayerUrl": "URL van invoerlaag",
     "selectLayer": "Selecteer een laag van huidige kaart.",
     "chooseItem": "Kies een item.",
     "setServiceUrl": "Voer de URL van de service in.",
-    "selectFromOnline": "Toevoegen vanuit ArcGIS Online",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Kies een laag."
   },
   "gpSource": {
-    "selectFromPortal": "Toevoegen vanuit Portal for ArcGIS",
-    "addServiceUrl": "Service-URL toevoegen",
-    "selectFromOnline": "Toevoegen vanuit ArcGIS Online",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Service-URL",
+    "selectFromOnline": "ArcGIS Online",
     "setServiceUrl": "Voer de URL van de geoprocessingservice in.",
     "chooseItem": "Kies een geoprocessingservice-item.",
     "chooseTask": "Kies een geoprocessingtaak."
@@ -293,7 +330,11 @@ define({
     "owner": "eigenaar",
     "signInTo": "Meld u aan bij",
     "lastModified": "Laatst gewijzigd",
-    "moreDetails": "Meer details"
+    "moreDetails": "Meer details",
+    "mostRecent": "Meest recent",
+    "mostViewed": "Meest bekeken",
+    "highestRated": "Hoogst beoordeeld",
+    "viewItemDetails": "Itemdetails weergeven"
   },
   "featureLayerChooserFromPortal": {
     "notSupportQuery": "De service ondersteunt geen query's."
@@ -304,7 +345,7 @@ define({
   "layerInfosMenu": {
     "titleBasemap": "Basiskaarten",
     "titleLayers": "Operationele lagen",
-    "labelLayer": "Laagnaam",
+    "labelLayer": "Kaartlaagnaam",
     "itemZoomTo": "Zoomen naar",
     "itemTransparency": "Transparant",
     "itemTransparent": "Transparant",
@@ -313,16 +354,16 @@ define({
     "itemMoveDown": "Naar beneden verplaatsen",
     "itemDesc": "Beschrijving",
     "itemDownload": "Downloaden",
-    "itemToAttributeTable": "Attribuuttabel openen"
+    "itemToAttributeTable": "Bekijken in Attribuuttabel"
   },
   "imageChooser": {
-    "unsupportReaderAPI": "TAAK: De browser biedt geen ondersteuning voor bestandslezer-API",
+    "unsupportReaderAPI": "Te doen: De browser biedt geen ondersteuning voor bestandslezer-API",
     "readError": "Kan het bestand niet lezen.",
     "unknowError": "kan de bewerkingen niet voltooien",
     "invalidType": "Ongeldig bestandstype.",
     "cropImage": "Afbeelding bijsnijden",
     "exceed": "Bestandsgrootte mag niet groter zijn dan 1024 KB",
-    "enableFlash": "TAAK: schakel Flash in.",
+    "enableFlash": "Schakel Adobe Flash in alvorens te bladeren naar een afbeelding.",
     "cropWaining": "Kies een foto die minstens ${breedte}x ${hoogte} pixels is.",
     "toolTip": "Voor de beste weergave moet de afbeelding ${width} pixels breed en ${height} pixels hoog zijn. Andere formaten worden passend gemaakt. Aanvaardbare afbeeldingsindelingen zijn: PNG, GIF en JPEG."
   },
@@ -339,7 +380,7 @@ define({
   "exportTo": {
     "exportTo": "Exporteren",
     "toCSV": "Exporteren naar CSV-bestand",
-    "toFeatureCollection": "Exporteren naar Feature Collection",
+    "toFeatureCollection": "Exporteren naar objectverzameling",
     "toGeoJSON": "Exporteren naar GeoJSON"
   },
   "appState": {
@@ -347,17 +388,22 @@ define({
     "restoreMap": "Klik om de extent van de kaart en de zichtbaarheid van de lagen te herstellen waar u bent gebleven."
   },
   "featureActions": {
+    "featureActions": "Objectacties",
     "ZoomTo": "Zoomen naar",
     "PanTo": "Pannen naar",
     "Flash": "Flash",
     "ShowPopup": "Pop-up weergeven",
-    "CreateLayer": "Kaartlaag maken",
+    "CreateLayer": "Laag maken",
     "ShowStatistics": "Statistieken...",
-    "ClearSelection": "Selectie wissen",
+    "ClearSelection": "Clear selection",
     "ExportToCSV": "Exporteren naar CSV-bestand",
     "ShowSelectedFeature": "Geselecteerde objecten weergeven",
-    "ExportToFeatureCollection": "Exporteren naar Feature Collection",
-    "ExportToGeoJSON": "Exporteren naar GeoJSON"
+    "ExportToFeatureCollection": "Exporteren naar objectverzameling",
+    "ExportToGeoJSON": "Exporteren naar GeoJSON",
+    "EditAttributes": "Attributen bewerken",
+    "AddMarker": "Een markering toevoegen",
+    "RemoveMarker": "Markering verwijderen",
+    "SaveToMyContent": "Opslaan naar Mijn content"
   },
   "spatialFilterByFeatures": {
     "relatedLayer": "Gerelateerde laag",
@@ -373,11 +419,37 @@ define({
   },
   "units": {
     "miles": "Mijl",
+    "milesAbbr": "mi",
     "kilometers": "Kilometer",
+    "kilometersAbbr": "km",
     "feet": "Voet",
+    "feetAbbr": "ft",
     "meters": "Meter",
+    "metersAbbr": "m",
     "yards": "Yard",
-    "nauticalMiles": "Zeemijl"
+    "yardsAbbr": "yd",
+    "acres": "Hectare",
+    "acresAbbr": "acre",
+    "nauticalMiles": "Zeemijl",
+    "nauticalMilesAbbr": "nmi",
+    "uSSurveyFeet": "US survey-voet",
+    "uSSurveyFeetAbbr": "ftUS",
+    "decimalDegree": "Decimale graden",
+    "decimalDegreeAbbr": "dg",
+    "degreeMinuteSeconds": "Graden minuten seconden",
+    "degreeMinuteSecondsAbbr": "d-m-s",
+    "squareMiles": "Vierkante mijl",
+    "squareMilesAbbr": "mi²",
+    "squareKilometer": "Vierkante kilometer",
+    "squareKilometerAbbr": "km²",
+    "squareFeet": "Vierkante voet",
+    "squareFeetAbbr": "ft²",
+    "squareMeters": "Vierkante meter",
+    "squareMetersAbbr": "m²",
+    "squareYards": "Vierkante yard",
+    "squareYardsAbbr": "yd²",
+    "squareUSSurveyFeet": "Vierkante US survey-voet",
+    "squareUSSurveyFeetAbbr": "sq ftUS"
   },
   "featureSetChooser": {
     "select": "Selecteren",
@@ -389,7 +461,13 @@ define({
     "addSelectionTip": "Toevoegen aan selectie",
     "removeSelectionTip": "Remove from selection",
     "selectFromCurrentSelectionTip": "Selecteren uit de huidige selectie",
-    "unselectAllSelectionTip": "Deselecteer alle momenteel geselecteerde objecten"
+    "unselectAllSelectionTip": "Deselecteer alle momenteel geselecteerde objecten",
+    "selectByPolygon": "Selecteren op polygoon",
+    "selectByCircle": "Selecteren op cirkel",
+    "selectByLine": "Selecteren op lijn",
+    "chooseSelectingTools": "Selectiehulpmiddelen kiezen",
+    "darw": "Tekenen",
+    "drawShap": "Een vorm tekenen"
   },
   "widgetManager": {
     "createWidgetError": "Widgetfout maken",
@@ -424,7 +502,7 @@ define({
     "more": "Opties inbedden",
     "changeShareSettings": "Deelinstellingen wijzigen",
     "shareLinkText": "Een link naar deze app delen",
-    "linkOptions": "Link Options",
+    "linkOptions": "Linkopties",
     "linkOptionsUrlParameters": "Selecteer URL parameters opgenomen in de link",
     "currentMapExtent": "Huidige kaartextent",
     "chooseCenterWithLevel": "Klik op de kaart om het midden van de kaart te bepalen met zoomniveau",
@@ -447,6 +525,87 @@ define({
     "shareToWebTips": "Deze app wordt niet gedeeld met het publiek. De app kan niet worden bekeken."
   },
   "webSceneLoader": {
-    "webglSupportTip": "3D-webapps worden niet ondersteund door uw browser."
-  }
+    "webglSupportTip": "3D webapps worden niet ondersteund in uw browser."
+  },
+  "map": {
+    "basemapNotAvailable": "Basiskaart is niet beschikbaar.",
+    "displayDefaultBasemap": "In plaats daarvan wordt de standaard basiskaart weergegeven.",
+    "layerLoadedError": "De laag ${layers} kan niet worden toegevoegd aan de kaart."
+  },
+  "popup": {
+    "relatedTables": "Gerelateerde tabellen:",
+    "relatedRecords": "Gerelateerde records:",
+    "noRelatedRecotds": "Er zijn geen gerelateerde records gevonden.",
+    "chooseFieldTip": "Kies een attribuut om de lijst weer te geven",
+    "saveAsPopupTitle": "Zelfde als popupnaam"
+  },
+  "queryFeatures": {
+    "tooManyFeaturesTip": "Er zijn te veel objecten in uw selectie. Het kan lang duren om ze op te halen en weer te geven op de kaart.",
+    "askForContinue": "Wilt u doorgaan?"
+  },
+  "colorPalette": {
+    "transparent": "Transparant",
+    "custom": "Aangepast"
+  },
+  "temperature": {
+    "celsius": "Celsius",
+    "fahrenheit": "Fahrenheit"
+  },
+  "report": {
+    "printButtonLabel": "Afdrukken",
+    "reportDimensionsMsg": "Dit rapport is ontwikkeld om afgedrukt te worden op ${paperSize} papier",
+    "unableToPrintMapMsg": "Er is een fout opgetreden tijdens het afdrukken van de kaart(en).",
+    "notesHint": "Voer hier opmerkingen in",
+    "landscape": "Liggend",
+    "portrait": "Staand",
+    "mapOnly": "MAP_ONLY",
+    "a0": "A0",
+    "a1": "A1",
+    "a2": "A2",
+    "a3": "A3",
+    "a4": "A4",
+    "a5": "A5",
+    "letterANSIA": "Letter ANSI A",
+    "tabloidANSIB": "Tabloid ANSI B",
+    "letter": "Letter",
+    "legal": "Juridisch",
+    "tabloid": "Tabloid",
+    "ansi_a": "ANSI A",
+    "ansi_b": "ANSI B",
+    "ansi_c": "ANSI C",
+    "ansi_d": "ANSI D",
+    "ansi_e": "ANSI E"
+  },
+  "snapshot": {
+    "snapshot_complete": "Snapshot maken gelukt.",
+    "snapshot_failed": "Snapshot maken mislukt.",
+    "snapshot_append": "Snapshot",
+    "utc": "UTC"
+  },
+  "statisticsChart": {
+    "enlarge": "Vergroten",
+    "setting": "Instelling",
+    "count": "Aantal",
+    "horizontalAxis": "Horizontale as",
+    "verticalAxis": "Verticale as",
+    "dataLabels": "Datalabels",
+    "color": "Kleur"
+  },
+  "frameworkDatasource": {
+    "setDataSource": "Gegevensbron instellen",
+    "customDataSource": "Extra gegevensbron",
+    "selectCustomDataTip": "Selecteer een gegevensbron van deze app.",
+    "widgetOutputs": "Widget-outputs",
+    "noExtraDsAvailable": "Geen extra gegevensbronnen beschikbaar.",
+    "addExtraDsTip": "Ga naar het Attribuut-tabblad van debuilder, en klik op Extra gegevensbron om data toe te voegen.",
+    "widgetOutpusListTip": "Widget-outputs (indien van toepassing) worden hier ook vermeld."
+  },
+  "gridLayout": {
+    "addWidgetTip": "Voeg hier widgets toe via het tabblad Widget",
+    "modifyLayout": "Lay-out aanpassen",
+    "dragToAdd": "Sleep om toe te voegen",
+    "mapArea": "KAARTGEBIED"
+  },
+  "noEditPrivileges": "Uw account heeft geen machtigingen om gegevens te maken of te wijzigen.",
+  "invalidConfiguration": "Widget is niet geconfigureerd of de lagen in de configuratie zijn niet langer in de kaart. Open de app in de bouwmodus en configureer de widget opnieuw."
 });

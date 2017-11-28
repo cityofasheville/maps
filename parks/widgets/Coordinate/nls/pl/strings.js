@@ -14,7 +14,7 @@ define({
   "Foot": "Stopy",
   "Yards": "Jardy",
   "Miles": "Mile",
-  "Nautical_Miles": "Mile Morskie",
+  "Nautical_Miles": "Mile morskie",
   "Millimeters": "Milimetry",
   "Centimeters": "Centymetry",
   "Meter": "Metry",

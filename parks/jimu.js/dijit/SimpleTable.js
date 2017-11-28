@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 Esri. All Rights Reserved.
+// Copyright © 2014 - 2016 Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ define([
       templateString: '<div>' +
         '<div class="head-section" data-dojo-attach-point="headDiv">' +
           '<div class="table-div" data-dojo-attach-point="headTableDiv">' +
-            '<table class="table" cellspacing="0" onselectstart="return false;"' +
+            '<table class="table" cellspacing="0"' +
               ' data-dojo-attach-point="tableInHeadSection">' +
               '<colgroup data-dojo-attach-point="headColgroup"></colgroup>' +
               '<thead class="simple-table-thead simple-table-title" ' +
@@ -47,7 +47,7 @@ define([
         '</div>' +
         '<div class="body-section" data-dojo-attach-point="bodyDiv">' +
           '<div class="table-div" data-dojo-attach-point="bodyTableDiv">' +
-            '<table class="table" cellspacing="0" onselectstart="return false;"' +
+            '<table class="table" cellspacing="0"' +
              'data-dojo-attach-point="tableInBodySection">' +
               '<colgroup data-dojo-attach-point="bodyColgroup"></colgroup>' +
               '<tbody class="simple-table-tbody" data-dojo-attach-point="tbody"></tbody>' +
@@ -594,7 +594,7 @@ define([
       },
 
       _createRadioTd: function(tr, fieldMeta, fieldData) {
-        var tdStr = '<td class="radio-td ' + fieldMeta.name + '"><input type="radio" /></td>';
+        var tdStr = '<td class="radio-td ' + fieldMeta.name + '"><input class="jimu-radio-btn" type="radio" /></td>';
         var td = html.toDom(tdStr);
         html.addClass(td, 'simple-table-cell');
         html.place(td, tr);

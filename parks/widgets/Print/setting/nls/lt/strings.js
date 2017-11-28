@@ -6,5 +6,8 @@ define({
   "defaultFormat": "Numatytasis formatas",
   "defaultLayout": "Numatytasis maketas",
   "warning": "Klaidinga įvestis",
+  "urlNotAvailable": "URL nepasiekiamas",
+  "notPrintTask": "URL nėra spausdinimo užduotis",
+  "advancedOption": "Rodyti išplėstinius nustatymus",
   "ok": "Gerai"
 });

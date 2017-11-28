@@ -115,6 +115,37 @@ function(BaseVersionManager) {
         }
         return newConfig;
       }
+    }, {
+      version: '2.2',
+      upgrader: function(oldConfig){
+        var newConfig = oldConfig;
+        newConfig.hideLayersAfterWidgetClosed = true;
+        var query = null;
+        for(var i = 0; i < newConfig.queries.length; i++){
+          query = newConfig.queries[i];
+          delete query.keepResultsOnMapAfterCloseWidget;
+        }
+        return newConfig;
+      }
+    }, {
+      version: '2.3',
+      upgrader: function(oldConfig){
+        var newConfig = oldConfig;
+        var query = null;
+        for(var i = 0; i < newConfig.queries.length; i++){
+          query = newConfig.queries[i];
+          query.canModifySymbol = false;
+        }
+        return newConfig;
+      }
+    }, {
+      version: '2.4',
+      upgrader: function(oldConfig){
+        var newConfig = oldConfig;
+        newConfig.labelTasks = '';
+        newConfig.labelResults = '';
+        return newConfig;
+      }
     }];
   }
 

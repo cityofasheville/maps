@@ -18,5 +18,19 @@ define({
   "invalidTitle2": "'. Elige otro título.",
   "invalidBasemapUrl1": "Este tipo de capa no se puede usar como mapa base.",
   "invalidBasemapUrl2": "El mapa base que va a agregar tiene una referencia espacial distinta de la del mapa actual.",
-  "addBaselayer": "Agregar capa de mapa base"
+  "addBaselayer": "Agregar capa de mapa base",
+  "repectOnline": "Sincronizar siempre con la configuración de Galería de mapas base de la organización",
+  "customBasemap": "Configurar mapas base personalizados",
+  "basemapTips": "Haga clic en \"${import}\" o \"${createNew}\" para agregar mapas base.",
+  "importBasemap": "Importar",
+  "createBasemap": "Crear nuevo",
+  "importTitle": "Importar mapas base",
+  "createTitle": "Nuevo mapa base",
+  "selectGroupTip": "Seleccione un grupo cuyos mapas web pueda utilizarse como mapas base.",
+  "noBasemaps": "No hay mapas base.",
+  "defaultGroup": "Predeterminado de Esri",
+  "defaultOrgGroup": "Predeterminado de la organización",
+  "warningTitle": "Advertencia",
+  "confirmDelete": "¿Desea eliminar los mapas base seleccionados?",
+  "noBasemapAvailable": "No hay mapas base disponibles porque todos los mapas base tienen una referencia espacial diferente del mapa actual."
 });

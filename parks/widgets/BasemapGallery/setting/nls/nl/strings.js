@@ -18,5 +18,19 @@ define({
   "invalidTitle2": "' bestaat al. Kies een andere titel.",
   "invalidBasemapUrl1": "Dit laagtype kan niet worden gebruikt als een basiskaart.",
   "invalidBasemapUrl2": "De basiskaart die u toevoegt heeft een andere ruimtelijke referentie dan de huidige kaart.",
-  "addBaselayer": "Basiskaartlaag toevoegen"
+  "addBaselayer": "Basiskaartlaag toevoegen",
+  "repectOnline": "Altijd synchroniseren met de Basemap Gallery-instelling van de organisatie",
+  "customBasemap": "Aangepaste basiskaarten configureren",
+  "basemapTips": "Klik op \"${import}\" of \"${createNew}\" om basemaps toe te voegen.",
+  "importBasemap": "Importeren",
+  "createBasemap": "Maak nieuwe",
+  "importTitle": "Basiskaarten importeren",
+  "createTitle": "Nieuwe basiskaart",
+  "selectGroupTip": "Selecteer een groep waarvan de webmaps kunnen worden gebruikt als basiskaarten.",
+  "noBasemaps": "Geen basiskaarten.",
+  "defaultGroup": "Esri standaard",
+  "defaultOrgGroup": "Organisatiestandaard",
+  "warningTitle": "Waarschuwing",
+  "confirmDelete": "Wilt u geselecteerde basiskaarten verwijderen?",
+  "noBasemapAvailable": "Er zijn geen basiskaarten beschikbaar omdat alle basiskaarten een verschillende ruimtelijke referentie of tileschema hebben ten opzichte van de huidige kaart."
 });

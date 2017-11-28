@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 Esri. All Rights Reserved.
+// Copyright © 2014 - 2016 Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,6 +36,7 @@ define([
       baseClass: 'jimu-widget-layerList',
       name: 'layerList',
       _denyLayerInfosReorderResponseOneTime: null,
+      _denyLayerInfosIsVisibleChangedResponseOneTime: null,
       //layerListView: Object{}
       //  A module is responsible for show layers list
       layerListView: null,
@@ -48,6 +49,7 @@ define([
         this.inherited(arguments);
         NlsStrings.value = this.nls;
         this._denyLayerInfosReorderResponseOneTime = false;
+        this._denyLayerInfosIsVisibleChangedResponseOneTime = false;
         // summary:
         //    this function will be called when widget is started.
         // description:
@@ -162,7 +164,7 @@ define([
 
         this.own(on(this.operLayerInfos,
           'tableInfosChanged',
-          lang.hitch(this, this._onLayerInfosChanged)));
+          lang.hitch(this, this._onTableInfosChanged)));
 
         this.own(this.operLayerInfos.on('layerInfosIsVisibleChanged',
           lang.hitch(this, this._onLayerInfosIsVisibleChanged)));
@@ -182,25 +184,67 @@ define([
         this.own(on(this.operLayerInfos,
           'layerInfosRendererChanged',
           lang.hitch(this, this._onLayerInfosRendererChanged)));
+
+        this.own(on(this.operLayerInfos,
+          'layerInfosOpacityChanged',
+          lang.hitch(this, this._onLayerInfosOpacityChanged)));
       },
 
-      _onLayerInfosChanged: function(/*layerInfo, changedType*/) {
-        this._refresh();
+      _onLayerInfosChanged: function(layerInfo, changedType) {
+        //this._refresh();
+
+        if(changedType === "added") {
+          var allLayers = this.map.layerIds.concat(this.map.graphicsLayerIds);
+
+          var layerIndex = array.indexOf(allLayers, layerInfo.id);
+          var refLayerId = null;
+          var refLayerNode = null;
+          for(var i = layerIndex - 1; i >= 0; i--) {
+            refLayerId = allLayers[i];
+            refLayerNode = query("[class~='layer-tr-node-" + refLayerId + "']", this.domNode)[0];
+            if(refLayerNode) {
+              break;
+            }
+          }
+          if(refLayerNode) {
+            this.layerListView.drawListNode(layerInfo, 0, refLayerNode, 'before');
+          } else {
+            this.layerListView.drawListNode(layerInfo, 0, this.layerListView.layerListTable);
+          }
+        } else {
+          this.layerListView.destroyLayerTrNode(layerInfo);
+        }
+      },
+
+      _onTableInfosChanged: function(tableInfoArray, changedType) {
+        if(changedType === "added") {
+          array.forEach(tableInfoArray, function(tableInfo) {
+            this.layerListView.drawListNode(tableInfo, 0, this.layerListView.tableListTable);
+          }, this);
+        } else {
+          array.forEach(tableInfoArray, function(tableInfo) {
+            this.layerListView.destroyLayerTrNode(tableInfo);
+          }, this);
+        }
       },
 
       _onLayerInfosIsVisibleChanged: function(changedLayerInfos) {
-        array.forEach(changedLayerInfos, function(layerInfo) {
-          query("[class~='visible-checkbox-" + layerInfo.id + "']", this.domNode)
-          .forEach(function(visibleCheckBoxDomNode) {
-            var visibleCheckBox = registry.byNode(visibleCheckBoxDomNode);
-            if(layerInfo.isVisible()) {
-              visibleCheckBox.check();
-            } else {
-              visibleCheckBox.uncheck();
-            }
-          }, this);
+        if(this._denyLayerInfosIsVisibleChangedResponseOneTime) {
+          this._denyLayerInfosIsVisibleChangedResponseOneTime = false;
+        } else {
+          array.forEach(changedLayerInfos, function(layerInfo) {
+            query("[class~='visible-checkbox-" + layerInfo.id + "']", this.domNode)
+            .forEach(function(visibleCheckBoxDomNode) {
+              var visibleCheckBox = registry.byNode(visibleCheckBoxDomNode);
+              if(layerInfo.isVisible()) {
+                visibleCheckBox.check();
+              } else {
+                visibleCheckBox.uncheck();
+              }
+            }, this);
 
-        }, this);
+          }, this);
+        }
       },
 
       _onLayerInfosObjUpdated: function() {
@@ -241,6 +285,14 @@ define([
         } catch (err) {
           this._refresh();
         }
+      },
+
+      _onLayerInfosOpacityChanged: function(changedLayerInfos) {
+        array.forEach(changedLayerInfos, function(layerInfo) {
+          var opacity = layerInfo.layerObject.opacity === undefined ? 1 : layerInfo.layerObject.opacity;
+          var contentDomNode = query("[layercontenttrnodeid='" + layerInfo.id + "']", this.domNode)[0];
+          query(".legends-div.jimu-legends-div-flag img", contentDomNode).style("opacity", opacity);
+        }, this);
       },
 
       onAppConfigChanged: function(appConfig, reason, changedData){

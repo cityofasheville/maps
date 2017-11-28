@@ -5,7 +5,7 @@ define({
   "transparency": "Transparenţă",
   "controlPopup": "Activare/dezactivare pop-up",
   "moveUpAndDown": "Mutare în sus/Mutare în jos",
-  "attributeTable": "Deschidere tabel de atribute",
-  "url": "Descriere / Afişare detalii element / Descărcare",
+  "attributeTable": "Vizualizare în tabelul de atribute",
+  "url": "Descriere/Afişare detalii element/Descărcare",
   "layerSelectorTitle": "Alegeţi ce straturi tematice vor fi afişate în listă."
 });

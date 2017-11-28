@@ -6,7 +6,7 @@ define({
   "label": "Išvesties koordinačių sistemos pavadinimas",
   "transformationWkid": "Transformacijos WKID",
   "transformationLabel": "Transformacijos žymė",
-  "transformForward": "Transformuoti perspektyviai",
+  "transformForward": "Transformuoti į priekį",
   "actions": "Veiksmai",
   "warning": "Įveskite leistiną erdvinės charakteristikos WKID!",
   "tfWarning": "Įveskite leistiną atraminių duomenų transformacijos WKID!",
@@ -19,7 +19,7 @@ define({
   "output": "Išvesties koordinačių sistema",
   "cName": "Koordinačių sistemos pavadinimas",
   "units": "Rodymo vienetai: ",
-  "datum": "Atraminių duomenų transformacija",
+  "datum": "Duomenų transformacija",
   "tName": "Transformacijos pavadinimas",
   "tWKIDPlaceHolder": "Transformacijos WKID",
   "forward": "Naudoti perspektyvinę transformaciją",
@@ -39,7 +39,11 @@ define({
   "Kilometers": "Kilometrai",
   "Decimeters": "Decimetrai",
   "Decimal_Degrees": "Dešimtainiai laipsniai",
-  "Degree_Minutes_Seconds": "Laipsniai Minutės Sekundės",
+  "Degrees_Decimal_Minutes": "Laipsniai dešimtainės dalys minutės",
+  "Degree_Minutes_Seconds": "Laipsniai minutės sekundės",
   "MGRS": "MGRS",
-  "USNG": "USNG"
+  "USNG": "USNG",
+  "displayOrderLonLatTips": "Koordinačių rodymo tvarka:",
+  "lonLatTips": "Ilguma / platuma (X, Y)",
+  "latLonTips": "Platuma / Ilguma (Y, X)"
 });

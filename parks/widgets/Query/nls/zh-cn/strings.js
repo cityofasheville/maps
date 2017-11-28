@@ -76,12 +76,15 @@ define({
   "back": "后退",
   "execute": "执行",
   "zoomTo": "缩放至",
-  "openAttributeTable": "在属性表中打开",
+  "openAttributeTable": "在属性表中查看",
   "noResult": "无结果。",
   "noTask": "无任务。",
-  "removeThisResult": "移除该结果",
+  "removeThisResult": "移除此结果",
   "attributeCriteira": "属性条件",
   "spatialFilter": "空间过滤器",
   "value": "值",
-  "noAttributeSpatialFilterTip": "未定义过滤器。将返回所有要素。"
+  "noAttributeSpatialFilterTip": "未定义过滤器。将返回所有要素。",
+  "showAllRelatedRecords": "显示所有相关记录",
+  "changeSymbol": "更改符号",
+  "queryCriteira": "查询条件"
 });

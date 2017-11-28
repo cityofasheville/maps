@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 Esri. All Rights Reserved.
+// Copyright © 2014 - 2016 Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,16 +26,19 @@ define([
     'dijit/_WidgetsInTemplateMixin',
     'dojo/text!./RelatedRecordsResult.html',
     'esri/dijit/PopupRenderer',
-    'esri/layers/GraphicsLayer',
+    'esri/layers/FeatureLayer',
     'esri/renderers/SimpleRenderer',
     'jimu/utils',
     'jimu/symbolUtils',
-    'jimu/dijit/PopupMenu',
+    'jimu/BaseFeatureAction',
+    'jimu/dijit/Popup',
+    'jimu/dijit/FeatureActionPopupMenu',
+    'jimu/dijit/SymbolChooser',
     'jimu/FeatureActionManager'
   ],
   function(query, Evented, html, lang, array, declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
-    template, PopupRenderer, GraphicsLayer, SimpleRenderer, jimuUtils, symbolUtils, PopupMenu,
-    FeatureActionManager) {
+    template, PopupRenderer, FeatureLayer, SimpleRenderer, jimuUtils, symbolUtils, BaseFeatureAction, Popup,
+    PopupMenu, SymbolChooser, FeatureActionManager) {
 
     return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, Evented], {
 
@@ -51,13 +54,24 @@ define([
       map: null,
       layerDefinition: null,
       nls: null,
+      config: null,
 
       postCreate: function(){
         this.inherited(arguments);
         this.popupMenu = PopupMenu.getInstance();
         this.featureActionManager = FeatureActionManager.getInstance();
+
         if(this.layerDefinition.type !== 'Table'){
-          this.layer = new GraphicsLayer();
+          //FeatureLayer
+          this.layer = new FeatureLayer({
+            layerDefinition: {
+              type: this.layerDefinition.type,
+              geometryType: this.layerDefinition.geometryType,
+              fields: this.layerDefinition.fields,
+              typeIdField: this.layerDefinition.typeIdField,
+              types: this.layerDefinition.types
+            }
+          });
           var type = jimuUtils.getTypeByGeometryType(this.layerDefinition.geometryType);
           var symbol = null;
           if(type === 'point'){
@@ -72,6 +86,17 @@ define([
             this.layer.setRenderer(renderer);
           }
           this.map.addLayer(this.layer);
+        }else{
+          //Table
+          //If table, we also need to create a layer because of issue #8904, but we don't need to add it to map.
+          this.layer = new FeatureLayer({
+            layerDefinition: {
+              type: this.layerDefinition.type,
+              fields: this.layerDefinition.fields,
+              typeIdField: this.layerDefinition.typeIdField,
+              types: this.layerDefinition.types
+            }
+          });
         }
       },
 
@@ -88,14 +113,13 @@ define([
           this.layer.clear();
         }
         this.featureSet = featureSet;
-        // this.titleDiv.innerHTML = layerName;
         if(featureSet.features.length > 0){
           //has result
           array.forEach(featureSet.features, lang.hitch(this, function(feature){
-            this._createItem(popupTemplate, feature);
             if(this.layer){
               this.layer.add(feature);
             }
+            this._createItem(popupTemplate, feature);
           }));
           html.removeClass(this.btnAction, 'not-visible');
           html.addClass(this.noResultTip, 'not-visible');
@@ -107,6 +131,10 @@ define([
           html.removeClass(this.noResultTip, 'not-visible');
           html.addClass(this.content, 'not-visible');
         }
+      },
+
+      getLayer: function(){
+        return this.layer;
       },
 
       showLayer: function(){
@@ -179,13 +207,93 @@ define([
             action.data = this.featureSet;
           }));
 
+          if (!this.config.enableExport) {
+            var exportActionNames = [
+              'ExportToCSV',
+              'ExportToFeatureCollection',
+              'ExportToGeoJSON',
+              'SaveToMyContent'
+            ];
+            actions = array.filter(actions, lang.hitch(this, function(action) {
+              return exportActionNames.indexOf(action.name) < 0;
+            }));
+          }
+
           actions = array.filter(actions, lang.hitch(this, function(action){
             return action.name !== 'CreateLayer';
           }));
 
+          var symbolAction = this._getSymbolAction();
+          if(symbolAction){
+            actions.push(symbolAction);
+          }
+
           this.popupMenu.setActions(actions);
           this.popupMenu.show(position);
         }));
+      },
+
+      _getSymbolAction: function() {
+        var action = null;
+        if (this.layerDefinition.type !== 'Table' && this.layer && this.layer.renderer && this.config.canModifySymbol) {
+          var features = this.featureSet && this.featureSet.features;
+          if(!features){
+            features = [];
+          }
+          action = new BaseFeatureAction({
+            name: "ChangeSymbol",
+            label: this.nls.changeSymbol,
+            data: features,
+            iconClass: 'icon-edit-symbol',
+            iconFormat: 'svg',
+            map: this.map,
+            onExecute: lang.hitch(this, this._showSymbolChooser)
+          });
+        }
+        return action;
+      },
+
+      _showSymbolChooser: function() {
+        if(!this.layer){
+          return;
+        }
+
+        var renderer = this.layer.renderer;
+        var args = {};
+        var symbol = renderer.defaultSymbol || renderer.symbol;
+        if (symbol) {
+          args.symbol = symbol;
+        } else {
+          var symbolType = jimuUtils.getSymbolTypeByGeometryType(this.layer.geometryType);
+          args.type = symbolType;
+        }
+        var symbolChooser = new SymbolChooser(args);
+        var popup = new Popup({
+          width: 380,
+          autoHeight: true,
+          titleLabel: this.nls.changeSymbol,
+          content: symbolChooser,
+          onClose: lang.hitch(this, function() {
+            symbolChooser.destroy();
+            symbolChooser = null;
+            popup = null;
+          }),
+          buttons: [{
+            label: window.jimuNls.common.ok,
+            onClick: lang.hitch(this, function() {
+              var symbol = symbolChooser.getSymbol();
+              var renderer = new SimpleRenderer(symbol);
+              this.layer.setRenderer(renderer);
+              this.layer.redraw();
+              popup.close();
+            })
+          }, {
+            label: window.jimuNls.common.cancel,
+            onClick: lang.hitch(this, function() {
+              popup.close();
+            })
+          }]
+        });
       }
 
     });

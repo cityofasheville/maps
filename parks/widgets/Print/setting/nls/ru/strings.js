@@ -6,5 +6,8 @@ define({
   "defaultFormat": "Формат по умолчанию",
   "defaultLayout": "Компоновка по умолчанию",
   "warning": "Входные данные не корректны",
+  "urlNotAvailable": "URL-адрес недоступен",
+  "notPrintTask": "URL-адрес не является заданием печати",
+  "advancedOption": "Показать дополнительные опции",
   "ok": "OK"
 });

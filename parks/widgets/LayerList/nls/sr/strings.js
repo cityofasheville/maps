@@ -11,7 +11,7 @@ define({
   "itemMoveDown": "Pomeri se na dole",
   "itemDesc": "Opis",
   "itemDownload": "Preuzmi",
-  "itemToAttributeTable": "Otvori atributnu tabelu",
+  "itemToAttributeTable": "Prikaži u tabeli atributa",
   "itemShowItemDetails": "Prikaži detalje stavke",
   "empty": "prazno",
   "removePopup": "Onemogući iskačuće prozore",
@@ -22,6 +22,6 @@ define({
   "collapseAlllayers": "Skupi sve slojeve",
   "turnAllLabelsOff": "Isključi sve oznake",
   "turnAllLabelsOn": "Uključi sve oznake",
-  "showLabels": "Pokaži oznake",
+  "showLabels": "Prikaži oznake",
   "hideLables": "Sakrij oznake"
 });

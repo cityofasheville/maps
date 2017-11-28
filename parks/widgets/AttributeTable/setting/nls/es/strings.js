@@ -11,7 +11,7 @@ define({
   "back": "Atrás",
   "exportCSV": "Permitir exportación a CSV",
   "expand": "Expandir inicialmente el widget",
-  "filterByExtent": "Habilita Filtrar por extensión de mapa de forma predeterminada",
+  "filterByExtent": "Habilitar Filtrar por extensión de mapa de forma predeterminada",
   "restore": "Restaurar al valor predeterminado",
   "ok": "Aceptar",
   "cancel": "Cancelar",
@@ -25,5 +25,6 @@ define({
   "fieldName": "Nombre",
   "fieldAlias": "Alias",
   "fieldVisibility": "Visibilidad",
-  "fieldActions": "Acciones"
+  "fieldActions": "Acciones",
+  "showAttachments": "Mostrar archivos adjuntos"
 });

@@ -5,7 +5,7 @@ define({
   "queryParams": "Alternativer",
   "parameters": "ALTERNATIVER",
   "queries": "SPØRRINGER",
-  "apply": "BRUK",
+  "apply": "Bruk",
   "queryResults": "Resultater",
   "clear": "Fjern",
   "noResults": "Fant ingen geoobjekter.",
@@ -76,12 +76,15 @@ define({
   "back": "Tilbake",
   "execute": "Utfør",
   "zoomTo": "Zoom til",
-  "openAttributeTable": "Åpne i AttributeTable",
+  "openAttributeTable": "Vis i attributtabell",
   "noResult": "Ingen resultater.",
   "noTask": "Ingen oppgave.",
   "removeThisResult": "Fjern dette resultatet",
   "attributeCriteira": "Attributtvilkår",
   "spatialFilter": "Romlig filter",
   "value": "VERDI",
-  "noAttributeSpatialFilterTip": "Det er ikke definert et filter. Alle poster blir returnert."
+  "noAttributeSpatialFilterTip": "Det er ikke definert et filter. Alle poster blir returnert.",
+  "showAllRelatedRecords": "Vis alle relaterte poster",
+  "changeSymbol": "Endre symbol",
+  "queryCriteira": "Spørringskriterier"
 });

@@ -1,7 +1,6 @@
 
 .jimu-widget-layerList{
   position: relative;
-  font-family: "Avenir-Medium";
 }
 
 .jimu-widget-layerList .jimu-hr{
@@ -25,9 +24,8 @@
   /*border: 1px solid #000000;
   color: #86909c;
   margin-top: 14px;*/
-  color: #000000;
   margin-bottom: 14px;
-  font-family: "Avenir-Heavy";
+  font-family: "Avenir Heavy";
   margin-left: 8px;
   margin-right: 8px;
 }
@@ -51,7 +49,6 @@
 }
 
 .jimu-widget-layerList .layer-row{
-  background-color: #ffffff;
   height: 40px;
 }
 
@@ -61,7 +58,6 @@
 
 .jimu-widget-layerList .jimu-widget-row-selected{
   background-color: #d9dde0;
-;
 }
 
 .jimu-widget-layerList .jimu-widget-row-active{
@@ -197,7 +193,6 @@
   position: relative;
   /*************/
   /*color: #686868;*/
-  color: #000000;
   font-size: 12px;
   border: 0px solid;
 }
@@ -274,8 +269,22 @@
   float: right;
   /*margin-right: 4px;*/
   padding-top: 14px;
+  background-image: url("../images/more_normal.svg");
+  background-repeat: no-repeat;
+  background-position: center 23px;
 }
 
+.jimu-widget-layerList .layers-list-popupMenu-div:hover{
+  background-image: url("../images/more_hover.svg");
+}
+
+.jimu-widget-layerList .layers-list-popupMenu-div .popup-menu-button{
+  background: none;
+}
+
+.jimu-widget-layerList .layers-list-popupMenu-div .popup-menu-button:hover{
+  background: none;
+}
 
 .jimu-widget-layerList .layers-list-popupMenu-div .loading-section {
   width: 17px;
@@ -291,14 +300,18 @@
    right: 2px;
 }
 
-.jimu-widget-layerList .layers-list-popupMenu-div .jimu-loading{
+.jimu-widget-layerList .layers-list-popupMenu-div .popup-menu-loading{
   width: 17px;
   height: 17px;
-  margin: 0;
+  margin: -9px 0 0 2px;
   border-radius: 25px;
+  background-image: url("../images/loading.gif");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
 }
 
-.jimu-rtl .jimu-widget-layerList .layers-list-popupMenu-div .jimu-loading{
+.jimu-rtl .jimu-widget-layerList .layers-list-popupMenu-div .popup-menu-loading{
 }
 
 .jimu-widget-layerList .layers-list-popupMenu-div-selected{
@@ -449,14 +462,13 @@
   outline-style:solid;
   outline-width:1px;
   overflow:auto;
-  color: #000000;
+  /*color: #000000;*/
   font-size: 12px;
   z-index: 2;
   right: 0px;
   background-color: #ffffff;
   box-shadow: 0px 0px 4px 2px rgba(177, 177, 177, 0.5);
   outline-style: none;
-  font-family: "Avenir-Light";
 }
 
 .jimu-widget-layerList .jimu-dropmenu .drop-menu hr{
@@ -487,10 +499,9 @@
 }
 
 .jimu-widget-layerList .jimu-dropmenu .menu-item:hover{
-  color: #000000;
   text-decoration: initial;
   background-color: #f3f3f3;
-  font-family: "Avenir-Medium";
+  font-family: "Avenir Medium";
 
 }
 

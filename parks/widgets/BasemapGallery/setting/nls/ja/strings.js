@@ -1,6 +1,6 @@
 define({
   "showArcgisBasemaps": "ポータルのベースマップを含める",
-  "add": "クリックして新規ベースマップを追加",
+  "add": "クリックすると新規ベースマップが追加されます",
   "edit": "プロパティ",
   "titlePH": "ベースマップ タイトル",
   "thumbnailHint": "画像を変更するにはサムネイルをクリックします",
@@ -18,5 +18,19 @@ define({
   "invalidTitle2": "' すでに存在しています。別のタイトルを選択してください。",
   "invalidBasemapUrl1": "このタイプのレイヤーは、ベースマップとして使用できません。",
   "invalidBasemapUrl2": "追加しているベースマップは、現在のマップとは空間参照が異なります。",
-  "addBaselayer": "ベースマップ レイヤーの追加"
+  "addBaselayer": "ベースマップ レイヤーの追加",
+  "repectOnline": "組織のベースマップ ギャラリーの設定と常に同期",
+  "customBasemap": "カスタム ベースマップの構成",
+  "basemapTips": "\"${import}\" または \"${createNew}\" をクリックして、ベースマップを追加します。",
+  "importBasemap": "インポート",
+  "createBasemap": "新規作成",
+  "importTitle": "ベースマップのインポート",
+  "createTitle": "新規ベースマップ",
+  "selectGroupTip": "Web マップをベースマップとして使用できるグループを選択します。",
+  "noBasemaps": "ベースマップがありません。",
+  "defaultGroup": "Esri デフォルト",
+  "defaultOrgGroup": "組織のデフォルト",
+  "warningTitle": "警告",
+  "confirmDelete": "選択したベースマップを削除しますか？",
+  "noBasemapAvailable": "すべてのベースマップの空間参照またはタイル スキーマが現在のマップと異なっているため、使用できるベースマップがありません。"
 });

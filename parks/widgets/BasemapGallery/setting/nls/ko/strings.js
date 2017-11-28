@@ -18,5 +18,19 @@ define({
   "invalidTitle2": "' 베이스맵이 이미 있습니다. 다른 제목을 선택하세요.",
   "invalidBasemapUrl1": "이 레이어 유형은 베이스맵으로 사용할 수 없습니다.",
   "invalidBasemapUrl2": "추가 중인 베이스맵에 현재 맵과 다른 공간 기준 체계가 있습니다.",
-  "addBaselayer": "베이스맵 레이어 추가"
+  "addBaselayer": "베이스맵 레이어 추가",
+  "repectOnline": "기관의 베이스맵 갤러리 설정과 항상 동기화",
+  "customBasemap": "사용자 정의 베이스맵 구성",
+  "basemapTips": "베이스맵을 추가하려면 \"${import}\" 또는 \"${createNew}\"를 클릭합니다.",
+  "importBasemap": "가져오기",
+  "createBasemap": "새로 생성",
+  "importTitle": "베이스맵 가져오기",
+  "createTitle": "새 베이스맵",
+  "selectGroupTip": "웹 맵을 베이스맵으로 사용할 수 있는 그룹을 선택합니다.",
+  "noBasemaps": "베이스맵이 없습니다.",
+  "defaultGroup": "Esri 기본값",
+  "defaultOrgGroup": "기관 기본값",
+  "warningTitle": "경고",
+  "confirmDelete": "선택한 베이스맵을 삭제하시겠습니까?",
+  "noBasemapAvailable": "모든 베이스맵에 현재 맵과 다른 공간 참조나 타일링 스키마가 있으므로 사용할 수 있는 베이스맵이 없습니다."
 });

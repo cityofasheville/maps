@@ -6,6 +6,7 @@ define({
     "yes": "예",
     "no": "아니요",
     "next": "다음",
+    "previous": "이전",
     "back": "뒤로",
     "selected": "선택함",
     "name": "이름",
@@ -48,11 +49,34 @@ define({
     "scene": "씬",
     "reset": "재설정",
     "icon": "아이콘",
+    "folder": "폴더",
     "share": "공유",
     "view": "보기",
     "newText": "새로 만들기",
     "edit": "편집",
-    "wkid": "WKID"
+    "wkid": "WKID",
+    "table": "테이블",
+    "zoomIn": "확대",
+    "zoomOut": "축소",
+    "continue1": "계속",
+    "longitude": "경도",
+    "latitude": "위도",
+    "custom": "사용자 정의",
+    "image": "이미지",
+    "font": "글꼴",
+    "text": "텍스트",
+    "all": "모두",
+    "number": "숫자",
+    "percentage": "백분율",
+    "unit": "단위",
+    "thousand": "천",
+    "billion": "10억",
+    "million": "백만",
+    "none": "없음",
+    "field": "필드",
+    "operation": "작업",
+    "disableUpdateGeometry": "지오메트리 업데이트 사용 안 함",
+    "preview": "미리보기"
   },
   "errorCode": "코드",
   "errorMessage": "메시지",
@@ -70,14 +94,14 @@ define({
     "stddev": "표준편차"
   },
   "symbolChooser": {
-    "preview": "미리보기",
+    "preview": "미리 보기",
     "basic": "기본",
     "arrows": "화살표",
     "business": "비즈니스",
     "cartographic": "지도",
     "nationalParkService": "국립공원관리청",
-    "outdoorRecreation": "야외 활동",
-    "peoplePlaces": "사람 장소",
+    "outdoorRecreation": "실외 레크리에이션",
+    "peoplePlaces": "사용자 장소",
     "safetyHealth": "안전 보건",
     "shapes": "모양",
     "transportation": "교통",
@@ -85,7 +109,7 @@ define({
     "color": "색상",
     "alpha": "알파",
     "outlineColor": "윤곽선 색상",
-    "outlineWidth": "윤곽선 두께",
+    "outlineWidth": "윤곽선 너비",
     "style": "스타일",
     "width": "너비",
     "text": "텍스트",
@@ -96,7 +120,10 @@ define({
     "dash": "대시",
     "dot": "점",
     "dashDot": "대시 점",
-    "dashDotDot": "대시 점 점"
+    "dashDotDot": "대시 점 점",
+    "customImage": "사용자 정의 이미지",
+    "chooseFile": "파일 선택",
+    "noFileChoosen": "선택한 파일이 없습니다."
   },
   "transparency": {
     "opaque": "불투명",
@@ -106,10 +133,10 @@ define({
     "domain": "도메인",
     "use": "사용",
     "singleSymbol": "단일 심볼",
-    "uniqueSymbol": "고유한 심볼",
+    "uniqueSymbol": "고유 심볼",
     "color": "색상",
     "size": "크기",
-    "toShow": "표시할",
+    "toShow": "다음 항목 나타내기",
     "colors": "색상",
     "classes": "클래스",
     "symbolSize": "심볼 크기",
@@ -176,8 +203,8 @@ define({
     "invalidUrl": "잘못된 URL입니다."
   },
   "filterBuilder": {
-    "addAnotherExpression": "필터 식 추가",
-    "addSet": "식 집합 추가",
+    "addAnotherExpression": "식 추가",
+    "addSet": "세트 추가",
     "matchMsg": "다음 식 ${any_or_all}와 일치하는 레이어의 피처를 가져옵니다.",
     "matchMsgSet": "이 세트의 다음 식 ${any_or_all}가 true입니다.",
     "all": "모두",
@@ -202,9 +229,14 @@ define({
     "dateOperatorIsNotOn": "다음 날짜가 아님",
     "dateOperatorIsBefore": "다음 이전 날짜임",
     "dateOperatorIsAfter": "다음 이후 날짜임",
+    "dateOperatorIsOnOrBefore": "다음 시간 또는 그 이전",
+    "dateOperatorIsOnOrAfter": "다음 시간 또는 그 이후",
+    "dateOperatorMinutes": "분",
+    "dateOperatorHours": "시간",
     "dateOperatorDays": "일",
     "dateOperatorWeeks": "주",
     "dateOperatorMonths": "개월",
+    "dateOperatorYears": "수 년",
     "dateOperatorInTheLast": "다음 기간에 이내에 속함",
     "dateOperatorNotInTheLast": "다음 기간에 이내에 속하지 않음",
     "dateOperatorIsBetween": "다음 사이에 속함",
@@ -230,44 +262,49 @@ define({
     "error": {
       "invalidParams": "잘못된 매개변수입니다.",
       "invalidUrl": "잘못된 URL입니다.",
-      "noFilterFields": "레이어에는 필터에 사용할 수 있는 필드가 없습니다.",
+      "noFilterFields": "레이어에는 필터를 생성하는 데 사용할 수 있는 필드가 없습니다.",
       "invalidSQL": "잘못된 SQL 식입니다.",
       "cantParseSQL": "SQL 식의 구문을 분석할 수 없습니다."
     },
     "caseSensitive": "대소문자 구분",
     "notSupportCaseSensitiveTip": "호스팅된 서비스는 대소문자 구분 쿼리를 지원하지 않습니다.",
-    "setFilterTip": "필터를 올바르게 설정하세요."
+    "setFilterTip": "필터를 올바르게 설정하세요.",
+    "listValues": "목록 값",
+    "cascadeFilterTip": "이전 식으로 필터링된 값만 보여 줍니다.",
+    "noneCascadeFilterTip": "이 필드의 모든 고유값",
+    "previousCascadeFilterTip": "이전 식으로 필터링된 값",
+    "allCascadeFilterTip": "다른 모든 식으로 필터링된 값"
   },
   "featureLayerSource": {
     "layer": "레이어",
     "browse": "찾아보기",
-    "selectFromMap": "맵에서 선택",
-    "selectFromPortal": "Portal for ArcGIS에서 추가",
-    "addServiceUrl": "서비스 URL 추가",
+    "selectFromMap": "맵",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "서비스 URL",
     "inputLayerUrl": "입력 레이어 URL",
     "selectLayer": "현재 맵에서 피처 레이어를 선택합니다.",
     "chooseItem": "피처 레이어 항목을 선택합니다.",
     "setServiceUrl": "피처 서비스 또는 맵 서비스의 URL을 입력합니다.",
-    "selectFromOnline": "ArcGIS Online에서 추가",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "피처 레이어를 선택합니다."
   },
   "queryableLayerSource": {
     "layer": "레이어",
     "browse": "찾아보기",
-    "selectFromMap": "맵에서 선택",
-    "selectFromPortal": "Portal for ArcGIS에서 추가",
-    "addServiceUrl": "서비스 URL 추가",
+    "selectFromMap": "맵",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "서비스 URL",
     "inputLayerUrl": "입력 레이어 URL",
     "selectLayer": "현재 맵에서 레이어를 선택합니다.",
     "chooseItem": "항목을 선택합니다.",
     "setServiceUrl": "서비스 URL을 입력합니다.",
-    "selectFromOnline": "ArcGIS Online에서 추가",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "레이어를 선택합니다."
   },
   "gpSource": {
-    "selectFromPortal": "Portal for ArcGIS에서 추가",
-    "addServiceUrl": "서비스 URL 추가",
-    "selectFromOnline": "ArcGIS Online에서 추가",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "서비스 URL",
+    "selectFromOnline": "ArcGIS Online",
     "setServiceUrl": "지오프로세싱 서비스 URL을 입력합니다.",
     "chooseItem": "지오프로세싱 서비스 항목을 선택합니다.",
     "chooseTask": "지오프로세싱 작업을 선택합니다."
@@ -292,8 +329,12 @@ define({
     "noneThumbnail": "섬네일을 사용할 수 없음",
     "owner": "소유자",
     "signInTo": "로그인:",
-    "lastModified": "마지막으로 수정한 날짜",
-    "moreDetails": "자세한 정보"
+    "lastModified": "최근 수정일",
+    "moreDetails": "자세한 정보",
+    "mostRecent": "최신순",
+    "mostViewed": "인기순",
+    "highestRated": "최고 평점순",
+    "viewItemDetails": "항목 세부정보 보기"
   },
   "featureLayerChooserFromPortal": {
     "notSupportQuery": "서비스가 쿼리를 지원하지 않습니다."
@@ -313,17 +354,17 @@ define({
     "itemMoveDown": "아래로 이동",
     "itemDesc": "설명",
     "itemDownload": "다운로드",
-    "itemToAttributeTable": "속성 테이블 열기"
+    "itemToAttributeTable": "속성 테이블에서 보기"
   },
   "imageChooser": {
-    "unsupportReaderAPI": "TODO: 브라우저가 파일 리더 API를 지원하지 않습니다.",
+    "unsupportReaderAPI": "해야 할 일: 브라우저가 파일 리더 API를 지원하지 않습니다.",
     "readError": "파일을 읽지 못했습니다.",
     "unknowError": "작업을 완료할 수 없음",
     "invalidType": "잘못된 파일 유형입니다.",
     "cropImage": "이미지 자르기",
     "exceed": "파일 크기는 1024KB를 넘을 수 없습니다.",
-    "enableFlash": "TODO: 깜박이기를 활성화하세요.",
-    "cropWaining": "${width} x ${height} 픽셀 이상의 사진을 선택하세요.",
+    "enableFlash": "이미지를 찾아보려면 먼저 Adobe Flash를 활성화하세요.",
+    "cropWaining": "${가로} x ${세로} 픽셀 이상의 사진을 선택하세요.",
     "toolTip": "최상의 결과를 얻으려면 이미지의 폭은 ${width}픽셀, 높이는 ${height}픽셀이어야 합니다. 그 밖의 다른 크기는 맞게 조정됩니다. PNG, GIF 및 JPEG 형식의 이미지를 사용할 수 있습니다."
   },
   "simpleTable": {
@@ -347,6 +388,7 @@ define({
     "restoreMap": "작업을 중지한 지점의 맵 범위와 레이어 가시성을 복원하려면 클릭하세요."
   },
   "featureActions": {
+    "featureActions": "피처 동작",
     "ZoomTo": "확대/축소",
     "PanTo": "이동",
     "Flash": "깜박이기",
@@ -357,7 +399,11 @@ define({
     "ExportToCSV": "CSV 파일로 내보내기",
     "ShowSelectedFeature": "선택한 피처 표시",
     "ExportToFeatureCollection": "피처 컬렉션으로 내보내기",
-    "ExportToGeoJSON": "GeoJSON으로 내보내기"
+    "ExportToGeoJSON": "GeoJSON으로 내보내기",
+    "EditAttributes": "속성 편집",
+    "AddMarker": "표시 추가",
+    "RemoveMarker": "표시 제거",
+    "SaveToMyContent": "내 콘텐츠에 저장"
   },
   "spatialFilterByFeatures": {
     "relatedLayer": "릴레이트된 레이어",
@@ -365,7 +411,7 @@ define({
     "drawShapesTip": "모양을 그려 피처 선택",
     "pleaseDrawShapesTip": "모양을 그려 피처를 선택하세요.",
     "allFeaturesTip": "레이어 내 모든 피처",
-    "selectFeaturesOrDrawShapesTip": "피처를 제한하려면 이 레이어에서 선택한 피처를 사용하거나 맵에 모양을 그리세요."
+    "selectFeaturesOrDrawShapesTip": "피처를 제한하려면 이 레이어에서 선택한 피처를 사용하거나 맵에 도형을 그리세요."
   },
   "searchDistance": {
     "applySearchDistance": "검색 거리 적용",
@@ -373,23 +419,55 @@ define({
   },
   "units": {
     "miles": "마일",
+    "milesAbbr": "마일",
     "kilometers": "킬로미터",
+    "kilometersAbbr": "킬로미터",
     "feet": "피트",
+    "feetAbbr": "피트",
     "meters": "미터",
+    "metersAbbr": "미터",
     "yards": "야드",
-    "nauticalMiles": "해리"
+    "yardsAbbr": "야드",
+    "acres": "에이커",
+    "acresAbbr": "에이커",
+    "nauticalMiles": "해리",
+    "nauticalMilesAbbr": "nmi",
+    "uSSurveyFeet": "미국 측량 피트",
+    "uSSurveyFeetAbbr": "ftUS",
+    "decimalDegree": "십진수(DD)",
+    "decimalDegreeAbbr": "dd",
+    "degreeMinuteSeconds": "도-분-초",
+    "degreeMinuteSecondsAbbr": "d-m-s",
+    "squareMiles": "제곱마일",
+    "squareMilesAbbr": "제곱마일",
+    "squareKilometer": "제곱킬로미터",
+    "squareKilometerAbbr": "제곱킬로미터",
+    "squareFeet": "제곱피트",
+    "squareFeetAbbr": "제곱피트",
+    "squareMeters": "제곱미터",
+    "squareMetersAbbr": "제곱미터",
+    "squareYards": "제곱야드",
+    "squareYardsAbbr": "제곱야드",
+    "squareUSSurveyFeet": "미국 측량 평방 피트",
+    "squareUSSurveyFeetAbbr": "sq ftUS"
   },
   "featureSetChooser": {
     "select": "선택",
     "dragBox": "드래그",
     "dragMouse": "마우스 드래그",
-    "selectByRectangle": "직사각형으로 선택",
+    "selectByRectangle": "사각형으로 선택",
     "selectFeaturesTip": "맵에서 주위에 있는 상자를 드래그하여 피처 선택",
     "newSelectionTip": "새로운 선택 생성",
     "addSelectionTip": "선택에 추가",
     "removeSelectionTip": "선택 영역에서 제거",
     "selectFromCurrentSelectionTip": "현재 선택에서 다시 선택",
-    "unselectAllSelectionTip": "현재 선택한 모든 피처 선택 해제"
+    "unselectAllSelectionTip": "현재 선택한 모든 피처 선택 해제",
+    "selectByPolygon": "폴리곤으로 선택",
+    "selectByCircle": "원으로 선택",
+    "selectByLine": "라인으로 선택",
+    "chooseSelectingTools": "선택 도구 선택",
+    "darw": "그리기",
+    "drawShap": "도형 그리기"
   },
   "widgetManager": {
     "createWidgetError": "위젯 생성 오류",
@@ -448,5 +526,86 @@ define({
   },
   "webSceneLoader": {
     "webglSupportTip": "3D 웹 앱이 브라우저에서 지원되지 않습니다."
-  }
+  },
+  "map": {
+    "basemapNotAvailable": "베이스맵을 사용할 수 없습니다.",
+    "displayDefaultBasemap": "기본 베이스맵을 대신 표시합니다.",
+    "layerLoadedError": "${layers} 레이어를 맵에 추가할 수 없습니다."
+  },
+  "popup": {
+    "relatedTables": "릴레이트된 테이블:",
+    "relatedRecords": "릴레이트된 레코드:",
+    "noRelatedRecotds": "릴레이트된 레코드를 찾을 수 없습니다.",
+    "chooseFieldTip": "목록에 표시할 속성을 선택합니다.",
+    "saveAsPopupTitle": "팝업 제목과 동일"
+  },
+  "queryFeatures": {
+    "tooManyFeaturesTip": "선택 항목에 피처가 너무 많습니다. 맵에서 이러한 피처를 검색하고 나타나는 데 시간이 오래 걸릴 수 있습니다.",
+    "askForContinue": "계속하시겠습니까?"
+  },
+  "colorPalette": {
+    "transparent": "투명",
+    "custom": "사용자 정의"
+  },
+  "temperature": {
+    "celsius": "섭씨",
+    "fahrenheit": "화씨"
+  },
+  "report": {
+    "printButtonLabel": "인쇄",
+    "reportDimensionsMsg": "이 보고서는 ${paperSize} 용지에 인쇄되도록 만들어졌습니다.",
+    "unableToPrintMapMsg": "맵을 인쇄하는 중 오류가 발생했습니다.",
+    "notesHint": "여기에 의견 입력",
+    "landscape": "가로",
+    "portrait": "세로",
+    "mapOnly": "MAP_ONLY",
+    "a0": "A0",
+    "a1": "A1",
+    "a2": "A2",
+    "a3": "A3",
+    "a4": "A4",
+    "a5": "A5",
+    "letterANSIA": "Letter ANSI A",
+    "tabloidANSIB": "Tabloid ANSI B",
+    "letter": "Letter",
+    "legal": "Legal",
+    "tabloid": "Tabloid",
+    "ansi_a": "ANSI A",
+    "ansi_b": "ANSI B",
+    "ansi_c": "ANSI C",
+    "ansi_d": "ANSI D",
+    "ansi_e": "ANSI E"
+  },
+  "snapshot": {
+    "snapshot_complete": "스냅샷을 생성했습니다.",
+    "snapshot_failed": "스냅샷 생성에 실패했습니다.",
+    "snapshot_append": "스냅샷",
+    "utc": "UTC"
+  },
+  "statisticsChart": {
+    "enlarge": "확대",
+    "setting": "설정",
+    "count": "개수",
+    "horizontalAxis": "수평축",
+    "verticalAxis": "수직축",
+    "dataLabels": "데이터 레이블",
+    "color": "색상"
+  },
+  "frameworkDatasource": {
+    "setDataSource": "데이터 원본 설정",
+    "customDataSource": "추가 데이터 원본",
+    "selectCustomDataTip": "이 앱에서 데이터 원본을 선택하세요.",
+    "widgetOutputs": "위젯 결과",
+    "noExtraDsAvailable": "사용 가능한 추가 데이터 원본이 없습니다.",
+    "addExtraDsTip": "빌더의 속성 탭으로 이동한 다음, 데이터를 추가할 추가 데이터 원본을 클릭합니다.",
+    "widgetOutpusListTip": "위젯 결과(있는 경우)도 여기에 나열됩니다."
+  },
+  "gridLayout": {
+    "addWidgetTip": "위젯 탭을 통해 여기에 위젯 추가",
+    "modifyLayout": "레이아웃 수정",
+    "dragToAdd": "드래그하여 추가",
+    "mapArea": "맵 영역"
+  },
+  "noEditPrivileges": "내 계정에 데이터를 만들거나 수정할 권한이 없습니다.",
+  "invalidConfiguration": "위젯이 구성되지 않았거나 구성의 레이어가 더 이상 맵에 없습니다. 빌더 모드에서 앱을 열고 위젯을 다시 구성하세요."
 });

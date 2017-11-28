@@ -21,7 +21,7 @@ define({
   "Kilometers": "Километры",
   "Decimeters": "Дециметры",
   "Decimal_Degrees": "Градусы",
-  "Degree_Minutes_Seconds": "Градусы, минуты, секунды",
+  "Degree_Minutes_Seconds": "Градусы минуты секунды",
   "MGRS": "MGRS",
   "USNG": "USNG"
 });

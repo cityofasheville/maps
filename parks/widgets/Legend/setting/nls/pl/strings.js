@@ -3,5 +3,5 @@ define({
   "right": "Wyrównaj do prawej",
   "arrangement": "Rozmieszczenie",
   "autoUpdate": "Automatyczna aktualizacja",
-  "respectCurrentMapScale": "Uwzględniaj bieżącą skalę mapy"
+  "respectCurrentMapScale": "Użyj bieżącej skali mapy"
 });

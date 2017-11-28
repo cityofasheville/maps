@@ -4,6 +4,8 @@ define({
   "format": "Vorming",
   "layout": "Paigutus",
   "settings": "Täiustunud",
+  "labels": "Märgised",
+  "showLabels": "Kuva märgised",
   "mapScaleExtent": "Kaardi mõõtkava/ulatus",
   "preserve": "Säilita",
   "mapScale": "kaardi mõõtkava",
@@ -30,6 +32,6 @@ define({
   "height": "Kõrgus (px)",
   "print": "Prindi",
   "clearList": "Tühista printimine",
-  "creatingPrint": "Printimine",
+  "creatingPrint": "Printimise tühistamine",
   "printError": "Viga, proovige uuesti"
 });

@@ -88,7 +88,10 @@ var ie = (function() {
       window.apiUrl + 'esri/css/esri.css',
       window.apiUrl + 'dojox/layout/resources/ResizeHandle.css',
       window.path + 'jimu.js/css/jimu-theme.css',
-      window.path + 'libs/caja-html-sanitizer-minified.js'
+      window.path + 'libs/caja-html-sanitizer-minified.js',
+      //because we have jimu/dijit/GridLayout dijit, so we import this css here
+      window.path + 'libs/goldenlayout/goldenlayout-base.css',
+      window.path + 'libs/goldenlayout/goldenlayout-light-theme.css'
     ]);
 
     if (window.apiUrl.substr(window.apiUrl.length - 'arcgis-js-api/'.length,
@@ -114,6 +117,12 @@ var ie = (function() {
       }, {
         name: "dgrid",
         location: window.apiUrl + "dgrid"
+      }, {
+        name: "dgrid1",
+        location: window.apiUrl + "dgrid1"
+      }, {
+        name: "dstore",
+        location: window.apiUrl + "dstore"
       }, {
         name: "moment",
         location: window.apiUrl + "moment"

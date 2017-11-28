@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 Esri. All Rights Reserved.
+// Copyright © 2014 - 2016 Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,10 +17,12 @@
 define(['dojo/_base/declare',
     'dojo/_base/html',
     'dojo/query',
+    'dojo/on',
+    'dojo/_base/lang',
     'dijit/_WidgetsInTemplateMixin',
     'jimu/BaseWidget'
   ],
-  function(declare, html, query, _WidgetsInTemplateMixin, BaseWidget) {
+  function(declare, html, query, on, lang, _WidgetsInTemplateMixin, BaseWidget) {
     var clazz = declare([BaseWidget, _WidgetsInTemplateMixin], {
       baseClass: 'jimu-widget-about',
       // clasName: 'esri.widgets.About',
@@ -44,25 +46,37 @@ define(['dojo/_base/declare',
       },
 
       _resizeContentImg: function() {
-        var customBox = html.getContentBox(this.customContentNode);
-
         if (this._hasContent) {
           html.empty(this.customContentNode);
 
           var aboutContent = html.toDom(this.config.about.aboutContent);
-          // DocumentFragment or single node
-          if (aboutContent.nodeType &&
-            (aboutContent.nodeType === 11 || aboutContent.nodeType === 1)) {
-            var contentImgs = query('img', aboutContent);
+          html.place(aboutContent, this.customContentNode);
+          // single node only(no DocumentFragment)
+          if (this.customContentNode.nodeType && this.customContentNode.nodeType === 1) {
+            var contentImgs = query('img', this.customContentNode);
             if (contentImgs && contentImgs.length) {
-              contentImgs.style({
-                maxWidth: (customBox.w - 20) + 'px' // prevent x scroll
-              });
-            } else if (aboutContent.nodeName.toUpperCase() === 'IMG') {
-              html.setStyle(aboutContent, 'maxWidth', (customBox.w - 20) + 'px');
+              contentImgs.forEach(lang.hitch(this, function(img) {
+                var isNotLoaded = ("undefined" !== typeof img.complete && false === img.complete) ? true : false;
+                if (isNotLoaded) {
+                  this.own(on(img, 'load', lang.hitch(this, function() {
+                    this._resizeImg(img);
+                  })));
+                } else {
+                  this._resizeImg(img);
+                }
+              }));
             }
           }
-          html.place(aboutContent, this.customContentNode);
+        }
+      },
+      _resizeImg: function(img) {
+        var customBox = html.getContentBox(this.customContentNode);
+        var imgSize = html.getContentBox(img);
+        if (imgSize && imgSize.w && imgSize.w >= customBox.w) {
+          html.setStyle(img, {
+            maxWidth: (customBox.w - 20) + 'px', // prevent x scroll
+            maxHeight: (customBox.h - 40) + 'px'
+          });
         }
       }
     });

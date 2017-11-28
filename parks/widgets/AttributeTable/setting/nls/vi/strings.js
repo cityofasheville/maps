@@ -2,16 +2,16 @@ define({
   "instruction": "Chọn và cấu hình các lớp sẽ được hiển thị ban đầu trong Bảng Thuộc tính.",
   "label": "Lớp",
   "show": "Hiển thị",
-  "actions": "Cấu hình Trường Lớp",
+  "actions": "Cấu hình trường của lớp dữ liệu",
   "field": "Trường",
   "alias": "Bí danh",
   "visible": "Hiển thị",
-  "linkField": "Trường Liên kết",
+  "linkField": "Trường liên kết",
   "noLayers": "Không có lớp đối tượng nào",
   "back": "Quay lại",
   "exportCSV": "Cho phép xuất ra CSV",
   "expand": "Mở rộng tiện ích lúc ban đầu",
-  "filterByExtent": "Bật Lọc theo Phạm vi Bản đồ theo mặc định",
+  "filterByExtent": "Bật lọc theo phạm vi bản đồ mặc định",
   "restore": "Khôi phục về giá trị mặc định",
   "ok": "OK",
   "cancel": "Hủy",
@@ -25,5 +25,6 @@ define({
   "fieldName": "Tên",
   "fieldAlias": "Bí danh",
   "fieldVisibility": "Khả năng hiển thị",
-  "fieldActions": "Các hành động"
+  "fieldActions": "Các hành động",
+  "showAttachments": "Hiển thị tệp đính kèm"
 });

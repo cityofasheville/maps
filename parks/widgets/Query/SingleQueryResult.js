@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 Esri. All Rights Reserved.
+// Copyright © 2014 - 2016 Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,33 +29,37 @@ define([
     'esri/lang',
     'esri/tasks/QueryTask',
     'esri/tasks/FeatureSet',
-    'esri/symbols/jsonUtils',
     'esri/dijit/PopupTemplate',
     'esri/dijit/PopupRenderer',
     'esri/tasks/RelationshipQuery',
+    'esri/renderers/SimpleRenderer',
     'jimu/utils',
     'jimu/symbolUtils',
+    'jimu/dijit/Popup',
     'jimu/dijit/Message',
-    'jimu/dijit/PopupMenu',
+    'jimu/dijit/FeatureActionPopupMenu',
     'jimu/BaseFeatureAction',
+    'jimu/dijit/SymbolChooser',
     'jimu/LayerInfos/LayerInfos',
     'jimu/FeatureActionManager',
     './SingleQueryLoader',
     './RelatedRecordsResult',
-    'jimu/dijit/LoadingShelter'
+    'jimu/dijit/LoadingShelter',
+    'dijit/form/Select'
   ],
   function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, Evented, template, lang, query,
-    html, array, Deferred, esriLang, QueryTask, FeatureSet, symbolJsonUtils, PopupTemplate, PopupRenderer,
-    RelationshipQuery, jimuUtils, jimuSymbolUtils, Message, PopupMenu, BaseFeatureAction, LayerInfos,
-    FeatureActionManager, SingleQueryLoader, RelatedRecordsResult) {
+    html, array, Deferred, esriLang, QueryTask, FeatureSet, PopupTemplate, PopupRenderer,
+    RelationshipQuery, SimpleRenderer, jimuUtils, jimuSymbolUtils, Popup, Message, PopupMenu, BaseFeatureAction,
+    SymbolChooser, LayerInfos, FeatureActionManager, SingleQueryLoader, RelatedRecordsResult) {
 
     return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, Evented], {
 
       baseClass: 'single-query-result',
       templateString: template,
       singleQueryLoader: null,
-      featureLayer: null,//used for execute queryRelatedFeatures
-      relatedRecordsResult: null,
+      featureLayer: null, //used for execute queryRelatedFeatures
+      singleRelatedRecordsResult: null,
+      multipleRelatedRecordsResult: null,
       popupMenu: null,
 
       //options:
@@ -68,30 +72,41 @@ define([
       //getCurrentAttrs
       //zoomToLayer
       //executeQueryForFirstTime
+      //_emitFeaturesUpdate
+
+      //events:
+      //features-update
+      //show-related-records
+      //hide-related-records
 
       //we can get where,geometry and resultLayer from singleQueryLoader
-      getCurrentAttrs: function(){
-        if(this.singleQueryLoader){
+      getCurrentAttrs: function() {
+        if (this.singleQueryLoader) {
           return this.singleQueryLoader.getCurrentAttrs();
         }
         return null;
       },
 
-      postCreate:function(){
+      postCreate: function() {
         this.inherited(arguments);
         //init SingleQueryLoader
         this.singleQueryLoader = new SingleQueryLoader(this.map, this.currentAttrs);
         this.popupMenu = PopupMenu.getInstance();
         this.featureActionManager = FeatureActionManager.getInstance();
+        this.btnFeatureAction.title = window.jimuNls.featureActions.featureActions;
       },
 
-      destroy: function(){
+      destroy: function() {
+        this.emit('features-update', {
+          taskIndex: this.currentAttrs.queryTr.taskIndex,
+          features: []
+        });
         this.queryWidget = null;
         var currentAttrs = this.getCurrentAttrs();
-        if(currentAttrs){
-          if(currentAttrs.query){
-            if(currentAttrs.query.resultLayer){
-              if(currentAttrs.query.resultLayer.getMap()){
+        if (currentAttrs) {
+          if (currentAttrs.query) {
+            if (currentAttrs.query.resultLayer) {
+              if (currentAttrs.query.resultLayer.getMap()) {
                 this.map.removeLayer(currentAttrs.query.resultLayer);
               }
             }
@@ -101,47 +116,58 @@ define([
         this.inherited(arguments);
       },
 
-      zoomToLayer: function(){
+      _isValidNumber: function(v) {
+        return typeof v === "number" && !isNaN(v);
+      },
+
+      zoomToLayer: function() {
         var currentAttrs = this.getCurrentAttrs();
         var resultLayer = currentAttrs.query.resultLayer;
-        if(resultLayer && !this._isTable(currentAttrs.layerInfo)){
+        if (resultLayer && !this._isTable(currentAttrs.layerInfo)) {
           //we should validate geometries to calculate extent
-          var graphics = array.filter(resultLayer.graphics, lang.hitch(this, function(g){
+          var graphics = array.filter(resultLayer.graphics, lang.hitch(this, function(g) {
             var geo = g.geometry;
-            if(geo){
+            if (geo) {
               //x and y maybe "NaN"
-              if(geo.type === 'point'){
-                return typeof geo.x === "number" && typeof geo.y === "number";
-              }else if(geo.type === 'multipoint'){
-                if(geo.points && geo.points.length > 0){
-                  return array.every(geo.points, lang.hitch(this, function(xyArray){
-                    if(xyArray){
-                      return typeof xyArray[0] === "number" && typeof xyArray[1] === "number";
-                    }else{
+              if (geo.type === 'point') {
+                return this._isValidNumber(geo.x) && this._isValidNumber(geo.y);
+              } else if (geo.type === 'multipoint') {
+                if (geo.points && geo.points.length > 0) {
+                  return array.every(geo.points, lang.hitch(this, function(xyArray) {
+                    if (xyArray) {
+                      return this._isValidNumber(xyArray[0]) && this._isValidNumber(xyArray[1]);
+                    } else {
                       return false;
                     }
                   }));
-                }else{
+                } else {
                   return false;
                 }
-              }else{
+              } else {
                 return true;
               }
-            }else{
+            } else {
               return false;
             }
           }));
-          if(graphics.length > 0){
+          if (graphics.length > 0) {
             var ext = jimuUtils.graphicsExtent(graphics, 1.4);
-            if(ext){
+            if (ext) {
               this.map.setExtent(ext);
             }
           }
         }
       },
 
+      _emitFeaturesUpdate: function(){
+        this.emit('features-update', {
+          taskIndex: this.currentAttrs.queryTr.taskIndex,
+          features: this.currentAttrs.query.resultLayer.graphics
+        });
+      },
+
       //start to query
-      executeQueryForFirstTime: function(){
+      executeQueryForFirstTime: function() {
         var def = new Deferred();
 
         //reset result page
@@ -164,6 +190,7 @@ define([
             this._addResultLayerToMap(resultLayer);
           }
           def.resolve(allCount);
+          this._emitFeaturesUpdate();
         });
 
         var errorCallback = lang.hitch(this, function(err) {
@@ -182,7 +209,7 @@ define([
 
         this.shelter.show();
 
-        if(currentAttrs.queryType !== 3){
+        if (currentAttrs.queryType !== 3) {
           this._showResultsNumberDiv();
         }
 
@@ -192,30 +219,70 @@ define([
         return def;
       },
 
-      _addResultLayerToMap: function(resultLayer){
-        if(this.map.graphicsLayerIds.indexOf(resultLayer.id) < 0){
+      getResultLayer: function() {
+        var currentAttrs = this.getCurrentAttrs();
+        var resultLayer = lang.getObject("query.resultLayer", false, currentAttrs);
+        return resultLayer;
+      },
+
+      showResultLayer: function() {
+        var resultLayer = this.getResultLayer();
+        if (resultLayer) {
+          resultLayer.show();
+        }
+      },
+
+      hideResultLayer: function() {
+        var resultLayer = this.getResultLayer();
+        if (resultLayer) {
+          resultLayer.hide();
+        }
+      },
+
+      showLayer: function() {
+        this.showResultLayer();
+        if (this.multipleRelatedRecordsResult) {
+          this.multipleRelatedRecordsResult.showLayer();
+        }
+        if (this.singleRelatedRecordsResult) {
+          this.singleRelatedRecordsResult.showLayer();
+        }
+      },
+
+      hideLayer: function() {
+        this.hideResultLayer();
+        if (this.multipleRelatedRecordsResult) {
+          this.multipleRelatedRecordsResult.hideLayer();
+        }
+        if (this.singleRelatedRecordsResult) {
+          this.singleRelatedRecordsResult.hideLayer();
+        }
+      },
+
+      _addResultLayerToMap: function(resultLayer) {
+        if (this.map.graphicsLayerIds.indexOf(resultLayer.id) < 0) {
           this.map.addLayer(resultLayer);
         }
       },
 
-      _showResultsNumberDiv: function(){
+      _showResultsNumberDiv: function() {
         html.setStyle(this.resultsNumberDiv, 'display', 'block');
       },
 
-      _hideResultsNumberDiv: function(){
+      _hideResultsNumberDiv: function() {
         html.setStyle(this.resultsNumberDiv, 'display', 'none');
       },
 
-      _updateNumSpan: function(allCount){
+      _updateNumSpan: function(allCount) {
         this.numSpan.innerHTML = jimuUtils.localizeNumber(allCount);
       },
 
-      _isTable: function(layerDefinition){
+      _isTable: function(layerDefinition) {
         return layerDefinition.type === "Table";
       },
 
-      _onResultsScroll:function(){
-        if(!jimuUtils.isScrollToBottom(this.resultsContainer)){
+      _onResultsScroll: function() {
+        if (!jimuUtils.isScrollToBottom(this.resultsContainer)) {
           return;
         }
 
@@ -224,7 +291,7 @@ define([
         var nextIndex = currentAttrs.query.nextIndex;
         var allCount = currentAttrs.query.allCount;
 
-        if(nextIndex >= allCount){
+        if (nextIndex >= allCount) {
           return;
         }
 
@@ -236,6 +303,7 @@ define([
           }
           this.shelter.hide();
           this._addResultItems(features, resultLayer);
+          this._emitFeaturesUpdate();
         });
 
         var errorCallback = lang.hitch(this, function(err) {
@@ -252,68 +320,54 @@ define([
         this.singleQueryLoader.executeQueryWhenScrollToBottom().then(callback, errorCallback);
       },
 
-      _clearResultPage: function(){
+      _clearResultPage: function() {
         this._hideInfoWindow();
         this._unSelectResultTr();
         html.empty(this.resultsTbody);
         this._updateNumSpan(0);
       },
 
-      _unSelectResultTr: function(){
-        if(this.resultTr){
+      _unSelectResultTr: function() {
+        if (this.resultTr) {
           html.removeClass(this.resultTr, 'jimu-state-active');
         }
         this.resultTr = null;
       },
 
-      _selectResultTr: function(tr){
+      _selectResultTr: function(tr) {
         this._unSelectResultTr();
         this.resultTr = tr;
-        if(this.resultTr){
+        if (this.resultTr) {
           html.addClass(this.resultTr, 'jimu-state-active');
         }
       },
 
-      _addResultItems: function(features, resultLayer){
-        //var featuresCount = features.length;
+      _addResultItems: function(features, resultLayer) {
         var currentAttrs = this.getCurrentAttrs();
-        var sym = null;
         var url = currentAttrs.config.url;
         var objectIdField = currentAttrs.config.objectIdField;
-
-        if(currentAttrs.config.resultsSymbol){
-          //if the layer is a table, resultsSymbol will be null
-          sym = symbolJsonUtils.fromJson(currentAttrs.config.resultsSymbol);
-        }
 
         var relationships = this._getCurrentRelationships();
         var popupInfo = currentAttrs.config.popupInfo;
         var popupInfoWithoutMediaInfos = lang.clone(popupInfo);
         popupInfoWithoutMediaInfos.mediaInfos = [];
         var popupTemplate2 = new PopupTemplate(popupInfoWithoutMediaInfos);
-        // if(popupInfo.showAttachments){
-        //   queryUtils.overridePopupTemplateMethodGetAttachments(popupTemplate2, url, objectIdField);
-        // }
 
         var shouldCreateSymbolNode = true;
 
         var renderer = resultLayer.renderer;
-        if(!renderer){
+        if (!renderer) {
           shouldCreateSymbolNode = false;
         }
 
-        array.forEach(features, lang.hitch(this, function(feature, i){
-          var trClass = '';
-          if(i % 2 === 0){
-            trClass = 'even';
-          }else{
-            trClass = 'odd';
-          }
+        var isWebMapShowRelatedRecordsEnabled = this._isWebMapShowRelatedRecordsEnabled();
 
-          if(feature.geometry){
-            if(sym){
-              feature.setSymbol(sym);
-            }
+        array.forEach(features, lang.hitch(this, function(feature, i) {
+          var trClass = '';
+          if (i % 2 === 0) {
+            trClass = 'even';
+          } else {
+            trClass = 'odd';
           }
 
           resultLayer.add(feature);
@@ -327,7 +381,8 @@ define([
             objectIdField: objectIdField,
             url: url,
             relationshipPopupTemplates: currentAttrs.relationshipPopupTemplates,
-            shouldCreateSymbolNode: shouldCreateSymbolNode
+            shouldCreateSymbolNode: shouldCreateSymbolNode,
+            isWebMapShowRelatedRecordsEnabled: isWebMapShowRelatedRecordsEnabled
           };
 
           this._createQueryResultItem(options);
@@ -336,7 +391,7 @@ define([
         this.zoomToLayer();
       },
 
-      _createQueryResultItem:function(options){
+      _createQueryResultItem: function(options) {
         var resultLayer = options.resultLayer;
         var feature = options.feature;
         var trClass = options.trClass;
@@ -346,50 +401,49 @@ define([
         var url = options.url;
         var relationshipPopupTemplates = options.relationshipPopupTemplates;
         var shouldCreateSymbolNode = options.shouldCreateSymbolNode;
+        var isWebMapShowRelatedRecordsEnabled = options.isWebMapShowRelatedRecordsEnabled;
 
         var attributes = feature && feature.attributes;
-        if(!attributes){
+        if (!attributes) {
           return;
         }
 
-        var objectId = feature.attributes[objectIdField];
-
         //create PopupRenderer
         var strItem = '<tr class="jimu-table-row jimu-table-row-separator query-result-item" ' +
-        ' cellpadding="0" cellspacing="0"><td>' +
+          ' cellpadding="0" cellspacing="0"><td>' +
           '<table class="query-result-item-table">' +
-            '<tbody>' +
-              '<tr>' +
-                '<td class="symbol-td"></td><td class="popup-td"></td>' +
-                '</tr>' +
-            '</tbody>' +
+          '<tbody>' +
+          '<tr>' +
+          '<td class="symbol-td"></td><td class="popup-td"></td>' +
+          '</tr>' +
+          '</tbody>' +
           '</table>' +
-        '</td></tr>';
+          '</td></tr>';
         var trItem = html.toDom(strItem);
         html.addClass(trItem, trClass);
         html.place(trItem, this.resultsTbody);
         trItem.feature = feature;
 
         var symbolTd = query('.symbol-td', trItem)[0];
-        if(shouldCreateSymbolNode){
-          try{
+        if (shouldCreateSymbolNode) {
+          try {
             var renderer = resultLayer.renderer;
-            if(renderer){
+            if (renderer) {
               var symbol = renderer.getSymbol(feature);
-              if(symbol){
+              if (symbol) {
                 var symbolNode = jimuSymbolUtils.createSymbolNode(symbol, {
                   width: 32,
                   height: 32
                 });
-                if(symbolNode){
+                if (symbolNode) {
                   html.place(symbolNode, symbolTd);
                 }
               }
             }
-          }catch(e){
+          } catch (e) {
             console.error(e);
           }
-        }else{
+        } else {
           html.destroy(symbolTd);
         }
 
@@ -403,18 +457,19 @@ define([
         popupRenderer.startup();
 
         //create TitlePane for relationships
-        if(relationships && relationships.length > 0){
+        if (objectIdField && relationships && relationships.length > 0 && isWebMapShowRelatedRecordsEnabled) {
+          var objectId = feature.attributes[objectIdField];
           //var lastIndex = relationships.length - 1;
-          array.forEach(relationships, lang.hitch(this, function(relationship){
+          array.forEach(relationships, lang.hitch(this, function(relationship) {
             //{id,name,relatedTableId}
             //var layerName = this._getLayerNameByRelationshipId(relationship.id);
-            var relationshipLayerInfo = this._getRelationshipLyaerInfo(relationship.relatedTableId);
+            var relationshipLayerInfo = this._getRelationshipLayerInfo(relationship.relatedTableId);
             var layerName = relationshipLayerInfo.name;
             var relationshipPopupTemplate = relationshipPopupTemplates[relationship.relatedTableId];
 
             var btn = html.create("div", {
               "class": "related-table-btn",
-              "innerHTML": layerName//this.nls.attributesFromRelationship + ': ' + layerName
+              "innerHTML": layerName //this.nls.attributesFromRelationship + ': ' + layerName
             }, popupTd);
             btn.queryStatus = "unload";
             btn.url = url;
@@ -427,59 +482,173 @@ define([
         }
       },
 
-      _onBtnRelatedBackClicked: function(){
+      _onBtnMultipleRelatedBackClicked: function() {
         this._showFeaturesResultDiv();
       },
 
-      _showFeaturesResultDiv: function(){
-        if(this.relatedRecordsResult){
-          this.relatedRecordsResult.destroy();
+      _onBtnSingleRelatedBackClicked: function() {
+        this._showFeaturesResultDiv();
+      },
+
+      _showFeaturesResultDiv: function() {
+        if (this.multipleRelatedRecordsResult) {
+          this.multipleRelatedRecordsResult.destroy();
         }
-        this.relatedRecordsResult = null;
+        this.multipleRelatedRecordsResult = null;
+
+        if (this.singleRelatedRecordsResult) {
+          this.singleRelatedRecordsResult.destroy();
+        }
+        this.singleRelatedRecordsResult = null;
+
+        html.addClass(this.multipleRelatedRecordsDiv, 'not-visible');
+        html.addClass(this.singleRelatedRecordsResultDiv, 'not-visible');
         html.removeClass(this.featuresResultDiv, 'not-visible');
-        html.addClass(this.relatedRecordsResultDiv, 'not-visible');
         this.emit("hide-related-records");
       },
 
-      _showRelatedRecordsDiv: function(){
+      _showMultipleRelatedRecords: function() {
+        if (this.singleRelatedRecordsResult) {
+          this.singleRelatedRecordsResult.destroy();
+        }
+        this.singleRelatedRecordsResult = null;
+
         html.addClass(this.featuresResultDiv, 'not-visible');
-        html.removeClass(this.relatedRecordsResultDiv, 'not-visible');
+        html.addClass(this.singleRelatedRecordsResultDiv, 'not-visible');
+        html.removeClass(this.multipleRelatedRecordsDiv, 'not-visible');
+        this.emit("show-related-records");
+
+        var relationships = this._getCurrentRelationships();
+        this.relatedLayersSelect.removeOption(this.relatedLayersSelect.getOptions());
+        array.forEach(relationships, lang.hitch(this, function(relationship) {
+          var relationshipLayerInfo = this._getRelationshipLayerInfo(relationship.relatedTableId);
+          var relationshipPopupTemplate = this.currentAttrs.relationshipPopupTemplates[relationship.relatedTableId];
+          var layerName = relationshipLayerInfo.name;
+
+          this.relatedLayersSelect.addOption({
+            value: relationship.id + "",//should be a string
+            label: layerName,
+            relationship: relationship,
+            relationshipLayerInfo: relationshipLayerInfo,
+            relationshipPopupTemplate: relationshipPopupTemplate
+          });
+        }));
+
+        this._onRelatedLayersSelectChanged();
+      },
+
+      _onRelatedLayersSelectChanged: function() {
+        var value = this.relatedLayersSelect.get('value');
+        var option = this.relatedLayersSelect.getOptions(value);
+        if (!option) {
+          return;
+        }
+        /*{
+            value: relationship.id,
+            label: layerName,
+            relationship: relationship,
+            relationshipLayerInfo: relationshipLayerInfo,
+            relationshipPopupTemplate: relationshipPopupTemplate,
+            selected: index === 0
+          }*/
+        if (this.multipleRelatedRecordsResult) {
+          this.multipleRelatedRecordsResult.destroy();
+        }
+        this.multipleRelatedRecordsResult = new RelatedRecordsResult({
+          map: this.map,
+          layerDefinition: option.relationshipLayerInfo,
+          nls: this.nls,
+          config: this.currentAttrs.config
+        });
+        this.multipleRelatedRecordsResult.placeAt(this.multipleRelatedRecordsDiv, 'first');
+        var url = this.currentAttrs.config.url;
+        this.shelter.show();
+        var errorCallback = lang.hitch(this, function(err) {
+          console.error(err);
+          if (!this.domNode) {
+            return;
+          }
+          this.shelter.hide();
+        });
+        //var objectIds = this.currentAttrs.query.objectIds;
+        this.singleQueryLoader.getObjectIdsForAllRelatedRecordsAction().then(lang.hitch(this, function(objectIds){
+          var def = this._queryRelatedRecords(url, objectIds, option.relationship.id);
+          def.then(lang.hitch(this, function(response) {
+            if (!this.domNode) {
+              return;
+            }
+            this.shelter.hide();
+            //{objectId:{features,geometryType,spatialReference,transform}}
+            var features = [];
+            array.forEach(objectIds, lang.hitch(this, function(objectId) {
+              var a = response[objectId];
+              if (a && a.features && a.features.length > 0) {
+                features = features.concat(a.features);
+              }
+            }));
+
+            var relationshipLayerInfo = option.relationshipLayerInfo;
+            var featureSet = new FeatureSet();
+            featureSet.fields = lang.clone(relationshipLayerInfo.fields);
+            featureSet.features = features;
+            featureSet.geometryType = relationshipLayerInfo.geometryType;
+            featureSet.fieldAliases = {};
+            array.forEach(featureSet.fields, lang.hitch(this, function(fieldInfo) {
+              var fieldName = fieldInfo.name;
+              var fieldAlias = fieldInfo.alias || fieldName;
+              featureSet.fieldAliases[fieldName] = fieldAlias;
+            }));
+            this.multipleRelatedRecordsResult.setResult(option.relationshipPopupTemplate, featureSet);
+          }), errorCallback);
+        }), errorCallback);
+      },
+
+      _showSingleRelatedRecordsDiv: function() {
+        if (this.multipleRelatedRecordsResult) {
+          this.multipleRelatedRecordsResult.destroy();
+        }
+        this.multipleRelatedRecordsResult = null;
+
+        html.addClass(this.featuresResultDiv, 'not-visible');
+        html.addClass(this.multipleRelatedRecordsDiv, 'not-visible');
+        html.removeClass(this.singleRelatedRecordsResultDiv, 'not-visible');
         this.emit("show-related-records");
       },
 
-      _onRelatedTableButtonClicked: function(target){
-        if(this.relatedRecordsResult){
-          this.relatedRecordsResult.destroy();
+      _onSingleRelatedTableButtonClicked: function(target) {
+        if (this.singleRelatedRecordsResult) {
+          this.singleRelatedRecordsResult.destroy();
         }
-        this.relatedRecordsResult = null;
+        this.singleRelatedRecordsResult = null;
         var url = target.url;
         var layerName = target.layerName;
         var objectId = target.objectId;
         var relationship = target.relationship;
         var relationshipLayerInfo = target.relationshipLayerInfo;
         var relationshipPopupTemplate = target.relationshipPopupTemplate;
-        this.relatedRecordsResult = new RelatedRecordsResult({
+        this.singleRelatedRecordsResult = new RelatedRecordsResult({
           map: this.map,
           layerDefinition: relationshipLayerInfo,
-          nls: this.nls
+          nls: this.nls,
+          config: this.currentAttrs.config
         });
-        this.relatedRecordsResult.placeAt(this.relatedRecordsResultDiv, 'first');
-        // this.own(on(this.relatedRecordsResult, 'back', lang.hitch(this, function(){
+        this.singleRelatedRecordsResult.placeAt(this.singleRelatedRecordsResultDiv, 'first');
+        // this.own(on(this.singleRelatedRecordsResult, 'back', lang.hitch(this, function(){
         //   this._showFeaturesResultDiv();
         // })));
-        this._showRelatedRecordsDiv();
-        var callback = lang.hitch(this, function(){
+        this._showSingleRelatedRecordsDiv();
+        var callback = lang.hitch(this, function() {
           var featureSet = new FeatureSet();
           featureSet.fields = lang.clone(relationshipLayerInfo.fields);
           featureSet.features = target.relatedFeatures;
           featureSet.geometryType = relationshipLayerInfo.geometryType;
           featureSet.fieldAliases = {};
-          array.forEach(featureSet.fields, lang.hitch(this, function(fieldInfo){
+          array.forEach(featureSet.fields, lang.hitch(this, function(fieldInfo) {
             var fieldName = fieldInfo.name;
             var fieldAlias = fieldInfo.alias || fieldName;
             featureSet.fieldAliases[fieldName] = fieldAlias;
           }));
-          this.relatedRecordsResult.setResult(relationshipPopupTemplate, featureSet);
+          this.singleRelatedRecordsResult.setResult(relationshipPopupTemplate, featureSet);
 
           this.relatedTitleDiv.innerHTML = layerName;
         });
@@ -487,15 +656,8 @@ define([
         if (target.queryStatus === "unload") {
           target.queryStatus = "loading";
           this.shelter.show();
-          var queryTask = new QueryTask(url);
-          var relationshipQuery = new RelationshipQuery();
-          relationshipQuery.objectIds = [objectId];
-          relationshipQuery.relationshipId = relationship.id;
-          relationshipQuery.outFields = ['*'];
-          relationshipQuery.returnGeometry = true;
-          relationshipQuery.outSpatialReference = this.map.spatialReference;
-          queryTask.executeRelationshipQuery(relationshipQuery).then(lang.hitch(this, function(response) {
-            if(!this.domNode){
+          this._queryRelatedRecords(url, [objectId], relationship.id).then(lang.hitch(this, function(response) {
+            if (!this.domNode) {
               return;
             }
             this.shelter.hide();
@@ -507,7 +669,7 @@ define([
             target.queryStatus = "loaded";
             callback();
           }), lang.hitch(this, function(err) {
-            if(!this.domNode){
+            if (!this.domNode) {
               return;
             }
             this.shelter.hide();
@@ -515,44 +677,55 @@ define([
             target.queryStatus = "unload";
             callback();
           }));
-        }else if(target.queryStatus === "loaded"){
+        } else if (target.queryStatus === "loaded") {
           callback();
         }
       },
 
-      _getCurrentRelationships: function(){
+      _queryRelatedRecords: function(url, objectIds, relationshipId) {
+        var queryTask = new QueryTask(url);
+        var relationshipQuery = new RelationshipQuery();
+        relationshipQuery.objectIds = objectIds;
+        relationshipQuery.relationshipId = relationshipId;
+        relationshipQuery.outFields = ['*'];
+        relationshipQuery.returnGeometry = true;
+        relationshipQuery.outSpatialReference = this.map.spatialReference;
+        return queryTask.executeRelationshipQuery(relationshipQuery);
+      },
+
+      _getCurrentRelationships: function() {
         var currentAttrs = this.getCurrentAttrs();
         return currentAttrs.queryTr.layerInfo.relationships || [];
       },
 
       //{id,name,relatedTableId}
       //relationshipId is the id attribute
-      _getRelationshipInfo: function(relationshipId){
+      _getRelationshipInfo: function(relationshipId) {
         var relationships = this._getCurrentRelationships();
-        for(var i = 0; i < relationships.length; i++){
-          if(relationships[i].id === relationshipId){
+        for (var i = 0; i < relationships.length; i++) {
+          if (relationships[i].id === relationshipId) {
             return relationships[i];
           }
         }
         return null;
       },
 
-      _getRelationshipLyaerInfo: function(relatedTableId){
+      _getRelationshipLayerInfo: function(relatedTableId) {
         var currentAttrs = this.getCurrentAttrs();
         var layerInfo = currentAttrs.relationshipLayerInfos[relatedTableId];
         return layerInfo;
       },
 
-      _tryLocaleNumber: function(value){
+      _tryLocaleNumber: function(value) {
         var result = value;
-        if(esriLang.isDefined(value) && isFinite(value)){
-          try{
+        if (esriLang.isDefined(value) && isFinite(value)) {
+          try {
             //if pass "abc" into localizeNumber, it will return null
             var a = jimuUtils.localizeNumber(value);
-            if(typeof a === "string"){
+            if (typeof a === "string") {
               result = a;
             }
-          }catch(e){
+          } catch (e) {
             console.error(e);
           }
         }
@@ -561,25 +734,27 @@ define([
         return result;
       },
 
-      _showQueryErrorMsg: function(/* optional */ msg){
-        new Message({message: msg || this.nls.queryError});
+      _showQueryErrorMsg: function( /* optional */ msg) {
+        new Message({
+          message: msg || this.nls.queryError
+        });
       },
 
-      _onResultsTableClicked: function(event){
+      _onResultsTableClicked: function(event) {
         var target = event.target || event.srcElement;
-        if(!html.isDescendant(target, this.resultsTable)){
+        if (!html.isDescendant(target, this.resultsTable)) {
           return;
         }
 
-        if(html.hasClass(target, 'related-table-btn')){
-          this._onRelatedTableButtonClicked(target);
+        if (html.hasClass(target, 'related-table-btn')) {
+          this._onSingleRelatedTableButtonClicked(target);
           return;
         }
 
-        var tr = jimuUtils.getAncestorDom(target, lang.hitch(this, function(dom){
+        var tr = jimuUtils.getAncestorDom(target, lang.hitch(this, function(dom) {
           return html.hasClass(dom, 'query-result-item');
         }), this.resultsTbody);
-        if(!tr){
+        if (!tr) {
           return;
         }
 
@@ -588,27 +763,27 @@ define([
         html.addClass(tr, 'jimu-state-active');
         var feature = tr.feature;
         var geometry = feature.geometry;
-        if(geometry){
+        if (geometry) {
           //var infoContent = tr.infoTemplateContent;
           var geoType = geometry.type;
           var centerPoint, extent;
           var def = null;
 
-          if(geoType === 'point' || geoType === 'multipoint'){
-            var singlePointFlow = lang.hitch(this, function(){
+          if (geoType === 'point' || geoType === 'multipoint') {
+            var singlePointFlow = lang.hitch(this, function() {
               def = new Deferred();
               var maxLevel = this.map.getNumLevels();
               var currentLevel = this.map.getLevel();
               var level2 = Math.floor(maxLevel * 2 / 3);
               var zoomLevel = Math.max(currentLevel, level2);
-              if(this.map.getMaxZoom() >= 0){
+              if (this.map.getMaxZoom() >= 0) {
                 //use tiled layer as base map
-                this.map.setLevel(zoomLevel).then(lang.hitch(this, function(){
-                  this.map.centerAt(centerPoint).then(lang.hitch(this, function(){
+                this.map.setLevel(zoomLevel).then(lang.hitch(this, function() {
+                  this.map.centerAt(centerPoint).then(lang.hitch(this, function() {
                     def.resolve();
                   }));
                 }));
-              }else{
+              } else {
                 //use dynamic layer
                 this.map.centerAt(centerPoint).then(lang.hitch(this, function() {
                   def.resolve();
@@ -616,45 +791,45 @@ define([
               }
             });
 
-            if(geoType === 'point'){
+            if (geoType === 'point') {
               centerPoint = geometry;
               singlePointFlow();
-            }else if(geoType === 'multipoint'){
-              if(geometry.points.length === 1){
+            } else if (geoType === 'multipoint') {
+              if (geometry.points.length === 1) {
                 centerPoint = geometry.getPoint(0);
                 singlePointFlow();
-              }else if(geometry.points.length > 1){
+              } else if (geometry.points.length > 1) {
                 extent = geometry.getExtent();
-                if(extent){
+                if (extent) {
                   extent = extent.expand(1.4);
                   centerPoint = geometry.getPoint(0);
                   def = this.map.setExtent(extent);
                 }
               }
             }
-          }else if(geoType === 'polyline'){
+          } else if (geoType === 'polyline') {
             extent = geometry.getExtent();
             extent = extent.expand(1.4);
             centerPoint = extent.getCenter();
             def = this.map.setExtent(extent);
-          }else if(geoType === 'polygon'){
+          } else if (geoType === 'polygon') {
             extent = geometry.getExtent();
             extent = extent.expand(1.4);
             centerPoint = extent.getCenter();
             def = this.map.setExtent(extent);
-          }else if(geoType === 'extent'){
+          } else if (geoType === 'extent') {
             extent = geometry;
             extent = extent.expand(1.4);
             centerPoint = extent.getCenter();
             def = this.map.setExtent(extent);
           }
 
-          if(def){
-            def.then(lang.hitch(this, function(){
-              if(typeof this.map.infoWindow.setFeatures === 'function'){
+          if (def) {
+            def.then(lang.hitch(this, function() {
+              if (typeof this.map.infoWindow.setFeatures === 'function') {
                 this.map.infoWindow.setFeatures([feature]);
               }
-              if(typeof this.map.infoWindow.reposition === 'function'){
+              if (typeof this.map.infoWindow.reposition === 'function') {
                 this.map.infoWindow.reposition();
               }
               this.map.infoWindow.show(centerPoint);
@@ -663,10 +838,10 @@ define([
         }
       },
 
-      _hideInfoWindow:function(){
-        if(this.map && this.map.infoWindow){
+      _hideInfoWindow: function() {
+        if (this.map && this.map.infoWindow) {
           this.map.infoWindow.hide();
-          if(typeof this.map.infoWindow.setFeatures === 'function'){
+          if (typeof this.map.infoWindow.setFeatures === 'function') {
             this.map.infoWindow.setFeatures([]);
           }
         }
@@ -674,14 +849,14 @@ define([
 
       /* ----------------------------operations-------------------------------- */
 
-      _getFeatureSet: function(){
+      _getFeatureSet: function() {
         var layer = this.currentAttrs.query.resultLayer;
         var featureSet = new FeatureSet();
         featureSet.fields = lang.clone(layer.fields);
         featureSet.features = [].concat(layer.graphics);
         featureSet.geometryType = layer.geometryType;
         featureSet.fieldAliases = {};
-        array.forEach(featureSet.fields, lang.hitch(this, function(fieldInfo){
+        array.forEach(featureSet.fields, lang.hitch(this, function(fieldInfo) {
           var fieldName = fieldInfo.name;
           var fieldAlias = fieldInfo.alias || fieldName;
           featureSet.fieldAliases[fieldName] = fieldAlias;
@@ -689,24 +864,29 @@ define([
         return featureSet;
       },
 
-      _onBtnMenuClicked: function(evt){
+      _onBtnMenuClicked: function(evt) {
         var position = html.position(evt.target || evt.srcElement);
         var featureSet = this._getFeatureSet();
         var currentAttrs = this.getCurrentAttrs();
         var layer = currentAttrs.query.resultLayer;
-        this.featureActionManager.getSupportedActions(featureSet, layer).then(lang.hitch(this, function(actions){
-          array.forEach(actions, lang.hitch(this, function(action){
+        this.featureActionManager.getSupportedActions(featureSet, layer).then(lang.hitch(this, function(actions) {
+          array.forEach(actions, lang.hitch(this, function(action) {
             action.data = featureSet;
           }));
 
-          if(!currentAttrs.config.enableExport){
-            var exportActionNames = ['ExportToCSV', 'ExportToFeatureCollection', 'ExportToGeoJSON'];
-            actions = array.filter(actions, lang.hitch(this, function(action){
+          if (!currentAttrs.config.enableExport) {
+            var exportActionNames = [
+              'ExportToCSV',
+              'ExportToFeatureCollection',
+              'ExportToGeoJSON',
+              'SaveToMyContent'
+            ];
+            actions = array.filter(actions, lang.hitch(this, function(action) {
               return exportActionNames.indexOf(action.name) < 0;
             }));
           }
 
-          actions = array.filter(actions, lang.hitch(this, function(action){
+          actions = array.filter(actions, lang.hitch(this, function(action) {
             return action.name !== 'CreateLayer';
           }));
 
@@ -722,17 +902,140 @@ define([
           removeAction.data = featureSet;
           actions.push(removeAction);
 
+          var relatedRecordAction = this._getRelatedTableAction(featureSet);
+          if (relatedRecordAction) {
+            actions.push(relatedRecordAction);
+          }
+
+          var symbolAction = this._getSymbolAction(featureSet);
+          if (symbolAction) {
+            actions.push(symbolAction);
+          }
+
           this.popupMenu.setActions(actions);
           this.popupMenu.show(position);
         }));
       },
 
-      _removeResult: function(){
+      _getObjectIdField: function() {
+        return this.currentAttrs.config.objectIdField;
+      },
+
+      _getSymbolAction: function(featureSet) {
+        var action = null;
+        if (this.currentAttrs.query.resultLayer.renderer && this.currentAttrs.config.canModifySymbol) {
+          var features = featureSet && featureSet.features;
+          action = new BaseFeatureAction({
+            name: "ChangeSymbol",
+            label: this.nls.changeSymbol,
+            data: features,
+            iconClass: 'icon-edit-symbol',
+            iconFormat: 'svg',
+            map: this.map,
+            onExecute: lang.hitch(this, this._showSymbolChooser)
+          });
+        }
+        return action;
+      },
+
+      _showSymbolChooser: function() {
+        var resultLayer = this.currentAttrs.query.resultLayer;
+        var renderer = resultLayer.renderer;
+        var args = {};
+        var symbol = renderer.defaultSymbol || renderer.symbol;
+        if (symbol) {
+          args.symbol = symbol;
+        } else {
+          var symbolType = jimuUtils.getSymbolTypeByGeometryType(resultLayer.geometryType);
+          args.type = symbolType;
+        }
+        var symbolChooser = new SymbolChooser(args);
+        var popup = new Popup({
+          width: 380,
+          autoHeight: true,
+          titleLabel: this.nls.changeSymbol,
+          content: symbolChooser,
+          onClose: lang.hitch(this, function() {
+            symbolChooser.destroy();
+            symbolChooser = null;
+            popup = null;
+          }),
+          buttons: [{
+            label: window.jimuNls.common.ok,
+            onClick: lang.hitch(this, function() {
+              var symbol = symbolChooser.getSymbol();
+              this._updateSymbol(symbol);
+              popup.close();
+            })
+          }, {
+            label: window.jimuNls.common.cancel,
+            onClick: lang.hitch(this, function() {
+              popup.close();
+            })
+          }]
+        });
+      },
+
+      _updateSymbol: function(symbol) {
+        var renderer = new SimpleRenderer(symbol);
+        var resultLayer = this.currentAttrs.query.resultLayer;
+        resultLayer.setRenderer(renderer);
+        resultLayer.redraw();
+        var symbolNodes = query(".symbol", this.resultsTable);
+        array.forEach(symbolNodes, lang.hitch(this, function(oldSymbolNode) {
+          var parent = oldSymbolNode.parentElement;
+          html.destroy(oldSymbolNode);
+          var newSymbolNode = jimuSymbolUtils.createSymbolNode(symbol, {
+            width: 32,
+            height: 32
+          });
+          if (newSymbolNode) {
+            html.place(newSymbolNode, parent);
+          }
+        }));
+      },
+
+      _getRelatedTableAction: function(featureSet) {
+        var action = null;
+        var features = featureSet && featureSet.features;
+        var relationships = this._getCurrentRelationships();
+        var objectIdField = this._getObjectIdField();
+        if (objectIdField && features.length > 0 && relationships && relationships.length > 0 &&
+            this._isWebMapShowRelatedRecordsEnabled()) {
+          action = new BaseFeatureAction({
+            iconClass: 'icon-show-related-record',
+            icon: '',
+            data: featureSet,
+            label: this.nls.showAllRelatedRecords,
+            onExecute: lang.hitch(this, function() {
+              this._showMultipleRelatedRecords();
+              var def = new Deferred();
+              def.resolve();
+              return def;
+            }),
+            getIcon: function() {
+              return "";
+            }
+          });
+        }
+        return action;
+      },
+
+      _isWebMapShowRelatedRecordsEnabled: function(){
+        //#2887
+        var popupInfo = this.currentAttrs.config.popupInfo;
+        if(popupInfo.relatedRecordsInfo){
+          return popupInfo.relatedRecordsInfo.showRelatedRecords !== false;
+        }
+        return true;
+      },
+
+      _removeResult: function() {
         this.queryWidget.removeSingleQueryResult(this);
         this._hideInfoWindow();
       },
 
-      _getAvailableWidget: function(widgetName){
+      _getAvailableWidget: function(widgetName) {
         var appConfig = this.queryWidget.appConfig;
         var attributeTableWidget = appConfig.getConfigElementsByName(widgetName)[0];
         if (attributeTableWidget && attributeTableWidget.visible) {
@@ -741,10 +1044,10 @@ define([
         return null;
       },
 
-      _openAttributeTable: function(){
+      _openAttributeTable: function() {
         var attributeTableWidget = this._getAvailableWidget("AttributeTable");
 
-        if(!attributeTableWidget){
+        if (!attributeTableWidget) {
           return;
         }
 

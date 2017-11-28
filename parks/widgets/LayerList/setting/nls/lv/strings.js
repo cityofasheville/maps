@@ -3,9 +3,9 @@ define({
   "controlPopupMenuTitle": "Izvēlieties, kuras darbības tiks rādītas slāņa konteksta izvēlnē.",
   "zoomto": "Pietuvināt",
   "transparency": "Caurspīdīgums",
-  "controlPopup": "Iespējot/atspējot uznirstošo logu",
+  "controlPopup": "Aktivizēt/deaktivizēt uznirstošo logu",
   "moveUpAndDown": "Pārvietot uz augšu/uz leju",
-  "attributeTable": "Atvērt atribūtu tabulu",
-  "url": "Apraksts/Rādīt detalizētu vienuma informāciju/Lejupielādēt",
+  "attributeTable": "Skatīt atribūtu tabulā",
+  "url": "Apraksts/Rādīt detalizētu vienības informāciju/Lejupielādēt",
   "layerSelectorTitle": "Izvēlieties, kuri slāņi tiks rādīti sarakstā."
 });

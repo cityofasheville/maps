@@ -21,7 +21,7 @@ define({
   "Kilometers": "Kilometri",
   "Decimeters": "Decimetri",
   "Decimal_Degrees": "Grade",
-  "Degree_Minutes_Seconds": "Grade Minute Secunde",
+  "Degree_Minutes_Seconds": "Grade minute secunde",
   "MGRS": "MGRS",
   "USNG": "USNG"
 });

@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 Esri. All Rights Reserved.
+// Copyright © 2014 - 2016 Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ define([
     'jimu/BaseWidget',
     'jimu/portalUtils',
     'jimu/PanelManager',
-    "jimu/SpatialReference/wkidUtils",
     'jimu/portalUrlUtils',
     'jimu/utils',
     "esri/dijit/Basemap",
@@ -33,7 +32,8 @@ define([
     "dojo/query",
     'dojo/on',
     'dojo/promise/all',
-    './utils'
+    './utils',
+    'jimu/dijit/LoadingIndicator'
   ],
   function(
     declare,
@@ -42,7 +42,6 @@ define([
     BaseWidget,
     portalUtils,
     PanelManager,
-    SRUtils,
     portalUrlUtils,
     jimuUtils,
     Basemap,
@@ -75,16 +74,18 @@ define([
       _responsive: function() {
         // the default width of esriBasemapGalleryNode is 85px,
         // margin-left is 10px, margin-right is 10px;
-        var paneNode = query('#' + this.id)[0];
-        var width = html.getStyle(paneNode, 'width');
-        var column      = parseInt(width / 105, 10);
-        if (column > 0) {
-          var margin      = width % 105;
-          var addWidth    = parseInt(margin / column, 10);
-          query('.esriBasemapGalleryNode', this.id).forEach(function(node) {
-            html.setStyle(node, 'width', 85 + addWidth + 'px');
-          });
-        }
+        setTimeout(lang.hitch(this, function() {
+          var paneNode = query('#' + this.id)[0];
+          var width = html.getStyle(paneNode, 'width');
+          var column      = parseInt(width / 105, 10);
+          if (column > 0) {
+            var margin      = width % 105;
+            var addWidth    = parseInt(margin / column, 10);
+            query('.esriBasemapGalleryNode', this.id).forEach(function(node) {
+              html.setStyle(node, 'width', 85 + addWidth + 'px');
+            });
+          }
+        }), 100);
       },
 
       initBasemaps: function() {
@@ -92,10 +93,10 @@ define([
         var portalSelfDef;
         var config = lang.clone(this.config.basemapGallery);
 
+        this.loadingShelter.show();
         //load form portal or config file.
-        if (!config.basemaps || config.basemaps.length === 0) {
-          basemapsDef = utils._loadPortalBaseMaps(this.appConfig.portalUrl,
-                                                  this.map.spatialReference);
+        if (config.mode === 1) {
+          basemapsDef = utils._loadPortalBaseMaps(this.appConfig.portalUrl, this.map);
         } else {
           basemapsDef = new Deferred();
           basemapsDef.resolve(config.basemaps);
@@ -117,30 +118,20 @@ define([
               return false;
             }
             var bingKeyResult;
-            var spatialReferenceResult;
             // first, filter bingMaps
-            if(result.portalSelf.bingKey) {
-              // has bingKey, can add any bing map or not;
-              bingKeyResult = true;
-            } else if(!utils.isBingMap(basemap)) {
+            if(!utils.isBingMap(basemap)) {
               // do not have bingKey and basemap is not bingMap.
+              bingKeyResult = true;
+            } else if(result.portalSelf.bingKey) {
+              // has bingKey, can add any bing map or not;
               bingKeyResult = true;
             } else {
               // do not show basemap if do not has bingKey as well as basemap is bingMap.
               bingKeyResult = false;
             }
 
-            // second, filter spatialReference.
-            // only show basemaps who has same spatialReference with current map.
-            if (SRUtils.isSameSR(this.map.spatialReference.wkid,
-                                  basemap.spatialReference.wkid)) {
-              spatialReferenceResult = true;
-            } else {
-              spatialReferenceResult = false;
-            }
-
             // basemap does not have title means basemap load failed.
-            return basemap.title && bingKeyResult && spatialReferenceResult;
+            return basemap.title && bingKeyResult;
           }, this);
 
           // if basemap of current webmap is not include, so add it.
@@ -163,7 +154,8 @@ define([
             if (!basemaps[i].thumbnailUrl) {
               basemaps[i].thumbnailUrl = this.folderUrl + "images/default.jpg";
             } else {
-              if (basemaps[i].thumbnailUrl.indexOf('//') === 0) {
+              var reg = /^(https?:)?\/\//;
+              if (reg.test(basemaps[i].thumbnailUrl)) {
                 basemaps[i].thumbnailUrl = basemaps[i].thumbnailUrl +
                                            utils.getToken(this.appConfig.portalUrl);
               } else {
@@ -194,6 +186,8 @@ define([
                       "selection-change",
                       lang.hitch(this, this.selectionChange)));
           this._responsive();
+
+          this.loadingShelter.hide();
         }));
       },
 
@@ -214,16 +208,42 @@ define([
       },
 
       selectionChange: function() {
-        // var basemap = this.basemapGallery.getSelected();
-        // var layers = basemap.getLayers();
-        // if (layers.length > 0) {
-        //   this.publishData(layers);
-        // }
-        if (this.isOnScreen) {
+        this.updateExtent();
+
+        if (this.gid === 'widgetOnScreen') {
           PanelManager.getInstance().closePanel(this.id + '_panel');
         }
-      }
+      },
 
+      updateExtent: function() {
+        if (this.map.getNumLevels() > 0) {
+          // Set scale to nearest level of current basemap layer
+          var basemap = this.basemapGallery.getSelected();
+          var layers = basemap.getLayers();
+          var currentLod = this.map.__tileInfo.lods[this.map.getLevel()];
+          var layer, tileInfo;
+
+          if (layers.length > 0) {
+            layer = layers[0];
+            tileInfo = layer.tileInfo ||
+              (layer.serviceInfoResponse && layer.serviceInfoResponse.tileInfo);
+            if (tileInfo && currentLod) {
+              // normalize scale
+              var mapScale = currentLod.scale / this.map.__tileInfo.dpi;
+              var bestScale;
+              array.forEach(tileInfo.lods, function(lod) {
+                var scale = lod.scale / tileInfo.dpi;
+                if (!bestScale || Math.abs(scale - mapScale) < Math.abs(bestScale - mapScale)){
+                  bestScale = scale;
+                }
+              });
+              if (Math.abs(bestScale - mapScale) / mapScale > (1 / this.map.width)) {
+                this.map.setScale(bestScale * tileInfo.dpi);
+              }
+            }
+          }
+        }
+      }
     });
 
     return clazz;

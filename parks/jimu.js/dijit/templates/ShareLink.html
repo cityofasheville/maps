@@ -1,15 +1,16 @@
 <div class="shareLink">
   <div class="shareLinkOptionsWrapper displaynone">
     <div data-dojo-attach-point="backBtn" class="backBtn"></div>
+    <div class="linkOptionsTitle">${nls.linkOptions}</div>
     <div class="subTitle">${nls.linkOptionsUrlParameters}</div>
     <form data-id="shareOptionsRadios" data-dojo-attach-point="shareOptionsRadios">
       <fieldset>
         <div class="optionsRow">
-          <input data-dojo-attach-point="currentMapExtent" class="shareRadios jimu-float-leading" type="radio" name="radios" data-id="currentMapExtent" data-dojo-type="dijit.form.RadioButton" data-dojo-props='checked:true' checked>
+          <input data-dojo-attach-point="currentMapExtent" class="shareRadios jimu-float-leading jimu-radio-btn" type="radio" name="radios" data-id="currentMapExtent" data-dojo-type="dijit.form.RadioButton" data-dojo-props='checked:true' checked>
           <div class="labels" data-forid="currentMapExtent">${nls.currentMapExtent}</div>
         </div>
         <div class="optionsRow" data-dojo-attach-point="chooseCenterWithLevelRow">
-          <input data-dojo-attach-point="chooseCenterWithLevel" class="shareRadios jimu-float-leading" type="radio" name="radios" data-id="chooseCenterWithLevel" data-dojo-type="dijit.form.RadioButton">
+          <input data-dojo-attach-point="chooseCenterWithLevel" class="shareRadios jimu-float-leading jimu-radio-btn" type="radio" name="radios" data-id="chooseCenterWithLevel" data-dojo-type="dijit.form.RadioButton">
           <div class="labels" data-forid="chooseCenterWithLevel">${nls.chooseCenterWithLevel}</div>
           <div class="optionsMore chooseCenterWithLevel_optionsMore">
             <div data-dojo-attach-point="chooseCenterWithLevel_marker" class="markers"></div>
@@ -17,7 +18,7 @@
           </div>
         </div>
         <div class="optionsRow">
-          <input data-dojo-attach-point="chooseCenterWithScale" class="shareRadios jimu-float-leading" type="radio" name="radios" data-id="chooseCenterWithScale" data-dojo-type="dijit.form.RadioButton">
+          <input data-dojo-attach-point="chooseCenterWithScale" class="shareRadios jimu-float-leading jimu-radio-btn" type="radio" name="radios" data-id="chooseCenterWithScale" data-dojo-type="dijit.form.RadioButton">
           <div class="labels">${nls.chooseCenterWithScale}</div>
           <div class="optionsMore chooseCenterWithScale_optionsMore">
             <div data-dojo-attach-point="chooseCenterWithScale_marker" class="markers"></div>
@@ -26,7 +27,7 @@
         </div>
 
         <div class="optionsRow" data-dojo-attach-point="findLocationRow">
-          <input data-dojo-attach-point="findLocation" class="shareRadios jimu-float-leading" type="radio" name="radios" data-id="findLocation" data-dojo-type="dijit.form.RadioButton">
+          <input data-dojo-attach-point="findLocation" class="shareRadios jimu-float-leading jimu-radio-btn" type="radio" name="radios" data-id="findLocation" data-dojo-type="dijit.form.RadioButton">
           <div class="labels">${nls.findLocation}</div>
           <div class="optionsMore findLocation_optionsMore">
             <div class="moreOptions">
@@ -35,7 +36,7 @@
           </div>
         </div>
         <div class="optionsRow">
-          <input data-dojo-attach-point="queryFeature" class="shareRadios jimu-float-leading" type="radio" name="radios" data-id="queryFeature" data-dojo-type="dijit.form.RadioButton">
+          <input data-dojo-attach-point="queryFeature" class="shareRadios jimu-float-leading jimu-radio-btn" type="radio" name="radios" data-id="queryFeature" data-dojo-type="dijit.form.RadioButton">
           <div class="labels">${nls.queryFeature}</div>
           <div class="optionsMore queryFeature_optionsMore">
             <div class="moreOptions">
@@ -46,7 +47,7 @@
           </div>
         </div>
         <div class="optionsRow">
-          <input data-dojo-attach-point="addMarker" class="shareRadios jimu-float-leading" type="radio" name="radios" data-id="addMarker" data-dojo-type="dijit.form.RadioButton">
+          <input data-dojo-attach-point="addMarker" class="shareRadios jimu-float-leading jimu-radio-btn" type="radio" name="radios" data-id="addMarker" data-dojo-type="dijit.form.RadioButton">
           <div class="labels">${nls.addMarker}</div>
           <div class="optionsMore addMarker_optionsMore">
             <div data-dojo-attach-point="addMarker_marker" class="markers"></div>

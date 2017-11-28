@@ -5,7 +5,7 @@ define({
   "queryParams": "Opzioni",
   "parameters": "OPZIONI",
   "queries": "INTERROGAZIONI",
-  "apply": "APPLICA",
+  "apply": "Applica",
   "queryResults": "Risultati",
   "clear": "Cancella",
   "noResults": "Nessuna feature trovata.",
@@ -76,12 +76,15 @@ define({
   "back": "Indietro",
   "execute": "Esegui",
   "zoomTo": "Zoom a",
-  "openAttributeTable": "Apri in AttributeTable",
+  "openAttributeTable": "Visualizza nella tabella degli attributi",
   "noResult": "Nessun risultato.",
   "noTask": "Nessuna attività.",
   "removeThisResult": "Rimuovi questo risultato",
   "attributeCriteira": "Criteri attributo",
   "spatialFilter": "Filtro spaziale",
   "value": "VALUE",
-  "noAttributeSpatialFilterTip": "Nessun filtro definito. Tutte le feature verranno restituite."
+  "noAttributeSpatialFilterTip": "Nessun filtro definito. Tutte le feature verranno restituite.",
+  "showAllRelatedRecords": "Mostra tutti i record correlati",
+  "changeSymbol": "Cambia simbolo",
+  "queryCriteira": "Criteri di interrogazione"
 });

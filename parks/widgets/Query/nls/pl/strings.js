@@ -5,7 +5,7 @@ define({
   "queryParams": "Opcje",
   "parameters": "OPCJE",
   "queries": "ZAPYTANIA",
-  "apply": "ZASTOSUJ",
+  "apply": "Zastosuj",
   "queryResults": "Wyniki",
   "clear": "Wyczyść",
   "noResults": "Nie odnaleziono żadnego obiektu.",
@@ -76,12 +76,15 @@ define({
   "back": "Powrót",
   "execute": "Wykonaj",
   "zoomTo": "Powiększ do",
-  "openAttributeTable": "Otwórz w tabeli atrybutów",
+  "openAttributeTable": "Wyświetl w tabeli atrybutów",
   "noResult": "Brak wyniku.",
   "noTask": "Brak zadania.",
   "removeThisResult": "Usuń ten wynik",
   "attributeCriteira": "Kryteria atrybutowe",
   "spatialFilter": "Filtr przestrzenny",
   "value": "WARTOŚĆ",
-  "noAttributeSpatialFilterTip": "Nie zdefiniowano filtrów. Zostaną zwrócone wszystkie obiekty."
+  "noAttributeSpatialFilterTip": "Nie zdefiniowano filtrów. Zostaną zwrócone wszystkie obiekty.",
+  "showAllRelatedRecords": "Pokaż wszystkie powiązane rekordy",
+  "changeSymbol": "Zmień symbol",
+  "queryCriteira": "Kryteria zapytania"
 });

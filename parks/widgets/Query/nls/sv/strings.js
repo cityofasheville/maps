@@ -5,7 +5,7 @@ define({
   "queryParams": "Alternativ",
   "parameters": "ALTERNATIV",
   "queries": "FRÅGOR",
-  "apply": "TILLÄMPA",
+  "apply": "Verkställ",
   "queryResults": "Resultat",
   "clear": "Rensa",
   "noResults": "Inget geoobjekt hittades.",
@@ -76,12 +76,15 @@ define({
   "back": "Bakom",
   "execute": "Utför",
   "zoomTo": "Zooma till",
-  "openAttributeTable": "Öppna i AttributeTable",
+  "openAttributeTable": "Visa i attributtabell",
   "noResult": "Inget resultat.",
   "noTask": "Ingen uppgift.",
   "removeThisResult": "Ta bort det här resultatet",
   "attributeCriteira": "Attributkriterier",
   "spatialFilter": "Geografiskt filter",
   "value": "VÄRDE",
-  "noAttributeSpatialFilterTip": "Inga filter har definierats. Alla geoobjekt kommer att returneras."
+  "noAttributeSpatialFilterTip": "Inga filter har definierats. Alla geoobjekt kommer att returneras.",
+  "showAllRelatedRecords": "Visa alla relaterade poster",
+  "changeSymbol": "Byta symbol",
+  "queryCriteira": "Frågekriterier"
 });

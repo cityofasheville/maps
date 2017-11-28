@@ -1,15 +1,15 @@
 define({
   "visible": "maksimize edici",
-  "minWidth": "Min Genişlik",
-  "minHeight": "Min Yükseklik",
-  "maxWidth": "Maks Genişlik",
-  "maxHeight": "Maks Yükseklik",
+  "minWidth": "Min genişlik",
+  "minHeight": "Min yükseklik",
+  "maxWidth": "Maks genişlik",
+  "maxHeight": "Maks yükseklik",
   "minText": "Minimum",
   "maxText": "maksimum",
   "attachText": "Bu gerecin haritanın hangi köşesine iliştirileceğini belirtin.",
   "expandText": "İlk olarak gereci genişlet",
-  "topLeft": "Üst Sol",
-  "topRight": "Üst Sağ",
-  "bottomLeft": "Alt Sol",
-  "bottomRight": "Alt Sağ"
+  "topLeft": "Sol üst",
+  "topRight": "Sağ üst",
+  "bottomLeft": "Sol alt",
+  "bottomRight": "Sağ alt"
 });

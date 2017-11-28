@@ -6,6 +6,7 @@ define({
     "yes": "Да",
     "no": "Нет",
     "next": "Далее",
+    "previous": "Предыдущий",
     "back": "Назад",
     "selected": "выбрано",
     "name": "Имя",
@@ -48,11 +49,34 @@ define({
     "scene": "Сцена",
     "reset": "Сбросить",
     "icon": "Значок",
+    "folder": "Папка",
     "share": "Опубликовать",
     "view": "Просмотреть",
     "newText": "Новый",
     "edit": "Редактировать",
-    "wkid": "WKID"
+    "wkid": "WKID",
+    "table": "Таблица",
+    "zoomIn": "Увеличить",
+    "zoomOut": "Уменьшить",
+    "continue1": "Продолжить",
+    "longitude": "Долгота",
+    "latitude": "Широта",
+    "custom": "Пользовательский",
+    "image": "Изображение",
+    "font": "Шрифт",
+    "text": "Текст",
+    "all": "все",
+    "number": "Число",
+    "percentage": "Процент",
+    "unit": "Единица измерения",
+    "thousand": "Тысяча",
+    "billion": "Миллиард",
+    "million": "Миллион",
+    "none": "Нет",
+    "field": "Поле",
+    "operation": "Операция",
+    "disableUpdateGeometry": "DisableUpdateGeometry",
+    "preview": "Просмотр"
   },
   "errorCode": "Код",
   "errorMessage": "Сообщение",
@@ -70,13 +94,13 @@ define({
     "stddev": "Среднеквадратическое отклонение"
   },
   "symbolChooser": {
-    "preview": "Просмотр",
+    "preview": "Предварительный просмотр",
     "basic": "Базовый",
     "arrows": "Стрелки",
     "business": "Бизнес",
     "cartographic": "Картография",
     "nationalParkService": "Служба национальных парков",
-    "outdoorRecreation": "Отдых на свежем воздухе",
+    "outdoorRecreation": "Отдых на природе",
     "peoplePlaces": "Общественные места",
     "safetyHealth": "Безопасность, здоровье",
     "shapes": "Формы",
@@ -95,8 +119,11 @@ define({
     "solid": "Заливка",
     "dash": "Тире",
     "dot": "Точка",
-    "dashDot": "Тире-точка",
-    "dashDotDot": "Тире-точка-точка"
+    "dashDot": "Штрих-пунктир",
+    "dashDotDot": "Тире и две точки",
+    "customImage": "Пользовательское изображение",
+    "chooseFile": "Выберите файл",
+    "noFileChoosen": "Файл не выбран."
   },
   "transparency": {
     "opaque": "Непрозрачный",
@@ -109,7 +136,7 @@ define({
     "uniqueSymbol": "Уникальные символы",
     "color": "Цвет",
     "size": "Размер",
-    "toShow": "Отображать",
+    "toShow": "Показать",
     "colors": "Цвета",
     "classes": "Классы",
     "symbolSize": "Размер символа",
@@ -125,13 +152,13 @@ define({
     "point": "Точка",
     "line": "Линия",
     "polyline": "Линия",
-    "freehandPolyline": "Линия произвольной формы",
+    "freehandPolyline": "Произвольная полилиния",
     "triangle": "Треугольник",
     "extent": "Экстент",
     "circle": "Круг",
     "ellipse": "Эллипс",
     "polygon": "Полигон",
-    "freehandPolygon": "Полигон произвольной формы",
+    "freehandPolygon": "Произвольный полигон",
     "text": "Текст",
     "clear": "Сброс"
   },
@@ -152,7 +179,7 @@ define({
     "loading": "Загрузка"
   },
   "basicServiceBrowser": {
-    "noServicesFound": "Сервисы не были найдены.",
+    "noServicesFound": "Сервисы не найдены.",
     "unableConnectTo": "Не удается подключиться к",
     "invalidUrlTip": "Введенный URL-адрес недопустим или недоступен."
   },
@@ -161,7 +188,7 @@ define({
     "unableConnectTo": "Не удается подключиться к"
   },
   "layerServiceBrowser": {
-    "noServicesFound": "Картографические сервисы или сервисы пространственных объектов не найдены",
+    "noServicesFound": "Картографические сервисы или сервисы пространственных объектов не найдены.",
     "unableConnectTo": "Не удается подключиться к"
   },
   "basicServiceChooser": {
@@ -176,11 +203,11 @@ define({
     "invalidUrl": "Недопустимый URL-адрес."
   },
   "filterBuilder": {
-    "addAnotherExpression": "Добавить выражение фильтра",
-    "addSet": "Добавить набор выражений",
+    "addAnotherExpression": "Добавить выражение",
+    "addSet": "Добавить набор",
     "matchMsg": "Получить объекты слоя, которые соответствуют ${any_or_all} из следующих выражений",
     "matchMsgSet": "${any_or_all} из следующих выражений в этом наборе равно true",
-    "all": "все",
+    "all": "Все",
     "any": "Любые",
     "value": "Значение",
     "field": "Поле",
@@ -202,9 +229,14 @@ define({
     "dateOperatorIsNotOn": "не соответствует",
     "dateOperatorIsBefore": "перед",
     "dateOperatorIsAfter": "после",
+    "dateOperatorIsOnOrBefore": "соответствует или до",
+    "dateOperatorIsOnOrAfter": "соответствует или после",
+    "dateOperatorMinutes": "минуты",
+    "dateOperatorHours": "часы",
     "dateOperatorDays": "дней",
     "dateOperatorWeeks": "недель",
     "dateOperatorMonths": "месяцев",
+    "dateOperatorYears": "года",
     "dateOperatorInTheLast": "в последние",
     "dateOperatorNotInTheLast": "не в последние",
     "dateOperatorIsBetween": "между",
@@ -234,47 +266,52 @@ define({
       "invalidSQL": "Некорректное sql выражение.",
       "cantParseSQL": "Не возможно разобрать sql выражение."
     },
-    "caseSensitive": "Учитывать регистр",
+    "caseSensitive": "Чувствительный к регистру",
     "notSupportCaseSensitiveTip": "Опубликованные сервисы не поддерживают запрос с чувствительностью к регистру.",
-    "setFilterTip": "Задайте корректный фильтр."
+    "setFilterTip": "Настройте фильтры правильно.",
+    "listValues": "Список значений",
+    "cascadeFilterTip": "Показывать значения только для предыдущих выражений фильтра.",
+    "noneCascadeFilterTip": "Все уникальные значения этого поля",
+    "previousCascadeFilterTip": "Значения предыдущих выражений фильтра",
+    "allCascadeFilterTip": "Значения всех остальных выражений фильтра"
   },
   "featureLayerSource": {
     "layer": "Слой",
     "browse": "Обзор",
-    "selectFromMap": "Выбрать с карты",
-    "selectFromPortal": "Добавить с Portal for ArcGIS",
-    "addServiceUrl": "Добавить URL-адрес сервиса",
+    "selectFromMap": "Карты",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "URL Сервиса",
     "inputLayerUrl": "URL-адрес входного слоя",
     "selectLayer": "Выбрать слой объектов на текущей карте.",
     "chooseItem": "Выбрать элемент слоя объектов.",
-    "setServiceUrl": "Введите URL-адрес сервиса объектов или картографического сервиса.",
-    "selectFromOnline": "Добавить с ArcGIS Online",
+    "setServiceUrl": "Введите URL сервиса объектов или картографического сервиса.",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Выберите векторный слой."
   },
   "queryableLayerSource": {
     "layer": "Слой",
     "browse": "Обзор",
-    "selectFromMap": "Выбрать с карты",
-    "selectFromPortal": "Добавить с Portal for ArcGIS",
-    "addServiceUrl": "Добавить URL-адрес сервиса",
+    "selectFromMap": "Карта",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "URL Сервиса",
     "inputLayerUrl": "URL-адрес входного слоя",
     "selectLayer": "Выбрать слой из текущей карты.",
     "chooseItem": "Выбрать элемент.",
     "setServiceUrl": "Ввести URL сервиса.",
-    "selectFromOnline": "Добавить с ArcGIS Online",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Выбор слоя."
   },
   "gpSource": {
-    "selectFromPortal": "Добавить с Portal for ArcGIS",
-    "addServiceUrl": "Добавить URL сервиса",
-    "selectFromOnline": "Добавить с ArcGIS Online",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "URL Сервиса",
+    "selectFromOnline": "ArcGIS Online",
     "setServiceUrl": "Введите URL-адрес сервиса геообработки.",
     "chooseItem": "Выберите элемент сервиса геообработки.",
     "chooseTask": "Выберите задачу геообработки."
   },
   "itemSelector": {
     "map": "Карта",
-    "selectWebMap": "Выбрать веб-карту",
+    "selectWebMap": "Выбор веб-карты",
     "addMapFromOnlineOrPortal": "Найти и добавить в приложение веб-карты из открытых ресурсов ArcGIS Online или собственных частных ресурсов ArcGIS Online или Portal.",
     "searchMapName": "Поиск по названию карты...",
     "searchNone": "Мы не смогли найти то, что вы искали. Пожалуйста, попробуйте снова.",
@@ -293,7 +330,11 @@ define({
     "owner": "владелец",
     "signInTo": "Войти в",
     "lastModified": "Последние изменения",
-    "moreDetails": "Подробнее"
+    "moreDetails": "Подробнее",
+    "mostRecent": "Самые свежие",
+    "mostViewed": "Самые просматриваемые",
+    "highestRated": "Самые рейтинговые",
+    "viewItemDetails": "Просмотр информации об элементе"
   },
   "featureLayerChooserFromPortal": {
     "notSupportQuery": "Сервис не поддерживает запросы."
@@ -313,16 +354,16 @@ define({
     "itemMoveDown": "Ниже",
     "itemDesc": "Описание",
     "itemDownload": "Загрузить",
-    "itemToAttributeTable": "Открыть таблицу атрибутов"
+    "itemToAttributeTable": "Просмотреть в таблице атрибутов"
   },
   "imageChooser": {
-    "unsupportReaderAPI": "TODO: Браузер не поддерживает API чтения файлов",
+    "unsupportReaderAPI": "Todo: Браузер не поддерживает API чтения файлов",
     "readError": "Не удалось считать файл.",
     "unknowError": "невозможно завершить операции",
     "invalidType": "Недопустимый тип файла.",
     "cropImage": "Обрезать изображение",
     "exceed": "Размер файла не может превышать 1024 КБ",
-    "enableFlash": "TODO: включите флеш.",
+    "enableFlash": "Активируйте Adobe Flash до того, как начнете поиск изображения.",
     "cropWaining": "Выберите фото размером как минимум ${width} x ${height} пикселов.",
     "toolTip": "Для получения наилучших результатов, изображение должно быть ${width} пикселов шириной и ${height} пикселов высотой. Изображения других размеров будут настроены. Допустимые форматы изображений: PNG, GIF и JPEG."
   },
@@ -347,17 +388,22 @@ define({
     "restoreMap": "Щелкните, чтобы сохранить заново экстент карты и видимость слоев в том виде, в котором вы их оставляете."
   },
   "featureActions": {
+    "featureActions": "Действия с объектами",
     "ZoomTo": "Приблизить к",
     "PanTo": "Переместить к",
     "Flash": "Подсветить",
     "ShowPopup": "Показать всплывающее окно",
     "CreateLayer": "Создать слой",
     "ShowStatistics": "Статистика...",
-    "ClearSelection": "Очистить выбранные объекты",
+    "ClearSelection": "Щелкните, чтобы очистить выборку слоя",
     "ExportToCSV": "Экспорт в файл CSV",
     "ShowSelectedFeature": "Показывать выбранные объекты",
     "ExportToFeatureCollection": "Экспорт в Коллекцию объектов",
-    "ExportToGeoJSON": "Экспорт в GeoJSON"
+    "ExportToGeoJSON": "Экспорт в GeoJSON",
+    "EditAttributes": "Редактирование атрибутов",
+    "AddMarker": "Добавить маркер",
+    "RemoveMarker": "Удалить маркер",
+    "SaveToMyContent": "Сохранить в Моих ресурсах"
   },
   "spatialFilterByFeatures": {
     "relatedLayer": "Связанный слой",
@@ -373,11 +419,37 @@ define({
   },
   "units": {
     "miles": "Мили",
+    "milesAbbr": "мили",
     "kilometers": "Километры",
+    "kilometersAbbr": "км",
     "feet": "Футы",
+    "feetAbbr": "футы",
     "meters": "Метры",
+    "metersAbbr": "м",
     "yards": "Ярды",
-    "nauticalMiles": "Морские мили"
+    "yardsAbbr": "ярды",
+    "acres": "Акры",
+    "acresAbbr": "акров",
+    "nauticalMiles": "Морские мили",
+    "nauticalMilesAbbr": "мор.миль",
+    "uSSurveyFeet": "Геодезические футы США",
+    "uSSurveyFeetAbbr": "ftUS",
+    "decimalDegree": "Десятичные градусы",
+    "decimalDegreeAbbr": "дг",
+    "degreeMinuteSeconds": "Градусы минуты секунды",
+    "degreeMinuteSecondsAbbr": "г-м-с",
+    "squareMiles": "Квадратные мили",
+    "squareMilesAbbr": "кв. мили",
+    "squareKilometer": "Квадратные километры",
+    "squareKilometerAbbr": "кв. км",
+    "squareFeet": "Квадратные футы",
+    "squareFeetAbbr": "кв.фт",
+    "squareMeters": "Квадратные метры",
+    "squareMetersAbbr": "кв.м",
+    "squareYards": "Квадратные ярды",
+    "squareYardsAbbr": "кв.ярд",
+    "squareUSSurveyFeet": "Квадратные геодезические футы США",
+    "squareUSSurveyFeetAbbr": "sq ftUS"
   },
   "featureSetChooser": {
     "select": "Выбрать",
@@ -389,7 +461,13 @@ define({
     "addSelectionTip": "Добавить к выборке",
     "removeSelectionTip": "Удалить из выборки",
     "selectFromCurrentSelectionTip": "Выбрать из текущей выборки",
-    "unselectAllSelectionTip": "Снять выделение со всех выбранных в данный момент объектов"
+    "unselectAllSelectionTip": "Снять выделение со всех выбранных в данный момент объектов",
+    "selectByPolygon": "Выбрать полигоном",
+    "selectByCircle": "Выбрать окружностью",
+    "selectByLine": "Выбрать линией",
+    "chooseSelectingTools": "Выбрать инструменты выборки",
+    "darw": "Нарисовать",
+    "drawShap": "Нарисовать форму"
   },
   "widgetManager": {
     "createWidgetError": "Ошибка создания виджета",
@@ -424,7 +502,7 @@ define({
     "more": "Опции встраивания",
     "changeShareSettings": "Изменить настройки публикации",
     "shareLinkText": "Опубликовать ссылку на это приложение",
-    "linkOptions": "Опции ссылки",
+    "linkOptions": "Опции связывания",
     "linkOptionsUrlParameters": "Выберите параметры URL, включенные в ссылку",
     "currentMapExtent": "Текущий экстент карты",
     "chooseCenterWithLevel": "Щелкните карту, чтобы задать ее центр с уровнем масштабирования",
@@ -448,5 +526,86 @@ define({
   },
   "webSceneLoader": {
     "webglSupportTip": "3D веб-приложения не поддерживаются в вашем браузере."
-  }
+  },
+  "map": {
+    "basemapNotAvailable": "Базовая карта не доступна.",
+    "displayDefaultBasemap": "Вместо нее отображается базовая карта, используемая по умолчанию.",
+    "layerLoadedError": "Слой ${layers} не может быть добавлен к карте."
+  },
+  "popup": {
+    "relatedTables": "Связанные таблицы:",
+    "relatedRecords": "Связанные записи:",
+    "noRelatedRecotds": "Связанных записей не найдено.",
+    "chooseFieldTip": "Выбрать атрибут для отображения списка",
+    "saveAsPopupTitle": "Так же, как в заголовке всплывающего окна"
+  },
+  "queryFeatures": {
+    "tooManyFeaturesTip": "Слишком много объектов в вашей выборке. Для отображения всех данных на карте может потребоваться значительное время.",
+    "askForContinue": "Хотите продолжить?"
+  },
+  "colorPalette": {
+    "transparent": "Прозрачный",
+    "custom": "Пользовательский"
+  },
+  "temperature": {
+    "celsius": "По Цельсию",
+    "fahrenheit": "По Фаренгейту"
+  },
+  "report": {
+    "printButtonLabel": "Печать",
+    "reportDimensionsMsg": "Этот отчет предназначен для печати на бумаге формата ${paperSize}",
+    "unableToPrintMapMsg": "Во время печати карты произошла ошибка.",
+    "notesHint": "Введите комментарий здесь",
+    "landscape": "Альбомная",
+    "portrait": "Книжная",
+    "mapOnly": "MAP_ONLY",
+    "a0": "A0",
+    "a1": "A1",
+    "a2": "A2",
+    "a3": "A3",
+    "a4": "A4",
+    "a5": "A5",
+    "letterANSIA": "Letter ANSI A",
+    "tabloidANSIB": "Tabloid ANSI B",
+    "letter": "Letter",
+    "legal": "Правовая информация",
+    "tabloid": "Tabloid",
+    "ansi_a": "ANSI A",
+    "ansi_b": "ANSI B",
+    "ansi_c": "ANSI C",
+    "ansi_d": "ANSI D",
+    "ansi_e": "ANSI E"
+  },
+  "snapshot": {
+    "snapshot_complete": "Снимок успешно создан.",
+    "snapshot_failed": "Не удалось создать снимок.",
+    "snapshot_append": "Снимок",
+    "utc": "UTC"
+  },
+  "statisticsChart": {
+    "enlarge": "Увеличить",
+    "setting": "Установки",
+    "count": "Количество",
+    "horizontalAxis": "Горизонтальная ось",
+    "verticalAxis": "Вертикальная ось",
+    "dataLabels": "Надписи данных",
+    "color": "Цвет"
+  },
+  "frameworkDatasource": {
+    "setDataSource": "Задать источник данных",
+    "customDataSource": "Внешний источник данных",
+    "selectCustomDataTip": "Выберите источник данных из этого приложения.",
+    "widgetOutputs": "Выходные данные виджета",
+    "noExtraDsAvailable": "Нет дополнительных источников данных.",
+    "addExtraDsTip": "Перейдите на вкладку конструктора Атрибуты и щелкните Дополнительный источник данных, чтобы добавить данные.",
+    "widgetOutpusListTip": "Выходные данные виджета (при наличии) также перечислены здесь."
+  },
+  "gridLayout": {
+    "addWidgetTip": "Добавьте виджет из вкладки Виджеты",
+    "modifyLayout": "Изменить компоновку",
+    "dragToAdd": "Потяните, чтобы добавить",
+    "mapArea": "ОБЛАСТЬ КАРТЫ"
+  },
+  "noEditPrivileges": "У вашей учетной записи нет прав на создание или изменение данных.",
+  "invalidConfiguration": "Виджет не настроен, или на карте больше нет слоёв из конфигурации. Откройте приложение в режиме конструктора и настройте виджет."
 });

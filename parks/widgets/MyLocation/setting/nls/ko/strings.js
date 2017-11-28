@@ -3,5 +3,5 @@ define({
   "highlightLocation": "위치 강조",
   "useTracking": "위치 변경 사항 보기",
   "warning": "잘못된 입력",
-  "zoomScale": "확대/축소 축척"
+  "zoomScale": "확대 축척"
 });

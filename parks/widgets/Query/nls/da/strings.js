@@ -5,7 +5,7 @@ define({
   "queryParams": "Indstillinger",
   "parameters": "INDSTILLINGER",
   "queries": "FORESPØRGSLER",
-  "apply": "ANVEND",
+  "apply": "Anvend",
   "queryResults": "Resultater",
   "clear": "Ryd",
   "noResults": "Ingen resultater fundet.",
@@ -76,12 +76,15 @@ define({
   "back": "Tilbage",
   "execute": "Udfør",
   "zoomTo": "Zoom til",
-  "openAttributeTable": "Åbn i AttributeTable",
+  "openAttributeTable": "Vis i attributtabel",
   "noResult": "Intet resultat.",
   "noTask": "Ingen opgave.",
   "removeThisResult": "Fjern dette resultat",
   "attributeCriteira": "Attributkriterier",
   "spatialFilter": "Spatialt filter",
   "value": "VÆRDI",
-  "noAttributeSpatialFilterTip": "Ingen filtre defineret. Alle objekter vil blive returneret."
+  "noAttributeSpatialFilterTip": "Ingen filtre defineret. Alle objekter vil blive returneret.",
+  "showAllRelatedRecords": "Vis alle relaterede poster",
+  "changeSymbol": "Skift symbol",
+  "queryCriteira": "Forespørgselskriterier"
 });

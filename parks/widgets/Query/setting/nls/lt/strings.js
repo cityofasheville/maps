@@ -3,7 +3,7 @@ define({
   "addNew": "Pridėti naują",
   "newQuery": "Nauja užklausa",
   "queryLayer": "Užklausos sluoksnis",
-  "setSource": "Grupė",
+  "setSource": "Nustatyti",
   "setDataSource": "Nustatykite duomenų šaltinį",
   "name": "Pavadinimas",
   "querySource": "Duomenų šaltinis",
@@ -97,7 +97,8 @@ define({
   "sortingFields": "Rūšiuoti rezultatų elementus",
   "setDisplayFields": "Nustatyti rodomus laukus",
   "symbol": "Simbolis",
-  "setSymbol": "Nustatyti pasirinktą simbolį",
+  "setSymbol": "Naudoti adaptuotą simbolį",
+  "changeSymbolAtRuntime": "Leisti keisti simbolius vykdymo metu",
   "serviceSymbolTip": "Naudoti simbolius, apibrėžtus pagal sluoksnį",
   "exportTip": "Leisti eksportuoti rezultatus",
   "keepResultsTip": "Uždarius valdiklį palikti rezultatus ant žemėlapio",
@@ -113,7 +114,7 @@ define({
   "customPopupTip": "Konfigūruoti pasirinktą turinį",
   "showResultsSetActions": "Rodyti rezultatų rinkinio veiksmus",
   "zoomTo": "Pritraukti iki",
-  "openAttributeTable": "Atidaryti atributų lentelę",
+  "openAttributeTable": "Peržiūrėti atributų lentelėje",
   "content": "Turinys",
   "displaySQLTip": "Rodyti SQL užklausą galutiniams vartotojams",
   "useLayerDefaultSymbol": "Naudoti sluoksnio numatytąjį simbolį",
@@ -122,5 +123,9 @@ define({
   "uploadImage": "Įkelti paveikslėlį",
   "attributeCriteira": "Atributo kriterijai",
   "specifyFilterAtRuntimeTip": "Vartotojai turės nurodyti šios sąlygos parametrus.",
-  "value": "REIKŠMĖ"
+  "value": "REIKŠMĖ",
+  "hideLayersTip": "Išjungti užklausos rezultatų sluoksnius, kai valdiklis uždarytas.",
+  "tabLabels": "Skirtukų žymės",
+  "tasks": "Užduotys",
+  "queryCriteira": "Užklausos kriterijai"
 });

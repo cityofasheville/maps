@@ -76,12 +76,15 @@ define({
   "back": "戻る",
   "execute": "実行",
   "zoomTo": "ズーム",
-  "openAttributeTable": "属性テーブルで開く",
+  "openAttributeTable": "属性テーブルの表示",
   "noResult": "結果がありません。",
   "noTask": "タスクがありません。",
   "removeThisResult": "この結果を削除",
   "attributeCriteira": "属性条件",
   "spatialFilter": "空間フィルター",
   "value": "値",
-  "noAttributeSpatialFilterTip": "フィルターが定義されていません。すべてのフィーチャが返されます。"
+  "noAttributeSpatialFilterTip": "フィルターが定義されていません。すべてのフィーチャが返されます。",
+  "showAllRelatedRecords": "すべての関連レコードを表示",
+  "changeSymbol": "シンボルの変更",
+  "queryCriteira": "クエリ条件"
 });

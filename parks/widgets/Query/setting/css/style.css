@@ -1,7 +1,26 @@
 @import url("list.css");
 
+.jimu-widget-query-setting > .content{
+  bottom: 90px;
+}
+
+.jimu-widget-query-setting > .general-setting{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 5px;
+}
+
+.jimu-widget-query-setting .jimu-checkbox.small-font-size .label{
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.jimu-widget-query-setting > .general-setting .jimu-checkbox{
+  margin-bottom: 15px;
+}
+
 .jimu-widget-query-setting .stress{
-  /*font-family: 'Avenir Medium';*/
   font-size: 14px;
   font-weight: bold;
   color: #000;
@@ -10,7 +29,6 @@
 .jimu-widget-query-setting .light-stress{
   font-family: 'Avenir Medium';
   font-size: 12px;
-  /*font-weight: bold;*/
   color: #353535;
 }
 
@@ -32,11 +50,6 @@
   margin-left: 0;
   margin-right: 2px;
 }
-
-/*.jimu-widget-query-setting.not-mac .radio-label-container label{
-  position: relative;
-  top: -2px;
-}*/
 
 .jimu-widget-query-setting .jimu-checkbox.buffer-checkbox .label{
   font-size: 12px;

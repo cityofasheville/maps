@@ -6,6 +6,7 @@ define({
     "yes": "Ja",
     "no": "Nej",
     "next": "Næste",
+    "previous": "Forrige",
     "back": "Tilbage",
     "selected": "valgt",
     "name": "Navn",
@@ -43,16 +44,39 @@ define({
     "check": "Kontrollér",
     "save": "Gem",
     "close": "Luk",
-    "deleteText": "download fuldført",
+    "deleteText": "Slet",
     "map": "Kort",
     "scene": "Scene",
     "reset": "Nulstil",
     "icon": "Ikon",
+    "folder": "Mappe",
     "share": "Opdatér",
     "view": "Vis",
     "newText": "Ny",
     "edit": "Redigér",
-    "wkid": "WKID"
+    "wkid": "WKID",
+    "table": "Tabel",
+    "zoomIn": "Zoom ind",
+    "zoomOut": "Zoom ud",
+    "continue1": "Fortsæt",
+    "longitude": "Længde",
+    "latitude": "Bredde",
+    "custom": "Brugerdefineret",
+    "image": "Billede",
+    "font": "Skrifttype",
+    "text": "Tekst",
+    "all": "Alle",
+    "number": "Nummer",
+    "percentage": "procentdel",
+    "unit": "Enhed",
+    "thousand": "Tusind",
+    "billion": "Milliard",
+    "million": "Million",
+    "none": "Ingen",
+    "field": "Felt",
+    "operation": "Handling",
+    "disableUpdateGeometry": "Deaktiver Opdatér geomatri",
+    "preview": "Forhåndsvisning"
   },
   "errorCode": "Kode",
   "errorMessage": "Meddelelse",
@@ -61,7 +85,7 @@ define({
   "fieldStatistics": {
     "selectField": "Vælg felt",
     "statistics": "Statistik",
-    "field": "Felt",
+    "field": "Mark",
     "count": "Antal værdier",
     "sum": "Summen af værdier",
     "min": "Minimum",
@@ -70,12 +94,12 @@ define({
     "stddev": "Standardafvigelse"
   },
   "symbolChooser": {
-    "preview": "Forhåndsvisning",
+    "preview": "Eksempel",
     "basic": "Grundlæggende principper",
     "arrows": "Pile",
     "business": "Forretning",
     "cartographic": "Kartografisk",
-    "nationalParkService": "Nationalparkforvaltning (NPF)",
+    "nationalParkService": "Nationalparkforvaltning",
     "outdoorRecreation": "Udendørs rekreation",
     "peoplePlaces": "Offentlige steder",
     "safetyHealth": "Sikkerhed og sundhed",
@@ -96,7 +120,10 @@ define({
     "dash": "Streg",
     "dot": "Punktum",
     "dashDot": "Streg-prik",
-    "dashDotDot": "Streg-prik-prik"
+    "dashDotDot": "Streg-prik-prik",
+    "customImage": "Brugerdefineret billede",
+    "chooseFile": "Vælg fil",
+    "noFileChoosen": "Der er ikke valgt nogen fil."
   },
   "transparency": {
     "opaque": "Uigennemsigtig",
@@ -106,10 +133,10 @@ define({
     "domain": "Domæne",
     "use": "Brug",
     "singleSymbol": "Et enkelt symbol",
-    "uniqueSymbol": "Entydige symboler",
+    "uniqueSymbol": "Unikke symboler",
     "color": "Farve",
     "size": "Størrelse",
-    "toShow": "Som viser",
+    "toShow": "At vise",
     "colors": "Farver",
     "classes": "Klasser",
     "symbolSize": "Symbolstørrelse",
@@ -152,16 +179,16 @@ define({
     "loading": "Indlæser"
   },
   "basicServiceBrowser": {
-    "noServicesFound": "Der blev ingen tjenester fundet.",
+    "noServicesFound": "Der blev ikke fundet nogen tjenester.",
     "unableConnectTo": "Der kunne ikke oprettes forbindelse til",
     "invalidUrlTip": "Den URL, du har angivet, er ugyldig eller utilgængelig."
   },
   "serviceBrowser": {
-    "noGpFound": "Der blev ingen geoprocesseringstjenester fundet.",
+    "noGpFound": "Der blev ikke fundet nogen geoprocesseringstjenester.",
     "unableConnectTo": "Der kunne ikke oprettes forbindelse til"
   },
   "layerServiceBrowser": {
-    "noServicesFound": "Der blev ingen kort- eller featuretjeneste fundet",
+    "noServicesFound": "Der blev ikke fundet nogen kort- eller featuretjenester",
     "unableConnectTo": "Der kunne ikke oprettes forbindelse til"
   },
   "basicServiceChooser": {
@@ -176,14 +203,14 @@ define({
     "invalidUrl": "Ugyldig URL."
   },
   "filterBuilder": {
-    "addAnotherExpression": "Tilføj et filterudtryk",
-    "addSet": "Tilføj et udtrykssæt",
+    "addAnotherExpression": "Tilføj et udtryk",
+    "addSet": "Tilføj et sæt",
     "matchMsg": "Hent objekter i det lag, der passer til ${any_or_all} af følgende udtryk",
     "matchMsgSet": "${any_or_all} af følgende udtryk i dette sæt er sande",
     "all": "Alle",
     "any": "Hvilket som helst",
     "value": "Værdi",
-    "field": "Mark",
+    "field": "Felt",
     "unique": "Unik",
     "none": "Ingen",
     "and": "og",
@@ -202,9 +229,14 @@ define({
     "dateOperatorIsNotOn": "er ikke d.",
     "dateOperatorIsBefore": "er før",
     "dateOperatorIsAfter": "er efter",
+    "dateOperatorIsOnOrBefore": "er på eller før",
+    "dateOperatorIsOnOrAfter": "er på eller efter",
+    "dateOperatorMinutes": "minutter",
+    "dateOperatorHours": "timer",
     "dateOperatorDays": "dage",
     "dateOperatorWeeks": "uger",
     "dateOperatorMonths": "måneder",
+    "dateOperatorYears": "år",
     "dateOperatorInTheLast": "i de seneste",
     "dateOperatorNotInTheLast": "ikke i de seneste",
     "dateOperatorIsBetween": "er mellem",
@@ -230,45 +262,50 @@ define({
     "error": {
       "invalidParams": "Ugyldige parametre.",
       "invalidUrl": "Ugyldig URL.",
-      "noFilterFields": "Laget har ingen felter, der kan anvendes til filtrering.",
+      "noFilterFields": "Laget har ingen felter, der kan anvendes til oprettelse af filtre.",
       "invalidSQL": "Ugyldigt SQL-udtryk.",
       "cantParseSQL": "SQL-udtrykket kan ikke parses."
     },
     "caseSensitive": "Skelner mellem store og små bogstaver",
     "notSupportCaseSensitiveTip": "\"Hostede\" tjenester understøtter ikke forespørgsler, der skelner mellem store og små bogstaver.",
-    "setFilterTip": "Angiv filteret korrekt."
+    "setFilterTip": "Angiv filteret korrekt.",
+    "listValues": "Listeværdier",
+    "cascadeFilterTip": "Vis kun værdier filtreret efter de forrige udtryk.",
+    "noneCascadeFilterTip": "Alle entydige værdier i dette felt",
+    "previousCascadeFilterTip": "Værdier filtreret efter de forrige udtryk",
+    "allCascadeFilterTip": "Værdier filtreret efter alle andre udtryk"
   },
   "featureLayerSource": {
     "layer": "Lag",
     "browse": "Gennemse",
-    "selectFromMap": "Vælg fra kort",
-    "selectFromPortal": "Tilføj fra Portal for ArcGIS",
-    "addServiceUrl": "Tilføj tjeneste-URL",
+    "selectFromMap": "Kort",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Tjeneste-URL",
     "inputLayerUrl": "Inputlagets URL",
     "selectLayer": "Vælg et vektorlag fra det aktuelle kort.",
     "chooseItem": "Vælg et vektorlagelement.",
-    "setServiceUrl": "Angiv URL-adressen på en feature- eller korttjeneste.",
-    "selectFromOnline": "Tilføj fra ArcGIS Online",
+    "setServiceUrl": "Angiv URL'en for en feature- eller korttjeneste.",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Vælg et vektorlag."
   },
   "queryableLayerSource": {
     "layer": "Lag",
     "browse": "Gennemse",
-    "selectFromMap": "Vælg fra kort",
-    "selectFromPortal": "Tilføj fra Portal for ArcGIS",
-    "addServiceUrl": "Tilføj tjeneste-URL",
+    "selectFromMap": "Kort",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Tjeneste-URL",
     "inputLayerUrl": "Inputlagets URL",
     "selectLayer": "Vælg et lag fra det aktuelle kort.",
     "chooseItem": "Vælg et element.",
     "setServiceUrl": "Indtast URL'en til tjenesten.",
-    "selectFromOnline": "Tilføj fra ArcGIS Online",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Vælg et lag."
   },
   "gpSource": {
-    "selectFromPortal": "Tilføj fra Portal for ArcGIS",
-    "addServiceUrl": "Tilføj tjeneste-URL",
-    "selectFromOnline": "Tilføj fra ArcGIS Online",
-    "setServiceUrl": "Indtast URL til geoprocesseringstjenesten.",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Tjeneste-URL",
+    "selectFromOnline": "ArcGIS Online",
+    "setServiceUrl": "Indtast URL'en til en geoprocesseringstjeneste.",
     "chooseItem": "Vælg et geoprocesseringstjenesteelement.",
     "chooseTask": "Vælg en geoprocesseringsopgave."
   },
@@ -292,8 +329,12 @@ define({
     "noneThumbnail": "Miniaturen er ikke tilgængelig",
     "owner": "ejer",
     "signInTo": "Log ind på",
-    "lastModified": "Sidst ændret",
-    "moreDetails": "Flere oplysninger"
+    "lastModified": "Senest ændret",
+    "moreDetails": "Flere oplysninger",
+    "mostRecent": "Seneste",
+    "mostViewed": "Mest viste",
+    "highestRated": "Højest klassificerede",
+    "viewItemDetails": "Vis oplysninger om element"
   },
   "featureLayerChooserFromPortal": {
     "notSupportQuery": "Tjenesten understøtter ikke forespørgsler."
@@ -313,16 +354,16 @@ define({
     "itemMoveDown": "Flyt ned",
     "itemDesc": "Beskrivelse",
     "itemDownload": "Hent",
-    "itemToAttributeTable": "Åbn attributtabel"
+    "itemToAttributeTable": "Vis i attributtabel"
   },
   "imageChooser": {
-    "unsupportReaderAPI": "OPGAVE: Browseren understøtter ikke fillæser-API",
+    "unsupportReaderAPI": "Opgave: Browseren understøtter ikke fillæser-API",
     "readError": "Kunne ikke læse filen.",
     "unknowError": "kan ikke fuldføre handlinger",
     "invalidType": "Ugyldig filtype.",
     "cropImage": "Beskær billede",
     "exceed": "Filstørrelsen må ikke være over 1.024 KB",
-    "enableFlash": "OPGAVE: Aktivér flash.",
+    "enableFlash": "Aktivér Adobe Flash, før du browser til et billede.",
     "cropWaining": "Vælg et foto, der er mindst ${width} x ${height} pixels.",
     "toolTip": "For at opnå det bedste resultat bør billedet være ${width} pixels bredt x ${height} pixels højt. Andre størrelser tilpasses, så de passer. Acceptable billedformater er: PNG, GIF og JPEG."
   },
@@ -347,17 +388,22 @@ define({
     "restoreMap": "Klik for at gendanne kortudstrækningen og lagenes synlighed dér, hvor du var nået til."
   },
   "featureActions": {
+    "featureActions": "Objekthandlinger",
     "ZoomTo": "Zoom til",
     "PanTo": "Panorér til",
     "Flash": "Blitz",
-    "ShowPopup": "Vis pop-up",
+    "ShowPopup": "Vis pop-up-vindue",
     "CreateLayer": "Opret lag",
     "ShowStatistics": "Statistik...",
-    "ClearSelection": "Ryd markering",
+    "ClearSelection": "Clear selection",
     "ExportToCSV": "Eksportér til CSV-fil",
     "ShowSelectedFeature": "Vis udvalgte objekter",
     "ExportToFeatureCollection": "Eksportér til objektsamling",
-    "ExportToGeoJSON": "Eksportér til GeoJSON"
+    "ExportToGeoJSON": "Eksportér til GeoJSON",
+    "EditAttributes": "Redigér attributter",
+    "AddMarker": "Tilføj en markør",
+    "RemoveMarker": "Fjern markør",
+    "SaveToMyContent": "Gem til Mit indhold"
   },
   "spatialFilterByFeatures": {
     "relatedLayer": "Relateret lag",
@@ -373,11 +419,37 @@ define({
   },
   "units": {
     "miles": "Miles",
+    "milesAbbr": "mile",
     "kilometers": "Kilometer",
+    "kilometersAbbr": "km",
     "feet": "Fod",
+    "feetAbbr": "fod",
     "meters": "Meter",
+    "metersAbbr": "m",
     "yards": "Yards",
-    "nauticalMiles": "Sømil"
+    "yardsAbbr": "yard",
+    "acres": "Acres",
+    "acresAbbr": "acres",
+    "nauticalMiles": "Sømil",
+    "nauticalMilesAbbr": "nmi",
+    "uSSurveyFeet": "US survey feet",
+    "uSSurveyFeetAbbr": "ftUS",
+    "decimalDegree": "Decimalgrader",
+    "decimalDegreeAbbr": "dd",
+    "degreeMinuteSeconds": "Grader Minutter Sekunder",
+    "degreeMinuteSecondsAbbr": "d-m-s",
+    "squareMiles": "Kvadrat-miles",
+    "squareMilesAbbr": "kvadratmil",
+    "squareKilometer": "Kvadratkilometer",
+    "squareKilometerAbbr": "kv.-km",
+    "squareFeet": "Kvadratfod",
+    "squareFeetAbbr": "kvadratfod",
+    "squareMeters": "Kvadratmeter",
+    "squareMetersAbbr": "kv.-m",
+    "squareYards": "Kvadrat-yards",
+    "squareYardsAbbr": "kvadratyard",
+    "squareUSSurveyFeet": "Square US survey feet",
+    "squareUSSurveyFeetAbbr": "sq ftUS"
   },
   "featureSetChooser": {
     "select": "Vælg",
@@ -389,7 +461,13 @@ define({
     "addSelectionTip": "Føj til markering",
     "removeSelectionTip": "Fjern fra markeringen",
     "selectFromCurrentSelectionTip": "Vælg ud fra den aktuelle markering",
-    "unselectAllSelectionTip": "Fravælg alle aktuelt valgte objekter"
+    "unselectAllSelectionTip": "Fravælg alle aktuelt valgte objekter",
+    "selectByPolygon": "Vælg efter polygon",
+    "selectByCircle": "Vælg efter cirkel",
+    "selectByLine": "Vælg efter linje",
+    "chooseSelectingTools": "Vælg markeringsværktøjer",
+    "darw": "Tegn",
+    "drawShap": "Tegn en form"
   },
   "widgetManager": {
     "createWidgetError": "Fejl ved oprettelse af widget",
@@ -448,5 +526,86 @@ define({
   },
   "webSceneLoader": {
     "webglSupportTip": "3D-webapplikationer understøttes ikke i din browser."
-  }
+  },
+  "map": {
+    "basemapNotAvailable": "Baggrundskortet er ikke tilgængeligt.",
+    "displayDefaultBasemap": "Viser standardbaggrundskort i stedet for.",
+    "layerLoadedError": "Laget, ${layers}, kan ikke føjes til kortet."
+  },
+  "popup": {
+    "relatedTables": "Relatereder tabeller:",
+    "relatedRecords": "Relaterede poster:",
+    "noRelatedRecotds": "Ingen relaterede poster fundet.",
+    "chooseFieldTip": "Vælg en attribut for at vise listen",
+    "saveAsPopupTitle": "Samme som pop-up-titel"
+  },
+  "queryFeatures": {
+    "tooManyFeaturesTip": "Der er for mange objekter i din markering. Det kan tage lang tid at hente og vise dem på kortet.",
+    "askForContinue": "Vil du fortsætte?"
+  },
+  "colorPalette": {
+    "transparent": "Gennemsigtig",
+    "custom": "Brugerdefineret"
+  },
+  "temperature": {
+    "celsius": "Celsius",
+    "fahrenheit": "Fahrenheit"
+  },
+  "report": {
+    "printButtonLabel": "Udskriv",
+    "reportDimensionsMsg": "Denne rapport er designet til udskrivning på ${paperSize} papir",
+    "unableToPrintMapMsg": "Der opstod en fejl under udskrivning af kort(ene)",
+    "notesHint": "Angiv kommentarer her",
+    "landscape": "På langs",
+    "portrait": "På højkant",
+    "mapOnly": "MAP_ONLY",
+    "a0": "A0",
+    "a1": "A1",
+    "a2": "A2",
+    "a3": "A3",
+    "a4": "A4",
+    "a5": "A5",
+    "letterANSIA": "Letter ANSI A",
+    "tabloidANSIB": "Tabloid ANSI B",
+    "letter": "Letter",
+    "legal": "Juridisk",
+    "tabloid": "Tabloid",
+    "ansi_a": "ANSI A",
+    "ansi_b": "ANSI B",
+    "ansi_c": "ANSI C",
+    "ansi_d": "ANSI D",
+    "ansi_e": "ANSI E"
+  },
+  "snapshot": {
+    "snapshot_complete": "Har oprettet snapshot med succes.",
+    "snapshot_failed": "Kunne ikke oprette snapshot.",
+    "snapshot_append": "Snapshot",
+    "utc": "UTC"
+  },
+  "statisticsChart": {
+    "enlarge": "Forstør",
+    "setting": "Indstilling",
+    "count": "Tælling",
+    "horizontalAxis": "Horisontal akse",
+    "verticalAxis": "Vertikal akse",
+    "dataLabels": "Dataetiketter",
+    "color": "Farve"
+  },
+  "frameworkDatasource": {
+    "setDataSource": "Angiv datakilde",
+    "customDataSource": "Ekstra datakilde",
+    "selectCustomDataTip": "Vælg en datakilde fra denne app.",
+    "widgetOutputs": "Widget-output",
+    "noExtraDsAvailable": "Ingen ekstra datakilder er til rådighed.",
+    "addExtraDsTip": "Gå til builder-programmets Attribut-fane, og klik på Ekstra datakilde for at tilføje data.",
+    "widgetOutpusListTip": "Widget-outputs (hvis der er nogen) er også angivet her."
+  },
+  "gridLayout": {
+    "addWidgetTip": "Tilføj widgets her via Widget-fanen",
+    "modifyLayout": "Redigér layout",
+    "dragToAdd": "Træk for at tilføje",
+    "mapArea": "KORTOMRÅDE"
+  },
+  "noEditPrivileges": "Din konto har ikke rettigheder til at oprette eller redigere data.",
+  "invalidConfiguration": "Widget'en er enten ikke konfigureret, eller lagene i konfigurationen findes ikke længere i kortet. Åbn app'en i builder-tilstand, og omkonfigurér widget'en."
 });

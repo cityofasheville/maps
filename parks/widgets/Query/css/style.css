@@ -73,6 +73,7 @@
   cursor: pointer;
   text-align: center;
   border-bottom: 1px solid #ccc;
+  padding: 0 5px;
 }
 
 .jimu-widget-query .query-tab-item.selected{
@@ -125,8 +126,6 @@
 
 
 .jimu-widget-query .list-table tr.single-task > td{
-  /*height: 30px;
-  line-height: 30px;*/
   padding-top: 13px;
   padding-bottom: 13px;
   cursor: pointer;
@@ -139,7 +138,6 @@
   text-overflow: ellipsis;
   display: inline-block;
   line-height: 16px;
-  /*height: 100%;*/
 }
 
 .jimu-widget-query .list-table tr.single-task .first-td{
@@ -151,12 +149,6 @@
   height: 16px;
   vertical-align: middle;
 }
-
-/*.jimu-widget-query .list-table tr.empty-single-task td{
-  height: 10px;
-  line-height: 10px;
-  cursor: default;
-}*/
 
 /* css for task-list */
 .jimu-widget-query .task-list{
@@ -182,7 +174,6 @@
 
 .jimu-widget-query .task-list .tasks .tasks-table-container{
   width: 100%;
-  /*margin-top: 15px;*/
 }
 
 .jimu-widget-query .task-list .invalid-config{
@@ -306,6 +297,11 @@
   border-radius: 0;
 }
 
+.jimu-widget-query .query-task-setting .btn-execute.jimu-btn.disabled{
+  background-color: #ccc !important;
+  cursor: default;
+}
+
 .jimu-widget-query .query-task-setting .btn-execute:hover{
   background-color: #417505;
 }
@@ -372,7 +368,7 @@
 /* css for single-query-result */
 .jimu-widget-query .single-query-result,
 .jimu-widget-query .single-query-result .features-result,
-.jimu-widget-query .single-query-result .related-records-section{
+.jimu-widget-query .single-query-result .single-related-records-section{
   position: relative;
   width: 100%;
   height: 100%;
@@ -388,21 +384,6 @@
   right: auto;
   left: -8px;
 }
-
-/*.jimu-widget-query .single-query-result .operations-icon{
-  position: absolute;
-  right: 7px;
-  top: 23px;
-  width: 17px;
-  height: 14px;
-  cursor: pointer;
-  background: url(images/more_results.png) center no-repeat;
-}
-
-.jimu-rtl .jimu-widget-query .single-query-result .operations-icon{
-  right: auto;
-  left: 7px;
-}*/
 
 .jimu-widget-query .single-query-result .results-number{
   position: relative;
@@ -433,10 +414,8 @@
 }
 
 .jimu-widget-query .single-query-result .query-result-item > td{
-  /*padding-left: 15px;
-  padding-right: 15px;*/
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   cursor: pointer;
 }
 
@@ -445,8 +424,8 @@
   padding-right: 15px;
 }
 
-.jimu-widget-query .single-query-result .query-result-item>.esriViewPopup .header{
-  margin-bottom: 5px;
+.jimu-widget-query .single-query-result .query-result-item .esriViewPopup .header{
+  margin-bottom: 8px;
 }
 
 .jimu-widget-query .single-query-result .query-result-item .esriViewPopup .hzLine{
@@ -474,7 +453,6 @@
 .jimu-widget-query .single-query-result .query-result-item .related-table-btn{
   height: 30px;
   line-height: 30px;
-  /*border: 1px solid #ccc;*/
   margin: 5px 0;
   padding: 0 5px;
   background: url(images/arrow_right1.png) right center no-repeat content-box;
@@ -498,34 +476,32 @@
   background: url(images/arrow_left2.png) left center no-repeat content-box;
 }
 
-.jimu-widget-query .related-records-section table.related-records-header{
+.jimu-widget-query table.related-records-header{
   position: absolute;
+  top: 5px;
   width: 100%;
   min-height: 36px;
   border-collapse: collapse;
   table-layout: fixed;
 }
 
-.jimu-widget-query .related-records-section table.related-records-header>tbody>tr>td{
+.jimu-widget-query table.related-records-header>tbody>tr>td{
   height: 36px;
 }
 
-.jimu-widget-query .related-records-section table.related-records-header>tbody>tr>.first-td{
+.jimu-widget-query table.related-records-header>tbody>tr>.first-td{
   width: 30px;
 }
 
-.jimu-widget-query .related-records-section table.related-records-header>tbody>tr>.middle-td{
+.jimu-widget-query table.related-records-header>tbody>tr>.middle-td{
   width: auto;
 }
 
-.jimu-widget-query .related-records-section table.related-records-header>tbody>tr>.last-td{
+.jimu-widget-query table.related-records-header>tbody>tr>.last-td{
   width: 40px;
 }
 
-.jimu-widget-query .related-records-section table.related-records-header .back-arrow{
-}
-
-.jimu-widget-query .related-records-section table.related-records-header .related-records-title{
+.jimu-widget-query table.related-records-header .related-records-title{
   text-align: center;
 }
 
@@ -542,7 +518,7 @@
 .jimu-widget-query .related-records-result .related-records-action-button{
   position: absolute;
   right: -8px;
-  top: 0;
+  top: 6px;
   z-index: 1;
 }
 
@@ -647,33 +623,3 @@
   line-height: 20px;
   cursor: pointer;
 }
-
-/* css for query popup */
-/*.query-popup-title{
-  height: 20px;
-}
-
-.query-popup .header{
-  font-weight: bold;
-}
-
-.query-popup .hzLine{
-  border-top: 1px solid #333333;
-  margin-top: 6px;
-  margin-bottom: 6px;
-}
-
-.query-popup .query-popup-table{
-  width: 100%;
-  table-layout: fixed;
-  word-break: break-all;
-  border-collapse: collapse;
-}
-
-.query-popup .query-popup-table td{
-  padding:2px 2px 5px 2px;
-}
-
-.query-popup .query-popup-table .attr-name{
-  color: #888888;
-}*/

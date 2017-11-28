@@ -18,5 +18,19 @@ define({
   "invalidTitle2": "' existe déjà. Choisissez un autre titre.",
   "invalidBasemapUrl1": "Ce type de couche ne peut pas être utilisé comme fond de carte.",
   "invalidBasemapUrl2": "La référence spatiale du fond de carte que vous ajoutez est différente de celle de la carte actuelle.",
-  "addBaselayer": "Ajouter une couche de fonds de carte"
+  "addBaselayer": "Ajouter une couche de fonds de cartes",
+  "repectOnline": "Toujours synchroniser avec le paramètre de bibliothèque de fonds de carte de l'organisation",
+  "customBasemap": "Configurer les fonds de carte personnalisés",
+  "basemapTips": "Cliquez sur « ${import} » ou « ${createNew} » pour ajouter des fonds de carte.",
+  "importBasemap": "Importer",
+  "createBasemap": "Créer",
+  "importTitle": "Importer des fonds de cartes",
+  "createTitle": "Nouveau fond de carte",
+  "selectGroupTip": "Sélectionnez un groupe dont les cartes Web peuvent être utilisées comme fonds de carte.",
+  "noBasemaps": "Aucun fond de carte.",
+  "defaultGroup": "Valeur par défaut d'Esri",
+  "defaultOrgGroup": "Valeur par défaut de l'organisation",
+  "warningTitle": "Avertissement",
+  "confirmDelete": "Souhaitez-vous supprimer les fonds de carte sélectionnés ?",
+  "noBasemapAvailable": "Aucun fond de carte n'est disponible, car tous les fonds de carte ont une référence spatiale ou une structure de tuile différente de celle de la carte actuelle."
 });

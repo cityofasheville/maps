@@ -6,6 +6,7 @@ define({
     "yes": "نعم",
     "no": "لا",
     "next": "التالي",
+    "previous": "السابق",
     "back": "السابق",
     "selected": "محدد",
     "name": "الاسم",
@@ -48,11 +49,34 @@ define({
     "scene": "مشهد",
     "reset": "إعادة تعيين",
     "icon": "أيقونة",
+    "folder": "مجلد",
     "share": "مشاركة",
     "view": "عرض",
     "newText": "جديد",
     "edit": "تحرير",
-    "wkid": "WKID"
+    "wkid": "WKID",
+    "table": "جدول",
+    "zoomIn": "التكبير",
+    "zoomOut": "التصغير.",
+    "continue1": "متابعة",
+    "longitude": "خط طول",
+    "latitude": "خط عرض",
+    "custom": "تخصيص",
+    "image": "صورة",
+    "font": "الخط",
+    "text": "النص",
+    "all": "جميع",
+    "number": "عدد",
+    "percentage": "نسبة",
+    "unit": "وحدة",
+    "thousand": "ألف",
+    "billion": "مليار",
+    "million": "مليون",
+    "none": "لا شيء",
+    "field": "حقل",
+    "operation": "العملية",
+    "disableUpdateGeometry": "تعطيل تحديث هندسة الشكل",
+    "preview": "معاينة"
   },
   "errorCode": "كود",
   "errorMessage": "رسالة",
@@ -62,12 +86,12 @@ define({
     "selectField": "حدد الحقل",
     "statistics": "الإحصائيات",
     "field": "حقل",
-    "count": "رقم القيم",
+    "count": "عدد القيم",
     "sum": "مجموع القيم",
     "min": "الحد الأدنى",
     "max": "الحد الأقصى",
     "ave": "المتوسط",
-    "stddev": "انحراف معياري"
+    "stddev": "الانحراف المعياري"
   },
   "symbolChooser": {
     "preview": "معاينة",
@@ -78,13 +102,13 @@ define({
     "nationalParkService": "خدمة المتنزه الوطني",
     "outdoorRecreation": "ترفيه خارجي",
     "peoplePlaces": "أماكن التجمعات",
-    "safetyHealth": "الصحة العامة",
+    "safetyHealth": "الصحة المهنية",
     "shapes": "الأشكال",
     "transportation": "نقل",
     "symbolSize": "حجم الرمز",
     "color": "لون",
     "alpha": "ألفا",
-    "outlineColor": "اللون الأساسي",
+    "outlineColor": "لون المخطط",
     "outlineWidth": "العرض التفصيلي",
     "style": "نمط",
     "width": "العرض",
@@ -96,7 +120,10 @@ define({
     "dash": "شَرطَة",
     "dot": "نقطة",
     "dashDot": "شَرطَة ونقطة",
-    "dashDotDot": "شَرطَة ونقطتين"
+    "dashDotDot": "شرطة ونقطتين",
+    "customImage": "صور مخصصة",
+    "chooseFile": "اختيار ملف",
+    "noFileChoosen": "لم يتم اختيار الملف."
   },
   "transparency": {
     "opaque": "غير شفاف",
@@ -109,7 +136,7 @@ define({
     "uniqueSymbol": "رموز فريدة",
     "color": "لون",
     "size": "الحجم",
-    "toShow": "لإظهار",
+    "toShow": "لعرض",
     "colors": "ألوان",
     "classes": "تصنيفات",
     "symbolSize": "حجم الرمز",
@@ -125,13 +152,13 @@ define({
     "point": "نقطة",
     "line": "الخط",
     "polyline": "متعدد الخطوط",
-    "freehandPolyline": "خط يدوي حر متعدد",
+    "freehandPolyline": "خطوط متصلة مرسومة بخط اليد",
     "triangle": "مثلث",
     "extent": "المدى",
     "circle": "دائرة",
     "ellipse": "قطع ناقص",
     "polygon": "مضلع",
-    "freehandPolygon": "مضلع مسوم بخط يدوي حر",
+    "freehandPolygon": "مضلع يدوي",
     "text": "النص",
     "clear": "مسح"
   },
@@ -152,16 +179,16 @@ define({
     "loading": "تحميل"
   },
   "basicServiceBrowser": {
-    "noServicesFound": "لا توجد خدمات",
+    "noServicesFound": "لم يتم العثور على أي خدمة.",
     "unableConnectTo": "يتعذر الاتصال بـ",
     "invalidUrlTip": "عنوان URL الذي أدخلته غير صحيح أو يتعذر الوصول إليه."
   },
   "serviceBrowser": {
-    "noGpFound": "لا توجد خدمة معالجة جغرافية.",
+    "noGpFound": "لم يتم العثور على أي خدمة معالجة جغرافية.",
     "unableConnectTo": "يتعذر الاتصال بـ"
   },
   "layerServiceBrowser": {
-    "noServicesFound": "لا توجد خدمة خريطة أو خدمة معالم",
+    "noServicesFound": "لم يتم العثور على خدمة خريطة أو خدمة معلم.",
     "unableConnectTo": "يتعذر الاتصال بـ"
   },
   "basicServiceChooser": {
@@ -176,20 +203,20 @@ define({
     "invalidUrl": "عنوان URL غير صحيح."
   },
   "filterBuilder": {
-    "addAnotherExpression": "إضافة تعبير عامل تصفية",
-    "addSet": "إضافة مجموعة التعبيرات",
+    "addAnotherExpression": "إضافة تعبير",
+    "addSet": "إضافة مجموعة",
     "matchMsg": "الحصول على المعالم في الطبقة التي تُطابق ${any_or_all} في التعبيرات التالية",
     "matchMsgSet": "${any_or_all} من التعبيرات التالية في هذه المجموعة صحيح",
-    "all": "جميع",
+    "all": "الكل",
     "any": "أي من",
     "value": "قيمة",
     "field": "حقل",
     "unique": "فريد",
-    "none": "بلا",
+    "none": "لا شيء",
     "and": "و",
     "valueTooltip": "أدخل قيمة",
     "fieldTooltip": "اختيار من حقل حالي",
-    "uniqueValueTooltip": "اختيار من قيم فريدة في حقل مُحدد",
+    "uniqueValueTooltip": "اختيار من قيم فريدة في الحقل المُحدد",
     "stringOperatorIs": "هو",
     "stringOperatorIsNot": "ليس",
     "stringOperatorStartsWith": "البدء بـ",
@@ -202,9 +229,14 @@ define({
     "dateOperatorIsNotOn": "ليس",
     "dateOperatorIsBefore": "قبل",
     "dateOperatorIsAfter": "بعد",
+    "dateOperatorIsOnOrBefore": "في أو قبل",
+    "dateOperatorIsOnOrAfter": "في أو بعد",
+    "dateOperatorMinutes": "دقائق",
+    "dateOperatorHours": "ساعات",
     "dateOperatorDays": "يوم",
     "dateOperatorWeeks": "أسبوع",
     "dateOperatorMonths": "شهر",
+    "dateOperatorYears": "سنوات",
     "dateOperatorInTheLast": "في آخر",
     "dateOperatorNotInTheLast": "ليس في الآخر",
     "dateOperatorIsBetween": "بين",
@@ -230,51 +262,56 @@ define({
     "error": {
       "invalidParams": "معلمات غير صحيحة.",
       "invalidUrl": "عنوان URL غير صحيح.",
-      "noFilterFields": "لا توجد حقول بالطبقة يمكن استخدامها للتصفية.",
+      "noFilterFields": "لا تحتوي الطبقة على أي حقول يمكن استخدامها لإنشاء عوامل التصفية.",
       "invalidSQL": "تعبير SQL غير صحيح.",
       "cantParseSQL": "يتعذر توزيع تعبير SQL."
     },
-    "caseSensitive": "تحسس حالة الأحرف",
+    "caseSensitive": "تحسّس حالة الأحرف",
     "notSupportCaseSensitiveTip": "الخدمات المستضافة لا تدعم الاستعلام الحساس للحالة.",
-    "setFilterTip": "يرجى تعيين عامل التصفية بشكل صحيح."
+    "setFilterTip": "يرجى تعيين عوامل التصفية بشكل صحيح.",
+    "listValues": "إدراج القيم",
+    "cascadeFilterTip": "عرض القيم التي يتم تصفيتها بواسطة التعبيرات السابقة.",
+    "noneCascadeFilterTip": "جميع القيم المميزة لهذا الحقل",
+    "previousCascadeFilterTip": "القيم التي يتم تصفيتها بواسطة التعبيرات السابقة",
+    "allCascadeFilterTip": "القيم التي يتم تصفيتها بواسطة جميع التعبيرات الأخرى"
   },
   "featureLayerSource": {
-    "layer": "الطبقة",
+    "layer": "طبقة",
     "browse": "استعراض",
-    "selectFromMap": "تحديد من الخريطة",
-    "selectFromPortal": "إضافة من Portal for ArcGIS",
-    "addServiceUrl": "إضافة عنوان URL للخدمة",
-    "inputLayerUrl": "إدخال عنوان URL للطبقة",
+    "selectFromMap": "خريطة",
+    "selectFromPortal": "مدخل لـ ArcGIS",
+    "addServiceUrl": "خدمة عنوان URL",
+    "inputLayerUrl": "عنوان URL للطبقة المدخلة",
     "selectLayer": "تحديد طبقة معالم من الخريطة الحالية.",
     "chooseItem": "اختيار من عنصر طبقة معالم.",
-    "setServiceUrl": "أدخل عنوان URL لخدمة المعالم أو خدمة الخريطة.",
-    "selectFromOnline": "إضافة من ArcGIS Online",
+    "setServiceUrl": "أدخل عنوان URL لخدمة المعلم أو خدمة الخريطة.",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "اختر طبقة معلم."
   },
   "queryableLayerSource": {
     "layer": "الطبقة",
     "browse": "مربع حوار",
-    "selectFromMap": "تحديد من الخريطة",
-    "selectFromPortal": "إضافة من Portal for ArcGIS",
-    "addServiceUrl": "إضافة عنوان URL للخدمة",
-    "inputLayerUrl": "إدخال عنوان URL للطبقة",
+    "selectFromMap": "خريطة",
+    "selectFromPortal": "مدخل لـ ArcGIS",
+    "addServiceUrl": "خدمة عنوان URL",
+    "inputLayerUrl": "عنوان URL للطبقة المدخلة",
     "selectLayer": "حدد طبقة من الخريطة الحالية.",
     "chooseItem": "اختر عنصر.",
     "setServiceUrl": "أدخل عنوان URL للخدمة.",
-    "selectFromOnline": "إضافة من ArcGIS Online",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "اختيار الطبقة"
   },
   "gpSource": {
-    "selectFromPortal": "إضافة من Portal for ArcGIS",
-    "addServiceUrl": "إضافة عنوان URL للخدمة",
-    "selectFromOnline": "إضافة من ArcGIS Online",
-    "setServiceUrl": "أدخل عنوان URL لخدمة المعالجة الجغرافية.",
+    "selectFromPortal": "مدخل لـ ArcGIS",
+    "addServiceUrl": "خدمة عنوان URL",
+    "selectFromOnline": "ArcGIS Online",
+    "setServiceUrl": "أدخل عنوان URL لخدمة معالجة جغرافية.",
     "chooseItem": "اختر عنصر خدمة المعالجة الجغرافية.",
     "chooseTask": "اختر مهمة المعالجة الجغرافية."
   },
   "itemSelector": {
     "map": "خريطة",
-    "selectWebMap": "اختر خريطة الويب",
+    "selectWebMap": "اختيار خريطة الويب",
     "addMapFromOnlineOrPortal": "العثور على خريطة الويب وإضافتها للاستخدام في التطبيق من موارد ArcGIS Online العامة أو المحتويات الخاصة في ArcGIS Online أو البوابة الإلكترونية.",
     "searchMapName": "ابحث باستخدام اسم الخريطة...",
     "searchNone": "يتعذر إيجاد ما تبحث عنه. يرجى المحاولة مرة أخرى.",
@@ -293,7 +330,11 @@ define({
     "owner": "المالك",
     "signInTo": "تسجيل الدخول إلى",
     "lastModified": "آخر تعديل",
-    "moreDetails": "المزيد من التفاصيل"
+    "moreDetails": "مزيد من التفاصيل",
+    "mostRecent": "الأحدث",
+    "mostViewed": "الأكثر عرضًا",
+    "highestRated": "الأعلى تصنيفًا",
+    "viewItemDetails": "عرض تفاصيل العنصر"
   },
   "featureLayerChooserFromPortal": {
     "notSupportQuery": "الخدمة لا تدعم الاستعلام."
@@ -303,7 +344,7 @@ define({
   },
   "layerInfosMenu": {
     "titleBasemap": "خرائط الأساس",
-    "titleLayers": "الطبقات التشغيلية",
+    "titleLayers": "الطبقات الجاهزة للتشغيل",
     "labelLayer": "اسم الطبقة",
     "itemZoomTo": "تكبير إلى",
     "itemTransparency": "معدل الشفافية:",
@@ -313,7 +354,7 @@ define({
     "itemMoveDown": "نقل لأسفل",
     "itemDesc": "الوصف",
     "itemDownload": "تنزيل",
-    "itemToAttributeTable": "فتح جدول البيانات الجدولية"
+    "itemToAttributeTable": "عرض في جدول البيانات"
   },
   "imageChooser": {
     "unsupportReaderAPI": "قائمة المهام: المستعرض لا يدعم API لقارئ الملف",
@@ -322,7 +363,7 @@ define({
     "invalidType": "نوع الملف غير صحيح.",
     "cropImage": "قص الصورة",
     "exceed": "لا يجوز أن يتجاوز حجم الملف 1024 كيلوبايت",
-    "enableFlash": "قائمة المهام: يرجى تمكين الفلاش.",
+    "enableFlash": "الرجاء تمكين Adobe Flash قبل استعراض الصور.",
     "cropWaining": "يرجى اختيار صورة على الأقل ${عرض} x ${طول} بكسل.",
     "toolTip": "للحصول على أفضل نتيجة، ينبغي أن يكون حجم الصورة ${width} بيكسل وارتفاعها ${height} بيكسل. سيتم تعديل الأحجام الأخرى للملائمة. تنسيقات الصورة المقبولة هي PNG وGIF وJPEG."
   },
@@ -339,7 +380,7 @@ define({
   "exportTo": {
     "exportTo": "تصدير",
     "toCSV": "تصدير لملف CSV",
-    "toFeatureCollection": "التصدير إلى مجموعة المعالم",
+    "toFeatureCollection": "تصدير إلى مجموعة المعالم",
     "toGeoJSON": "التصدير إلى GeoJSON"
   },
   "appState": {
@@ -347,17 +388,22 @@ define({
     "restoreMap": "انقر لاستعادة مدى الخريطة ورؤية الطبقات حيث توقفت."
   },
   "featureActions": {
+    "featureActions": "إجراءات المعالم",
     "ZoomTo": "تكبير/تصغير إلى",
     "PanTo": "التحريك إلى",
     "Flash": "وميض",
-    "ShowPopup": "إظهار القائمة المنبثقة",
+    "ShowPopup": "إظهار العناصر المنبثقة",
     "CreateLayer": "إنشاء طبقة",
     "ShowStatistics": "الإحصائيات...",
     "ClearSelection": "مسح التحديد",
     "ExportToCSV": "تصدير لملف CSV",
-    "ShowSelectedFeature": "عرض المعالم المحددة",
-    "ExportToFeatureCollection": "التصدير إلى مجموعة المعالم",
-    "ExportToGeoJSON": "التصدير إلى GeoJSON"
+    "ShowSelectedFeature": "عرض المعالم المُحددة",
+    "ExportToFeatureCollection": "تصدير إلى مجموعة المعالم",
+    "ExportToGeoJSON": "التصدير إلى GeoJSON",
+    "EditAttributes": "تحرير البيانات الجدولية",
+    "AddMarker": "إضافة علامة",
+    "RemoveMarker": "إزالة علامة",
+    "SaveToMyContent": "حفظ على المحتوى الخاص بي"
   },
   "spatialFilterByFeatures": {
     "relatedLayer": "الطبقات المرتبطة",
@@ -373,11 +419,37 @@ define({
   },
   "units": {
     "miles": "أميال",
+    "milesAbbr": "ميل",
     "kilometers": "كيلومترات",
+    "kilometersAbbr": "كيلومتر",
     "feet": "قدم",
+    "feetAbbr": "قدم",
     "meters": "أمتار",
+    "metersAbbr": "متر",
     "yards": "ياردات",
-    "nauticalMiles": "أميال محايدة"
+    "yardsAbbr": "يارد",
+    "acres": "فدان",
+    "acresAbbr": "فدان",
+    "nauticalMiles": "أميال بحرية",
+    "nauticalMilesAbbr": "nmi",
+    "uSSurveyFeet": "قدم US",
+    "uSSurveyFeetAbbr": "ftUS",
+    "decimalDegree": "الدرجات العشرية",
+    "decimalDegreeAbbr": "dd",
+    "degreeMinuteSeconds": "درجة دقيقة ثانية",
+    "degreeMinuteSecondsAbbr": "d-m-s",
+    "squareMiles": "أميال مربعة",
+    "squareMilesAbbr": "ميل مكعب",
+    "squareKilometer": "كيلو مترات مربعة",
+    "squareKilometerAbbr": "كيلومتر مكعب",
+    "squareFeet": "قدم مربع",
+    "squareFeetAbbr": "قدم مربع",
+    "squareMeters": "أمتار مربعة",
+    "squareMetersAbbr": "متر مربع",
+    "squareYards": "ياردات مربعة",
+    "squareYardsAbbr": "ياردة مربعة",
+    "squareUSSurveyFeet": "قدم مسح مربع US",
+    "squareUSSurveyFeetAbbr": "sq ftUS"
   },
   "featureSetChooser": {
     "select": "تحديد",
@@ -389,7 +461,13 @@ define({
     "addSelectionTip": "إضافة للاختيارات",
     "removeSelectionTip": "إزالة من التحديد",
     "selectFromCurrentSelectionTip": "تحديد من التحديد الحالي",
-    "unselectAllSelectionTip": "ألغ تحديد كل المعالم المحددة حاليًا"
+    "unselectAllSelectionTip": "ألغ تحديد كل المعالم المحددة حاليًا",
+    "selectByPolygon": "تحديد بواسطة مضلع",
+    "selectByCircle": "تحديد بواسطة دائرة",
+    "selectByLine": "تحديد بواسطة خط",
+    "chooseSelectingTools": "اختر أدوات التحديد",
+    "darw": "رسم",
+    "drawShap": "رسم شكل"
   },
   "widgetManager": {
     "createWidgetError": "خطأ في إنشاء عنصر واجهة المستخدم",
@@ -448,5 +526,86 @@ define({
   },
   "webSceneLoader": {
     "webglSupportTip": "تطبيقات الويب ثلاثية الأبعاد غير مدعومة في المستعرض."
-  }
+  },
+  "map": {
+    "basemapNotAvailable": "لم تتوافر خريطة الأساس.",
+    "displayDefaultBasemap": "عرض خريطة الأساس الافتراضية بدلاً من ذلك.",
+    "layerLoadedError": "تتعذر إضافة الطبقة ${layer} إلى الخريطة."
+  },
+  "popup": {
+    "relatedTables": "الجداول ذات الصلة:",
+    "relatedRecords": "السجلات ذات الصلة:",
+    "noRelatedRecotds": "لم يتم العثور على سجلات ذات صلة.",
+    "chooseFieldTip": "اختر بيانات جدولية لإظهار القائمة",
+    "saveAsPopupTitle": "كما هو الأمر في العنوان المنبثق"
+  },
+  "queryFeatures": {
+    "tooManyFeaturesTip": "يوجد الكثير جدًا من المعالم في التحديد الخاص بك. قد يستغرق وقتًا طويلاً لاستعادتهم وعرضهم على الخريطة.",
+    "askForContinue": "هل تريد المتابعة؟"
+  },
+  "colorPalette": {
+    "transparent": "شفاف",
+    "custom": "تخصيص"
+  },
+  "temperature": {
+    "celsius": "سلزيوس",
+    "fahrenheit": "فهرينهايت"
+  },
+  "report": {
+    "printButtonLabel": "طباعة",
+    "reportDimensionsMsg": "يتم تصميم هذا التقرير لكي يتم طباعته على ورق ${paperSize}",
+    "unableToPrintMapMsg": "حدث خطأ أثناء طباعة الخرائط.",
+    "notesHint": "أدخل التعليقات هنا",
+    "landscape": "أفقي",
+    "portrait": "عمودي",
+    "mapOnly": "MAP_ONLY",
+    "a0": "A0",
+    "a1": "A1",
+    "a2": "A2",
+    "a3": "A3",
+    "a4": "A4",
+    "a5": "A5",
+    "letterANSIA": "حرف ANSI A",
+    "tabloidANSIB": "صحيفة مصغرة ANSI B",
+    "letter": "حرف",
+    "legal": "قانوني",
+    "tabloid": "Tabloid",
+    "ansi_a": "ANSI A",
+    "ansi_b": "ANSI B",
+    "ansi_c": "ANSI C",
+    "ansi_d": "ANSI D",
+    "ansi_e": "ANSI E"
+  },
+  "snapshot": {
+    "snapshot_complete": "تم إنشاء لقطة الشاشة بنجاح.",
+    "snapshot_failed": "فشل إنشاء اللقطة.",
+    "snapshot_append": "لقطة",
+    "utc": "UTC"
+  },
+  "statisticsChart": {
+    "enlarge": "توسيع",
+    "setting": "إعداد",
+    "count": "عدد",
+    "horizontalAxis": "محور أفقي",
+    "verticalAxis": "محور رأسي",
+    "dataLabels": "تسميات البيانات",
+    "color": "لون"
+  },
+  "frameworkDatasource": {
+    "setDataSource": "تعيين مصدر البيانات",
+    "customDataSource": "مصدر بيانات إضافي",
+    "selectCustomDataTip": "حدد مصدر بيانات من هذا التطبيق.",
+    "widgetOutputs": "العنصر الناتجة لعنصر واجهة المستخدم",
+    "noExtraDsAvailable": "لا يتوفر مصادر بيانات إضافية.",
+    "addExtraDsTip": "انتقل إلى علامة تبويب البيانات الجدولية من المنشيء، وانقر على مصادر بيانات إضافية لإضافة بيانات.",
+    "widgetOutpusListTip": "يتم أيضًا إدراج مخرجات عنصر واجهة الاستخدام (إن وجدت) هنا."
+  },
+  "gridLayout": {
+    "addWidgetTip": "إضافة عناصر واجهة مستخدم هنا خلال علامة تبويب عنصر واجهة المستخدم",
+    "modifyLayout": "تعديل التخطيط",
+    "dragToAdd": "سحب للإضافة",
+    "mapArea": "منطقة الخريطة"
+  },
+  "noEditPrivileges": "لا يحتوي حسابك على أذونات لإنشاء أو تعديل البيانات.",
+  "invalidConfiguration": "لم يتم تكوين عنصر واجهة المستخدم أو أن الطبقات التي توجد في التكوين لم تُعد موجودة في الخريطة. يرجى فتح التطبيق في وضع المُنشئ وإعادة تكوين عنصر واجهة المستخدم."
 });

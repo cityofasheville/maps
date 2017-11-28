@@ -16,7 +16,7 @@ define({
   "ok": "Gerai",
   "cancel": "Atšaukti",
   "includePoint": "Įtraukti taško koordinates į eksportuotą failą",
-  "configureLayerFields": "Konfigūruoti sluoksnio laukus",
+  "configureLayerFields": "Konfigūruoti laukus",
   "result": "Išsaugota sėkmingai",
   "warning": "Pirmiausia pasirinkite parinktį Rodyti.",
   "fieldCheckWarning": "Būtina pasirinkti bent vieną lauką.",
@@ -25,5 +25,6 @@ define({
   "fieldName": "Pavadinimas",
   "fieldAlias": "Pseudonimas",
   "fieldVisibility": "Matomumas",
-  "fieldActions": "Veiksmai"
+  "fieldActions": "Veiksmai",
+  "showAttachments": "Rodyti priedus"
 });

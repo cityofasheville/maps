@@ -13,5 +13,33 @@
 			<div class="no-query-tip" data-dojo-attach-point="noQueryTip"></div>
 		</div>
 	</div>
+	<div class="general-setting">
+		<div data-dojo-type="jimu/dijit/CheckBox" class="small-font-size" data-dojo-attach-point="cbxHideLayersAfterWidgetClosed" data-dojo-props='checked:true'></div>
+		<table>
+			<tbody>
+				<tr>
+					<td>
+						<div>${nls.tabLabels}:</div>
+					</td>
+					<td style="width:15px;"></td>
+					<td>
+						<div>${nls.tasks}</div>
+					</td>
+					<td style="width:5px;"></td>
+					<td>
+						<div data-dojo-attach-point="labelTasksTextBox" data-dojo-type="dijit/form/TextBox"></div>
+					</td>
+					<td style="width:10px;"></td>
+					<td>
+						<div>${nls.results}</div>
+					</td>
+					<td style="width:5px;"></td>
+					<td>
+						<div data-dojo-attach-point="labelResultsTextBox" data-dojo-type="dijit/form/TextBox"></div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 	<div data-dojo-attach-point="shelter" data-dojo-type="jimu/dijit/LoadingShelter" data-dojo-props='hidden:true'></div>
 </div>

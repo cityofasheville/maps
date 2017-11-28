@@ -1,8 +1,8 @@
 <div>
   <div class="jimu-widget-normal query-widget-content">
     <div class="query-tab-header" data-dojo-attach-point="tabHeader" data-dojo-attach-event="onclick:_onTabHeaderClicked">
-      <div class="query-tab-item jimu-float-leading selected" data-dojo-attach-point="taskQueryItem">${nls.tasks}</div>
-      <div class="query-tab-item jimu-float-trailing" data-dojo-attach-point="resultQueryItem">${nls.queryResults}</div>
+      <div class="query-tab-item jimu-ellipsis jimu-float-leading selected" data-dojo-attach-point="taskQueryItem" title="${labelTasks}">${labelTasks}</div>
+      <div class="query-tab-item jimu-ellipsis jimu-float-trailing" data-dojo-attach-point="resultQueryItem" title="${labelResults}">${labelResults}</div>
     </div>
     <div class="query-tabs-container">
       <div class="query-tab-view task-tab-view selected" data-dojo-attach-point="taskTabView">

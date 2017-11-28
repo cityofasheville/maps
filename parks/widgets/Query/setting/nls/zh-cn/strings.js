@@ -35,7 +35,7 @@ define({
   "noFilterTip": "在未定义过滤表达式的情况下，此查询任务会列出指定数据源中的所有要素。",
   "relationships": "关系",
   "addRelationshipLayer": "添加新关系",
-  "relatedTo": "关联对象",
+  "relatedTo": "相关内容",
   "selectOption": "请选择..",
   "resultItemSorting": "结果项目排序",
   "field": "字段",
@@ -97,7 +97,8 @@ define({
   "sortingFields": "对结果项目进行排序",
   "setDisplayFields": "设置显示字段",
   "symbol": "符号",
-  "setSymbol": "设置自定义符号",
+  "setSymbol": "使用自定义符号",
+  "changeSymbolAtRuntime": "允许在运行时更改符号",
   "serviceSymbolTip": "使用由图层定义的符号",
   "exportTip": "允许导出结果",
   "keepResultsTip": "在微件关闭后将结果保留地图上",
@@ -113,7 +114,7 @@ define({
   "customPopupTip": "配置自定义内容",
   "showResultsSetActions": "显示结果集的操作",
   "zoomTo": "缩放至",
-  "openAttributeTable": "在属性表中打开",
+  "openAttributeTable": "在属性表中查看",
   "content": "内容",
   "displaySQLTip": "针对最终用户显示 SQL 表达式",
   "useLayerDefaultSymbol": "使用图层的默认符号",
@@ -122,5 +123,9 @@ define({
   "uploadImage": "上传图像",
   "attributeCriteira": "属性条件",
   "specifyFilterAtRuntimeTip": "用户需要指定此表达式的参数。",
-  "value": "值"
+  "value": "值",
+  "hideLayersTip": "请在关闭微件时关闭查询结果图层。",
+  "tabLabels": "选项卡标注",
+  "tasks": "任务",
+  "queryCriteira": "查询条件"
 });

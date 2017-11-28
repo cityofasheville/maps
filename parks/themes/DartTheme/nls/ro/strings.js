@@ -1,4 +1,4 @@
 define({
   "_themeLabel": "Temă săgeţi",
-  "_layout_default": "Configuraţie implicită"
+  "_layout_default": "Aspect implicit"
 });

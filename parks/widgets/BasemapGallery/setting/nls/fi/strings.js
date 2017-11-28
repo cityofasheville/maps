@@ -18,5 +18,19 @@ define({
   "invalidTitle2": "' on jo olemassa. Valitse toinen otsikko.",
   "invalidBasemapUrl1": "Tämän tyyppistä karttatasoa ei voi käyttää taustakarttana.",
   "invalidBasemapUrl2": "Lisättävän taustakartan koordinaattijärjestelmä ei ole sama kuin nykyisessä kartassa.",
-  "addBaselayer": "Lisää taustakarttataso"
+  "addBaselayer": "Lisää taustakarttataso",
+  "repectOnline": "Organisaation Synkronoi aina taustakarttagallerian kanssa -asetus",
+  "customBasemap": "Määritä mukautetut taustakartat",
+  "basemapTips": "Lisää taustakarttoja valitsemalla ${import} tai ${createNew}.",
+  "importBasemap": "Tuo",
+  "createBasemap": "Luo uusi",
+  "importTitle": "Tuo taustakarttoja",
+  "createTitle": "Uusi taustakartta",
+  "selectGroupTip": "Valitse ryhmä, jonka taustakarttoja voi käyttää taustakarttoina.",
+  "noBasemaps": "Ei taustakarttoja.",
+  "defaultGroup": "Esri-oletusarvo",
+  "defaultOrgGroup": "Organisaation oletus",
+  "warningTitle": "Varoitus",
+  "confirmDelete": "Haluatko poistaa valitut taustakartat?",
+  "noBasemapAvailable": "Käytettävissä ei ole taustakarttoja, koska kaikilla taustakartoilla on eri sijaintiviite tai tiilirakenne kuin nykyisellä kartalla."
 });

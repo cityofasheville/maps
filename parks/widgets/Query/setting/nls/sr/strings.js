@@ -97,7 +97,8 @@ define({
   "sortingFields": "Sortiraj stavke rezultata",
   "setDisplayFields": "Postavi prikaz polja",
   "symbol": "Simbol",
-  "setSymbol": "Podesi prilagođeni simbol",
+  "setSymbol": "Koristi prilagođeni simbol",
+  "changeSymbolAtRuntime": "Dozvoli menjanje simbola pri pokretanju",
   "serviceSymbolTip": "Koristi simbole definisane slojem",
   "exportTip": "Dozvoli izvoz rezultata",
   "keepResultsTip": "Ostavi rezultate na mapi nakon što se vidžet zatvori",
@@ -113,7 +114,7 @@ define({
   "customPopupTip": "Konfiguriši prilagođeni sadržaj",
   "showResultsSetActions": "Prikaži radnje za skup rezultata",
   "zoomTo": "Zumiraj na",
-  "openAttributeTable": "Otvori u tabeli atributa",
+  "openAttributeTable": "Prikaži u tabeli atributa",
   "content": "Sadržaj",
   "displaySQLTip": "Prikaži SQL izraz za krajnje korisnike",
   "useLayerDefaultSymbol": "Koristi podrazumevani simbol sloja",
@@ -122,5 +123,9 @@ define({
   "uploadImage": "Otpremi snimak",
   "attributeCriteira": "Kriterijumi atributa",
   "specifyFilterAtRuntimeTip": "Korisnici će trebati da navedu parametre za ovaj izraz.",
-  "value": "VREDNOST"
+  "value": "VREDNOST",
+  "hideLayersTip": "Isključite slojeve sa rezultatima upita kada je vidžet zatvoren.",
+  "tabLabels": "Oznake kartice",
+  "tasks": "Zadaci",
+  "queryCriteira": "Kriterijum upita"
 });

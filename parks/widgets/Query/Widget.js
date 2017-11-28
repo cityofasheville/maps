@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 Esri. All Rights Reserved.
+// Copyright © 2014 - 2016 Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,17 +24,17 @@ define([
     'dojo/promise/all',
     'dojo/_base/declare',
     'dijit/_WidgetsInTemplateMixin',
-    'jimu/BaseWidget',
-    'jimu/dijit/Message',
     'jimu/utils',
+    'jimu/BaseWidget',
     'jimu/MapManager',
     'jimu/filterUtils',
+    'jimu/dijit/Message',
+    'esri/lang',
+    'esri/request',
+    'esri/symbols/jsonUtils',
     'esri/layers/FeatureLayer',
     'esri/dijit/PopupTemplate',
     'esri/renderers/SimpleRenderer',
-    'esri/symbols/jsonUtils',
-    'esri/lang',
-    'esri/request',
     './TaskSetting',
     './SingleQueryLoader',
     './SingleQueryResult',
@@ -43,9 +43,9 @@ define([
     'jimu/dijit/LoadingShelter',
     'dijit/form/Select'
   ],
-  function(on, query, Deferred, lang, html, array, all, declare, _WidgetsInTemplateMixin, BaseWidget,
-    Message, jimuUtils, MapManager, FilterUtils, FeatureLayer, PopupTemplate, SimpleRenderer, symbolJsonUtils,
-    esriLang, esriRequest, TaskSetting, SingleQueryLoader, SingleQueryResult, queryUtils, LayerInfos) {
+  function(on, query, Deferred, lang, html, array, all, declare, _WidgetsInTemplateMixin, jimuUtils, BaseWidget,
+    MapManager, FilterUtils, Message, esriLang, esriRequest, symbolJsonUtils, FeatureLayer, PopupTemplate,
+    SimpleRenderer, TaskSetting, SingleQueryLoader, SingleQueryResult, queryUtils, LayerInfos) {
 
     return declare([BaseWidget, _WidgetsInTemplateMixin], {
       name: 'Query',
@@ -53,9 +53,10 @@ define([
       currentTaskSetting: null,
       hiddenClass: "not-visible",
       _resultLayerInfos: null,//[{value,label,taskIndex,singleQueryResult}]
-      _activeLayerId: null,//save the current visible layer id
       mapManager: null,
       layerInfosObj: null,
+      labelTasks: '',
+      labelResults: '',
 
       /*
       test:
@@ -77,9 +78,17 @@ define([
         var strClearResults = this.nls.clearResults;
         var tip = esriLang.substitute({clearResults:strClearResults}, this.nls.operationalTip);
         this.nls.operationalTip = tip;
+        this.labelTasks = this.nls.tasks;
+        this.labelResults = this.nls.queryResults;
         if(this.config){
           this.config = queryUtils.getConfigWithValidDataSource(this.config);
           this._updateConfig();
+          if(this.config.labelTasks){
+            this.labelTasks = this.config.labelTasks;
+          }
+          if(this.config.labelResults){
+            this.labelResults = this.config.labelResults;
+          }
         }
         this.mapManager = MapManager.getInstance();
         this.layerInfosObj = LayerInfos.getInstanceSync();
@@ -119,22 +128,19 @@ define([
       },
 
       onOpen: function(){
-        // var resultLayers = this._getAllResultLayers();
-        // array.forEach(resultLayers, lang.hitch(this, function(layer){
-        //   layer.show();
-        // }));
-
-        if(this._activeLayerId){
-          var layer = this.map.getLayer(this._activeLayerId);
-          if(layer){
-            layer.show();
-          }
+        var info = this._getCurrentResultLayerInfo();
+        var singleQueryResult = info && info.singleQueryResult;
+        if(singleQueryResult){
+          singleQueryResult.showLayer();
         }
+        this._showTempLayers();
+        this.inherited(arguments);
       },
 
       onActive: function(){
         //this.map.setInfoWindowOnClick(false);
-        this.mapManager.disableWebMapPopup();
+        // this.mapManager.disableWebMapPopup();
+        this._showTempLayers();
       },
 
       onDeActive: function(){
@@ -144,17 +150,15 @@ define([
           this.currentTaskSetting.deactivate();
         }
         this.mapManager.enableWebMapPopup();
+        this._hideTempLayers();
       },
 
       onClose:function(){
-        // var resultLayers = this._getAllResultLayers();
-        // array.forEach(resultLayers, lang.hitch(this, function(layer){
-        //   if(!layer.keepResultsOnMapAfterCloseWidget){
-        //     layer.hide();
-        //   }
-        // }));
-        this._hideAllLayers();
+        if(this.config.hideLayersAfterWidgetClosed){
+          this._hideAllLayers();
+        }
         this._hideInfoWindow();
+        this._hideTempLayers();
         this.inherited(arguments);
       },
 
@@ -162,6 +166,18 @@ define([
         this._hideInfoWindow();
         this._removeResultLayerInfos(this._resultLayerInfos);
         this.inherited(arguments);
+      },
+
+      _hideTempLayers: function(){
+        if(this.currentTaskSetting){
+          this.currentTaskSetting.hideTempLayers();
+        }
+      },
+
+      _showTempLayers: function(){
+        if(this.currentTaskSetting){
+          this.currentTaskSetting.showTempLayers();
+        }
       },
 
       _initSelf:function(){
@@ -175,10 +191,6 @@ define([
 
         //create query tasks
         array.forEach(queries, lang.hitch(this, function(singleConfig, index){
-          // var strEmptyTr = '<tr class="empty-single-task"><td></td><td></td></tr>';
-          // var emptyTr = html.toDom(strEmptyTr);
-          // html.place(emptyTr, this.tasksTbody);
-
           var name = singleConfig.name;
           var strTr = '<tr class="single-task">' +
             '<td class="first-td"><img class="task-icon" /></td>' +
@@ -192,7 +204,7 @@ define([
           html.place(tr, this.tasksTbody);
           var img = query("img", tr)[0];
           if(singleConfig.icon){
-            img.src = singleConfig.icon;
+            img.src = jimuUtils.processUrlInWidgetConfig(singleConfig.icon, this.folderUrl);
           }else{
             img.src = this.folderUrl + "css/images/default_task_icon.png";
           }
@@ -209,6 +221,15 @@ define([
       _onTabHeaderClicked: function(event){
         var target = event.target || event.srcElement;
         if(target === this.taskQueryItem){
+          var currentResultLayerInfo = this._getCurrentResultLayerInfo();
+          if(currentResultLayerInfo){
+            var singleQueryResult = currentResultLayerInfo.singleQueryResult;
+            if(singleQueryResult){
+              if(singleQueryResult.singleRelatedRecordsResult || singleQueryResult.multipleRelatedRecordsResult){
+                singleQueryResult._showFeaturesResultDiv();
+              }
+            }
+          }
           this._switchToTaskTab();
         }else if(target === this.resultQueryItem){
           this._switchToResultTab();
@@ -292,17 +313,9 @@ define([
           currentAttrs.relationshipPopupTemplates = relationshipPopupTemplates;
           currentAttrs.query.maxRecordCount = layerInfo.maxRecordCount || 1000;
 
-          if (this._isServiceSupportsOrderBy(layerInfo) &&
-            this._isServiceSupportsPagination(layerInfo)) {
-            currentAttrs.queryType = 1;
-          } else if (this._isSupportObjectIds(layerInfo)) {
-            currentAttrs.queryType = 2;
-          } else {
-            currentAttrs.queryType = 3;
-          }
+          currentAttrs.queryType = queryUtils.getQueryType(layerInfo);
 
-          //after get currentAttrs, we can show task setting pane
-          //destroy the old TaskSetting dijit and create a new one
+          //after get currentAttrs, we can show task setting pane destroy the old TaskSetting dijit and create a new one
           if (this.currentTaskSetting) {
             this.currentTaskSetting.destroy();
           }
@@ -321,9 +334,6 @@ define([
             })
           });
 
-          // query('tr.single-task', this.tasksTbody).removeClass('selected');
-          // html.addClass(currentAttrs.queryTr, 'selected');
-
           if (this.currentTaskSetting.canAutoRunning()) {
             this._switchToResultTab();
             //if the task can run without specify other parameters, then we run it automatically
@@ -331,8 +341,6 @@ define([
           }
 
           this.currentTaskSetting.placeAt(this.taskSettingContainer);
-
-          //this._fromQueryListToQueryParams();
         }), lang.hitch(this, function(err){
           console.error("can't get layerInfo", err);
         }));
@@ -383,8 +391,15 @@ define([
 
             tr.relationshipLayerInfos = relationshipLayerInfos;
             var relationshipPopupTemplates = {};
+            var webMapItemData = this.map.itemInfo.itemData;
+
+            var baseServiceUrl = tr.singleConfig.url.replace(/\d*\/*$/g, '');
+
             for(var layerId in relationshipLayerInfos){
-              var popupInfo = queryUtils.getDefaultPopupInfo(relationshipLayerInfos[layerId], false, true);
+              var layerDefinition = relationshipLayerInfos[layerId];
+              //var popupInfo = queryUtils.getDefaultPopupInfo(layerDefinition, false, true);
+              var layerUrl = baseServiceUrl + layerId;
+              var popupInfo = queryUtils.getPopupInfoForRelatedLayer(webMapItemData, layerUrl , layerDefinition);
               relationshipPopupTemplates[layerId] = new PopupTemplate(popupInfo);
             }
             this.shelter.hide();
@@ -567,7 +582,7 @@ define([
           var taskIndex = currentAttrs.queryTr.taskIndex;
           var taskOptions = this._getResultLayerInfosByTaskIndex(taskIndex);
           if(taskOptions.length > 0){
-            //When SingleQueryResult is destroyed, the releated feature layer is removed
+            //When SingleQueryResult is destroyed, the related feature layer is removed
             this._removeResultLayerInfos(taskOptions);
           }
         }
@@ -590,6 +605,7 @@ define([
         });
         this.own(on(singleQueryResult, 'show-related-records', lang.hitch(this, this._onShowRelatedRecords)));
         this.own(on(singleQueryResult, 'hide-related-records', lang.hitch(this, this._onHideRelatedRecords)));
+        this.own(on(singleQueryResult, 'features-update', lang.hitch(this, this._onFeaturesUpdate)));
         //we should put singleQueryResult into the dom tree when _onSingleQueryFinished is called
         //singleQueryResult.placeAt(this.singleResultDetails);
 
@@ -730,40 +746,26 @@ define([
       },
 
       _onResultLayerSelectChanged: function(){
-        var value = this.resultLayersSelect.get('value');
-        if(value){
-          var resultLayerInfo = this._getResultLayerInfoByValue(value);
-          if (resultLayerInfo) {
-            this._showResultLayerInfo(resultLayerInfo);
-            var singleQueryResult = resultLayerInfo.singleQueryResult;
-            if(singleQueryResult){
-              singleQueryResult.zoomToLayer();
-            }
-          }
+        var resultLayerInfo = this._getCurrentResultLayerInfo();
+        if (resultLayerInfo) {
+          this._showResultLayerInfo(resultLayerInfo);
         }
       },
 
-      _getAllResultLayers: function(){
-        var resultLayers = [];
-        array.map(this._resultLayerInfos, lang.hitch(this, function(resultLayerInfo){
-          if(resultLayerInfo.singleQueryResult){
-            var currentAttrs = resultLayerInfo.singleQueryResult.getCurrentAttrs();
-            if(currentAttrs && currentAttrs.query){
-              var layer = currentAttrs.query.resultLayer;
-              if(layer){
-                resultLayers.push(layer);
-              }
-            }
-          }
-        }));
-        return resultLayers;
+      _getCurrentResultLayerInfo: function(){
+        var resultLayerInfo = null;
+        var value = this.resultLayersSelect.get('value');
+        if(value){
+          resultLayerInfo = this._getResultLayerInfoByValue(value);
+        }
+        return resultLayerInfo;
       },
 
-      _hideAllLayers: function(/*optional*/ ignoreLayer){
-        var resultLayers = this._getAllResultLayers();
-        array.forEach(resultLayers, lang.hitch(this, function(layer){
-          if(layer !== ignoreLayer){
-            layer.hide();
+      _hideAllLayers: function(/*optional*/ ignoredSingleQueryResult){
+        var dijits = this._getAllSingleQueryResultDijits();
+        array.forEach(dijits, lang.hitch(this, function(singleQueryResult){
+          if(singleQueryResult && singleQueryResult !== ignoredSingleQueryResult){
+            singleQueryResult.hideLayer();
           }
         }));
       },
@@ -854,20 +856,11 @@ define([
       _showResultLayerInfo: function(resultLayerInfo){
         this._hideAllSingleQueryResultDijits();
         var singleQueryResult = resultLayerInfo.singleQueryResult;
-        var resutlLayer = null;
+        this._hideAllLayers(singleQueryResult);
         if (singleQueryResult) {
           html.setStyle(singleQueryResult.domNode, 'display', 'block');
-          var currentAttrs = singleQueryResult.getCurrentAttrs();
-          resutlLayer = lang.getObject("query.resultLayer", false, currentAttrs);
-        }
-
-        if (resutlLayer) {
-          this._activeLayerId = resutlLayer.id;
-          this._hideAllLayers(resutlLayer);
-          resutlLayer.show();
-        }else{
-          this._activeLayerId = null;
-          this._hideAllLayers();
+          singleQueryResult.showLayer();
+          singleQueryResult.zoomToLayer();
         }
       },
 
@@ -894,37 +887,19 @@ define([
         html.removeClass(this.resultLayersSelectDiv, this.hiddenClass);
       },
 
+      _onFeaturesUpdate: function(args){
+        var taskIndex = args.taskIndex;
+        var features = args.features;
+        try{
+          this.updateDataSourceData(taskIndex, {
+            features: features
+          });
+        }catch(e){
+          console.error(e);
+        }
+      },
+
       /*-------------------------common functions----------------------------------*/
-      _isServiceSupportsOrderBy: function(layerInfo){
-        var isSupport = false;
-        if(layerInfo.advancedQueryCapabilities){
-          if(layerInfo.advancedQueryCapabilities.supportsOrderBy){
-            isSupport = true;
-          }
-        }
-        return isSupport;
-      },
-
-      _isServiceSupportsPagination: function(layerInfo){
-        var isSupport = false;
-        if(layerInfo.advancedQueryCapabilities){
-          if(layerInfo.advancedQueryCapabilities.supportsPagination){
-            isSupport = true;
-          }
-        }
-        return isSupport;
-      },
-
-      _isSupportObjectIds: function(layerInfo){
-        //http://resources.arcgis.com/en/help/arcgis-rest-api/#/Layer_Table/02r3000000zr000000/
-        //currentVersion is added from 10.0 SP1
-        //typeIdField is added from 10.0
-        var currentVersion = 0;
-        if(layerInfo.currentVersion){
-          currentVersion = parseFloat(layerInfo.currentVersion);
-        }
-        return currentVersion >= 10.0 || layerInfo.hasOwnProperty('typeIdField');
-      },
 
       _isImageServiceLayer: function(url) {
         return (url.indexOf('/ImageServer') > -1);

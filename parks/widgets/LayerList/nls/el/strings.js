@@ -1,7 +1,7 @@
 define({
   "_widgetLabel": "Λίστα θεματικών επιπέδων",
   "titleBasemap": "Υπόβαθρα",
-  "titleLayers": "Επιχειρησιακά επίπεδα",
+  "titleLayers": "Επιχειρησιακά Επίπεδα",
   "labelLayer": "Όνομα θεματικού επιπέδου",
   "itemZoomTo": "Εστίαση",
   "itemTransparency": "Διαφάνεια",
@@ -11,7 +11,7 @@ define({
   "itemMoveDown": "Μετακίνηση προς τα κάτω",
   "itemDesc": "Περιγραφή",
   "itemDownload": "Λήψη",
-  "itemToAttributeTable": "Άνοιγμα Πίνακα Περιγραφικών Γνωρισμάτων",
+  "itemToAttributeTable": "Προβολή στον πίνακα περιγραφικών γνωρισμάτων",
   "itemShowItemDetails": "Εμφάνιση λεπτομερειών αντικειμένου",
   "empty": "κενό",
   "removePopup": "Απενεργοποίηση αναδυόμενου παραθύρου",

@@ -1,9 +1,11 @@
 define({
   "_widgetLabel": "打印",
-  "title": "地图标题",
+  "title": "地图切片",
   "format": "格式",
   "layout": "布局",
   "settings": "高级",
+  "labels": "标注",
+  "showLabels": "显示标注",
   "mapScaleExtent": "地图比例/范围",
   "preserve": "保留",
   "mapScale": "地图比例",

@@ -16,7 +16,7 @@ define({
   "getVersionError": "Det går inte att hämta versionsnumret för geometritjänsten",
   "add": "Lägg till koordinatsystem för utdata",
   "edit": "Redigera koordinatsystem",
-  "output": "Koordinatsystem för utdata",
+  "output": "Utdatakoordinatsystem",
   "cName": "Koordinatsystemets namn",
   "units": "Visningsenheter: ",
   "datum": "Datumomvandling",
@@ -39,7 +39,11 @@ define({
   "Kilometers": "Kilometer",
   "Decimeters": "Decimeter",
   "Decimal_Degrees": "Decimalgrader",
+  "Degrees_Decimal_Minutes": "Grader decimalminuter",
   "Degree_Minutes_Seconds": "Grader minuter sekunder",
   "MGRS": "MGRS",
-  "USNG": "USNG"
+  "USNG": "USNG",
+  "displayOrderLonLatTips": "Koordinatvisningsordning:",
+  "lonLatTips": "Longitud/latitud (X, Y)",
+  "latLonTips": "Latitud/longitud (Y, X)"
 });

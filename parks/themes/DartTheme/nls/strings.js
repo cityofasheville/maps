@@ -1,9 +1,10 @@
 define({
   root: ({
     _themeLabel: "Dart Theme",
-    _layout_default: "Default Layout"
+    _layout_default: "Default layout"
   }),
   "ar": 1,
+  "bs": 1,
   "cs": 1,
   "da": 1,
   "de": 1,
@@ -13,8 +14,10 @@ define({
   "fi": 1,
   "fr": 1,
   "he": 1,
+  "hi": 1,
   "hr": 1,
   "it": 1,
+  "id": 1,
   "ja": 1,
   "ko": 1,
   "lt": 1,

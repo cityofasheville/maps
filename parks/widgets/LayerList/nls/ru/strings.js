@@ -11,7 +11,7 @@ define({
   "itemMoveDown": "Ниже",
   "itemDesc": "Описание",
   "itemDownload": "Загрузить",
-  "itemToAttributeTable": "Открыть таблицу атрибутов",
+  "itemToAttributeTable": "Просмотреть в таблице атрибутов",
   "itemShowItemDetails": "Показать информацию об элементе",
   "empty": "пусто",
   "removePopup": "Отключить всплывающее окно",

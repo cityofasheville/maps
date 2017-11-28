@@ -5,7 +5,7 @@ define({
   "queryParams": "Opcije",
   "parameters": "OPCIJE",
   "queries": "UPITI",
-  "apply": "PRIMENI",
+  "apply": "Primeni",
   "queryResults": "Rezultati",
   "clear": "Izbriši",
   "noResults": "Nije pronađen nijedan geoobjekat.",
@@ -76,12 +76,15 @@ define({
   "back": "Nazad",
   "execute": "Izvrši",
   "zoomTo": "Zumiraj na",
-  "openAttributeTable": "Otvori u tabeli atributa",
+  "openAttributeTable": "Prikaži u tabeli atributa",
   "noResult": "Bez rezultata.",
   "noTask": "Bez zadatka.",
   "removeThisResult": "Ukloni ovaj rezultat",
   "attributeCriteira": "Kriterijumi atributa",
   "spatialFilter": "Prostorni filter",
   "value": "VREDNOST",
-  "noAttributeSpatialFilterTip": "Nema definisanih filtera. Svi geoobjekti će biti vraćeni."
+  "noAttributeSpatialFilterTip": "Nema definisanih filtera. Svi geoobjekti će biti vraćeni.",
+  "showAllRelatedRecords": "Prikaži sve povezane zapise",
+  "changeSymbol": "Promeni simbol",
+  "queryCriteira": "Kriterijum upita"
 });

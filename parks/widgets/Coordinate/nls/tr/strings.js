@@ -14,14 +14,14 @@ define({
   "Foot": "Fit",
   "Yards": "Yarda",
   "Miles": "Mil",
-  "Nautical_Miles": "Deniz Mili",
+  "Nautical_Miles": "Deniz mili",
   "Millimeters": "Milimetre",
   "Centimeters": "Santimetre",
   "Meter": "Metre",
   "Kilometers": "Kilometre",
   "Decimeters": "Desimetre",
   "Decimal_Degrees": "Derece",
-  "Degree_Minutes_Seconds": "Derece Dakika Saniye",
+  "Degree_Minutes_Seconds": "Derece dakika saniye",
   "MGRS": "MGRS",
   "USNG": "USNG"
 });

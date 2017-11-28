@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 Esri. All Rights Reserved.
+// Copyright © 2014 - 2016 Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -262,7 +262,7 @@ define([
         for (i = 0; i < allIconConfigs.length; i++) {
           iconConfig = allIconConfigs[i];
           name = iconConfig.name;
-          if (name === "ZoomSlider" || name === "HomeButton" || name === "MyLocation") {
+          if (name === "ZoomSlider" || name === "HomeButton" || name === "MyLocation" || name === "ExtentNavigate") {
             this._createChildWidget(iconConfig);
           } else if (name === "Search" && defaultSearch) {
             defaultSearch = false;
@@ -347,6 +347,12 @@ define([
               domConstruct.place(widget.domNode, this.locateNode);
               domAttr.set(this.locateNode, "settingId", iconConfig.id);
               domStyle.set("locateNode", "display", "block");
+              break;
+            case "ExtentNavigate":
+              widget.setOrientation(false);
+              domConstruct.place(widget.domNode, this.extentNavigateNode);
+              domAttr.set(this.extentNavigateNode, "settingId", iconConfig.id);
+              domStyle.set(this.extentNavigateDiv, "display", "block");
               break;
             case "Search":
               domConstruct.place(widget.domNode, this.searchNode);

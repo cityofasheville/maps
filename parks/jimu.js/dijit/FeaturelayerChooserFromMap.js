@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 Esri. All Rights Reserved.
+// Copyright © 2014 - 2016 Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,6 +31,9 @@ function(declare, Deferred, html, lang, LayerChooserFromMap) {
     showLayerFromFeatureSet: false,
     showTable: false,//if true, types will be ignored for table layer
     onlyShowVisible: false,//if the layer is a Table, this option is ignored
+    ignoredFeaturelayerIds: null,//an array of ignored feature layer ids
+    mustSupportStatistics: false,
+    ignoreVirtualLayer: false,
 
     //public methods:
     //getSelectedItems return [{name, url, layerInfo}]
@@ -41,10 +44,20 @@ function(declare, Deferred, html, lang, LayerChooserFromMap) {
 
     postMixInProperties:function(){
       this.inherited(arguments);
+      if(!this.ignoredFeaturelayerIds){
+        this.ignoredFeaturelayerIds = [];
+      }
       this.basicFilter = lang.hitch(this, this.basicFilter);
       this.filter = LayerChooserFromMap.createFeaturelayerFilter(this.types,
                                                                  this.showLayerFromFeatureSet,
-                                                                 this.showTable);
+                                                                 this.showTable,
+                                                                 this.mustSupportStatistics);
+
+      if(this.ignoreVirtualLayer){
+        this.filter = LayerChooserFromMap.andCombineFilters(
+          [this.filter, lang.hitch(this, this._ignoreVirtualLayerFilter)]
+        );
+      }
     },
 
     postCreate: function(){
@@ -52,13 +65,25 @@ function(declare, Deferred, html, lang, LayerChooserFromMap) {
       html.addClass(this.domNode, 'jimu-basic-layer-chooser-from-map');
     },
 
+    _ignoreVirtualLayerFilter: function(layerInfo){
+      return layerInfo.getLayerType().then(function(layerType) {
+        var virtualLayer = layerType === 'ArcGISDynamicMapServiceLayer' ||
+          layerType === 'ArcGISTiledMapServiceLayer' || layerType === 'GroupLayer';
+        return !virtualLayer;
+      });
+    },
+
     //override basicFilter method of LayerChooserFromMap
     basicFilter: function(layerInfo) {
       var def = new Deferred();
-      if (this.onlyShowVisible && layerInfo.getLayerType() !== 'Table') {
-        def.resolve(layerInfo.isShowInMap());
-      } else {
-        def.resolve(true);
+      if(this.ignoredFeaturelayerIds.indexOf(layerInfo.id) >= 0){
+        def.resolve(false);
+      }else{
+        if (this.onlyShowVisible && layerInfo.getLayerType() !== 'Table') {
+          def.resolve(layerInfo.isShowInMap());
+        } else {
+          def.resolve(true);
+        }
       }
       return def;
     },

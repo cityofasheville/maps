@@ -11,7 +11,7 @@ define({
   "exportAll": "すべてを CSV にエクスポート",
   "options": "オプション",
   "zoomto": "ズーム",
-  "highlight": "グラフィックのハイライト表示",
+  "highlight": "グラフィックスのハイライト表示",
   "selectAll": "すべてのページのレコードを選択",
   "selectPage": "現在のページのレコードを選択",
   "clearSelection": "選択の解除",
@@ -19,10 +19,11 @@ define({
   "setFilterTip": "フィルターを正しく設定してください。",
   "noFilterTip": "フィルターの条件式が定義されていない場合、このクエリ タスクは、指定したデータ ソース内のすべてのフィーチャをリストします。",
   "filterByExtent": "マップ範囲によるフィルター",
-  "showSelectedRecords": "選択レコードの表示",
+  "showSelectedRecords": "選択レコードを表示",
   "showAllRecords": "すべてのレコードを表示",
   "showRelatedRecords": "関連レコードの表示",
   "noRelatedRecords": "関連するレコードが見つかりませんでした",
+  "attachmentColumn": "写真とファイル",
   "refresh": "更新",
   "features": "フィーチャ",
   "records": "レコード",
@@ -37,5 +38,7 @@ define({
   "closeTableTip": "属性テーブルの非表示",
   "sortAsc": "昇順で並べ替え",
   "sortDes": "降順で並べ替え",
-  "statistics": "統計"
+  "statistics": "統計",
+  "attachments": "添付ファイル",
+  "files": "ファイル"
 });

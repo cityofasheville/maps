@@ -3,5 +3,5 @@ define({
   "right": "Aliniere la dreapta",
   "arrangement": "Aranjament",
   "autoUpdate": "Actualizare automată",
-  "respectCurrentMapScale": "Respectare scară actuală a hărţii"
+  "respectCurrentMapScale": "Păstrare scară curentă a hărţii"
 });
