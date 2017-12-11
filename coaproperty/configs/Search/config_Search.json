@@ -1,0 +1,36 @@
+{
+  "allPlaceholder": "Search by address or PIN",
+  "showInfoWindowOnSelect": true,
+  "sources": [
+    {
+      "url": "http://arcgis.ashevillenc.gov/arcgis/rest/services/Geolocators/BC_address_point/GeocodeServer",
+      "name": "Search by Address",
+      "singleLineFieldName": "Single Line Input",
+      "placeholder": "Search by address",
+      "countryCode": "",
+      "zoomScale": 50000,
+      "maxSuggestions": 6,
+      "maxResults": 6,
+      "searchInCurrentMapExtent": false,
+      "enableLocalSearch": false,
+      "localSearchMinScale": 300000,
+      "localSearchDistance": 50000,
+      "type": "locator"
+    },
+    {
+      "url": "http://arcgis.ashevillenc.gov/arcgis/rest/services/Geolocators/BC_parcel_pin_owner/GeocodeServer",
+      "name": "PIN Number",
+      "singleLineFieldName": "SingleLine",
+      "placeholder": "",
+      "countryCode": "",
+      "zoomScale": 50000,
+      "maxSuggestions": 6,
+      "maxResults": 6,
+      "searchInCurrentMapExtent": false,
+      "enableLocalSearch": false,
+      "localSearchMinScale": 300000,
+      "localSearchDistance": 50000,
+      "type": "locator"
+    }
+  ]
+}

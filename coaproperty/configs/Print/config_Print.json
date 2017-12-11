@@ -1,0 +1,8 @@
+{
+  "serviceURL": "https://utility.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
+  "defaultTitle": "COA Real Owned Property Map",
+  "defaultAuthor": "Map Asheville",
+  "defaultCopyright": "",
+  "defaultFormat": "PDF",
+  "defaultLayout": "Letter ANSI A Landscape"
+}

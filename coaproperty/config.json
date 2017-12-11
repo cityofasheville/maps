@@ -1,0 +1,310 @@
+{
+  "theme": {
+    "name": "DartTheme",
+    "styles": [
+      "pink",
+      "default",
+      "purple",
+      "blue",
+      "turquoise",
+      "green",
+      "orange",
+      "red"
+    ],
+    "version": "2.5",
+    "sharedTheme": {
+      "useHeader": false,
+      "useLogo": false,
+      "isPortalSupport": true
+    },
+    "customStyles": {
+      "mainBackgroundColor": "#4169e1"
+    }
+  },
+  "portalUrl": "https://avl.maps.arcgis.com",
+  "appId": "",
+  "authorizedCrossOriginDomains": [],
+  "title": "<div class=\"attribute-custom-style\"><font color=\"#afeeee\">City-Owned Property</font></div>",
+  "subtitle": "<div class=\"attribute-custom-style\">https://docs.google.com/document/d/1rIld9WoSbR2IwyBHAjlG-qaforH6UnGgLbMGQJbvxDA/edit</div>",
+  "keepAppState": true,
+  "logo": "https://avl.maps.arcgis.com/sharing/rest/content/items/8046633fd85e4cbd91ae595c43427e0c/data",
+  "geometryService": "https://utility.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer",
+  "links": [
+    {
+      "label": "Classifications",
+      "url": "https://docs.google.com/document/d/1rIld9WoSbR2IwyBHAjlG-qaforH6UnGgLbMGQJbvxDA/edit"
+    }
+  ],
+  "widgetOnScreen": {
+    "widgets": [
+      {
+        "uri": "themes/DartTheme/widgets/DartController/Widget",
+        "position": {
+          "left": 0,
+          "right": 0,
+          "bottom": 20,
+          "relativeTo": "map"
+        },
+        "version": "2.5",
+        "id": "themes_DartTheme_widgets_DartController_Widget_20",
+        "name": "DartController"
+      },
+      {
+        "uri": "widgets/OverviewMap/Widget",
+        "position": {
+          "right": 0,
+          "top": 0,
+          "relativeTo": "map"
+        },
+        "version": "2.5",
+        "id": "widgets_OverviewMap_Widget_21",
+        "name": "OverviewMap",
+        "config": "configs/OverviewMap/config_OverviewMap.json",
+        "visible": false
+      },
+      {
+        "uri": "widgets/Scalebar/Widget",
+        "position": {
+          "left": 10,
+          "bottom": 1,
+          "zIndex": 100,
+          "relativeTo": "map"
+        },
+        "version": "2.5",
+        "id": "widgets_Scalebar_Widget_22",
+        "name": "Scalebar",
+        "config": "configs/Scalebar/config_Scalebar.json"
+      },
+      {
+        "uri": "widgets/Coordinate/Widget",
+        "visible": false,
+        "position": {
+          "right": 10,
+          "bottom": -2,
+          "zIndex": 100,
+          "relativeTo": "map"
+        },
+        "version": "2.5",
+        "id": "widgets_Coordinate_Widget_23",
+        "name": "Coordinate",
+        "config": "configs/Coordinate/config_Coordinate.json"
+      },
+      {
+        "uri": "widgets/AttributeTable/Widget",
+        "version": "2.5",
+        "position": {
+          "relativeTo": "browser"
+        },
+        "id": "widgets_AttributeTable_Widget_24",
+        "name": "AttributeTable",
+        "config": "configs/AttributeTable/config_AttributeTable.json"
+      },
+      {
+        "uri": "widgets/Splash/Widget",
+        "position": {
+          "relativeTo": "browser"
+        },
+        "version": "2.5",
+        "id": "widgets_Splash_Widget_25",
+        "name": "Splash",
+        "config": "configs/Splash/config_Splash.json"
+      },
+      {
+        "uri": "widgets/FullScreen/Widget",
+        "position": {
+          "right": 8,
+          "top": 8,
+          "relativeTo": "map"
+        },
+        "version": "2.5",
+        "id": "widgets_FullScreen_Widget_26",
+        "name": "FullScreen",
+        "visible": false
+      }
+    ],
+    "panel": {
+      "uri": "jimu/OnScreenWidgetPanel",
+      "position": {
+        "relativeTo": "map"
+      }
+    }
+  },
+  "map": {
+    "3D": false,
+    "2D": true,
+    "position": {
+      "left": 0,
+      "top": 0,
+      "right": 0,
+      "bottom": 0
+    },
+    "itemId": "5739f3f3a8144a5dbc5c2ffac5da5726",
+    "mapOptions": {
+      "extent": {
+        "xmin": -9193152.268262405,
+        "ymin": 4242292.413699166,
+        "xmax": -9187443.377712205,
+        "ymax": 4245712.970715017,
+        "spatialReference": {
+          "wkid": 102100
+        }
+      }
+    },
+    "id": "map",
+    "portalUrl": "https://avl.maps.arcgis.com",
+    "mapRefreshInterval": {
+      "useWebMapRefreshInterval": true
+    }
+  },
+  "widgetPool": {
+    "panel": {
+      "uri": "themes/DartTheme/panels/DartPanel/Panel",
+      "position": {
+        "relativeTo": "map"
+      }
+    },
+    "widgets": [
+      {
+        "uri": "widgets/Legend/Widget",
+        "version": "2.5",
+        "id": "widgets_Legend_Widget_18",
+        "name": "Legend",
+        "index": 2,
+        "config": "configs/Legend/config_Legend.json"
+      },
+      {
+        "uri": "widgets/LayerList/Widget",
+        "version": "2.5",
+        "id": "widgets_LayerList_Widget_19",
+        "name": "LayerList",
+        "index": 3,
+        "config": "configs/LayerList/config_LayerList.json",
+        "openAtStart": true
+      },
+      {
+        "uri": "widgets/ZoomSlider/Widget",
+        "isPreconfiguredInTheme": true,
+        "id": "widgets_ZoomSlider_Widget_27",
+        "name": "ZoomSlider",
+        "version": "2.5",
+        "position": {
+          "relativeTo": "map"
+        },
+        "index": 4
+      },
+      {
+        "name": "BasemapGallery",
+        "version": "2.5",
+        "uri": "widgets/BasemapGallery/Widget",
+        "config": "configs/BasemapGallery/config_BasemapGallery.json",
+        "index": 5,
+        "id": "widgets_BasemapGallery_Widget_37"
+      },
+      {
+        "name": "Draw",
+        "version": "2.5",
+        "uri": "widgets/Draw/Widget",
+        "index": 6,
+        "id": "widgets_Draw_Widget_29",
+        "config": "configs/Draw/config_Draw.json"
+      },
+      {
+        "name": "Measurement",
+        "version": "2.5",
+        "uri": "widgets/Measurement/Widget",
+        "index": 7,
+        "id": "widgets_Measurement_Widget_30"
+      },
+      {
+        "name": "Print",
+        "version": "2.5",
+        "uri": "widgets/Print/Widget",
+        "index": 8,
+        "id": "widgets_Print_Widget_31",
+        "config": "configs/Print/config_Print.json"
+      },
+      {
+        "name": "StreetView",
+        "version": "2.0.1",
+        "uri": "widgets/StreetView/Widget",
+        "index": 9,
+        "id": "widgets_StreetView_Widget_33"
+      },
+      {
+        "name": "About",
+        "label": "Terminology",
+        "version": "2.5",
+        "uri": "widgets/About/Widget",
+        "index": 10,
+        "id": "widgets_About_Widget_28",
+        "config": "configs/About/config_Terminology.json"
+      },
+      {
+        "name": "Search",
+        "version": "2.5",
+        "uri": "widgets/Search/Widget",
+        "config": "configs/Search/config_Search.json",
+        "index": 11,
+        "id": "widgets_Search_Widget_34",
+        "position": {
+          "relativeTo": "map"
+        }
+      },
+      {
+        "name": "HomeButton",
+        "version": "2.5",
+        "uri": "widgets/HomeButton/Widget",
+        "index": 12,
+        "id": "widgets_HomeButton_Widget_35",
+        "position": {
+          "relativeTo": "map"
+        }
+      },
+      {
+        "name": "About",
+        "label": "About Map Asheville",
+        "version": "2.5",
+        "icon": "configs\\About\\icon_About Map Asheville.gif",
+        "uri": "widgets/About/Widget",
+        "config": "configs/About/config_About Map Asheville.json",
+        "index": 13,
+        "id": "widgets_About_Widget_36"
+      },
+      {
+        "name": "Share",
+        "version": "2.5",
+        "uri": "widgets/Share/Widget",
+        "config": "configs/Share/config_Share.json",
+        "index": 14,
+        "id": "widgets_Share_Widget_38"
+      }
+    ],
+    "groups": []
+  },
+  "loadingPage": {
+    "backgroundColor": "#508dca",
+    "backgroundImage": {
+      "visible": false
+    },
+    "loadingGif": {
+      "visible": true,
+      "uri": "configs/loading/images/predefined_loading_1.gif",
+      "width": 58,
+      "height": 29
+    }
+  },
+  "wabVersion": "2.5",
+  "isTemplateApp": true,
+  "isWebTier": false,
+  "httpProxy": {
+    "useProxy": true,
+    "alwaysUseProxy": false,
+    "url": "",
+    "rules": []
+  },
+  "dataSource": {
+    "dataSources": {},
+    "settings": {}
+  },
+  "logoLink": "https://docs.google.com/document/d/1rIld9WoSbR2IwyBHAjlG-qaforH6UnGgLbMGQJbvxDA/edit"
+}
