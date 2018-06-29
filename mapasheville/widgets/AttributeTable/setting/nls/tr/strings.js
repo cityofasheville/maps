@@ -2,16 +2,16 @@ define({
   "instruction": "Başlangıçta Öznitelik Tablosunda gösterilecek katmanları seçin ve yapılandırın.",
   "label": "Katman",
   "show": "Göster",
-  "actions": "Katman Alanlarını Yapılandır",
+  "actions": "Katman alanlarını yapılandır",
   "field": "Alan",
   "alias": "Takma Ad",
   "visible": "Görünür",
-  "linkField": "Bağlantı Alanı",
+  "linkField": "Alan bağlantısı yap",
   "noLayers": "Detay katmanı mevcut değil",
   "back": "Geri",
   "exportCSV": "CSV'ye Aktarmaya İzin Ver",
   "expand": "İlk olarak gereci genişlet",
-  "filterByExtent": "Harita Yayılımına Göre Filtrele özelliğini varsayılan olarak etkinleştir",
+  "filterByExtent": "Harita yayılımına göre filtrele özelliğini varsayılan olarak etkinleştir",
   "restore": "Varsayılan değere geri yükle",
   "ok": "Tamam",
   "cancel": "İptal",
@@ -25,5 +25,6 @@ define({
   "fieldName": "Ad",
   "fieldAlias": "Takma Ad",
   "fieldVisibility": "Görünürlük",
-  "fieldActions": "İşlemler"
+  "fieldActions": "İşlemler",
+  "showAttachments": "Ekleri göster"
 });

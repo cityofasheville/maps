@@ -1,3 +1,12 @@
+.widget-esearch-singlesearch-setting {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.general-options-edit .settingslabel{
+  font-size: 14px;
+}
+
 .widget-esearch-singlevalue-setting .uniqueMessage {
   font-size: 12px;
   color: #686868;
@@ -227,7 +236,8 @@ textarea {
 .widget-esearch-setting .btn-spatial-section,
 .widget-esearch-setting .btn-graphical-section,
 .widget-esearch-setting .btn-format-section,
-.widget-esearch-setting .btn-disable-section {
+.widget-esearch-setting .btn-disable-section,
+.widget-esearch-setting .btn-general-section {
   display:inline-block;
   overflow:hidden;
   height:24px;
@@ -288,13 +298,14 @@ textarea {
 .widget-esearch-setting .btn-spatial-section .btn-edit-icon,
 .widget-esearch-setting .btn-graphical-section .btn-edit-icon,
 .widget-esearch-setting .btn-disable-section .btn-edit-icon,
-.widget-esearch-setting .btn-format-section .btn-edit-icon{
+.widget-esearch-setting .btn-format-section .btn-edit-icon,
+.widget-esearch-setting .btn-general-section .btn-edit-icon{
   float:left;
   height:100%;
   width:14px;
   background-repeat: no-repeat;
   background-position: center center;
-  background-image: url(images/edit.png);
+  background-image: url(images/edit_enabled.png);
 }
 
 .widget-esearch-singleexpression-setting .error-message-div,
@@ -330,7 +341,8 @@ textarea {
 .widget-esearch-setting .btn-spatial-section .btn-edit-spatial-label,
 .widget-esearch-setting .btn-graphical-section .btn-edit-graphical-label,
 .widget-esearch-setting .btn-disable-section .btn-edit-disable-label,
-.widget-esearch-setting .btn-format-section .btn-edit-format-label{
+.widget-esearch-setting .btn-format-section .btn-edit-format-label,
+.widget-esearch-setting .btn-general-section .btn-edit-general-label{
   float:left;
   height:100%;
   line-height:24px;
@@ -384,6 +396,7 @@ textarea {
   color:white;
   border-radius:3px;
   cursor: pointer;
+  margin: 0 auto;
 }
 
 .widgets-Search-setting-include-all-button.enable{
@@ -414,6 +427,7 @@ textarea {
   color:white;
   border-radius:3px;
   cursor: pointer;
+  margin: 10px auto;
 }
 
 .widgets-Search-setting-include-button.enable{
@@ -602,7 +616,8 @@ textarea {
   margin-top: 7px;
 }
 
-.graphical-options-edit .jimu-checkbox .checkbox{
+.graphical-options-edit .jimu-checkbox .checkbox,
+.general-options-edit .jimu-checkbox .checkbox{
   margin-top: 0;
 }
 
@@ -746,13 +761,14 @@ textarea {
 }
 
 .jimu-simple-table.searches-table{
-  max-height: 237px;
-  height: 237px;
+  max-height: 425px;
+  height: 425px;
 }
 
 .jimu-simple-table.expressions-table,
 .jimu-simple-table.link-table,
-.jimu-simple-table.values-table{
+.jimu-simple-table.values-table,
+.jimu-simple-table.relate-table{
   max-height: 117px;
 }
 

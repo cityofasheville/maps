@@ -20,22 +20,25 @@ define([
   'dijit/form/TextBox',
   'dijit/form/RadioButton',
   'dijit/form/Form',
-  'widgets/eSearch/setting/LayerFieldChooser',
-  'widgets/eSearch/setting/IncludeAllButton',
-  'widgets/eSearch/setting/IncludeButton',
+  './LayerFieldChooser',
+  './IncludeAllButton',
+  './IncludeButton',
   'jimu/dijit/SimpleTable',
-  'widgets/eSearch/setting/SimpleTable',
+  './SimpleTable',
   'jimu/dijit/ServiceURLInput',
   'esri/request',
   'jimu/dijit/Popup',
-  'widgets/eSearch/setting/SingleExpressionEdit',
-  'widgets/eSearch/setting/FieldFormatEdit',
-  'widgets/eSearch/setting/SingleLinkEdit',
+  './SingleExpressionEdit',
+  './FieldFormatEdit',
+  './SingleLinkEdit',
+  './SingleRelateEdit',
   './LayerSearchSymEdit',
   'dojo/keys',
   'jimu/dijit/Message',
   'jimu/utils',
   './SortFields',
+  'dojo/Deferred',
+  'dojo/promise/all',
   'jimu/dijit/CheckBox'
 ],
   function (
@@ -66,16 +69,20 @@ define([
        SingleExpressionEdit,
        FieldFormatEdit,
        SingleLinkEdit,
+       SingleRelateEdit,
        LayerSearchSymEdit,
        keys,
        Message,
        jimuUtils,
-       SortFields) {
+       SortFields,
+       Deferred,
+       all) {
     return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
       baseClass: 'widget-esearch-singlesearch-setting',
       templateString: template,
       nls: null,
       config: null,
+      mainConfig: null,
       searchSetting: null,
       _url: "",
       _layerDef: null,
@@ -88,9 +95,11 @@ define([
       popup3: null,
       popup4: null,
       popup5: null,
+      popup6: null,
       fieldformatedit: null,
       singleExpressionedit: null,
       singleLinkedit: null,
+      singleRelateedit: null,
       tr: null,
       featureLayerDetails:null,
       _currentOrderByFields: null,
@@ -104,6 +113,32 @@ define([
 
       postCreate: function () {
         this.inherited(arguments);
+        this.allFieldsTable = new LayerFieldChooser({}, this.allFieldsTableDiv);
+        this.includeButton = new IncludeButton({nls: this.nls}, this.includeButtonDiv);
+        this.includeAllButton = new IncludeAllButton({nls: this.nls}, this.includeAllButtonDiv);
+        this.displayFieldsTable = new eSimpleTable({
+          _rowHeight:40,
+          autoHeight:true,
+          selectable:true,
+          fields:[
+            {name:'name',title:this.nls.name,type:'text',editable:false,unique:true, width:'25%'},
+            {name:'alias',title:this.nls.alias,type:'text',editable:true, width:'30%'},
+            {name:'title',title:this.nls.title,type:'radio',width:'60px'},
+            {name:'popuponly',title:this.nls.popuponly,type:'checkbox',width:'100px'},
+            {name:'actions',width:'85px',title:this.nls.actions,type:'actions',actions:['up','down','edit','delete']},
+            {name:'isdate',type:'text',hidden:true},
+            {name:'isnumber',type:'text',hidden:true},
+            {name:'useutc',type:'text',hidden:true},
+            {name:'dateformat',type:'text',hidden:true},
+            {name:'numberformat',type:'text',hidden:true},
+            {name:'currencyformat',type:'text',hidden:true},
+            {name:'sumlabel',type:'text',hidden:true},
+            {name:'sumfield',type:'text',hidden:true},
+            {name:'excludestat',type:'text',hidden:true}
+          ]
+        }, this.displayFieldsTableDiv)
+        this.displayFieldsTable.startup();
+        html.addClass(this.displayFieldsTable.domNode, "searchLayerFieldsTable");
         this._initRadios();
         this._setConfig(this.config);
         this._bindEvents();
@@ -121,9 +156,23 @@ define([
         if (!this.config.url) {
           return;
         }
-        //this.showAttachmentsCbx.setValue(this.config.showattachments || false);
+        this.showAttachmentsCbx.setValue(this.config.showattachments || false);
         this.shareCbx.setValue(this.config.shareResult || false);
         this.attribTableCbx.setValue(this.config.addToAttrib || false);
+        this.hideNullDataCbx.setValue(this.config.hidenullvalue || false);
+        //console.info(this.mainConfig);
+        if(this.mainConfig.hasOwnProperty("autozoomtoresults") && !this.config.hasOwnProperty('autozoomtoresults')){
+          this.autoZoomCbx.setValue(this.mainConfig.autozoomtoresults || false);
+        }else{
+          var isAutoZoom = (this.config.hasOwnProperty('autozoomtoresults') && !this.config.autozoomtoresults)? false : true;
+          this.autoZoomCbx.setValue(isAutoZoom);
+        }
+        if(this.mainConfig.hasOwnProperty("disablePopups") && !this.config.hasOwnProperty('disablePopups')){
+          this.disPopupCbx.setValue(this.mainConfig.disablePopups || false);
+        }else{
+          var isDisablePopup = (this.config.hasOwnProperty('disablePopups') && !this.config.disablePopups)? false : true;
+          this.disPopupCbx.setValue(isDisablePopup);
+        }
         this._url = lang.trim(this.config.url || "");
         this._links = this.config.links;
         if(this.config.zoomScale){
@@ -166,7 +215,67 @@ define([
         if (this.config.links) {
           this._initLinksTable();
         }
+        if (this.config.relates) {
+          this._initRelatesTable();
+        }
         this._setOrderByFields(this.config.orderByFields);
+
+        this._getLayerInfoWithRelationships(this._url).then(lang.hitch(this, function(result){
+          this.layerInfoCache[this._url] = result.value;
+        }));
+      },
+
+      _getServiceUrlByLayerUrl: function (layerUrl) {
+        var lastIndex = layerUrl.lastIndexOf("/");
+        var serviceUrl = layerUrl.slice(0, lastIndex);
+        return serviceUrl;
+      },
+
+      _getLayerInfoWithRelationships: function (layerUrl) {
+        var def = new Deferred();
+        esriRequest({
+          url: layerUrl,
+          content: {
+            f: 'json'
+          },
+          handleAs: 'json',
+          callbackParamName: 'callback'
+        }).then(lang.hitch(this, function (layerInfo) {
+          if (!layerInfo.relationships) {
+            layerInfo.relationships = [];
+          }
+          layerInfo._origLayerURL = layerUrl;
+          var serviceUrl = this._getServiceUrlByLayerUrl(layerUrl);
+          layerInfo._origServiceURL = serviceUrl
+          var defs = array.map(layerInfo.relationships, lang.hitch(this, function (relationship) {
+            return esriRequest({
+              url: serviceUrl + '/' + relationship.relatedTableId,
+              content: {
+                f: 'json'
+              },
+              handleAs: 'json',
+              callbackParamName: 'callback'
+            });
+          }));
+          all(defs).then(lang.hitch(this, function (results) {
+            array.forEach(results, lang.hitch(this, function (relationshipInfo, index) {
+              var relationship = layerInfo.relationships[index];
+              relationship.name = relationshipInfo.name;
+              //ignore shape field
+              relationship.fields = array.filter(relationshipInfo.fields,
+                lang.hitch(this, function (relationshipFieldInfo) {
+                  return relationshipFieldInfo.type !== 'esriFieldTypeGeometry';
+                }));
+            }));
+            def.resolve({state: 'success', value: layerInfo});
+          }), lang.hitch(this, function (err) {
+            def.resolve({state: 'failure', value: err});
+          }));
+          def.resolve({state: 'success', value: layerInfo});
+        }), lang.hitch(this, function (err) {
+          def.resolve({state: 'failure', value: err});
+        }));
+        return def;
       },
 
       getConfig: function () {
@@ -176,6 +285,7 @@ define([
 
         var allSingleExpressions = this._getAllSingleExpressions();
         var allSingleLinks = this._getAllSingleLinks();
+        var allSingleRelates = this._getAllSingleRelates();
         var config = {
           name: lang.trim(this.layerName.get('value')),
           url: this._url,
@@ -199,10 +309,47 @@ define([
           links: {
             link: []
           },
-          orderByFields: []
-          //showattachments: this.showAttachmentsCbx.getValue()
+          relates: {
+            relate: []
+          },
+          orderByFields: [],
+          showattachments: this.showAttachmentsCbx.getValue()
         };
-
+        if(this.hideNullDataCbx.getValue()){
+          config.hidenullvalue = true;
+        }else if(config.hasOwnProperty("hidenullvalue")){
+          delete config.hidenullvalue;
+        };
+        if(this.mainConfig.hasOwnProperty("autozoomtoresults")){
+          if(this.mainConfig.autozoomtoresults && !this.autoZoomCbx.getValue()){
+            config.autozoomtoresults = false;
+          }else if(!this.mainConfig.autozoomtoresults && this.autoZoomCbx.getValue()){
+            config.autozoomtoresults = true;
+          }else{
+            delete config.autozoomtoresults;
+          }
+        }else{
+          if(this.autoZoomCbx.getValue()){
+            config.autozoomtoresults = true;
+          }else{
+            config.autozoomtoresults = false;
+          }
+        }
+        if(this.mainConfig.hasOwnProperty("disablePopups")){
+          if(this.mainConfig.disablePopups && !this.disPopupCbx.getValue()){
+            config.disablePopups = false;
+          }else if(!this.mainConfig.disablePopups && this.disPopupCbx.getValue()){
+            config.disablePopups = true;
+          }else{
+            delete config.disablePopups;
+          }
+        }else{
+          if(this.disPopupCbx.getValue()){
+            config.disablePopups = true;
+          }else{
+            config.disablePopups = false;
+          }
+        }
         if (this.config.sumfield) {
           config.sumfield = this.config.sumfield;
           config.sumlabel = this.config.sumlabel;
@@ -272,6 +419,7 @@ define([
         config.fields.field = fieldsArray;
         config.expressions.expression = allSingleExpressions;
         config.links.link = allSingleLinks;
+        config.relates.relate = allSingleRelates;
         this._addLinkFields(config.fields.field, config.links.link);
 
         if(this._shouldEnableSorting(this.featureLayerDetails)){
@@ -354,6 +502,29 @@ define([
         }));
       },
 
+      _initRelatesTable: function () {
+        this.relatesTable.clear();
+        var relates = this.config && this.config.relates.relate;
+        array.forEach(relates, lang.hitch(this, function (relateConfig) {
+          var args = {
+            config: relateConfig
+          };
+          this._createSingleRelate(args);
+        }));
+      },
+
+      _createSingleRelate: function (args) {
+        var rowData = {
+          label: (args.config && args.config.label) || ''
+        };
+        var result = this.relatesTable.addRow(rowData);
+        if (!result.success) {
+          return null;
+        }
+        result.tr.singleRelate = args.config;
+        return result.tr;
+      },
+
       _initLinksTable: function () {
         this.linksTable.clear();
         var links = this.config && this.config.links.link;
@@ -427,12 +598,12 @@ define([
       },
 
       _need2ChkOpLyr: function (){
-        if(this.attribTableCbx.getValue() /*|| this.showAttachmentsCbx.getValue()*/){
+        if(this.attribTableCbx.getValue() || this.showAttachmentsCbx.getValue()){
           if(!this.shareCbx.getValue()){
             this.shareCbx.setValue(true);
             new Message({
               titleLabel: this.nls.operationalLayerTip,
-              message: this.nls.showinattributetable + /*' ' + this.nls.andor + ' ' + this.nls.showattachments +*/ ' requires ' +
+              message: this.nls.showinattributetable + ' ' + this.nls.andor + ' ' + this.nls.showattachments + ' requires ' +
               this.nls.operationalLayerTip + ' ' + this.nls.tobeenabled + '.'
             });
           }
@@ -479,6 +650,16 @@ define([
             this._showSingleLinksEdit(tr);
           }
         })));
+        this.own(on(this.btnAddRelate, 'click', lang.hitch(this, function () {
+          var args = {
+            config: null
+          };
+          var tr = this._createSingleRelate(args);
+          if (tr) {
+            this.popupState = 'ADD';
+            this._showSingleRelatesEdit(tr);
+          }
+        })));
         this.own(on(this.displayFieldsTable, 'actions-edit', lang.hitch(this, function (tr) {
           if (tr.fieldInfo) {
             this._openFieldEdit(this.nls.edit + ": " + tr.fieldInfo.name, tr);
@@ -494,6 +675,13 @@ define([
         })));
         this.own(on(this.linksTable, 'row-delete', lang.hitch(this, function (tr) {
           delete tr.singleLink;
+        })));
+        this.own(on(this.relatesTable, 'actions-edit', lang.hitch(this, function (tr) {
+          this.popupState = 'EDIT';
+          this._showSingleRelatesEdit(tr);
+        })));
+        this.own(on(this.relatesTable, 'row-delete', lang.hitch(this, function (tr) {
+          delete tr.singleRelate;
         })));
         this.own(on(this.expressionsTable, 'row-delete', lang.hitch(this, function (tr) {
           delete tr.singleSearch;
@@ -826,6 +1014,10 @@ define([
         this._openSingleLinksEdit((this.popupState === 'EDIT')?this.nls.updateLink:this.nls.addLink, tr);
       },
 
+      _showSingleRelatesEdit: function(tr) {
+        this._openSingleRelatesEdit((this.popupState === 'EDIT')?this.nls.updateRelate:this.nls.addRelate, tr);
+      },
+
       _showSingleExpressionsEdit: function (tr) {
         this._openSingleExprEdit((this.popupState === 'EDIT')?this.nls.updateSearchExpr:this.nls.addSearchExpr, tr);
       },
@@ -836,6 +1028,62 @@ define([
           return item.singleExpression;
         }));
         return allSingleExpressions;
+      },
+
+      _getAllSingleRelates: function () {
+        var trs = this.relatesTable._getNotEmptyRows();
+        var allSingleRelates = array.map(trs, lang.hitch(this, function (item) {
+          return item.singleRelate;
+        }));
+        return allSingleRelates;
+      },
+
+      _openSingleRelatesEdit: function (name, tr) {
+        this.singleRelateedit = new SingleRelateEdit({
+          nls: this.nls,
+          tr: tr,
+          searchSetting: this,
+          layerURL: this._url,
+          layerInfoCache: this.layerInfoCache
+        });
+        this.singleRelateedit.setConfig(tr.singleRelate || {});
+        this.popup6 = new Popup({
+          titleLabel: name,
+          autoHeight: true,
+          content: this.singleRelateedit,
+          container: 'main-page',
+          buttons: [
+            {
+              label: this.nls.ok,
+              key: keys.ENTER,
+              onClick: lang.hitch(this, '_onSingleRelatesEditOk')
+            }, {
+              label: this.nls.cancel,
+              key: keys.ESCAPE
+            }
+          ],
+          onClose: lang.hitch(this, '_onSingleRelatesEditClose')
+        });
+        html.addClass(this.popup6.domNode, 'widget-setting-popup');
+        this.singleRelateedit.startup();
+      },
+
+      _onSingleRelatesEditOk: function () {
+        var edits = {};
+        var relateConfig = this.singleRelateedit.getConfig();
+        edits.label = relateConfig.label;
+        this.singleRelateedit.tr.singleRelate = relateConfig;
+        this.relatesTable.editRow(this.singleRelateedit.tr, edits);
+        this.popupState = '';
+        this.popup6.close();
+      },
+
+      _onSingleRelatesEditClose: function () {
+        if(this.popupState === 'ADD'){
+          this.relatesTable.deleteRow(this.singleRelateedit.tr);
+        }
+        this.singleRelateedit = null;
+        this.popup6 = null;
       },
 
       _getAllSingleLinks: function () {

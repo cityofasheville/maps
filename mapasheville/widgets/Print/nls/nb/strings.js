@@ -4,6 +4,8 @@ define({
   "format": "Format",
   "layout": "Layout",
   "settings": "Avansert",
+  "labels": "Påskrifter",
+  "showLabels": "Vis etiketter",
   "mapScaleExtent": "Kartmålestokk/-utstrekning",
   "preserve": "Bevar",
   "mapScale": "målestokk",
@@ -30,6 +32,6 @@ define({
   "height": "Høyde (px)",
   "print": "Skriv ut",
   "clearList": "Fjern utskrifter",
-  "creatingPrint": "Oppretter utskrfit",
+  "creatingPrint": "Oppretter utskrift",
   "printError": "Feil, prøv igjen"
 });

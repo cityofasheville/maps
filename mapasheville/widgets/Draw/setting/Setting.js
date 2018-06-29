@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 Esri. All Rights Reserved.
+// Copyright © 2014 - 2016 Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -74,7 +74,15 @@ define([
           conversion: jimuUtils.localizeNumber(1.0936133, {
             places: 7
           })
-        }];
+        }, {
+          value: 'NAUTICAL_MILES',
+          label: this.nls.nauticalmiles,
+          abbr: this.nls.nauticalmilesAbbreviation || 'nm',
+          conversion: jimuUtils.localizeNumber(5.39956803455, {
+            places: 9
+          }) + 'e-4'
+        }
+        ];
 
         this.areaUnits = [{
           value: 'SQUARE_KILOMETERS',

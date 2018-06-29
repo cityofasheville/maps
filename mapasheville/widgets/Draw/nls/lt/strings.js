@@ -30,6 +30,7 @@ define({
   "meters": "Metrai",
   "feet": "Pėdos",
   "yards": "Jardai",
+  "nauticalmiles": "Jūrmylės",
   "squareKilometers": "Kvadratiniai kilometrai",
   "squareMiles": "Kvadratinės mylios",
   "acres": "Akrai",

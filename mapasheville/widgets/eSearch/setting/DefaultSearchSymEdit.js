@@ -47,7 +47,7 @@ function(declare, lang, html, on, json, SymbolPicker, TabContainer, jsonUtils, S
 
     setConfig:function(config){
       this.config = config;
-      console.info(this.config);
+      //console.info(this.config);
       if(!this.config){
         return;
       }
@@ -55,7 +55,7 @@ function(declare, lang, html, on, json, SymbolPicker, TabContainer, jsonUtils, S
       if(this._symbols.picturemarkersymbol){
         var pms = lang.clone(this._symbols.picturemarkersymbol);
         pms.url = this.widget.folderUrl + pms.url;
-        console.info(pms);
+        //console.info(pms);
         this.defaultPointSymbolPicker.showBySymbol(jsonUtils.fromJson(pms));
       }
       if(this._symbols.simplemarkersymbol){

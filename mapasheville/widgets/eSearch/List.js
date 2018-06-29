@@ -22,7 +22,6 @@ define(['dojo/_base/declare',
     'dojo/dom-construct',
     'dojo/dom-attr',
     'dojo/_base/array',
-    'dojo/dom',
     'dojo/query',
     'dojo/dom-class',
     'dojo/dom-style',
@@ -37,7 +36,6 @@ define(['dojo/_base/declare',
     domConstruct,
     domAttr,
     array,
-    dom,
     query,
     domClass,
     domStyle,
@@ -177,12 +175,12 @@ define(['dojo/_base/declare',
           }
         }
         var linksDiv;
-        if(item.links && item.links.length > 0 || item.showRelate){
+        if(item.links && item.links.length > 0 ){//|| item.showRelate
           linksDiv = domConstruct.create("div");
           domConstruct.place(linksDiv, div);
           domClass.add(linksDiv, 'linksdiv');
         }
-        //console.info(item.links);
+        // console.info(item.links);
         array.forEach(item.links, function(link){
           if(link.popuptype === "text"){
             var linkText = domConstruct.toDom("<p><a href='" + link.link + "' target='_blank' title='" + link.alias + "'>" + link.alias + "</a></p>");
@@ -195,6 +193,9 @@ define(['dojo/_base/declare',
           }
         });
         domConstruct.place(div, this._listContainer);
+      },
+
+      addComplete: function() {
         this.clearSelection();
       },
 
@@ -279,9 +280,10 @@ define(['dojo/_base/declare',
         this.selectedIndex = -1;
         query('.search-list-item').forEach(function(node){
           domClass.remove(node, "alt");
+          domClass.remove(node, "selected");
         });
         array.map(this.items, lang.hitch(this, function(item, index){
-          item.alt = (index % 2 === 0);
+          item.alt = !(index % 2 === 0);
           if(item.alt){
             domClass.add(this.id.toLowerCase() + item.id + "", "alt");
           }
@@ -308,6 +310,13 @@ define(['dojo/_base/declare',
           return this._getItemById(this._selectedNode);
         }
         return;
+      },
+
+      hasSelectedItem: function(){
+        if(this._selectedNode){
+          return true;
+        }
+        return false;
       }
     });
   });

@@ -14,14 +14,14 @@ define({
   "Foot": "Jalga",
   "Yards": "jardi",
   "Miles": "miili",
-  "Nautical_Miles": "meremiili",
+  "Nautical_Miles": "Meremiili",
   "Millimeters": "millimeeter",
   "Centimeters": "sentimeetrit",
   "Meter": "Meetrit",
   "Kilometers": "kilomeetrit",
   "Decimeters": "detsimeetrit",
   "Decimal_Degrees": "Kraadi",
-  "Degree_Minutes_Seconds": "Kraadi, minutit, sekundit",
+  "Degree_Minutes_Seconds": "Kraadid minutid sekundid",
   "MGRS": "MGRS",
   "USNG": "USNG"
 });

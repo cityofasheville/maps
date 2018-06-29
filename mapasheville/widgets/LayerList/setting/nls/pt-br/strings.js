@@ -5,7 +5,7 @@ define({
   "transparency": "Transparência",
   "controlPopup": "Habilitar / Desabilitar Pop-up",
   "moveUpAndDown": "Mover para Cima / Mover para Baixo",
-  "attributeTable": "Abrir Tabela de Atributos",
+  "attributeTable": "Visualizar na Tabela de Atributos",
   "url": "Descrição / Mostrar Detalhes do Item / Download",
   "layerSelectorTitle": "Escolha quais camadas serão mostradas na lista."
 });

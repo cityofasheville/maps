@@ -6,5 +6,8 @@ define({
   "defaultFormat": "Výchozí formát",
   "defaultLayout": "Výchozí rozvržení",
   "warning": "Nesprávný vstup",
+  "urlNotAvailable": "Adresa URL není k dispozici.",
+  "notPrintTask": "Adresa URL neodkazuje na tiskovou úlohu.",
+  "advancedOption": "Zobrazit pokročilé možnosti",
   "ok": "OK"
 });

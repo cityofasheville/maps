@@ -1,3 +1,3 @@
 define({
-  "_widgetLabel": "镖控制器"
+  "_widgetLabel": "飞镖控制器"
 });

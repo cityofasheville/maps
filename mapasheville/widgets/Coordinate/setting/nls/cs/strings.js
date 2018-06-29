@@ -3,7 +3,7 @@ define({
   "state": "Ve výchozím nastavení se souřadnice zobrazí v souřadnicovém systému aktuální mapy. Chcete-li souřadnice zobrazovat v jiných souřadnicových systémech, je nutné je nastavit spolu s příslušnými transformacemi.",
   "outputUnit": "Výstupní jednotka",
   "wkid": "Výstupní WKID",
-  "label": "Výstupní souřadnicový systém",
+  "label": "Název výstupního souřadnicového systému",
   "transformationWkid": "WKID transformace",
   "transformationLabel": "Popisek transformace",
   "transformForward": "Transformovat blíž",
@@ -19,7 +19,7 @@ define({
   "output": "Výstupní souřadnicový systém",
   "cName": "Název souřadnicového systému",
   "units": "Jednotky zobrazení: ",
-  "datum": "Transformace data",
+  "datum": "Transformace geodetického data",
   "tName": "Název transformace",
   "tWKIDPlaceHolder": "WKID transformace",
   "forward": "Použít transformaci blíž",
@@ -39,7 +39,11 @@ define({
   "Kilometers": "Kilometry",
   "Decimeters": "Decimetry",
   "Decimal_Degrees": "Desetinné stupně",
-  "Degree_Minutes_Seconds": "Stupně, minuty, vteřiny",
+  "Degrees_Decimal_Minutes": "Stupně a desetinné minuty",
+  "Degree_Minutes_Seconds": "Stupně minuty vteřiny",
   "MGRS": "MGRS",
-  "USNG": "USNG"
+  "USNG": "USNG",
+  "displayOrderLonLatTips": "Pořadí zobrazení souřadnic:",
+  "lonLatTips": "Zeměpisná délka / zeměpisná šířka (X, Y)",
+  "latLonTips": "Zeměpisná šířka / zeměpisná délka (Y, X)"
 });

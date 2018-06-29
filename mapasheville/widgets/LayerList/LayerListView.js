@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 Esri. All Rights Reserved.
+// Copyright © 2014 - 2016 Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,31 +38,33 @@ define([
     templateString: template,
     _currentSelectedLayerRowNode: null,
     operationsDropMenu: null,
+    _layerNodeHandles: null,
 
     postMixInProperties: function() {
       this.inherited(arguments);
       this.nls = NlsStrings.value;
+      this._layerNodeHandles = {};
     },
 
     postCreate: function() {
       array.forEach(this.operLayerInfos.getLayerInfoArray(), function(layerInfo) {
-        this.drawListNode(layerInfo, 0, this.layerListTable, true);
+        this.drawListNode(layerInfo, 0, this.layerListTable);
       }, this);
 
       array.forEach(this.operLayerInfos.getTableInfoArray(), function(layerInfo) {
-        this.drawListNode(layerInfo, 0, this.tableListTable, true);
+        this.drawListNode(layerInfo, 0, this.tableListTable);
       }, this);
       this._initOperations();
     },
 
-    drawListNode: function(layerInfo, level, toTableNode) {
+    drawListNode: function(layerInfo, level, toTableNode, position) {
       var nodeAndSubNode, showLegendDiv;
       if(this.isLayerHiddenInWidget(layerInfo)) {
         return;
       }
       if (layerInfo.newSubLayers.length === 0) {
         //addLayerNode
-        nodeAndSubNode = this.addLayerNode(layerInfo, level, toTableNode);
+        nodeAndSubNode = this.addLayerNode(layerInfo, level, toTableNode, position);
         //add legend node
         if (this.config.showLegend) {
           this.addLegendNode(layerInfo, level, nodeAndSubNode.subNode);
@@ -75,20 +77,29 @@ define([
         return;
       }
       //addLayerNode
-      nodeAndSubNode = this.addLayerNode(layerInfo, level, toTableNode);
+      nodeAndSubNode = this.addLayerNode(layerInfo, level, toTableNode, position);
       array.forEach(layerInfo.newSubLayers, lang.hitch(this, function(level, subLayerInfo) {
         this.drawListNode(subLayerInfo, level + 1, nodeAndSubNode.subNode);
       }, level));
     },
 
-    addLayerNode: function(layerInfo, level, toTableNode) {
-      var layerTrNode = domConstruct.create('tr', {
-          'class': 'jimu-widget-row layer-row ' +
-            ( /*visible*/ false ? 'jimu-widget-row-selected' : ''),
-          'layerTrNodeId': layerInfo.id
-        }, toTableNode),
-        layerTdNode, ckSelectDiv, ckSelect, imageNoLegendDiv,
+    addLayerNode: function(layerInfo, level, toTableNode, position) {
+      var layerTrNode,
+        layerTdNode, ckSelectDiv, ckSelect, imageNoLegendDiv, handle,
         imageNoLegendNode, popupMenuNode, i, imageShowLegendDiv, popupMenu, divLabel;
+
+      var rootLayerInfo = layerInfo.getRootLayerInfo();
+      if(!this._layerNodeHandles[rootLayerInfo.id]) {
+        this._layerNodeHandles[rootLayerInfo.id] = [];
+      }
+
+      var layerTrNodeClass = "layer-tr-node-" + layerInfo.id;
+      layerTrNode = domConstruct.create('tr', {
+        'class': 'jimu-widget-row layer-row ' +
+          ( /*visible*/ false ? 'jimu-widget-row-selected ' : ' ') + layerTrNodeClass,
+        'layerTrNodeId': layerInfo.id
+      });
+      domConstruct.place(layerTrNode, toTableNode, position);
 
       layerTdNode = domConstruct.create('td', {
         'class': 'col col1'
@@ -167,11 +178,33 @@ define([
         'class': 'col col3'
       }, layerTrNode);
 
+      var popupMenuDisplayStyle = this.hasContentMenu() ? "display: block" : "display: none";
       // add popupMenu
       popupMenuNode = domConstruct.create('div', {
-        'class': 'layers-list-popupMenu-div'
+        'class': 'layers-list-popupMenu-div',
+        'style': popupMenuDisplayStyle
       }, layerTdNode);
 
+      /*
+      var handle = on(popupMenuNode,
+                  'click',
+                  lang.hitch(this, function() {
+                    var popupMenu = new PopupMenu({
+                      //items: layerInfo.popupMenuInfo.menuItems,
+                      _layerInfo: layerInfo,
+                    box: this.layerListWidget.domNode.parentNode,
+                    popupMenuNode: popupMenuNode,
+                    layerListWidget: this.layerListWidget,
+                    _config: this.config
+                    }).placeAt(popupMenuNode);
+                    this.own(on(popupMenu,
+                        'onMenuClick',
+                        lang.hitch(this, this._onPopupMenuItemClick, layerInfo, popupMenu)));
+
+                    handle.remove();
+                  }));
+      */
+      /*
       popupMenu = new PopupMenu({
         //items: layerInfo.popupMenuInfo.menuItems,
         _layerInfo: layerInfo,
@@ -183,12 +216,14 @@ define([
       this.own(on(popupMenu,
         'onMenuClick',
         lang.hitch(this, this._onPopupMenuItemClick, layerInfo, popupMenu)));
+      */
 
       //add a tr node to toTableNode.
       var trNode = domConstruct.create('tr', {
         'class': '',
         'layerContentTrNodeId': layerInfo.id
-      }, toTableNode);
+      });
+      domConstruct.place(trNode, toTableNode, position);
 
       var tdNode = domConstruct.create('td', {
         'class': '',
@@ -201,7 +236,7 @@ define([
       }, tdNode);
 
       //bind event
-      this.own(on(layerTitleTdNode,
+      handle = this.own(on(layerTitleTdNode,
         'click',
         lang.hitch(this,
           this._onRowTrClick,
@@ -209,8 +244,9 @@ define([
           imageShowLegendDiv,
           layerTrNode,
           tableNode)));
+      this._layerNodeHandles[rootLayerInfo.id].push(handle[0]);
 
-      this.own(on(imageShowLegendDiv,
+      handle = this.own(on(imageShowLegendDiv,
         'click',
         lang.hitch(this,
           this._onRowTrClick,
@@ -218,28 +254,67 @@ define([
           imageShowLegendDiv,
           layerTrNode,
           tableNode)));
+      this._layerNodeHandles[rootLayerInfo.id].push(handle[0]);
 
-      this.own(on(layerTrNode,
+      handle = this.own(on(layerTrNode,
         'mouseover',
         lang.hitch(this, this._onLayerNodeMouseover, layerTrNode, popupMenu)));
-      this.own(on(layerTrNode,
+      this._layerNodeHandles[rootLayerInfo.id].push(handle[0]);
+
+      handle = this.own(on(layerTrNode,
         'mouseout',
         lang.hitch(this, this._onLayerNodeMouseout, layerTrNode, popupMenu)));
-      this.own(on(ckSelect.domNode, 'click', lang.hitch(this,
+      this._layerNodeHandles[rootLayerInfo.id].push(handle[0]);
+
+      handle = this.own(on(ckSelect.domNode, 'click', lang.hitch(this,
         this._onCkSelectNodeClick,
         layerInfo,
         ckSelect)));
+      this._layerNodeHandles[rootLayerInfo.id].push(handle[0]);
 
-      this.own(on(popupMenuNode, 'click', lang.hitch(this,
+      handle = this.own(on(popupMenuNode, 'click', lang.hitch(this,
         this._onPopupMenuClick,
         layerInfo,
-        popupMenu,
+        popupMenuNode,
         layerTrNode)));
+      this._layerNodeHandles[rootLayerInfo.id].push(handle[0]);
 
       return {
         currentNode: layerTrNode,
         subNode: tableNode
       };
+    },
+
+    hasContentMenu: function() {
+      var hasContentMenu = false;
+      var item;
+      if(this.config.contextMenu) {
+        for (item in this.config.contextMenu) {
+          if(this.config.contextMenu.hasOwnProperty(item) &&
+             (typeof this.config.contextMenu[item] !== 'function')) {
+            hasContentMenu = hasContentMenu || this.config.contextMenu[item];
+          }
+        }
+      } else {
+        hasContentMenu = true;
+      }
+      return hasContentMenu;
+    },
+
+    destroyLayerTrNode: function(layerInfo) {
+      var removedLayerNode = query("[class~='layer-tr-node-" + layerInfo.id + "']", this.domNode)[0];
+      var removedLayerContentNode = query("[layercontenttrnodeid='" + layerInfo.id + "']", this.domNode)[0];
+      if(removedLayerNode) {
+        var rootLayerInfo = layerInfo.getRootLayerInfo();
+        array.forEach(this._layerNodeHandles[rootLayerInfo.id], function(handle) {
+          handle.remove();
+        }, this);
+        delete this._layerNodeHandles[rootLayerInfo.id];
+        domConstruct.destroy(removedLayerNode);
+        if(removedLayerContentNode) {
+          domConstruct.destroy(removedLayerContentNode);
+        }
+      }
     },
 
     addLegendNode: function(layerInfo, level, toTableNode) {
@@ -336,12 +411,31 @@ define([
           this.turnAllSameLevelLayers(layerInfo, ckSelect.checked);
         }
       } else {
+        this.layerListWidget._denyLayerInfosIsVisibleChangedResponseOneTime = true;
         layerInfo.setTopLayerVisible(ckSelect.checked);
       }
       evt.stopPropagation();
     },
 
-    _onPopupMenuClick: function(layerInfo, popupMenu, layerTrNode, evt) {
+    _onPopupMenuClick: function(layerInfo, popupMenuNode, layerTrNode, evt) {
+      var rootLayerInfo = layerInfo.getRootLayerInfo();
+      var popupMenu = popupMenuNode.popupMenu;
+      if(!popupMenu) {
+        popupMenu = new PopupMenu({
+          //items: layerInfo.popupMenuInfo.menuItems,
+          _layerInfo: layerInfo,
+          box: this.layerListWidget.domNode.parentNode,
+          popupMenuNode: popupMenuNode,
+          layerListWidget: this.layerListWidget,
+          _config: this.config
+        }).placeAt(popupMenuNode);
+        popupMenuNode.popupMenu = popupMenu;
+        var handle = this.own(on(popupMenu,
+              'onMenuClick',
+              lang.hitch(this, this._onPopupMenuItemClick, layerInfo, popupMenu)));
+        this._layerNodeHandles[rootLayerInfo.id].push(handle[0]);
+      }
+
       /*jshint unused: false*/
       this._changeSelectedLayerRow(layerTrNode);
       if (popupMenu && popupMenu.state === 'opened') {

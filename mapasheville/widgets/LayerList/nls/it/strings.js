@@ -11,7 +11,7 @@ define({
   "itemMoveDown": "Sposta giù",
   "itemDesc": "Descrizione",
   "itemDownload": "Download",
-  "itemToAttributeTable": "Apri tabella attributi",
+  "itemToAttributeTable": "Visualizza nella tabella degli attributi",
   "itemShowItemDetails": "Mostra dettagli elemento",
   "empty": "vuoto",
   "removePopup": "Disabilita popup",
@@ -22,6 +22,6 @@ define({
   "collapseAlllayers": "Comprimi tutti i layer",
   "turnAllLabelsOff": "Disattiva tutte le etichette",
   "turnAllLabelsOn": "Attiva tutte le etichette",
-  "showLabels": "Mostra Etichette",
-  "hideLables": "Nascondi Etichette"
+  "showLabels": "Mostra etichette",
+  "hideLables": "Nascondi etichette"
 });

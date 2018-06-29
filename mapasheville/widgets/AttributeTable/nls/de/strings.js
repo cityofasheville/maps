@@ -16,13 +16,14 @@ define({
   "selectPage": "Datensätze auf aktueller Seite auswählen",
   "clearSelection": "Auswahl aufheben",
   "filter": "Filter",
-  "setFilterTip": "Legen Sie den Filter ordnungsgemäß fest.",
+  "setFilterTip": "Legen Sie die Filter ordnungsgemäß fest.",
   "noFilterTip": "Dieser Abfrage-Task listet alle Features in der angegebenen Datenquelle ohne definierten Filterausdruck auf.",
   "filterByExtent": "Nach Kartenausdehnung filtern",
   "showSelectedRecords": "Ausgewählte Datensätze anzeigen",
   "showAllRecords": "Alle Datensätze anzeigen",
   "showRelatedRecords": "Zugehörige Datensätze anzeigen",
   "noRelatedRecords": "Keine zugehörigen Datensätze gefunden",
+  "attachmentColumn": "Fotos und Dateien",
   "refresh": "Aktualisieren",
   "features": "Features",
   "records": "Datensätze",
@@ -37,5 +38,7 @@ define({
   "closeTableTip": "Attributtabelle ausblenden",
   "sortAsc": "Aufsteigend sortieren",
   "sortDes": "Absteigend sortieren",
-  "statistics": "Statistiken"
+  "statistics": "Statistiken",
+  "attachments": "Anlagen",
+  "files": "Dateien"
 });

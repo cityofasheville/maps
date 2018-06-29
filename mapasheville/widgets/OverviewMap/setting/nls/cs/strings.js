@@ -1,15 +1,15 @@
 define({
   "visible": "Zobrazovat mapu přehledu jako výchozí",
-  "minWidth": "Minimální šířka",
-  "minHeight": "Minimální výška",
-  "maxWidth": "Maximální šířka",
-  "maxHeight": "Maximální výška",
+  "minWidth": "Min. šířka",
+  "minHeight": "Min. výška",
+  "maxWidth": "Max. šířka",
+  "maxHeight": "Max. výška",
   "minText": "Minimum",
   "maxText": "Maximum",
   "attachText": "Určete, do kterého rohu mapy chcete tento widget připojit.",
   "expandText": "Rozšířit widget po přidání",
-  "topLeft": "Levý horní roh",
-  "topRight": "Pravý horní roh",
-  "bottomLeft": "Levý dolní roh",
-  "bottomRight": "Pravý dolní roh"
+  "topLeft": "Nahoře vlevo",
+  "topRight": "Nahoře vpravo",
+  "bottomLeft": "Dole vlevo",
+  "bottomRight": "Dole vpravo"
 });

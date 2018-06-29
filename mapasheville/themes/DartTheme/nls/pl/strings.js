@@ -1,4 +1,4 @@
 define({
   "_themeLabel": "Motyw Rzutka",
-  "_layout_default": "Układ domyślny"
+  "_layout_default": "Kompozycja domyślna"
 });

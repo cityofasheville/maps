@@ -1,7 +1,7 @@
 define({
-  "left": "Links ausrichten",
-  "right": "Rechts ausrichten",
+  "left": "Linksbündig",
+  "right": "Rechtsbündig",
   "arrangement": "Anordnung",
-  "autoUpdate": "Automatische Aktualisierung",
+  "autoUpdate": "Automatisch aktualisieren",
   "respectCurrentMapScale": "Aktuellen Kartenmaßstab berücksichtigen"
 });

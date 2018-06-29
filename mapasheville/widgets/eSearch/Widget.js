@@ -61,7 +61,6 @@ define([
     'dojo/io-query',
     'dojo/query',
     'esri/SpatialReference',
-    'dijit/registry',
     'jimu/WidgetManager',
     'jimu/PanelManager',
     'dojo/aspect',
@@ -70,10 +69,11 @@ define([
     'jimu/CSVUtils',
     'jimu/BaseFeatureAction',
     'jimu/FeatureActionManager',
-    'jimu/dijit/PopupMenu',
+    'jimu/dijit/FeatureActionPopupMenu',
     'esri/tasks/FeatureSet',
-    'dojox/lang/functional/object',
-    'esri/tasks/RelationshipQuery',
+    'dojo/dom-construct',
+    'dojo/dom-class',
+    'dojo/topic',
     'jimu/dijit/CheckBox',
     'dijit/form/DropDownButton',
     'dijit/Menu',
@@ -84,8 +84,9 @@ define([
     RelationshipQuery, CodedValueDomain, Domain, GraphicsLayer, FeatureLayer, FeatureType, Field, RangeDomain, BufferParameters, GeometryService,
     esriConfig, Graphic, graphicsUtils, Point, SimpleMarkerSymbol, PictureMarkerSymbol, Polyline, SimpleLineSymbol, Polygon, Multipoint, Extent,
     SimpleFillSymbol, symUtils, SimpleRenderer, jsonUtil, Draw, PopupTemplate, esriRequest, Color, Deferred, ProgressBar, lang, on, html, array,
-    all, date, locale, Select, TextBox, NumberTextBox, DrawBox, LoadingShelter, ioquery, dojoQuery, SpatialReference, registry, WidgetManager,
-    PanelManager, aspect, domUtils, LayerInfos, CSVUtils, BaseFeatureAction, FeatureActionManager, PopupMenu, FeatureSet, dojoObject, RelationshipQuery
+    all, date, locale, Select, TextBox, NumberTextBox, DrawBox, LoadingShelter, ioquery, dojoQuery, SpatialReference, WidgetManager,
+    PanelManager, aspect, domUtils, LayerInfos, CSVUtils, BaseFeatureAction, FeatureActionManager, PopupMenu, FeatureSet, domConstruct, domClass,
+    topic
   ) { /*jshint unused: true*/
     return declare([BaseWidget, _WidgetsInTemplateMixin], {
       name: 'eSearch',
@@ -93,6 +94,7 @@ define([
       baseClass: 'widget-esearch',
       resultLayers: [],
       operationalLayers: [],
+      relateLayers:[],
       graphicLayerIndex: 0,
       AttributeLayerIndex: 0,
       spatialLayerIndex: 0,
@@ -105,6 +107,7 @@ define([
       pointSearchTolerance: 6,
       polygonsToDiscard: [],
       autozoomtoresults: false,
+      layerautozoomtoresults: false,
       keepgraphicalsearchenabled: false,
       layerDomainsCache: {},
       layerUniqueCache: null,
@@ -142,11 +145,27 @@ define([
       sumFields: [],
       currentCSVResults: null,
       popupMenu: null,
+      autoactivatedtool: null,
+      zoomFactor: 1.2,
+      token: null,
+      selectionGL: null,
 
       postCreate: function () {
         this.inherited(arguments);
+        this.list = new List({}, this.listDiv);
+        this.list.startup();
+        this.own(on(this.list, "click", lang.hitch(this, this._selectResultItem)));
+        html.addClass(this.list.domNode, "esearch-list");
         this.popupMenu = PopupMenu.getInstance();
         this.featureActionManager = FeatureActionManager.getInstance();
+        if(this.config.graphicalsearchoptions.autoactivatedtool){
+          this.autoactivatedtool = this.config.graphicalsearchoptions.autoactivatedtool;
+        }
+        if(this.config.zoomFactor){
+          this.zoomFactor = parseFloat(this.config.zoomFactor);
+        }else{
+          this.zoomFactor = 0.9;
+        }
         if (this.map.itemId) {
           LayerInfos.getInstance(this.map, this.map.itemInfo)
             .then(lang.hitch(this, function(operLayerInfos) {
@@ -162,22 +181,22 @@ define([
         html.empty(this.divResultMessage);
         this.resultLayers = [];
         this.layerUniqueCache = {};
+        this._addCustomStyle(this.appConfig.theme);
         this._initResultFormatString();
+        this._initDrawBox();
+        this._initSelectionGL();
         this._initTabContainer();
         this._initBufferUnits();
         this._initSpatialRelationships();
         this._initLayerSelect();
         this._initProgressBar();
-        this._initDrawBox();
         this._initCheckForSupportedWidgets();
-        this._combineRadioCheckBoxWithLabel();
         this.garr = [];
         this.polygonsToDiscard = [];
         this._addBufferLayer();
         this.wManager = WidgetManager.getInstance();
         this.pManager = PanelManager.getInstance();
         aspect.before(this, "onClose", this.closeDDs);
-        //this._addThemeFixes();
         this.own(on(this.domNode, 'mousedown', lang.hitch(this, function (event) {
           event.stopPropagation();
           if (event.altKey) {
@@ -190,6 +209,20 @@ define([
             });
           }
         })));
+        this.own(topic.subscribe("appConfigChanged", lang.hitch(this, this._onAppConfigChanged)));
+      },
+
+      startup: function(){
+        this.inherited(arguments);
+        this.fetchData();
+        this.list.parentWidget = this;
+        this.attWidget = this._getATWidget();
+      },
+
+      _initSelectionGL: function() {
+        this.selectionGL = new GraphicsLayer();
+        this.selectionGL.name = "Search Results Selction";
+        this.map.addLayer(this.selectionGL);
       },
 
       _obtainMapLayers: function() {
@@ -321,12 +354,6 @@ define([
         }
       },
 
-      startup: function(){
-        this.inherited(arguments);
-        this.fetchData();
-        this.list.parentWidget = this;
-      },
-
       onReceiveData: function(name, widgetId, data) {
         if(data.message && data.message === "Deactivate_DrawTool"){
           this.drawBox.deactivate();
@@ -350,6 +377,11 @@ define([
 
       _onBtnMenuClicked: function(evt){
         var position = html.position(evt.target || evt.srcElement);
+        this._setPopupMenuItems().then(this.popupMenu.show(position));
+      },
+
+      _setPopupMenuItems: function() {
+        var def = new Deferred();
         var featureSet = this._getFeatureSet();
 
         var layer = this.currentSearchLayer;
@@ -384,30 +416,32 @@ define([
                 var gFlds = array.filter(featureSet.fields, lang.hitch(this, function(field){
                   return noStats.indexOf(field.name) === -1;
                 }));
-                console.info(gFlds);
                 featureSet.fields = gFlds;
               }
+              action.data = featureSet;
+            }else if(action.name === "eZoomTo"){
+              action.zoomFactor = this.zoomFactor;
               action.data = featureSet;
             }else{
               action.data = featureSet;
             }
           }));
 
-          // if(layerConfig.relates && layerConfig.relates.relate && this.list.getSelectedItem){
-          //   var showRelateAction = new BaseFeatureAction({
-          //     name: "eShowRelate",
-          //     iconClass: 'icon-show-related-record',
-          //     label: this.nls._featureAction_eShowRelate,
-          //     iconFormat: 'svg',
-          //     map: this.map,
-          //     onExecute: lang.hitch(this, function(){
-          //       this._relateResultItem(0, this.list.getSelectedItem());
-          //     })
-          //   });
-          //   showRelateAction.name = "eShowRelate";
-          //   showRelateAction.data = featureSet;
-          //   actions.push(showRelateAction);
-          // }
+          if(layerConfig.relates && layerConfig.relates.relate && this.list.hasSelectedItem()){
+            var showRelateAction = new BaseFeatureAction({
+              name: "eShowRelate",
+              iconClass: 'icon-show-related-record',
+              label: this.nls._featureAction_eShowRelate,
+              iconFormat: 'svg',
+              map: this.map,
+              onExecute: lang.hitch(this, function(){
+                this._relateResultItem(0, this.list.getSelectedItem());
+              })
+            });
+            showRelateAction.name = "eShowRelate";
+            showRelateAction.data = featureSet;
+            actions.push(showRelateAction);
+          }
 
           if(!layerConfig.export2Geo){
             actions = array.filter(actions, lang.hitch(this, function(action){
@@ -422,7 +456,8 @@ define([
           }
 
           actions = array.filter(actions, lang.hitch(this, function(action){
-            return action.name !== 'CreateLayer' && action.name !== 'ShowStatistics' && action.name !== 'ExportToCSV';
+            return action.name !== 'CreateLayer' && action.name !== 'ShowStatistics' && action.name !== 'ExportToCSV' &&
+            action.name !== 'ZoomTo';
           }));
 
           if(layerConfig.export2Csv){
@@ -462,7 +497,7 @@ define([
               label: this.nls.clearBuffer,
               iconFormat: 'svg',
               map: this.map,
-              onExecute: lang.hitch(this, this.clearbuffer)
+              onExecute: lang.hitch(this,  this.clearbuffer)
             });
             removeBufferAction.name = "RemoveBufferResult";
             removeBufferAction.data = featureSet;
@@ -481,8 +516,52 @@ define([
           removeAction.data = featureSet;
           actions.push(removeAction);
 
+          if(this.list.hasSelectedItem()){
+            var removeAction2 = new BaseFeatureAction({
+              name: "ClearSelctedeSearchResult",
+              iconClass: 'icon-close',
+              label: this.nls.clearSelectedResults,
+              iconFormat: 'svg',
+              map: this.map,
+              onExecute: lang.hitch(this, this.clearSelection)
+            });
+            removeAction2.name = "ClearSelectedeSearchResult";
+            removeAction2.data = featureSet;
+            actions.push(removeAction2);
+          }
+
+          if(this.relateLayers && this.relateLayers.length > 0){
+            var removeAction3 = new BaseFeatureAction({
+              name: "ClearRelateResult",
+              iconClass: 'icon-close',
+              label: this.nls.clearRelates,
+              iconFormat: 'svg',
+              map: this.map,
+              onExecute: lang.hitch(this, this._clearRelateLayers)
+            });
+            removeAction3.name = "ClearRelateResult";
+            removeAction3.data = featureSet;
+            actions.push(removeAction3);
+          }
+
+          array.some(actions, lang.hitch(this, function(action, index){
+            if(action.name === "eZoomTo"){
+              actions.splice(0,0, actions.splice(index, 1)[0]);
+              return true;
+            }
+          }));
           this.popupMenu.setActions(actions);
-          this.popupMenu.show(position);
+          def.resolve();
+        }));
+        return def;
+      },
+
+      resetFeatureActions: function(featureSet, layer) {
+        this.featureActionManager.getSupportedActions(featureSet, layer).then(lang.hitch(this, function(actions){
+          array.forEach(actions, lang.hitch(this, function(action){
+            action.data = featureSet;
+          }));
+          this.popupMenu.setActions(actions);
         }));
       },
 
@@ -617,6 +696,10 @@ define([
         this.aSelectType.closeDropDown();
       },
 
+      onDeactivate: function() {
+        this.drawBox.deactivate();
+      },
+
       onClose: function () {
         this.drawBox.deactivate();
         this._hideInfoWindow();
@@ -629,6 +712,9 @@ define([
         if (this.tempResultLayer) {
           this.tempResultLayer.hide();
         }
+        if (this.selectionGL) {
+          this.selectionGL.hide();
+        }
       },
 
       onOpen: function () {
@@ -639,6 +725,9 @@ define([
         }
         if (this.tempResultLayer) {
           this.tempResultLayer.show();
+        }
+        if (this.selectionGL) {
+          this.selectionGL.show();
         }
       },
 
@@ -651,11 +740,13 @@ define([
         this._hideInfoWindow();
         this._resetDrawBox();
         this._removeAllResultLayers();
+        this._clearRelateLayers();
         this.inherited(arguments);
       },
 
       _removeAllResultLayers: function () {
         this._hideInfoWindow();
+        this._removeSelectionGraphics();
         this._removeTempResultLayer();
         this._removeAllOperatonalLayers();
       },
@@ -673,16 +764,49 @@ define([
         this.operationalLayers = [];
       },
 
+      _removeAllRelateLayers: function () {
+        var layers = this.relateLayers;
+        if(layers && layers.length > 0){
+          while (layers.length > 0) {
+            var layer = layers[0];
+            if (layer) {
+              this.map.removeLayer(layer);
+            }
+            if(this.attWidget){
+              if (this.attWidget.getExistLayerTabPage(layer.id)) {
+                this.attWidget.layerTabPageClose(layer.id, true);
+              }
+            }
+            layers[0] = null;
+            layers.splice(0, 1);
+          }
+          this.relateLayers = [];
+        }
+      },
+
       _addOperationalLayer: function (resultLayer) {
         this.operationalLayers.push(resultLayer);
         this.map.addLayer(resultLayer);
       },
 
-      _resetAndAddTempResultLayer: function () {
+      _addRelateLayer: function (resultLayer) {
+        if(this.relateLayers.indexOf(resultLayer) === -1){
+          this.relateLayers.push(resultLayer);
+          this.map.addLayer(resultLayer);
+        }else{
+          resultLayer.clear();
+        }
+      },
+
+      _resetAndAddTempResultLayer: function (layerIndex) {
         this._removeTempResultLayer();
         this.tempResultLayer = new GraphicsLayer();
-        this.tempResultLayer.name = "Search Results";
-        this.tempResultLayer.infoTemplate = new PopupTemplate();
+        this.tempResultLayer.name = this.nls.search + ' ' + this.nls.results;
+        var layerConfig = this.config.layers[layerIndex];
+        var lyrDisablePopupsAndTrue = (layerConfig.hasOwnProperty("disablePopups") && layerConfig.disablePopups)?true:false;
+        if(!this.config.disablePopups && !lyrDisablePopupsAndTrue){
+          this.tempResultLayer.infoTemplate = new PopupTemplate();
+        }
         this.map.addLayer(this.tempResultLayer);
       },
 
@@ -691,6 +815,10 @@ define([
           this.map.removeLayer(this.tempResultLayer);
         }
         this.tempResultLayer = null;
+      },
+
+      _removeSelectionGraphics: function () {
+        this.selectionGL.clear();
       },
 
       onSpatialLayerChange: function (newValue) {
@@ -889,15 +1017,6 @@ define([
         return iClass;
       },
 
-      _combineRadioCheckBoxWithLabel: function () {
-        this.own(on(this.bufferGraphicLabel, 'click', lang.hitch(this, function () {
-          this.cbxBufferGraphic.setValue(!this.cbxBufferGraphic.getValue());
-        })));
-        this.own(on(this.multiGraphicLabel, 'click', lang.hitch(this, function () {
-          this.cbxMultiGraphic.setValue(!this.cbxMultiGraphic.getValue());
-        })));
-      },
-
       _initTabContainer: function () {
         if (this.config.hasOwnProperty('disabledtabs')) {
           this.disabledTabs = this.config.disabledtabs;
@@ -909,7 +1028,6 @@ define([
         this.txtBufferValue.set('value', this.config.bufferDefaults.bufferDefaultValue || 2);
         this.txtBufferValueSpat.set('value', this.config.bufferDefaults.bufferDefaultValue || 2);
         this.bufferWKID = this.config.bufferDefaults.bufferWKID;
-        this.keepgraphicalsearchenabled = this.config.graphicalsearchoptions.keepgraphicalsearchenabled || false;
         this.autozoomtoresults = this.config.autozoomtoresults || false;
         this.mouseovergraphics = this.config.mouseovergraphics || false;
         var initView = this.config.initialView || "text";
@@ -974,6 +1092,9 @@ define([
         } else if (initView === "graphical" && this.shapeTab) {
           this.selTab = this.nls.selectFeatures;
         }
+        if(this.autoactivatedtool && initView === "graphical" && this.shapeTab){
+          this.drawBox.activate(this.autoactivatedtool.toUpperCase());
+        }
         var tabs = [];
         if (this.shapeTab) {
           tabs.push({
@@ -1022,6 +1143,17 @@ define([
         this.own(on(this.tabContainer, "tabChanged", lang.hitch(this, function (title) {
           if (title !== this.nls.results) {
             this.selTab = title;
+          }
+          if(title === this.nls.selectFeatures) {
+            if(this.autoactivatedtool){
+              this.drawBox.activate(this.autoactivatedtool.toUpperCase());
+            }
+          }else{
+            if (title === this.nls.selectByAttribute || title === this.nls.selectSpatial) {
+              this.drawBox.deactivate();
+            }else if(title === this.nls.results && !this.keepgraphicalsearchenabled) {
+              this.drawBox.deactivate();
+            }
           }
         })));
         jimuUtils.setVerticalCenter(this.tabContainer.domNode);
@@ -1076,7 +1208,8 @@ define([
             nls: this.nls,
             layerUniqueCache: this.layerUniqueCache,
             disableuvcache: this.config.disableuvcache,
-            selectFilterType: this.config.selectfilter
+            selectFilterType: this.config.selectfilter,
+            datedisplayformat: this.config.datedisplayformat
           });
           this.paramsDijit.placeAt(this.parametersDiv);
           this.paramsDijit.startup();
@@ -1107,6 +1240,14 @@ define([
                   if (oidFieldInfos.length > 0) {
                     var oidFieldInfo = oidFieldInfos[0];
                     layerConfig.objectIdField = oidFieldInfo.name;
+                  }else{
+                    var oidFieldInfos = array.filter(fields, lang.hitch(this, function (fieldInfo) {
+                      return fieldInfo.type === 'esriFieldTypeInteger' && fieldInfo.name.toUpperCase() === 'OBJECTID';
+                    }));
+                    if (oidFieldInfos.length > 0) {
+                      var oidFieldInfo = oidFieldInfos[0];
+                      layerConfig.objectIdField = oidFieldInfo.name;
+                    }
                   }
                 }
                 layerConfig.existObjectId = array.some(layerConfig.fields.field, lang.hitch(this, function (element) {
@@ -1143,10 +1284,30 @@ define([
                 this.resultLayers.push({});
               }
             }));
+            setTimeout(lang.hitch(this, function(){
+              if(options.length === 1){
+                this.labelLayerGraphical.innerHTML = options[0].label;
+                html.setStyle(dojoQuery(".esearch-select-graphic")[0], 'display', 'none');
+                html.removeClass(this.labelLayerGraphical, 'hidden');
+              }else{
+                this.selectLayerGraphical.addOption(options);
+              }
+              if(attribOptions.length === 1){
+                this.labelLayerAttribute.innerHTML = attribOptions[0].label;
+                html.setStyle(dojoQuery(".esearch-select-attrib")[0], 'display', 'none');
+                html.removeClass(this.labelLayerAttribute, 'hidden');
+              }else{
+                this.selectLayerAttribute.addOption(attribOptions);
+              }
+              if(spatialOptions.length === 1){
+                this.labelLayerSpatial.innerHTML = spatialOptions[0].label;
+                html.setStyle(dojoQuery(".select-layer-spatial")[0], 'display', 'none');
+                html.removeClass(this.labelLayerSpatial, 'hidden');
+              }else{
+                this.selectLayerSpatial.addOption(spatialOptions);
+              }
+            }), 100);
 
-            this.selectLayerGraphical.addOption(options);
-            this.selectLayerAttribute.addOption(attribOptions);
-            this.selectLayerSpatial.addOption(spatialOptions);
             if(spatialOptions.length > 0){
               this.spatialLayerIndex = spatialOptions[0].value;
             }
@@ -1191,16 +1352,12 @@ define([
                 }else{
                   html.style(this.textsearchlabel, 'display', 'none');
                 }
-                console.info(valuesObj1);
                 this.paramsDijit.build(valuesObj1, this.resultLayers[myObject.slayer], this.config.layers[myObject.slayer].url,
                                      this.config.layers[myObject.slayer].definitionexpression);
                 on.once(this.paramsDijit, 'param-ready', lang.hitch(this, function () {
-                  this._queryFromURL(myObject.esearch, myObject.slayer, myObject.exprnum || 0, myObject.close || false);
+                  this._queryFromURL(myObject.esearch, myObject.slayer, myObject.exprnum || 0, myObject.close || false, attribOptions.length);
                 }));
               }
-              /*this.publishData({
-                message: myObject.slayer
-              });*/
             } else {
               //init the first available attrib layers paramsDijit
               if(attribOptions.length > 0){
@@ -1243,9 +1400,27 @@ define([
             }
           }), lang.hitch(this, function (err) {
             this.shelter.hide();
-            this.selectLayerGraphical.addOption(options);
-            this.selectLayerAttribute.addOption(options);
-            this.selectLayerSpatial.addOption(spatialOptions);
+            if(options.length === 1){
+              this.labelLayerGraphical.innerHTML = options[0].label;
+              html.setStyle(dojoQuery(".esearch-select-graphic")[0], 'display', 'none');
+              html.removeClass(this.labelLayerGraphical, 'hidden');
+            }else{
+              this.selectLayerGraphical.addOption(options);
+            }
+            if(attribOptions.length === 1){
+              this.labelLayerAttribute.innerHTML = attribOptions[0].label;
+              html.setStyle(dojoQuery(".esearch-select-attrib")[0], 'display', 'none');
+              html.removeClass(this.labelLayerAttribute, 'hidden');
+            }else{
+              this.selectLayerAttribute.addOption(attribOptions);
+            }
+            if(spatialOptions.length === 1){
+              this.labelLayerSpatial.innerHTML = spatialOptions[0].label;
+              html.setStyle(dojoQuery(".select-layer-spatial")[0], 'display', 'none');
+              html.removeClass(this.labelLayerSpatial, 'hidden');
+            }else{
+              this.selectLayerSpatial.addOption(spatialOptions);
+            }
             console.error(err);
             for (var j = 0; j < this.config.layers.length; j++) {
               var layer = new GraphicsLayer();
@@ -1263,55 +1438,217 @@ define([
       _relateResultItem: function(index, item) {
         var layerConfig = this.config.layers[this.currentLayerIndex];
         var oidField = layerConfig.objectIdField;
+        if(!item){
+          return;
+        }
         var sResult = item;
-        //console.info(sResult);
-        //console.info(this.currentSearchLayer.relationships);
-        var relArray = [];
+        this.relArray = [];
         for(var r=0; r < layerConfig.relates.relate.length; r++){
           var relRslt = {
             id: layerConfig.relates.relate[r].id,
             name: layerConfig.relates.relate[r].label,
             fields: layerConfig.relates.relate[r].fields,
-            oid: sResult.graphic.attributes[oidField],
-            icon: layerConfig.relates.relate[r].icon
+            oid: sResult.graphic.attributes[oidField]
           };
-          relArray.push(relRslt);
+          this.relArray.push(relRslt);
         }
 
-        if (this.wManager) {
-          var widgetCfg = this._getWidgetConfig('AttributeTable');
-          if(widgetCfg){
-            var attWidget = this.wManager.getWidgetByLabel(widgetCfg.label);
-            if(attWidget){
-              this.attTableOpenedbySearch = !attWidget.showing;
-              this.wManager.openWidget(attWidget);
-              if(relArray.length === 1){
-                var relQuery = new RelationshipQuery();
-                relQuery.outSpatialReference = this.map.spatialReference;
-                relQuery.outFields = ["*"];
-                relQuery.relationshipId = relArray[0].id;
-                relQuery.objectIds = [relArray[0].oid];
-                var queryTask = new QueryTask(layerConfig.url);
-                queryTask.executeRelationshipQuery(relQuery, lang.hitch(this, this._onRelSearchFinish));
-              }else{
-                new RelateChooser({
-                  relatesArr: relArray,
-                  height: 400,
-                  titleLabel: this.nls.chooserelate,
-                  folderurl: this.folderUrl
-                });
-              }
-            }
+        if(this.attWidget){
+          this.attTableOpenedbySearch = !this.attWidget.showing;
+          this.wManager.openWidget(this.attWidget);
+          if(this.relArray.length === 1){
+            this._createLayerAndExecuteQuery(0);
+          }else{
+            var rc = new RelateChooser({
+              relatesArr: this.relArray,
+              autoHeight: true,
+              width: 400,
+              titleLabel: this.nls.chooserelate,
+              folderurl: this.folderUrl
+            });
+            on(rc, "click", lang.hitch(this, function(evt){
+              this._createLayerAndExecuteQuery(evt);
+            }));
           }
         }
       },
 
-      _onRelSearchFinish: function (result) {
-        console.info(result);
+      _createLayerAndExecuteQuery: function(relateId) {
+        var layerConfig = this.config.layers[this.currentLayerIndex];
+        var relateTableId = layerConfig.relates.relate[relateId].id;
+        this._createRelateResultLayer(relateId).then(lang.hitch(this, function(result){
+          var relateFL = result.value;
+          this._addRelateLayer(relateFL);
+          var relQuery = new RelationshipQuery();
+          relQuery.outSpatialReference = this.map.spatialReference;
+          if(this.relArray[relateId].fields.all){
+            relQuery.outFields = ["*"];
+          }else{
+            var outFields = array.map(this.relArray[relateId].fields.field, lang.hitch(this, function (fieldInfo) {
+              return fieldInfo.name;
+            }));
+            relQuery.outFields = outFields;
+          }
+          relQuery.relationshipId = parseInt(relateTableId);
+          relQuery.objectIds = [this.relArray[relateId].oid];
+          relQuery.returnGeometry = true;
+          var queryTask = new QueryTask(layerConfig.url);
+          queryTask.executeRelationshipQuery(relQuery, lang.hitch(this, this._onRelSearchFinish, this.relArray[relateId].oid, relateId));
+        }));
+      },
+
+      _onRelSearchFinish: function (oid, relateId, result) {
+        var layerConfig = this.config.layers[this.currentLayerIndex];
+        // console.info(oid, relateId, result);
+        if(!result[oid]){
+          if(this.attWidget){
+            if (this.attWidget.getExistLayerTabPage(this._relateLyr.id)) {
+              this.attWidget.layerTabPageClose(this._relateLyr.id, true);
+            }
+          }
+          this.map.removeLayer(this._relateLyr);
+          this.relateLayers.splice(this.relateLayers.length - 1, 1);
+          new Message({
+            titleLabel: this.nls.noResults,
+            message: this.nls.noRelatedRecords + " " + layerConfig.relates.relate[relateId].label
+          });
+          return;
+        }
+        result[oid].features.forEach(lang.hitch(this, function(feat){
+          this._relateLyr.add(feat);
+        }));
+        //this._relateLyr.add(result[oid].features[0]);
+        var layerInfo = this.operLayerInfos.getLayerInfoById(this._relateLyr.id);
+        layerInfo.getLayerObject = lang.hitch(this, function(){
+          var def = new Deferred();
+          def.resolve(this._relateLyr);
+          return def;
+        });
+        //Adjust field info based on config
+        if(!layerConfig.relates.relate[relateId].fields.all){
+          var adjRelFldInfos = [];
+          array.map(layerInfo.layerObject.fields, lang.hitch(this, function (fieldInfo){
+            var cnfgFldObj = this._getRelateConfigFieldObject(fieldInfo.name, this.currentLayerIndex, relateId);
+            if(cnfgFldObj){
+              adjRelFldInfos.push({
+                fieldName: cnfgFldObj.name,
+                label: cnfgFldObj.alias,
+                show: true,
+                format: this._convertFormatInfo(cnfgFldObj)
+              });
+            }
+          }));
+          layerInfo.originOperLayer.popupInfo = {
+            fieldInfos: adjRelFldInfos
+          }
+        }
+        this.publishData({
+          'target': 'AttributeTable',
+          'layer': layerInfo
+        });
+        if(this.attWidget){
+          this.attWidget._activeTable.refresh();
+        }
+      },
+
+      _createRelateResultLayer: function (relateId) {
+        var def = new Deferred();
+        var relLyrExists = false;
+        var layerConfig = this.config.layers[this.currentLayerIndex];
+        //Check if the layer already exists
+        if(this.relateLayers && this.relateLayers.length > 0){
+          array.some(this.relateLayers, lang.hitch(this, function(rLayer){
+            if(rLayer.name === this.nls.relate + ': ' + layerConfig.relates.relate[relateId].label){
+              this._relateLyr = rLayer;
+              def.resolve({state: 'success', value: rLayer});
+              relLyrExists = true;
+              return true;
+            }
+          }));
+        }
+        if(!relLyrExists){
+          var serviceUrl = this._getServiceUrlByLayerUrl(layerConfig.url);
+          var relateTableId = layerConfig.relates.relate[relateId].id;
+          var relMsId = this.resultLayers[this.currentLayerIndex].relationships[relateTableId].relatedTableId;
+          relateLyrUrl = serviceUrl + '/' + relMsId;
+          this._getLayerInfoWithRelationships(relateLyrUrl).then(lang.hitch(this, function(result){
+            var layerInfo = result.value;
+            layerInfo.name = this.nls.relate + ': ' + layerConfig.relates.relate[relateId].label;
+            layerInfo._titleForLegend = layerInfo.name;
+            layerInfo.minScale = 0;
+            layerInfo.maxScale = 0;
+            layerInfo.effectiveMinScale = 0;
+            layerInfo.effectiveMaxScale = 0;
+            layerInfo.defaultVisibility = true;
+
+            //only keep necessary fields
+            var necessaryFieldNames = array.map(layerConfig.relates.relate[relateId].fields.field, lang.hitch(this, function (fieldInfo) {
+              return fieldInfo.name;
+            }));
+
+            var oidField;
+            if (layerInfo.objectIdField) {
+              oidField = layerInfo.objectIdField;
+            } else {
+              var fields = layerInfo.fields;
+              var oidFieldInfos = array.filter(fields, lang.hitch(this, function (fieldInfo) {
+                return fieldInfo.type === 'esriFieldTypeOID';
+              }));
+              if (oidFieldInfos.length > 0) {
+                var oidFieldInfo = oidFieldInfos[0];
+                oidField = oidFieldInfo.name;
+              }
+            }
+            if (array.indexOf(necessaryFieldNames, oidField) < 0) {
+              necessaryFieldNames.push(oidField);
+            }
+            //match field order with order specified in relate config.
+            if(!layerConfig.relates.relate[relateId].fields.all){
+              var adjFieldsOrder = [];
+              array.map(layerConfig.relates.relate[relateId].fields.field, lang.hitch(this, function (fieldInfo) {
+                array.some(layerInfo.fields, lang.hitch(this, function (oFieldInfo) {
+                  if(oFieldInfo.name === fieldInfo.name){
+                    adjFieldsOrder.push(oFieldInfo);
+                    return true;
+                  }
+                }));
+              }));
+              layerInfo.fields = adjFieldsOrder;
+            }
+
+            layerInfo.fields = array.filter(layerInfo.fields, lang.hitch(this, function (fieldInfo) {
+              if(!layerConfig.relates.relate[relateId].fields.all){
+                return necessaryFieldNames.indexOf(fieldInfo.name) >= 0;
+              }else{
+                return true;
+              }
+            }));
+            /*Adjust field aliases to those configured in the json*/
+            array.map(layerInfo.fields, lang.hitch(this, function (fieldInfo){
+              if(necessaryFieldNames.indexOf(fieldInfo.name) >= 0){
+                var cnfgFldObj = this._getRelateConfigFieldObject(fieldInfo.name, this.currentLayerIndex, relateId);
+                if(cnfgFldObj && cnfgFldObj.alias !== fieldInfo.alias){
+                  fieldInfo.alias = cnfgFldObj.alias;
+                }
+              }
+            }));
+
+            var featureCollection = {
+              layerDefinition: layerInfo,
+              featureSet: null
+            };
+            resultLayer = new FeatureLayer(featureCollection);
+            this._relateLyr = resultLayer;
+            def.resolve({state: 'success', value: resultLayer});
+          }));
+        }
+        return def;
       },
 
       _removeResultItem: function (index, item) {
-        //console.info(item);
+        if(item === this.list.getSelectedItem()){
+          this.selectionGL.clear();
+        }
         array.some(this.currentCSVResults.data, lang.hitch(this, function(csvRow){
           if(csvRow.OID === item.OID){
             this.currentCSVResults.data.splice(this.currentCSVResults.data.indexOf(csvRow), 1);
@@ -1336,16 +1673,10 @@ define([
         this.list.remove(index);
         this._hideInfoWindow();
         if (layerConfig.shareResult && layerConfig.addToAttrib) {
-          if (this.wManager) {
-            var widgetCfg = this._getWidgetConfig('AttributeTable');
-            if(widgetCfg){
-              var attWidget = this.wManager.getWidgetByLabel(widgetCfg.label);
-              if(attWidget){
-                this.attTableOpenedbySearch = !attWidget.showing;
-                this.wManager.openWidget(attWidget);
-                attWidget._activeTable.refresh();
-              }
-            }
+          if(this.attWidget){
+            this.attTableOpenedbySearch = !this.attWidget.showing;
+            this.wManager.openWidget(this.attWidget);
+            this.attWidget._activeTable.refresh();
           }
         }
       },
@@ -1413,13 +1744,15 @@ define([
         return def;
       },
 
-      _queryFromURL: function (value, slayerId, exprNum, close) {
+      _queryFromURL: function (value, slayerId, exprNum, close, numOfAttribLayers) {
         slayerId = typeof slayerId !== 'undefined' ? slayerId : 0;
         exprNum = typeof exprNum !== 'undefined' ? exprNum : 0;
         this.AttributeLayerIndex = slayerId;
         this.expressIndex = exprNum;
 //make sure the form reflects what was searched
-        this.selectLayerAttribute.set('value', slayerId);
+        if(numOfAttribLayers > 1){
+          this.selectLayerAttribute.set('value', slayerId);
+        }
         setTimeout(lang.hitch(this, function(){
           this.selectExpression.set('value', exprNum || 0);
           setTimeout(lang.hitch(this, function(){
@@ -1451,7 +1784,8 @@ define([
 
         //now setup the infoTemplate
         //check if this layer is part of map and if it has a popup defined already
-        if(!this.config.disablePopups){
+        var lyrDisablePopupsAndTrue = (layerConfig.hasOwnProperty("disablePopups") && layerConfig.disablePopups)?true:false;
+        if(!this.config.disablePopups && !lyrDisablePopupsAndTrue){
           if(layerConfig.popupfrom && layerConfig.popupfrom === "webmap"){
             array.forEach(this.operLayerInfos.getLayerInfoArray(), function(layerInfo2) {
               //console.info(layerInfo2);
@@ -1460,14 +1794,18 @@ define([
                 if(layerInfo2.controlPopupInfo.hasOwnProperty("infoTemplates")){
                   if(layerInfo2.controlPopupInfo.infoTemplates[layerInfo.id]){
                     //console.info(layerInfo2.controlPopupInfo.infoTemplates[layerInfo.id].infoTemplate);
-                    _popupNeedFields = this._addPopupFields(layerInfo2.controlPopupInfo.infoTemplates[layerInfo.id].infoTemplate._fieldLabels);
+                    if(layerInfo2.controlPopupInfo.infoTemplates[layerInfo.id].infoTemplate._fieldLabels){
+                      _popupNeedFields = this._addPopupFields(layerInfo2.controlPopupInfo.infoTemplates[layerInfo.id].infoTemplate._fieldLabels);
+                    }
                     _infoTemplate = layerInfo2.controlPopupInfo.infoTemplates[layerInfo.id].infoTemplate;
                     _hasInfoTemplate = true;
                   }else{
                     _hasInfoTemplate = false;
                   }
                 }else{
-                  _popupNeedFields = this._addPopupFields(layerInfo2.controlPopupInfo.infoTemplate._fieldLabels);
+                  if(layerInfo2.controlPopupInfo.infoTemplate._fieldLabels){
+                    _popupNeedFields = this._addPopupFields(layerInfo2.controlPopupInfo.infoTemplate._fieldLabels);
+                  }
                   _infoTemplate = layerInfo2.controlPopupInfo.infoTemplate;
                   _hasInfoTemplate = true;
                 }
@@ -1482,7 +1820,11 @@ define([
           //only keep necessary fields
           var necessaryFieldNames = this._getOutputFields(layerIndex, _popupNeedFields);
           layerInfo.fields = array.filter(layerInfo.fields, lang.hitch(this, function (fieldInfo) {
-            return necessaryFieldNames.indexOf(fieldInfo.name) >= 0;
+            if(!layerConfig.fields.all){
+              return necessaryFieldNames.indexOf(fieldInfo.name) >= 0;
+            }else{
+              return true;
+            }
           }));
 /*Adjust field aliases to those configured in the json*/
           array.map(layerInfo.fields, lang.hitch(this, function (fieldInfo){
@@ -1500,7 +1842,7 @@ define([
           resultLayer = new FeatureLayer(featureCollection);
         } else {
           //use graphics layer
-          this._resetAndAddTempResultLayer();
+          this._resetAndAddTempResultLayer(layerIndex);
           resultLayer = this.tempResultLayer;
         }
         if(_hasInfoTemplate){
@@ -1509,33 +1851,6 @@ define([
         }else{
           resultLayer._hasInfoTemplate = false;
         }
-        // //now setup the infoTemplate
-        // //check if this layer is part of map and if it has a popup defined already
-        // if(!this.config.disablePopups){
-        //   if(layerConfig.popupfrom && layerConfig.popupfrom === "webmap"){
-        //     array.forEach(this.operLayerInfos.getLayerInfoArray(), function(layerInfo2) {
-        //       //console.info(layerInfo2);
-        //       if(layerInfo2.layerObject && layerInfo2.layerObject.url === layerInfo._origServiceURL || layerInfo2.layerObject.url === layerInfo._origLayerURL){
-        //         //console.info(layerInfo2);
-        //         if(layerInfo2.controlPopupInfo.hasOwnProperty("infoTemplates")){
-        //           if(layerInfo2.controlPopupInfo.infoTemplates[layerInfo.id]){
-        //             //console.info(layerInfo2.controlPopupInfo.infoTemplates[layerInfo.id].infoTemplate);
-        //             //this._esurePopupFieldsAreInOutFields(layerInfo2.controlPopupInfo.infoTemplates[layerInfo.id].infoTemplate._fieldsMap, resultLayer);
-        //             resultLayer.infoTemplate = layerInfo2.controlPopupInfo.infoTemplates[layerInfo.id].infoTemplate;
-        //             resultLayer._hasInfoTemplate = true;
-        //           }else{
-        //             resultLayer._hasInfoTemplate = false;
-        //           }
-        //         }else{
-        //           resultLayer.infoTemplate = layerInfo2.controlPopupInfo.infoTemplate;
-        //           resultLayer._hasInfoTemplate = true;
-        //         }
-        //       }
-        //     }, this);
-        //   }else{
-        //     resultLayer._hasInfoTemplate = false;
-        //   }
-        // }
         return resultLayer;
       },
 
@@ -1550,6 +1865,22 @@ define([
       _getConfigFieldObject: function (fldName, layerIndex) {
 //        console.info(fldName, layerIndex);
         var layerConfig = this.config.layers[layerIndex];
+        var fields = layerConfig.fields.field;
+        var retFldObj = null;
+        array.some(fields, lang.hitch(this, function (fieldInfo) {
+          if(fieldInfo.name === fldName){
+            retFldObj = fieldInfo;
+            return true;
+          }else{
+            return false;
+          }
+        }));
+        return retFldObj;
+      },
+
+      _getRelateConfigFieldObject: function (fldName, layerIndex, relateId) {
+//        console.info(fldName, layerIndex, relateId);
+        var layerConfig = this.config.layers[layerIndex].relates.relate[relateId];
         var fields = layerConfig.fields.field;
         var retFldObj = null;
         array.some(fields, lang.hitch(this, function (fieldInfo) {
@@ -1597,6 +1928,9 @@ define([
             //console.info("Added popup field: " + fldname);
           }
         }));
+        if(layerConfig.fields.all){
+          outFields = allFieldNames;
+        }
         //console.info(outFields);
         return outFields;
       },
@@ -1620,6 +1954,12 @@ define([
 
             this.graphicsLayerBuffer.clear();
             this.graphicsLayerBuffer.add(graphic);
+            if(this.config.bufferDefaults.autoZoom){
+              var gExt = graphicsUtils.graphicsExtent(this.graphicsLayerBuffer.graphics);
+              if (gExt) {
+                this.map.setExtent(gExt.expand(this.zoomFactor), true);
+              }
+            }
             html.setStyle(this.btnClearBuffer2, 'display', 'block');
             html.setStyle(this.btnClearBuffer3, 'display', 'block');
             if (isGraphicalBufferOp) {
@@ -1687,6 +2027,7 @@ define([
       },
 
       _initDrawBox: function () {
+        this.keepgraphicalsearchenabled = this.config.graphicalsearchoptions.keepgraphicalsearchenabled || false;
         aspect.before(this.drawBox, "_activate", lang.hitch(this, function(){
           this.publishData({message: "Deactivate_DrawTool"});
         }));
@@ -1727,7 +2068,7 @@ define([
         if(this.keepgraphicalsearchenabled){
           this.drawBox.deactivateAfterDrawing = false;
         }
-        this.own(on(this.drawBox, 'IconSelected', lang.hitch(this, function (tool, geotype, commontype) {
+        this.own(on(this.drawBox, 'icon-selected', lang.hitch(this, function (tool, geotype, commontype) {
           if (this.lastDrawCommonType && this.lastDrawCommonType !== commontype && this.garr.length > 0) {
             var qMessage = new Message({
               type: 'question',
@@ -1755,7 +2096,7 @@ define([
             this.lastDrawTool = geotype;
           }
         })));
-        this.own(on(this.drawBox, 'DrawEnd', lang.hitch(this, function (graphic) {
+        this.own(on(this.drawBox, 'draw-end', lang.hitch(this, function (graphic) {
           if (!this.cbxMultiGraphic.getValue()) {
             if (graphic.geometry.type === "point" && this.cbxAddTolerance.getValue()) {
               var ext = this.pointToExtent(graphic.geometry, this.pointSearchTolerance);
@@ -1809,10 +2150,6 @@ define([
             url += i + '=' + urlObject.query[i];
           }
         }
-        /*new Message({
-          titleLabel: "eSearch widget url search string.",
-          message: url
-        });*/
         window.prompt(this.nls.copyurlprompt, url);
       },
 
@@ -1862,8 +2199,14 @@ define([
 
       _onCbxMultiGraphicClicked: function () {
         if (this.cbxMultiGraphic.getValue()) {
+          this.drawBox.deactivateAfterDrawing = false;
           html.setStyle(this.btnGraSearch, 'display', 'inline-block');
         } else {
+          if(this.keepgraphicalsearchenabled){
+            this.drawBox.deactivateAfterDrawing = false;
+          }else{
+            this.drawBox.deactivateAfterDrawing = true;
+          }
           html.setStyle(this.btnGraSearch, 'display', 'none');
         }
       },
@@ -2095,6 +2438,7 @@ define([
           this.clear();
         }else{
           this._clearLayers();
+          this._clearRelateLayers();
           this.drawBox.clear();
           this.garr = [];
           this.lastDrawCommonType = null;
@@ -2163,7 +2507,9 @@ define([
           }
         }
         if (!this.config.layers[layerIndex].existObjectId && fields.indexOf(this.config.layers[layerIndex].objectIdField) < 0) {
-          fields.push(this.config.layers[layerIndex].objectIdField);
+          if(!this.config.layers[layerIndex].fields.all){
+            fields.push(this.config.layers[layerIndex].objectIdField);
+          }
         }
 
         queryParams.returnGeometry = true;
@@ -2254,7 +2600,7 @@ define([
             this.onAttributeLayerChange(this.AttributeLayerIndex);
           }
           var valuesObj = lang.clone(this.config.layers[this.AttributeLayerIndex].expressions.expression[exInd].values.value);
-          console.info(valuesObj);
+          //console.info(valuesObj);
           array.map(valuesObj, lang.hitch(this, function(valObj){
             if(valObj.operation.toLowerCase().indexOf('date') > -1){
               if(valObj.valueObj.hasOwnProperty('value')){
@@ -2272,6 +2618,12 @@ define([
         }
       },
 
+      clearSelection: function() {
+        this.list.clearSelection();
+        this.selectionGL.clear();
+        this._hideInfoWindow();
+      },
+
       clear: function ( /* optional */ closeAtt) {
         if(this.sumDivEvt){
           this.sumDivEvt.remove();
@@ -2287,6 +2639,7 @@ define([
         this.currentFeatures = [];
         this._hideInfoWindow();
         this._clearLayers();
+        this._clearRelateLayers();
         this.divSum.innerHTML = '';
         this.zoomAttempt = 0;
         this.gSelectTypeVal = 'new';
@@ -2308,15 +2661,9 @@ define([
         this.lastDrawCommonType = null;
         this.lastDrawTool = null;
         if (closeAtt) {
-          if (this.wManager && this.attTableOpenedbySearch) {
-            var widgetCfg = this._getWidgetConfig('AttributeTable');
-            if(widgetCfg){
-              var attWidget = this.wManager.getWidgetByLabel(widgetCfg.label);
-              if (attWidget) {
-                attWidget._closeTable();
-              }
-              this.attTableOpenedbySearch = false;
-            }
+          if(this.attWidget && this.attTableOpenedbySearch){
+            this.attWidget._closeTable();
+            this.attTableOpenedbySearch = false;
           }
         }
         return false;
@@ -2366,15 +2713,24 @@ define([
             }
           }
 
-          // if (tOperation === 'stringOperatorContains') {
-          //   var sa = content[s].value.toString().split(" "), word;
-          //   for(w=0; w < sa.length; w++){
-          //     word = sa[w];
-          //     criteriaFromValue = queryExpr.replace(myPattern, word);
-          //     expr = this.AppendTo(expr, criteriaFromValue, "AND");
-          //   }
-          //   continue;
-          // }
+          if (tOperation === 'stringOperatorContains') {
+            if(content[s].value.toString() === ""){
+              continue;
+            }
+            if(this.config.containsword){
+              var sa = content[s].value.toString().split(" "), word;
+              for(w=0; w < sa.length; w++){
+                word = sa[w];
+                criteriaFromValue = queryExpr.replace(myPattern, word);
+                expr = this.AppendTo(expr, criteriaFromValue, tOperator);
+              }
+              continue;
+            }else{
+              criteriaFromValue = queryExpr.replace(myPattern, content[s].value.toString());
+              expr = this.AppendTo(expr, criteriaFromValue, tOperator);
+              continue;
+            }
+          }
 
           if (tOperation === 'dateOperatorIsOn' || tOperation === 'dateOperatorIsNotOn') {
             eVal = content[s].value.toString();
@@ -2438,7 +2794,7 @@ define([
           } else if (content[s].value.toString().toLowerCase() === "allu") {
             expr = this.AppendTo(expr, "1=1", tOperator);
           } else if (content[s].value.toString().toLowerCase() === "null" || content[s].value.toString().toLowerCase() === "nan"){
-            console.info(content[s].value.toString().toLowerCase());
+            //console.info(content[s].value.toString().toLowerCase());
             if (content[s].isValueRequired === true){
               var mExpr2 = queryExpr.substr(0, queryExpr.indexOf("=")) + " is null";
               expr = this.AppendTo(expr, mExpr2, tOperator);
@@ -2480,7 +2836,7 @@ define([
 
       zoomall: function () {
         var layerConfig = this.config.layers[this.currentLayerIndex];
-        var zoomScale = layerConfig.zoomScale || 10000;
+        var zoomScale = layerConfig && layerConfig.zoomScale || 10000;
         if (!this.currentLayerAdded) {
           return false;
         }
@@ -2505,7 +2861,7 @@ define([
           }
           var gExt = graphicsUtils.graphicsExtent(this.currentLayerAdded.graphics);
           if (gExt) {
-            this.map.setExtent(gExt.expand(1.5), true);
+            this.map.setExtent(gExt.expand(this.zoomFactor), true);
           } else {
             var mp2 = this.currentLayerAdded.graphics[0].geometry;
             this.map.setScale(zoomScale);
@@ -2519,6 +2875,10 @@ define([
         this._removeAllResultLayers();
         html.setStyle(this.btnClear2, 'display', 'none');
         html.setStyle(this.btnClear3, 'display', 'none');
+      },
+
+      _clearRelateLayers: function () {
+        this._removeAllRelateLayers();
       },
 
       _onSearchError: function (error) {
@@ -2563,14 +2923,25 @@ define([
         return retArr;
       },
 
+      _getAllLyrFields: function(){
+        var tempFlds = array.filter(this.resultLayers[this.currentLayerIndex].fields, lang.hitch(this, function (fieldInfo) {
+          return fieldInfo.type !== 'esriFieldTypeGeometry';
+        }));
+        return tempFlds;
+      },
+
       _onSearchFinish: function (layerIndex, closeOnComplete, removing, adding, results) {
         var layerConfig = this.config.layers[layerIndex];
         var currentLayer;
         array.map(this.currentSearchLayer.fields, lang.hitch(this, function (element) {
-          element.show = false;
-          for (var f = 0; f < layerConfig.fields.field.length; f++) {
-            if (layerConfig.fields.field[f].name == element.name) {
-              element.show = true;
+          if(layerConfig.fields.all){
+            element.show = true;
+          }else{
+            element.show = false;
+            for (var f = 0; f < layerConfig.fields.field.length; f++) {
+              if (layerConfig.fields.field[f].name == element.name) {
+                element.show = true;
+              }
             }
           }
         }));
@@ -2742,6 +3113,8 @@ define([
             }
           }
 
+          var lyrHideNullValues = (layerConfig.hasOwnProperty("hidenullvalue") && layerConfig.hidenullvalue)?true:false;
+
           var content = "",
             rsltcontent = "",
             value = "",
@@ -2750,6 +3123,9 @@ define([
           csvColumns = [];
           //ensure fields are ordered the same way they are configuraed in the json (this is an issue for ArcGIS Server 10.2.x)
           var tempFlds = lang.clone(this.config.layers[layerIndex].fields.field);
+          if(this.config.layers[layerIndex].fields.all){
+            var tempFlds = this._getAllLyrFields();
+          }
           if(!existObjectId && objectIdField && tempFlds.indexOf({"name": objectIdField}) < 0){
             tempFlds.push(
               {"name": objectIdField}
@@ -2830,10 +3206,14 @@ define([
               csvRow[this._getAlias(att, layerIndex)] = value;
             } else {
               if (this._isVisible(att, layerIndex)) {
-                content = content + this.resultFormatString.replace('[attribname]', this._getAlias(att, layerIndex)).replace('[attribvalue]', value);
-                if (!this._isPopupOnly(att, layerIndex)) {
-                  rsltcontent = rsltcontent + this.resultFormatString.replace('[attribname]',
-                                                                              this._getAlias(att, layerIndex)).replace('[attribvalue]', value);
+                if(lyrHideNullValues && value === ""){
+                  //console.log("Removed " + att);
+                }else{
+                  content = content + this.resultFormatString.replace('[attribname]', this._getAlias(att, layerIndex)).replace('[attribvalue]', value);
+                  if (!this._isPopupOnly(att, layerIndex)) {
+                    rsltcontent = rsltcontent + this.resultFormatString.replace('[attribname]',
+                      this._getAlias(att, layerIndex)).replace('[attribvalue]', value);
+                  }
                 }
                 csvRow[this._getAlias(att, layerIndex)] = value;
               }
@@ -2862,11 +3242,10 @@ define([
               alt: (i % 2 === 0),
               sym: symbol,
               links: lyrQLinks,
-              removeResultMsg: this.nls.removeResultMsg
+              removeResultMsg: this.nls.removeResultMsg,
+              showRelate: layerConfig.relates && layerConfig.relates.relate,
+              relalias: this.nls.showrelates
             });
-            //,
-            //showRelate: layerConfig.relates && layerConfig.relates.relate,
-            //relalias: this.nls.showrelates
           }else{
             var index = this._returnListIndexFromOID(oidVal);
             if(index > -1){
@@ -2874,6 +3253,7 @@ define([
             }
           }
         }
+        this.list.addComplete();
         this.currentCSVResults = {
           data: csvData,
           columns: csvColumns
@@ -2952,16 +3332,104 @@ define([
       },
 
       _openResultInAttributeTable: function (currentLayer) {
-        if (this.autozoomtoresults) {
+        var layerConfig = this.config.layers[this.currentLayerIndex];
+        var lyrZoomExistsAndTrue = (layerConfig.hasOwnProperty("autozoomtoresults") && !layerConfig.autozoomtoresults)?false:true;
+        if (this.autozoomtoresults && lyrZoomExistsAndTrue) {
           setTimeout(lang.hitch(this, function () {
             this.zoomall();
           }), 300);
         }
         var layerInfo = this.operLayerInfos.getLayerInfoById(currentLayer.id);
+
+        //Adjust field info based on config
+        if(!layerConfig.fields.all){
+          var adjFldInfos = [];
+          array.map(layerInfo.layerObject.fields, lang.hitch(this, function (fieldInfo){
+            var cnfgFldObj = this._getConfigFieldObject(fieldInfo.name, this.currentLayerIndex);
+            if(cnfgFldObj){
+              adjFldInfos.push({
+                fieldName: cnfgFldObj.name,
+                label: cnfgFldObj.alias,
+                show: true,
+                format: this._convertFormatInfo(cnfgFldObj)
+              });
+            }
+          }));
+          layerInfo.originOperLayer.popupInfo = {
+            fieldInfos: adjFldInfos
+          }
+        }
+
         this.publishData({
           'target': 'AttributeTable',
           'layer': layerInfo
         });
+      },
+
+      _convertFormatInfo: function(configFldInfo){
+        var result = null;
+        if(configFldInfo.currencyformat){
+          var cOps = configFldInfo.currencyformat.split("|");
+          result = {
+            places: parseInt(cOps[1] || 0),
+            digitSeparator: ((cOps[2])? true : false)
+          };
+        }
+        if(configFldInfo.dateformat){
+          var dFormat;
+          switch (configFldInfo.dateformat){
+            case "M/d/yyyy":
+              dFormat = "shortDate";
+              break;
+            case "d MMM yyyy":
+              dFormat = "dayShortMonthYear";
+              break;
+            case "EEEE, MMMM d, yyyy":
+              dFormat = "longDate";
+              break;
+            case "MMMM d, yyyy":
+              dFormat = "longMonthDayYear";
+              break;
+            case "MMMM yyyy":
+              dFormat = "longMonthYear";
+              break;
+            case "M/d/yyyy h:mm:ss a":
+              dFormat = "shortDateLongTime";
+              break;
+            case "M/d/yyyy H:mm:ss":
+              dFormat = "shortDateLongTime24";
+              break;
+            case "M/d/yyyy h:mm a":
+              dFormat = "shortDateShortTime";
+              break;
+            case "M/d/yyyy h:mm":
+              dFormat = "shortDateShortTime24";
+              break;
+            case "MMM yyyy":
+              dFormat = "shortMonthYear";
+              break;
+            case "yyyy":
+              dFormat = "year";
+              break;
+            default:
+              dFormat = "shortDate";
+              break;
+          }
+          result = {
+            dateFormat: dFormat
+          };
+          if(configFldInfo.useutc){
+            result.timezone = "utc"
+          }
+        }
+        if(configFldInfo.numberformat){
+          var nOps = configFldInfo.numberformat.split("|");
+          result = {
+            places: parseInt(nOps[0] || 0),
+            digitSeparator: ((nOps[1])? true : false)
+          };
+        }
+        return result;
       },
 
       _getFeatureType: function (layer, typeID) {
@@ -3166,7 +3634,8 @@ define([
             break;
           }
           listItem.centerpoint = centerpoint;
-          if(!this.config.disablePopups && !currentLayer._hasInfoTemplate){
+          var lyrDisablePopupsAndTrue = (layerConfig.hasOwnProperty("disablePopups") && layerConfig.disablePopups)?true:false;
+          if((!this.config.disablePopups && !lyrDisablePopupsAndTrue) && !currentLayer._hasInfoTemplate){
             feature.setInfoTemplate(this._configurePopupTemplate(listItem));
           }
           feature.setSymbol(listItem.sym);
@@ -3177,29 +3646,10 @@ define([
         }
         this.zoomAttempt = 0;
         if (layerConfig.shareResult && layerConfig.addToAttrib) {
-          if (this.wManager) {
-            var widgetCfg = this._getWidgetConfig('AttributeTable');
-            if(widgetCfg){
-              var attWidget = this.wManager.getWidgetByLabel(widgetCfg.label);
-              if(attWidget){
-                this.attTableOpenedbySearch = !attWidget.showing;
-                this.wManager.openWidget(attWidget);
-                attWidget._openTable().then(lang.hitch(this, this._openResultInAttributeTable, currentLayer));
-              }else{
-                /*Attribute Table Widget is not loaded*/
-                this.wManager.loadWidget(widgetCfg).then(lang.hitch(this, function(widget){
-                  if(widget){
-                    this.attTableOpenedbySearch = true;
-                    widget.setPosition(this.getOffPanelWidgetPosition(widget));
-                    this.wManager.openWidget(widget);
-                    widget._openTable().then(lang.hitch(this, this._openResultInAttributeTable, currentLayer));
-                  }
-                }));
-              }
-            }else{
-              console.warn('The Attribute Table Widget is not configured in this app.');
-              this._zoomAndClose(closeOnComplete);
-            }
+          if(this.attWidget){
+            this.attTableOpenedbySearch = !this.attWidget.showing;
+            this.wManager.openWidget(this.attWidget);
+            this.attWidget._openTable().then(lang.hitch(this, this._openResultInAttributeTable, currentLayer));
           }
           if (closeOnComplete) {
             setTimeout(lang.hitch(this, function () {
@@ -3213,11 +3663,20 @@ define([
         if (this.mouseovergraphics) {
           on(currentLayer, 'mouse-over', lang.hitch(this, this.onMouseOverGraphic));
         }
+        try{
+          this.updateDataSourceData(layerIndex, {
+            features: currentLayer.graphics
+          });
+        }catch(e){
+          console.error(e);
+        }
         this.currentLayerAdded = currentLayer;
       },
 
       _zoomAndClose: function (closeOnComplete) {
-        if (this.autozoomtoresults) {
+        var layerConfig = this.config.layers[this.currentLayerIndex];
+        var lyrZoomExistsAndTrue = (layerConfig.hasOwnProperty("autozoomtoresults") && !layerConfig.autozoomtoresults)?false:true;
+        if (this.autozoomtoresults && lyrZoomExistsAndTrue) {
           setTimeout(lang.hitch(this, function () {
             this.zoomall();
           }), 300);
@@ -3284,6 +3743,8 @@ define([
       },
 
       _searchResultListByOID: function (OID) {
+        var layerConfig = this.config.layers[this.currentLayerIndex];
+        var lyrHasPopupDisabled = (layerConfig.hasOwnProperty("disablePopups") && layerConfig.disablePopups)?true:false;
         for (var i = 0; i < this.list.items.length; i++) {
           var item = this.list.items[i];
           var point = item.centerpoint;
@@ -3293,10 +3754,13 @@ define([
               itemDom.scrollIntoView(false);
             }
             this.list.setSelectedItem(this.list.id.toLowerCase() + item.id);
-            if (this.map.infoWindow && this.config.enablePopupsOnResultClick) {
+            if ((this.map.infoWindow && this.config.enablePopupsOnResultClick) && !lyrHasPopupDisabled) {
               this.map.infoWindow.setFeatures([item.graphic]);
               if (this.map.infoWindow.reposition) {
                 this.map.infoWindow.reposition();
+              }
+              if(layerConfig.showattachments){
+                this._addAttachment(item.OID);
               }
               this.map.infoWindow.show(point);
             }
@@ -3356,33 +3820,74 @@ define([
         if (pminfos.length > 0) {
           popUpInfo.mediaInfos = pminfos;
         }
-        //        console.info(popUpInfo);
         var pt = new PopupTemplate(popUpInfo);
         return pt;
       },
 
+      _getPointSymbolSize: function (symbol) {
+        var retVal;
+        if(symbol.hasOwnProperty('width')){
+          retVal = Math.max(symbol.height, symbol.width) + 4;
+        }else{
+          retVal = symbol.size + 4;
+        }
+        return retVal;
+      },
+
       _selectResultItem: function (index, item) {
+        var FeatLyr = new FeatureLayer(this.resultLayers[this.currentLayerIndex]._origLayerURL);
         var point = item.centerpoint;
         var layerConfig = this.config.layers[this.currentLayerIndex];
+        var lyrHasPopupDisabled = (layerConfig.hasOwnProperty("disablePopups") && layerConfig.disablePopups)?true:false;
         var zoomScale = layerConfig.zoomScale || 10000;
+        //add the selection symbol
+        if(this.list.items.length > 1){
+          this.map.reorderLayer(this.selectionGL, 500);
+          var selGra = new Graphic(item.graphic.toJson());//item.graphic.clone();
+          if (item.graphic.geometry.type === "point"){
+            var size = this._getPointSymbolSize(item.graphic.symbol);
+            selGra.symbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_SQUARE, size,
+              new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([0, 255, 255, 1]), 2),
+              new Color([255, 255, 255, 0]));
+          }else{
+            if(selGra.symbol.hasOwnProperty('outline')){
+              selGra.symbol.setStyle(SimpleFillSymbol.STYLE_NULL);
+              selGra.symbol.outline.setColor(new Color([0, 255, 255, 1]));
+              selGra.symbol.outline.setWidth(3);
+            }else{
+              selGra.symbol.setColor(new Color([0, 255, 255, 1]));
+              selGra.symbol.setWidth(3);
+            }
+          }
+          this.selectionGL.clear();
+          this.selectionGL.add(selGra);
+        }
         if (item.graphic.geometry.type === "point") {
-          if (this.map.getScale() > zoomScale || layerConfig.forceZoomScale) {
+          if ((this.map.getScale() > zoomScale || layerConfig.forceZoomScale) && !lyrHasPopupDisabled) {
             this.map.setScale(zoomScale).then(lang.hitch(this, this.map.centerAt(point).then(lang.hitch(this, function () {
               if (this.map.infoWindow && this.config.enablePopupsOnResultClick) {
                 this.map.infoWindow.setFeatures([item.graphic]);
                 if (this.map.infoWindow.reposition) {
                   this.map.infoWindow.reposition();
                 }
+                if(layerConfig.showattachments){
+                  this._addAttachment(item.OID);
+                }
+                this._setPopupMenuItems();
                 this.map.infoWindow.show(point);
               }
             }))));
           } else {
             this.map.centerAt(point).then(lang.hitch(this, function () {
-              if (this.map.infoWindow && this.config.enablePopupsOnResultClick) {
+              if ((this.map.infoWindow && this.config.enablePopupsOnResultClick) && !lyrHasPopupDisabled) {
                 this.map.infoWindow.setFeatures([item.graphic]);
                 if (this.map.infoWindow.reposition) {
                   this.map.infoWindow.reposition();
                 }
+                if(layerConfig.showattachments){
+                  this._addAttachment(item.OID);
+                }
+                this._setPopupMenuItems();
                 this.map.infoWindow.show(point);
               }
             }));
@@ -3390,33 +3895,45 @@ define([
         } else {
           var gExt = graphicsUtils.graphicsExtent([item.graphic]);
           if (gExt && !layerConfig.forceZoomScale) {
-            this.map.setExtent(gExt.expand(1.5), true).then(lang.hitch(this, function () {
-              if (this.map.infoWindow && this.config.enablePopupsOnResultClick) {
+            this.map.setExtent(gExt.expand(this.zoomFactor), true).then(lang.hitch(this, function () {
+              if ((this.map.infoWindow && this.config.enablePopupsOnResultClick) && !lyrHasPopupDisabled) {
                 this.map.infoWindow.setFeatures([item.graphic]);
                 if (this.map.infoWindow.reposition) {
                   this.map.infoWindow.reposition();
                 }
+                if(layerConfig.showattachments){
+                  this._addAttachment(item.OID);
+                }
+                this._setPopupMenuItems();
                 this.map.infoWindow.show(point);
               }
             }));
           } else {
             if (this.map.getScale() > zoomScale || layerConfig.forceZoomScale) {
               this.map.setScale(zoomScale).then(lang.hitch(this, this.map.centerAt(point).then(lang.hitch(this, function () {
-                if (this.map.infoWindow && this.config.enablePopupsOnResultClick) {
+                if ((this.map.infoWindow && this.config.enablePopupsOnResultClick) && !lyrHasPopupDisabled) {
                   this.map.infoWindow.setFeatures([item.graphic]);
                   if (this.map.infoWindow.reposition) {
                     this.map.infoWindow.reposition();
                   }
+                  if(layerConfig.showattachments){
+                    this._addAttachment(item.OID);
+                  }
+                  this._setPopupMenuItems();
                   this.map.infoWindow.show(point);
                 }
               }))));
             } else {
               this.map.centerAt(point).then(lang.hitch(this, function () {
-                if (this.map.infoWindow && this.config.enablePopupsOnResultClick) {
+                if ((this.map.infoWindow && this.config.enablePopupsOnResultClick) && !lyrHasPopupDisabled) {
                   this.map.infoWindow.setFeatures([item.graphic]);
                   if (this.map.infoWindow.reposition) {
                     this.map.infoWindow.reposition();
                   }
+                  if(layerConfig.showattachments){
+                    this._addAttachment(item.OID);
+                  }
+                  this._setPopupMenuItems();
                   this.map.infoWindow.show(point);
                 }
               }));
@@ -3425,32 +3942,95 @@ define([
         }
       },
 
+      _addAttachment: function(OID) {
+        var ofl = new FeatureLayer(this.resultLayers[this.currentLayerIndex]._origLayerURL);
+        ofl.queryAttachmentInfos(OID, lang.hitch(this, function(info){
+          if(info.length > 0){
+            var domAttSec = dojoQuery(".attachmentsSection", this.map.infoWindow.domNode)[0];
+            var aWidget = dijit.getEnclosingWidget(domAttSec);
+            array.map(info, lang.hitch(this, function(att){
+              if(this.token && att.url.indexOf("?token=") < 0){
+                att.url + "?token=" + this.token;
+              }
+              var attLi = domConstruct.toDom('<li><a href="' + att.url + '" target="_blank">' + att.name +'</a></li>');
+              domConstruct.place(attLi, aWidget._attachmentsList);
+            }));
+            domClass.remove(domAttSec,'hidden');
+            aWidget = null;
+          }
+        }));
+        ofl = null;
+      },
+
       _hideInfoWindow: function () {
         if (this.map && this.map.infoWindow) {
           this.map.infoWindow.hide();
         }
+      },
+
+      _onAppConfigChanged: function(appConfig, reason, changeData){
+        appConfig = lang.clone(appConfig);
+        //deal with this reason only
+        switch(reason){
+          case 'styleChange':
+            this._addCustomStyle(appConfig.theme);
+            break;
+        }
+      },
+
+      _addCustomStyle: function(theme) {
+        var customStyles = lang.getObject('customStyles', false, theme);
+        if(!customStyles || !customStyles.mainBackgroundColor || customStyles.mainBackgroundColor === ""){
+          return;
+        }
+        var rgbArray = Color.fromHex(customStyles.mainBackgroundColor).toRgb();
+        var cssText = ".FoldableTheme.yellow .jimu-draw-box .draw-item.jimu-state-active,";
+        cssText += ".TabTheme.yellow .jimu-draw-box .draw-item.jimu-state-active,";
+        cssText += ".FoldableTheme.yellow .search-btn,";
+        cssText += ".TabTheme.yellow .search-btn,";
+        cssText += ".JewelryBoxTheme.yellow .search-btn,";
+        cssText += ".LaunchpadTheme.style3 .search-btn,";
+        cssText += ".JewelryBoxTheme.yellow .jimu-draw-box .draw-item.jimu-state-active {";
+        cssText += "background-color: rgb(" + rgbArray.join(",") + ");";
+        cssText += "background-color: rgba(" + rgbArray.join(",") + ", 1);";
+        cssText += "}";
+        cssText += ".FoldableTheme.yellow .search-btn:hover,";
+        cssText += ".TabTheme.yellow .search-btn:hover,";
+        cssText += ".JewelryBoxTheme.yellow .search-btn:hover,";
+        cssText += ".LaunchpadTheme.style3 .search-btn:hover,";
+        cssText += ".FoldableTheme.yellow .jimu-draw-box .draw-item:hover,";
+        cssText += ".TabTheme.yellow .jimu-draw-box .draw-item:hover,";
+        cssText += ".JewelryBoxTheme.yellow .jimu-draw-box .draw-item:hover {";
+        cssText += "background-color: rgb(" + rgbArray.join(",") + ");";
+        cssText += "-ms-filter: 'Alpha(opacity=70)';"
+        cssText += "background-color: rgba(" + rgbArray.join(",") + ", 0.7);";
+        cssText += "}";
+
+        var style = html.create('style', {
+          type: 'text/css'
+        });
+        try {
+          style.appendChild(document.createTextNode(cssText));
+        } catch(err) {
+          style.styleSheet.cssText = cssText;
+        }
+        style.setAttribute('source', 'custom');
+
+        document.head.appendChild(style);
+      },
+
+      _getATWidget: function(){
+        if (this.wManager) {
+          var widgetCfg = this._getWidgetConfig('AttributeTable');
+          if(widgetCfg){
+            var attWidget = this.wManager.getWidgetByLabel(widgetCfg.label);
+            return attWidget;
+          }else{
+            console.warn('The Attribute Table Widget is not configured in this app.');
+            return null;
+          }
+        }
       }
-      // },
-      //
-      // _addThemeFixes: function () {
-      //   /*Workaround for the LanunchPad theme not firing onClose and onOpen for the widget*/
-      //   if(this.appConfig.theme.name === "LaunchpadTheme"){
-      //     var tPanel = this.getPanel();
-      //     if(tPanel){
-      //       aspect.after(tPanel, "onClose", lang.hitch(this, this.onClose));
-      //       aspect.after(tPanel, "onOpen", lang.hitch(this, this.onOpen));
-      //     }
-      //   }
-      //   /*end work around for LaunchPad*/
-      //   /*Workaround for TabTheme moregroup not calling onClose and onOpen when the SidebarController is minimized*/
-      //   if(this.appConfig.theme.name === "TabTheme"){
-      //     var sidebarWidget = this.wManager.getWidgetsByName('SidebarController');
-      //     if (sidebarWidget[0]) {
-      //       aspect.after(sidebarWidget[0], "onMinimize", lang.hitch(this, this.onClose));
-      //       aspect.after(sidebarWidget[0], "onMaximize", lang.hitch(this, this.onOpen));
-      //     }
-      //   }
-      // }
 
     });
   });

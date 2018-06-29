@@ -33,8 +33,10 @@
       <tr>
           <td class="first">${nls.defaultCopyright}</td>
           <td class="second" colspan="2">
-            <input type="text" data-dojo-type="dijit/form/ValidationTextBox"
-            data-dojo-attach-point="defaultCopyright" data-dojo-attach-event="Blur:_onCopyrightBlur" data-dojo-props='style:{width:"100%"}'/>
+            <textarea data-dojo-attach-point="defaultCopyright" name="copyright"
+                      data-dojo-attach-event="Blur:_onCopyrightBlur"
+                      data-dojo-type="dijit/form/SimpleTextarea"
+                      style="width:100%;height:60px;resize:none;"></textarea>
           </td>
       </tr>
       <tr style="display: none">
@@ -49,6 +51,14 @@
           <td class="second" colspan="2">
             <select data-dojo-type="dijit/form/ComboBox" data-dojo-attach-point="defaultLayout">
             </select>
+          </td>
+      </tr>
+      <tr style="display: none">
+          <td class="first">${nls.advancedOption}</td>
+          <td class="second" colspan="2">
+            <div data-dojo-attach-point="showAdvancedOptionChk"
+                data-dojo-type="jimu/dijit/CheckBox"
+                data-dojo-props="checked:true">
           </td>
       </tr>
       </tbody>

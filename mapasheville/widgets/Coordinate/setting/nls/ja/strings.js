@@ -39,7 +39,11 @@ define({
   "Kilometers": "キロメートル",
   "Decimeters": "デシメートル",
   "Decimal_Degrees": "度 (10 進)",
+  "Degrees_Decimal_Minutes": "度分 (10 進)",
   "Degree_Minutes_Seconds": "度分秒",
   "MGRS": "MGRS",
-  "USNG": "USNG"
+  "USNG": "USNG",
+  "displayOrderLonLatTips": "座標の表示順序:",
+  "lonLatTips": "経度/緯度 (X、Y)",
+  "latLonTips": "緯度/経度 (Y、X)"
 });

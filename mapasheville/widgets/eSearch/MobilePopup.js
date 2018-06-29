@@ -26,10 +26,11 @@ define(['dojo/_base/declare',
     'dojo/dom-style',
     'dojo/query',
     'dojo/dnd/move',
-    'dijit/_WidgetBase'
+    'dijit/_WidgetBase',
+    'jimu/utils'
   ],
   function(declare, lang, array, html, baseFx, on, has, touch, domStyle,
-    query, Move, _WidgetBase) {
+    query, Move, _WidgetBase, jimuUtils) {
     var count = 0;
     /* global jimuConfig */
     return declare(_WidgetBase, {
@@ -98,7 +99,7 @@ define(['dojo/_base/declare',
 
         this.inherited(arguments);
 
-        this.domNode.tabIndex = 1;
+        // this.domNode.tabIndex = 1;
         // init dom node
         this._initDomNode();
 
@@ -109,7 +110,9 @@ define(['dojo/_base/declare',
 
         html.setStyle(this.domNode, 'outline', 'none');
 
-        this._moveToMiddle();
+        setTimeout(lang.hitch(this, function() {
+          this._moveToMiddle();
+        }), 50);
         // this._limitButtonsMaxWidth();
 
         if(has('event-orientationchange')){
@@ -174,7 +177,14 @@ define(['dojo/_base/declare',
         this.closeBtnNode = html.create('div', {
           'class': 'close-btn jimu-icon jimu-icon-close jimu-float-trailing'
         }, this.titleNode);
-        this.own(on(this.closeBtnNode, 'click', lang.hitch(this, this.close)));
+
+        var eventName = null;
+        if ('ontouchstart' in document) {
+          eventName = touch.press;
+        } else {
+          eventName = 'click';
+        }
+        this.own(on(this.closeBtnNode, eventName, lang.hitch(this, this.close)));
       },
 
       _initDomNode: function() {
@@ -247,7 +257,7 @@ define(['dojo/_base/declare',
 
         this.moveable = new Move.boxConstrainedMoveable(this.domNode, {
           box: containerBox,
-          handle: this.handleNode,
+          handle: this.titleNode || this.contentContainerNode,
           within: true
         });
         this.own(on(this.moveable, 'Moving', lang.hitch(this, this.onMoving)));
@@ -286,21 +296,11 @@ define(['dojo/_base/declare',
         return footerBox;
       },
 
-      _getScreenSize: function() {
-        var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-        var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-        return{
-          width: width,
-          height:height
-        };
-      },
-
       _calculatePosition: function() {
         var box = html.getContentBox(this.container);
         var headerBox = this._getHeaderBox(),
           footerBox = this._getFooterBox();
-        var screen = this._getScreenSize();
-        this._calculateHeight();
+
         var flexHeight = box.h - headerBox.h - footerBox.h - 40;
         var initHeight = 0;
         if (this._fixedHeight) {
@@ -316,12 +316,6 @@ define(['dojo/_base/declare',
         top = top < headerBox.h ? headerBox.h : top;
 
         this.width = this.width || this.maxWidth;
-        if (this.width > screen.width){
-          this.width = screen.width;
-        }
-        if(this.width < screen.width && this.width < this.maxWidth){
-          this.width = (screen.width > this.maxWidth)?this.maxWidth:screen.width;
-        }
         var left = (box.w - this.width) / 2;
 
         html.setStyle(this.domNode, {
@@ -332,14 +326,7 @@ define(['dojo/_base/declare',
       },
 
       _calculateHeight: function() {
-        var screen = this._getScreenSize();
         if (!this.autoHeight) { // position: absolute
-          if(this.height > screen.height){
-            this.height = screen.height;
-          }
-          if(this.height < screen.height && this.height < this.maxHeight){
-            this.height = (screen.height > this.maxHeight)?this.maxHeight:screen.height;
-          }
           html.setStyle(this.domNode, 'height', this.height + 'px');
           html.addClass(this.contentContainerNode, 'content-absolute');
           html.addClass(this.buttonContainer, 'button-container-absolute');
@@ -359,16 +346,8 @@ define(['dojo/_base/declare',
             });
           }
         }
-        if(screen.height >= this.maxHeight || screen.width >= this.maxWidth){
-          this._moveableNode(this.width, 100);
-          domStyle.set(this.handleNode, 'cursor', 'move');
-        }else{
-          domStyle.set(this.handleNode, 'cursor', 'unset');
-          if (this.moveable) {
-            this.moveable.destroy();
-            this.moveable = null;
-          }
-        }
+
+        this._moveableNode(this.width, 100);
       },
 
       _moveToMiddle: function() {
@@ -405,6 +384,10 @@ define(['dojo/_base/declare',
         html.setStyle(this.domNode, 'zIndex', count + baseIndex + 1);
         html.setStyle(this.overlayNode, 'zIndex', count + baseIndex);
         count++;
+      },
+
+      setTitleLabel: function(titleLabel) {
+        this.titleNode.innerHTML = jimuUtils.stripHTML(titleLabel);
       },
 
       onMoving: function(mover) {

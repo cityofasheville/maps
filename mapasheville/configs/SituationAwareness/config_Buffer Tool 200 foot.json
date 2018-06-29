@@ -1,0 +1,80 @@
+{
+  "geocodeService": {
+    "url": "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer"
+  },
+  "enableRouting": false,
+  "special_layer": {
+    "label": "Weather",
+    "value": "weather",
+    "url": "http://api.worldweatheronline.com/free/v1/weather.ashx?format=json&num_of_days=3&extra=localObsTime&key=63hkyhwzpks3a3kj9k9jdfeg",
+    "external_lyr": {
+      "label": "Weather observation web service",
+      "url": "http://api.worldweatheronline.com/free/v1/weather.ashx?format=json&num_of_days=3&extra=localObsTime&key=63hkyhwzpks3a3kj9k9jdfeg"
+    }
+  },
+  "bufferRange": {
+    "minimum": 200,
+    "maximum": 200
+  },
+  "distanceUnits": "feet",
+  "distanceSettings": {
+    "miles": 9035,
+    "kilometers": 9036,
+    "feet": 9002,
+    "meters": 9001,
+    "yards": 9037,
+    "nauticalMiles": 9030
+  },
+  "maxDistance": 200,
+  "defaultZoomLevel": 13,
+  "tabs": [
+    {
+      "label": "Parcels",
+      "type": "proximity",
+      "layers": "BuncombeCountyProperty_3449",
+      "layerTitle": "Buncombe County Property",
+      "advStat": {
+        "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Properties_Addresses/BuncombeCountyProperty/MapServer/0",
+        "stats": {
+          "outFields": [
+            {
+              "value": 0,
+              "expression": "owner",
+              "label": "owner"
+            },
+            {
+              "value": 0,
+              "expression": "address",
+              "label": "address"
+            },
+            {
+              "value": 0,
+              "expression": "cityname",
+              "label": "cityname"
+            }
+          ],
+          "tabCount": true
+        }
+      }
+    }
+  ],
+  "csvAllFields": true,
+  "summaryDisplayEnabled": "true",
+  "incidentLabel": "Buffer Tool",
+  "locateIncidentLabel": "Locate Parcel",
+  "bufferLabel": "Buffer Distance",
+  "celsius": false,
+  "disableVisibilityManagement": true,
+  "saveEnabled": false,
+  "savePoints": false,
+  "saveLines": false,
+  "savePolys": false,
+  "snapshotEnabled": false,
+  "reportEnabled": true,
+  "reportSettings": {
+    "printTaskURL": "https://utility.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
+    "footnote": "GIS Disclaimer\nDisclaimer: The City of Asheville acquires, develops, maintains, and uses GIS data in support of its internal business functions and the public services it provides. The GIS data which City of Asheville distributes and to which it provides access may not be suitable for other purposes or uses. All GIS data sets are provided \"as is\" with no warranty. It is your responsibility to verify any information derived from the GIS data before making any decisions or taking any actions based on the information. Use of all GIS data and map services provided by the City of Asheville are covered by this disclaimer.",
+    "logo": "${appPath}/configs/SituationAwareness/logo.gif",
+    "textColor": "#0f96cc"
+  }
+}

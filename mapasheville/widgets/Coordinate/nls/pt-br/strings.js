@@ -14,14 +14,14 @@ define({
   "Foot": "Pés",
   "Yards": "Jardas",
   "Miles": "Milhas",
-  "Nautical_Miles": "Milhas Náuticas",
+  "Nautical_Miles": "Milhas náuticas",
   "Millimeters": "Milímetros",
   "Centimeters": "Centímetros",
   "Meter": "Metros",
   "Kilometers": "Quilômetros",
   "Decimeters": "Decímetros",
   "Decimal_Degrees": "Graus",
-  "Degree_Minutes_Seconds": "Graus Minutos Segundos",
+  "Degree_Minutes_Seconds": "Graus minutos segundos",
   "MGRS": "MGRS",
   "USNG": "USNG"
 });

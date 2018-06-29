@@ -6,6 +6,7 @@ define({
     "yes": "Sí",
     "no": "No",
     "next": "Siguiente",
+    "previous": "Anterior",
     "back": "Atrás",
     "selected": "seleccionado(a)",
     "name": "Nombre",
@@ -48,11 +49,34 @@ define({
     "scene": "Escena",
     "reset": "Restablecer",
     "icon": "Icono",
+    "folder": "Carpeta",
     "share": "Compartir",
     "view": "Vista",
     "newText": "Nuevo",
     "edit": "Editar",
-    "wkid": "WKID"
+    "wkid": "WKID",
+    "table": "Tabla",
+    "zoomIn": "Acercar",
+    "zoomOut": "Alejar",
+    "continue1": "Continuar",
+    "longitude": "Longitud",
+    "latitude": "Latitud",
+    "custom": "Personalizada",
+    "image": "Imagen",
+    "font": "Fuente",
+    "text": "Texto",
+    "all": "Todo",
+    "number": "Número",
+    "percentage": "Porcentaje",
+    "unit": "Unidad",
+    "thousand": "Mil",
+    "billion": "Mil millones",
+    "million": "Millón",
+    "none": "Ninguna",
+    "field": "Campo",
+    "operation": "Operación",
+    "disableUpdateGeometry": "Deshabilitar actualizar geometría",
+    "preview": "Presentación preliminar"
   },
   "errorCode": "Código",
   "errorMessage": "Mensaje",
@@ -70,22 +94,22 @@ define({
     "stddev": "Desviación estándar"
   },
   "symbolChooser": {
-    "preview": "Presentación preliminar",
+    "preview": "Previsualización",
     "basic": "Básico",
     "arrows": "Flechas",
     "business": "Empresa",
     "cartographic": "Cartográfico",
     "nationalParkService": "Servicio de Parque Nacional",
-    "outdoorRecreation": "Entretenimiento al aire libre",
+    "outdoorRecreation": "Recreación al aire libre",
     "peoplePlaces": "Lugares y personas",
-    "safetyHealth": "Seguridad y salud públicas",
+    "safetyHealth": "Salud y seguridad",
     "shapes": "Formas",
     "transportation": "Transporte",
     "symbolSize": "Tamaño de símbolo",
     "color": "Color",
     "alpha": "Alfa",
     "outlineColor": "Color del contorno",
-    "outlineWidth": "Ancho de contorno",
+    "outlineWidth": "Ancho del contorno",
     "style": "Estilo",
     "width": "Ancho",
     "text": "Texto",
@@ -96,7 +120,10 @@ define({
     "dash": "Guion",
     "dot": "Punto",
     "dashDot": "Guion Punto",
-    "dashDotDot": "Guion Punto Punto"
+    "dashDotDot": "Guion Punto Punto",
+    "customImage": "Imagen personalizada",
+    "chooseFile": "Elegir archivo",
+    "noFileChoosen": "No se ha seleccionado ningún archivo."
   },
   "transparency": {
     "opaque": "Opaco",
@@ -109,7 +136,7 @@ define({
     "uniqueSymbol": "Símbolos únicos",
     "color": "Color",
     "size": "Tamaño",
-    "toShow": "Mostrar",
+    "toShow": "Para mostrar",
     "colors": "Colores",
     "classes": "Clases",
     "symbolSize": "Tamaño de símbolo",
@@ -152,16 +179,16 @@ define({
     "loading": "Cargando"
   },
   "basicServiceBrowser": {
-    "noServicesFound": "Ningún servicio encontrado.",
+    "noServicesFound": "No se ha encontrado ningún servicio.",
     "unableConnectTo": "No se puede conectar a",
     "invalidUrlTip": "La URL que has introducido no es válida o no se puede acceder a ella."
   },
   "serviceBrowser": {
-    "noGpFound": "Ningún servicio de geoprocesamiento encontrado.",
+    "noGpFound": "No se ha encontrado ningún servicio de geoprocesamiento.",
     "unableConnectTo": "No se puede conectar a"
   },
   "layerServiceBrowser": {
-    "noServicesFound": "Ningún servicio de mapas o entidades encontrado",
+    "noServicesFound": "No se ha encontrado ningún servicio de mapas o de entidades.",
     "unableConnectTo": "No se puede conectar a"
   },
   "basicServiceChooser": {
@@ -176,8 +203,8 @@ define({
     "invalidUrl": "URL no válida."
   },
   "filterBuilder": {
-    "addAnotherExpression": "Agregar una expresión de filtro",
-    "addSet": "Agregar un conjunto de expresiones",
+    "addAnotherExpression": "Agregar una expresión",
+    "addSet": "Añadir un conjunto",
     "matchMsg": "Obtener entidades de la capa que coincidan con ${any_or_all} de las expresiones siguientes",
     "matchMsgSet": "${any_or_all} de las expresiones siguientes de este conjunto son verdaderas",
     "all": "Todo",
@@ -185,7 +212,7 @@ define({
     "value": "Valor",
     "field": "Campo",
     "unique": "Único",
-    "none": "Ninguno",
+    "none": "Ninguna",
     "and": "y",
     "valueTooltip": "Introduce un valor",
     "fieldTooltip": "Seleccionar en un campo existente",
@@ -202,9 +229,14 @@ define({
     "dateOperatorIsNotOn": "no es el",
     "dateOperatorIsBefore": "es anterior a",
     "dateOperatorIsAfter": "es posterior a",
+    "dateOperatorIsOnOrBefore": "es el o antes del",
+    "dateOperatorIsOnOrAfter": "es el o después del",
+    "dateOperatorMinutes": "minutos",
+    "dateOperatorHours": "horas",
     "dateOperatorDays": "días",
     "dateOperatorWeeks": "semanas",
     "dateOperatorMonths": "meses",
+    "dateOperatorYears": "años",
     "dateOperatorInTheLast": "es el último",
     "dateOperatorNotInTheLast": "no es el último",
     "dateOperatorIsBetween": "está entre",
@@ -230,45 +262,50 @@ define({
     "error": {
       "invalidParams": "Parámetros no válidos.",
       "invalidUrl": "URL no válida.",
-      "noFilterFields": "La capa no tiene ningún campo que se pueda utilizar para el filtro.",
+      "noFilterFields": "La capa no tiene ningún campo que se pueda utilizar para crear filtros.",
       "invalidSQL": "Expresión SQL no válida.",
       "cantParseSQL": "No se puede analizar la expresión SQL."
     },
-    "caseSensitive": "Distinguir mayúsculas de minúsculas",
+    "caseSensitive": "Distinción entre mayúsculas y minúsculas",
     "notSupportCaseSensitiveTip": "Los servicios alojados no admiten consultas que distingan mayúsculas de minúsculas.",
-    "setFilterTip": "Define el filtro correctamente."
+    "setFilterTip": "Defina los filtros correctamente.",
+    "listValues": "Lista de valores",
+    "cascadeFilterTip": "Mostrar solo valores filtrados por expresiones anteriores.",
+    "noneCascadeFilterTip": "Todos los valores únicos de este campo",
+    "previousCascadeFilterTip": "Valores filtrados por las expresiones anteriores",
+    "allCascadeFilterTip": "Valores filtrados por todas las demás expresiones"
   },
   "featureLayerSource": {
     "layer": "Capa",
     "browse": "Examinar",
-    "selectFromMap": "Seleccionar en el mapa",
-    "selectFromPortal": "Agregar desde Portal for ArcGIS",
-    "addServiceUrl": "Agregar URL de servicio",
-    "inputLayerUrl": "Introducir URL de capa",
+    "selectFromMap": "Mapa",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "URL de servicio",
+    "inputLayerUrl": "Dirección URL de capa de entrada",
     "selectLayer": "Selecciona una capa de entidades en el mapa actual.",
     "chooseItem": "Elige un elemento de capa de entidades.",
-    "setServiceUrl": "Introduce la dirección URL del servicio de entidades o servicio de mapa.",
-    "selectFromOnline": "Agregar desde ArcGIS Online",
+    "setServiceUrl": "Introduzca la dirección URL de un servicio de entidades o un servicio de mapas.",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Elige una capa de entidades."
   },
   "queryableLayerSource": {
     "layer": "Capa",
     "browse": "Examinar",
-    "selectFromMap": "Seleccionar en el mapa",
-    "selectFromPortal": "Agregar desde Portal for ArcGIS",
-    "addServiceUrl": "Agregar URL de servicio",
-    "inputLayerUrl": "Introducir URL de capa",
+    "selectFromMap": "Mapa",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "URL de servicio",
+    "inputLayerUrl": "Dirección URL de capa de entrada",
     "selectLayer": "Selecciona una capa del mapa actual.",
     "chooseItem": "Selecciona un elemento.",
     "setServiceUrl": "Introduce la dirección URL del servicio.",
-    "selectFromOnline": "Agregar desde ArcGIS Online",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Elegir una capa."
   },
   "gpSource": {
-    "selectFromPortal": "Agregar desde Portal for ArcGIS",
-    "addServiceUrl": "Agregar URL de servicio",
-    "selectFromOnline": "Agregar desde ArcGIS Online",
-    "setServiceUrl": "Introduce la URL del servicio de geoprocesamiento.",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "URL de servicio",
+    "selectFromOnline": "ArcGIS Online",
+    "setServiceUrl": "Introduzca la dirección URL de un servicio de geoprocesamiento.",
     "chooseItem": "Elige un elemento de servicio de geoprocesamiento.",
     "chooseTask": "Elige una tarea de geoprocesamiento."
   },
@@ -293,7 +330,11 @@ define({
     "owner": "propietario",
     "signInTo": "Iniciar sesión en",
     "lastModified": "Última modificación",
-    "moreDetails": "Más detalles"
+    "moreDetails": "Más detalles",
+    "mostRecent": "Más reciente",
+    "mostViewed": "Más visualizaciones",
+    "highestRated": "Calificación más alta",
+    "viewItemDetails": "Ver detalles del elemento"
   },
   "featureLayerChooserFromPortal": {
     "notSupportQuery": "Este servicio no admite consultas."
@@ -303,7 +344,7 @@ define({
   },
   "layerInfosMenu": {
     "titleBasemap": "Mapas base",
-    "titleLayers": "Capas operativas",
+    "titleLayers": "Capas operacionales",
     "labelLayer": "Nombre de capa",
     "itemZoomTo": "Acercar a",
     "itemTransparency": "Transparencia",
@@ -313,16 +354,16 @@ define({
     "itemMoveDown": "Mover hacia abajo",
     "itemDesc": "Descripción",
     "itemDownload": "Descargar",
-    "itemToAttributeTable": "Abrir tabla de atributos"
+    "itemToAttributeTable": "Ver en la tabla de atributos"
   },
   "imageChooser": {
-    "unsupportReaderAPI": "TAREA PENDIENTE: el navegador no admite la API del lector de archivos",
+    "unsupportReaderAPI": "Tarea pendiente: el navegador no admite la API del lector de archivos",
     "readError": "Error al leer el archivo.",
     "unknowError": "no se pueden completar las operaciones",
     "invalidType": "Tipo de archivo no válido.",
     "cropImage": "Recortar imagen",
     "exceed": "El tamaño de archivo no puede sobrepasar los 1024 KB",
-    "enableFlash": "TAREA PENDIENTE: habilita flash.",
+    "enableFlash": "Habilite Adobe Flash antes de buscar una imagen.",
     "cropWaining": "Selecciona una foto que tenga por lo menos ${width} x ${height} píxeles.",
     "toolTip": "Para obtener el mejor resultado, la imagen debe tener ${width} píxeles de ancho y ${height} píxeles de alto. El resto de tamaños se adaptará a este tamaño. Los formatos de imagen válidos son: PNG, GIF y JPEG."
   },
@@ -347,6 +388,7 @@ define({
     "restoreMap": "Haz clic para restaurar la extensión de mapa y la visibilidad de las capas donde lo dejaste."
   },
   "featureActions": {
+    "featureActions": "Acciones de entidades",
     "ZoomTo": "Acercar",
     "PanTo": "Desplazar panorámicamente a",
     "Flash": "Destacar",
@@ -355,9 +397,13 @@ define({
     "ShowStatistics": "Estadísticas...",
     "ClearSelection": "Borrar selección",
     "ExportToCSV": "Exportar a archivo CSV",
-    "ShowSelectedFeature": "Mostrar entidades seleccionadas",
+    "ShowSelectedFeature": "Mostrar las entidades seleccionadas",
     "ExportToFeatureCollection": "Exportar a un conjunto de entidades",
-    "ExportToGeoJSON": "Exportar a GeoJSON"
+    "ExportToGeoJSON": "Exportar a GeoJSON",
+    "EditAttributes": "Editar atributos",
+    "AddMarker": "Agregar un marcador",
+    "RemoveMarker": "Eliminar marcador",
+    "SaveToMyContent": "Guardar en Mi contenido"
   },
   "spatialFilterByFeatures": {
     "relatedLayer": "Capa relacionada",
@@ -373,11 +419,37 @@ define({
   },
   "units": {
     "miles": "Millas",
+    "milesAbbr": "mi",
     "kilometers": "Kilómetros",
+    "kilometersAbbr": "km",
     "feet": "Pies",
+    "feetAbbr": "pies",
     "meters": "Metros",
+    "metersAbbr": "m",
     "yards": "Yardas",
-    "nauticalMiles": "Millas náuticas"
+    "yardsAbbr": "yd",
+    "acres": "Acres",
+    "acresAbbr": "acres",
+    "nauticalMiles": "Millas náuticas",
+    "nauticalMilesAbbr": "nmi",
+    "uSSurveyFeet": "Pies topográficos de EE. UU.",
+    "uSSurveyFeetAbbr": "ftUS",
+    "decimalDegree": "Grados decimales",
+    "decimalDegreeAbbr": "dd",
+    "degreeMinuteSeconds": "Grado minuto segundos",
+    "degreeMinuteSecondsAbbr": "g-m-s",
+    "squareMiles": "Millas cuadradas",
+    "squareMilesAbbr": "mi2",
+    "squareKilometer": "Kilómetros cuadrados",
+    "squareKilometerAbbr": "km2",
+    "squareFeet": "Pies cuadrados",
+    "squareFeetAbbr": "pies²",
+    "squareMeters": "Metros cuadrados",
+    "squareMetersAbbr": "m2",
+    "squareYards": "Yardas cuadradas",
+    "squareYardsAbbr": "yd²",
+    "squareUSSurveyFeet": "Pies cuadrados de agrimensura de EE. UU.",
+    "squareUSSurveyFeetAbbr": "sq ftUS"
   },
   "featureSetChooser": {
     "select": "Seleccionar",
@@ -389,7 +461,13 @@ define({
     "addSelectionTip": "Agregar a la selección",
     "removeSelectionTip": "Suprimir de la selección",
     "selectFromCurrentSelectionTip": "Seleccionar desde la selección actual",
-    "unselectAllSelectionTip": "Anule la selección de todas las entidades que están seleccionadas"
+    "unselectAllSelectionTip": "Anule la selección de todas las entidades que están seleccionadas",
+    "selectByPolygon": "Seleccionar por polígono",
+    "selectByCircle": "Seleccionar por círculo",
+    "selectByLine": "Seleccionar por línea",
+    "chooseSelectingTools": "Elegir herramientas de selección",
+    "darw": "Dibujar",
+    "drawShap": "Dibujar una forma"
   },
   "widgetManager": {
     "createWidgetError": "Error al crear widget",
@@ -424,7 +502,7 @@ define({
     "more": "Opciones de integración",
     "changeShareSettings": "Cambiar configuración de uso compartido",
     "shareLinkText": "Compartir un vínculo a esta aplicación",
-    "linkOptions": "Opciones de vínculo",
+    "linkOptions": "Opciones de vinculación",
     "linkOptionsUrlParameters": "Seleccionar parámetros de dirección URL incluidos en el vínculo",
     "currentMapExtent": "Extensión de mapa actual",
     "chooseCenterWithLevel": "Haga clic en el mapa para definir el centro del mapa con el nivel de zoom",
@@ -448,5 +526,86 @@ define({
   },
   "webSceneLoader": {
     "webglSupportTip": "Las aplicaciones web 3D no son compatibles con su navegador."
-  }
+  },
+  "map": {
+    "basemapNotAvailable": "El mapa base no está disponible.",
+    "displayDefaultBasemap": "Se muestra el mapa base predeterminado en su lugar.",
+    "layerLoadedError": "La capa, ${layers}, no se puede agregar al mapa."
+  },
+  "popup": {
+    "relatedTables": "Tablas relacionadas:",
+    "relatedRecords": "Registros relacionados:",
+    "noRelatedRecotds": "No se han encontrado registros relacionados.",
+    "chooseFieldTip": "Elija un atributo para mostrar la lista",
+    "saveAsPopupTitle": "Coincide con el título del elemento emergente"
+  },
+  "queryFeatures": {
+    "tooManyFeaturesTip": "Hay demasiadas entidades en la selección. Puede que se tarde mucho tiempo en recuperarlas y mostrarlas en el mapa.",
+    "askForContinue": "¿Deseas continuar?"
+  },
+  "colorPalette": {
+    "transparent": "Transparente",
+    "custom": "Personalizada"
+  },
+  "temperature": {
+    "celsius": "Celsius",
+    "fahrenheit": "Fahrenheit"
+  },
+  "report": {
+    "printButtonLabel": "Imprimir",
+    "reportDimensionsMsg": "Este informe está diseñado para ser impreso en papel ${paperSize}",
+    "unableToPrintMapMsg": "Se ha producido un error al imprimir el mapa o mapas.",
+    "notesHint": "Introducir comentarios aquí",
+    "landscape": "Paisaje",
+    "portrait": "Vertical",
+    "mapOnly": "MAP_ONLY",
+    "a0": "A0",
+    "a1": "A1",
+    "a2": "A2",
+    "a3": "A3",
+    "a4": "A4",
+    "a5": "A5",
+    "letterANSIA": "Letra ANSI A",
+    "tabloidANSIB": "Tabloide ANSI B",
+    "letter": "Carta",
+    "legal": "Legal",
+    "tabloid": "Tabloide",
+    "ansi_a": "ANSI A",
+    "ansi_b": "ANSI B",
+    "ansi_c": "ANSI C",
+    "ansi_d": "ANSI D",
+    "ansi_e": "ANSI E"
+  },
+  "snapshot": {
+    "snapshot_complete": "La instantánea se ha creado correctamente.",
+    "snapshot_failed": "No se ha podido crear la instantánea.",
+    "snapshot_append": "Instantánea",
+    "utc": "UTC"
+  },
+  "statisticsChart": {
+    "enlarge": "Ampliar",
+    "setting": "Configuración",
+    "count": "Calcular",
+    "horizontalAxis": "Eje horizontal",
+    "verticalAxis": "Eje vertical",
+    "dataLabels": "Etiquetas de datos",
+    "color": "Color"
+  },
+  "frameworkDatasource": {
+    "setDataSource": "Definir fuente de datos",
+    "customDataSource": "Fuente de datos adicional",
+    "selectCustomDataTip": "Seleccione una fuente de datos desde esta aplicación.",
+    "widgetOutputs": "Salidas de widget",
+    "noExtraDsAvailable": "No hay disponibles fuentes de datos adicionales.",
+    "addExtraDsTip": "Vaya a la pestaña Atributo del generador y haga clic en Fuente de datos adicional para añadir datos.",
+    "widgetOutpusListTip": "Las salidas del widget (si las hay) también aparecen aquí."
+  },
+  "gridLayout": {
+    "addWidgetTip": "Agregar widgets aquí a través de la pestaña Widget",
+    "modifyLayout": "Modificar diseño",
+    "dragToAdd": "Arrastrar para agregar",
+    "mapArea": "ÁREA DE MAPA"
+  },
+  "noEditPrivileges": "Su cuenta no tiene permiso para crear o modificar datos.",
+  "invalidConfiguration": "El widget no está configurado o las capas de la configuración ya no están en el mapa. Abra la aplicación en el modo de builder y vuelva a configurar el widget."
 });

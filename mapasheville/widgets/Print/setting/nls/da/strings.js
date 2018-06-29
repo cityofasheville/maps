@@ -6,5 +6,8 @@ define({
   "defaultFormat": "Standardformat",
   "defaultLayout": "Standardlayout",
   "warning": "Forkert input",
+  "urlNotAvailable": "URL'en er ikke tilgængelig.",
+  "notPrintTask": "URL'en er ikke en udskrivningsopgave",
+  "advancedOption": "Vis avancerede indstillinger",
   "ok": "OK"
 });

@@ -1,7 +1,7 @@
 define({
-  "left": "Justér venstre",
-  "right": "Justér højre",
+  "left": "Venstrejustér",
+  "right": "Højrejustér",
   "arrangement": "Fordeling",
-  "autoUpdate": "Opdater automatisk",
-  "respectCurrentMapScale": "Overhold kortets nuværende målestok"
+  "autoUpdate": "Auto-opdatering",
+  "respectCurrentMapScale": "Respektér aktuel kortmålestok"
 });

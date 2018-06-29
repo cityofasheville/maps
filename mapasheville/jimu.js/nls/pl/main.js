@@ -6,6 +6,7 @@ define({
     "yes": "Tak",
     "no": "Nie",
     "next": "Dalej",
+    "previous": "Powrót",
     "back": "Wstecz",
     "selected": "wybrane",
     "name": "Nazwa",
@@ -48,11 +49,34 @@ define({
     "scene": "Scena",
     "reset": "Resetuj",
     "icon": "Ikona",
+    "folder": "Folder",
     "share": "Udostępnianie",
     "view": "Wyświetl",
     "newText": "Nowa",
     "edit": "Edytuj",
-    "wkid": "WKID"
+    "wkid": "WKID",
+    "table": "Tabela",
+    "zoomIn": "Powiększ",
+    "zoomOut": "Pomniejsz",
+    "continue1": "Kontynuuj",
+    "longitude": "Długość geograficzna",
+    "latitude": "Szerokość geograficzna",
+    "custom": "Niestandardowy",
+    "image": "Obraz",
+    "font": "Czcionka",
+    "text": "Tekst",
+    "all": "Wszystkie",
+    "number": "Liczba",
+    "percentage": "Procent",
+    "unit": "Jednostka",
+    "thousand": "Tysiąc",
+    "billion": "Miliard",
+    "million": "Milion",
+    "none": "Brak",
+    "field": "Pole",
+    "operation": "Działanie",
+    "disableUpdateGeometry": "Wyłącz aktualizację geometrii",
+    "preview": "Podgląd"
   },
   "errorCode": "Kod",
   "errorMessage": "Komunikat",
@@ -70,7 +94,7 @@ define({
     "stddev": "Odchylenie standardowe"
   },
   "symbolChooser": {
-    "preview": "Podgląd",
+    "preview": "Zobacz podgląd",
     "basic": "Podstawowy",
     "arrows": "Strzałki",
     "business": "Biznes",
@@ -96,7 +120,10 @@ define({
     "dash": "Przerywana",
     "dot": "Kropka",
     "dashDot": "Kreska-kropka",
-    "dashDotDot": "Kreska-kropka-kropka"
+    "dashDotDot": "Kreska-kropka-kropka",
+    "customImage": "Obraz niestandardowy",
+    "chooseFile": "Wybierz plik",
+    "noFileChoosen": "Nie wybrano pliku."
   },
   "transparency": {
     "opaque": "Nieprzezroczysty",
@@ -109,13 +136,13 @@ define({
     "uniqueSymbol": "Symbole unikalne",
     "color": "Kolor",
     "size": "Rozmiar",
-    "toShow": "Do wyświetlenia",
+    "toShow": "Widoczne",
     "colors": "Kolory",
     "classes": "Klasy",
     "symbolSize": "Rozmiar symbolu",
     "addValue": "Dodaj wartość",
     "setDefaultSymbol": "Ustaw symbol domyślny",
-    "defaultSymbol": "Domyślny symbol",
+    "defaultSymbol": "Symbol domyślny",
     "selectedSymbol": "Wybrany symbol",
     "value": "Wartość",
     "label": "Etykieta",
@@ -125,13 +152,13 @@ define({
     "point": "Punkt",
     "line": "Linia",
     "polyline": "Polilinia",
-    "freehandPolyline": "Dowolna polilinia",
+    "freehandPolyline": "Polilinia odręczna",
     "triangle": "Trójkąt",
     "extent": "Zasięg",
     "circle": "Koło",
     "ellipse": "Elipsa",
     "polygon": "Poligon",
-    "freehandPolygon": "Dowolny poligon",
+    "freehandPolygon": "Poligon odręczny",
     "text": "Tekst",
     "clear": "Wyczyść"
   },
@@ -161,7 +188,7 @@ define({
     "unableConnectTo": "Nie można nawiązać połączenia z"
   },
   "layerServiceBrowser": {
-    "noServicesFound": "Nie znaleziono żadnych usług mapowych ani obiektowych.",
+    "noServicesFound": "Nie odnaleziono żadnych usług mapowych ani obiektowych.",
     "unableConnectTo": "Nie można nawiązać połączenia z"
   },
   "basicServiceChooser": {
@@ -176,8 +203,8 @@ define({
     "invalidUrl": "Nieprawidłowy adres URL"
   },
   "filterBuilder": {
-    "addAnotherExpression": "Dodaj wyrażenie filtru",
-    "addSet": "Dodaj zestaw wyrażenia",
+    "addAnotherExpression": "Dodaj wyrażenie",
+    "addSet": "Dodaj zestaw",
     "matchMsg": "Pobierz z warstwy obiekty, które spełniają ${any_or_all} następujące wyrażenia",
     "matchMsgSet": "${any_or_all} następujące wyrażenia z tego zestawu są prawdziwe",
     "all": "Wszystkie",
@@ -202,9 +229,14 @@ define({
     "dateOperatorIsNotOn": "nie jest w dniu",
     "dateOperatorIsBefore": "jest przed",
     "dateOperatorIsAfter": "jest po",
+    "dateOperatorIsOnOrBefore": "jest w tym dniu lub przed",
+    "dateOperatorIsOnOrAfter": "jest w tym dniu lub po",
+    "dateOperatorMinutes": "minut(y)",
+    "dateOperatorHours": "godzin(y)",
     "dateOperatorDays": "dni",
     "dateOperatorWeeks": "tygodni",
     "dateOperatorMonths": "miesięcy",
+    "dateOperatorYears": "lat(a)",
     "dateOperatorInTheLast": "w ciągu ostatnich",
     "dateOperatorNotInTheLast": "nie w ciągu ostatnich",
     "dateOperatorIsBetween": "jest pomiędzy",
@@ -230,45 +262,50 @@ define({
     "error": {
       "invalidParams": "Nieprawidłowe parametry",
       "invalidUrl": "Nieprawidłowy adres URL",
-      "noFilterFields": "Warstwa nie zawiera pól, które można zastosować w filtrze.",
+      "noFilterFields": "Warstwa nie zawiera pól, których można użyć podczas tworzenia filtrów.",
       "invalidSQL": "Nieprawidłowe wyrażenie SQL",
       "cantParseSQL": "Nie można przeanalizować wyrażenia SQL."
     },
     "caseSensitive": "Uwzględnia wielkość liter",
     "notSupportCaseSensitiveTip": "Hostowane usługi nie obsługują zapytań rozróżniających wielkość liter.",
-    "setFilterTip": "Skonfiguruj poprawnie filtr."
+    "setFilterTip": "Skonfiguruj poprawnie filtry.",
+    "listValues": "Wyświetl listę wartości",
+    "cascadeFilterTip": "Wyświetlaj tylko wartości odfiltrowane przez poprzednie wyrażenia.",
+    "noneCascadeFilterTip": "Wszystkie unikalne wartości tego pola",
+    "previousCascadeFilterTip": "Wartości odfiltrowane przez poprzednie wyrażenia",
+    "allCascadeFilterTip": "Wartości odfiltrowane przez wszystkie inne wyrażenia"
   },
   "featureLayerSource": {
     "layer": "Warstwa",
     "browse": "Przeglądaj",
-    "selectFromMap": "Wybierz na mapie",
-    "selectFromPortal": "Dodaj z witryny Portal for ArcGIS",
-    "addServiceUrl": "Dodaj adres URL usługi",
+    "selectFromMap": "Mapa",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Adres URL usługi",
     "inputLayerUrl": "Adres URL warstwy wejściowej",
     "selectLayer": "Zaznacz na bieżącej mapie warstwę obiektów.",
     "chooseItem": "Wybierz atrybut warstwy obiektów.",
     "setServiceUrl": "Wprowadź adres URL usługi obiektowej lub mapowej.",
-    "selectFromOnline": "Dodaj z usługi ArcGIS Online",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Wybierz warstwę obiektów."
   },
   "queryableLayerSource": {
     "layer": "Warstwa",
     "browse": "Przeglądaj",
-    "selectFromMap": "Wybierz na mapie",
-    "selectFromPortal": "Dodaj z witryny Portal for ArcGIS",
-    "addServiceUrl": "Dodaj adres URL usługi",
+    "selectFromMap": "Mapa",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Adres URL usługi",
     "inputLayerUrl": "Adres URL warstwy wejściowej",
     "selectLayer": "Wybierz na bieżącej mapie warstwę.",
     "chooseItem": "Wybierz element.",
     "setServiceUrl": "Wpisz adres URL usługi.",
-    "selectFromOnline": "Dodaj z usługi ArcGIS Online",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Wybierz warstwę."
   },
   "gpSource": {
-    "selectFromPortal": "Dodaj z witryny Portal for ArcGIS",
-    "addServiceUrl": "Dodaj adres URL usługi",
-    "selectFromOnline": "Dodaj z usługi ArcGIS Online",
-    "setServiceUrl": "Wpisz adres URL usługi geoprzetwarzania.",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Adres URL usługi",
+    "selectFromOnline": "ArcGIS Online",
+    "setServiceUrl": "Wprowadź adres URL usługi geoprzetwarzania.",
     "chooseItem": "Wybierz element będący usługą geoprzetwarzania.",
     "chooseTask": "Wybierz zadanie geoprzetwarzania."
   },
@@ -293,7 +330,11 @@ define({
     "owner": "właściciel",
     "signInTo": "Zaloguj się do",
     "lastModified": "Ostatnia modyfikacja",
-    "moreDetails": "Więcej szczegółów"
+    "moreDetails": "Więcej szczegółów",
+    "mostRecent": "Najnowsze",
+    "mostViewed": "Najczęściej wyświetlane",
+    "highestRated": "Najwyżej ocenione",
+    "viewItemDetails": "Wyświetl szczegóły elementu"
   },
   "featureLayerChooserFromPortal": {
     "notSupportQuery": "Usługa nie obsługuje wykonywania zapytań."
@@ -303,8 +344,8 @@ define({
   },
   "layerInfosMenu": {
     "titleBasemap": "Mapy bazowe",
-    "titleLayers": "Warstwy operacyjne",
-    "labelLayer": "Nazwa warstwy tematycznej",
+    "titleLayers": "Robocze warstwy tematyczne",
+    "labelLayer": "Nazwa warstwy",
     "itemZoomTo": "Powiększ do",
     "itemTransparency": "Przezroczystość",
     "itemTransparent": "Przezroczysty",
@@ -313,16 +354,16 @@ define({
     "itemMoveDown": "Przesuń w dół",
     "itemDesc": "Opis",
     "itemDownload": "Pobierz",
-    "itemToAttributeTable": "Otwórz tabelę atrybutów"
+    "itemToAttributeTable": "Wyświetl w tabeli atrybutów"
   },
   "imageChooser": {
-    "unsupportReaderAPI": "DO OPRACOWANIA:  Przeglądarka nie obsługuje interfejsu API czytnika plików",
+    "unsupportReaderAPI": "Do opracowania: Przeglądarka nie obsługuje interfejsu API czytnika plików",
     "readError": "Nie można odczytać pliku.",
     "unknowError": "nie można zakończyć czynności",
     "invalidType": "Nieprawidłowy typ plików",
     "cropImage": "Przytnij obraz",
     "exceed": "Rozmiar pliku nie może przekraczać 1024 KB",
-    "enableFlash": "DO WYKONANIA: Włącz technologię Flash.",
+    "enableFlash": "Włącz aplikację Adobe Flash przed przejściem do obrazu.",
     "cropWaining": "Proszę wybrać zdjęcie o minimalnych wymiarach ${width} x ${height} pikseli.",
     "toolTip": "W celu uzyskania najlepszych wyników obraz powinien mieć szerokość ${width} pikseli i wysokość ${height} pikseli.  Inne wielkości zostaną dopasowane.  Akceptowane formaty obrazów:  PNG, GIF i JPEG."
   },
@@ -347,17 +388,22 @@ define({
     "restoreMap": "Kliknij, aby przywrócić zasięg mapy i widoczność warstw takie, jak w chwili pozostawienia."
   },
   "featureActions": {
+    "featureActions": "Operacje na obiektach",
     "ZoomTo": "Powiększ do",
     "PanTo": "Przesuń do",
     "Flash": "Lampa błyskowa",
-    "ShowPopup": "Pokaż okno podręczne",
+    "ShowPopup": "Wyświetl okno podręczne",
     "CreateLayer": "Utwórz warstwę",
     "ShowStatistics": "Statystyka...",
-    "ClearSelection": "Wyczyść pole wyboru",
+    "ClearSelection": "Clear selection",
     "ExportToCSV": "Eksport do pliku CSV",
     "ShowSelectedFeature": "Pokaż wybrane obiekty",
     "ExportToFeatureCollection": "Eksportuj do zbioru obiektów",
-    "ExportToGeoJSON": "Eksportuj do GeoJSON"
+    "ExportToGeoJSON": "Eksportuj do GeoJSON",
+    "EditAttributes": "Edytuj atrybuty",
+    "AddMarker": "Dodaj sygnaturę",
+    "RemoveMarker": "Usuń sygnaturę",
+    "SaveToMyContent": "Zapisz do Moich zasobów"
   },
   "spatialFilterByFeatures": {
     "relatedLayer": "Powiązana warstwa",
@@ -373,23 +419,55 @@ define({
   },
   "units": {
     "miles": "Mile",
+    "milesAbbr": "mi",
     "kilometers": "Kilometry",
+    "kilometersAbbr": "km",
     "feet": "Stopy",
+    "feetAbbr": "ft",
     "meters": "Metry",
+    "metersAbbr": "m",
     "yards": "Jardy",
-    "nauticalMiles": "Mile morskie"
+    "yardsAbbr": "jard",
+    "acres": "Akry",
+    "acresAbbr": "akry",
+    "nauticalMiles": "Mile morskie",
+    "nauticalMilesAbbr": "nmi",
+    "uSSurveyFeet": "Stopy pomiarowe (USA)",
+    "uSSurveyFeetAbbr": "ftUS",
+    "decimalDegree": "Stopnie dziesiętne",
+    "decimalDegreeAbbr": "DD",
+    "degreeMinuteSeconds": "Stopnie, minuty i sekundy",
+    "degreeMinuteSecondsAbbr": "d-m-s",
+    "squareMiles": "Mile kwadratowe",
+    "squareMilesAbbr": "mi kw.",
+    "squareKilometer": "Kilometry kwadratowe",
+    "squareKilometerAbbr": "km kw",
+    "squareFeet": "Stopy kwadratowe",
+    "squareFeetAbbr": "ft kw.",
+    "squareMeters": "Metry kwadratowe",
+    "squareMetersAbbr": "m kw.",
+    "squareYards": "Jardy kwadratowe",
+    "squareYardsAbbr": "yd kw.",
+    "squareUSSurveyFeet": "Stopy pomiarowe kwadratowe (USA)",
+    "squareUSSurveyFeetAbbr": "ftUS kw."
   },
   "featureSetChooser": {
     "select": "Zaznacz",
     "dragBox": "Przeciągnij",
     "dragMouse": "Przeciągnij kursor myszy",
-    "selectByRectangle": "Wybierz  prostokątem",
+    "selectByRectangle": "Wybierz prostokątem",
     "selectFeaturesTip": "Wybierz obiekty, rysując wokół nich prostokąt na mapie",
     "newSelectionTip": "Utwórz nowy wybór",
     "addSelectionTip": "Dodaj do selekcji",
     "removeSelectionTip": "Usuń z wyboru",
     "selectFromCurrentSelectionTip": "Wybierz z bieżącego wyboru",
-    "unselectAllSelectionTip": "Anuluj wybór wszystkich obecnie wybranych obiektów"
+    "unselectAllSelectionTip": "Anuluj wybór wszystkich obecnie wybranych obiektów",
+    "selectByPolygon": "Wybierz poligonem",
+    "selectByCircle": "Wybierz okręgiem",
+    "selectByLine": "Wybierz linią",
+    "chooseSelectingTools": "Wybierz narzędzia do zaznaczania",
+    "darw": "Narysuj",
+    "drawShap": "Narysuj kształt"
   },
   "widgetManager": {
     "createWidgetError": "Błąd tworzenia widżetu",
@@ -422,7 +500,7 @@ define({
     "customSize": "Niestandardowy",
     "embed": "Osadź tę aplikację w witrynie internetowej",
     "more": "Opcje osadzania",
-    "changeShareSettings": "Zmień parametry udostępniania",
+    "changeShareSettings": "Zmień ustawienia udostępniania",
     "shareLinkText": "Udostępnij łącze do tej aplikacji",
     "linkOptions": "Opcje łącza",
     "linkOptionsUrlParameters": "Wybierz parametry adresu URL uwzględniane w łączu",
@@ -448,5 +526,86 @@ define({
   },
   "webSceneLoader": {
     "webglSupportTip": "Twoja przeglądarka nie obsługuje aplikacji internetowych 3D."
-  }
+  },
+  "map": {
+    "basemapNotAvailable": "Mapa bazowa jest niedostępna.",
+    "displayDefaultBasemap": "Zamiast niej zostanie wyświetlona domyślna mapa bazowa.",
+    "layerLoadedError": "Do mapy nie można dodać warstwy ${layers}."
+  },
+  "popup": {
+    "relatedTables": "Powiązane tabele:",
+    "relatedRecords": "Powiązane rekordy:",
+    "noRelatedRecotds": "Nie znaleziono powiązanych rekordów.",
+    "chooseFieldTip": "Wybierz atrybut w celu wyświetlenia listy",
+    "saveAsPopupTitle": "Taki sam jak tytuł okna podręcznego"
+  },
+  "queryFeatures": {
+    "tooManyFeaturesTip": "Wybrano zbyt wiele obiektów. Pobranie i wyświetlenie ich na mapie może zająć dużo czasu.",
+    "askForContinue": "Czy chcesz kontynuować?"
+  },
+  "colorPalette": {
+    "transparent": "Przezroczysty",
+    "custom": "Niestandardowy"
+  },
+  "temperature": {
+    "celsius": "Celsjusza",
+    "fahrenheit": "Fahrenheita"
+  },
+  "report": {
+    "printButtonLabel": "Drukuj",
+    "reportDimensionsMsg": "Ten raport jest zaprojektowany do wydrukowania na papierze w rozmiarze: ${paperSize}",
+    "unableToPrintMapMsg": "Wystąpił błąd podczas drukowania map.",
+    "notesHint": "Tutaj wprowadź komentarze",
+    "landscape": "Krajobraz",
+    "portrait": "Pionowo",
+    "mapOnly": "MAP_ONLY",
+    "a0": "A0",
+    "a1": "A1",
+    "a2": "A2",
+    "a3": "A3",
+    "a4": "A4",
+    "a5": "A5",
+    "letterANSIA": "Letter ANSI A",
+    "tabloidANSIB": "Tabloid ANSI B",
+    "letter": "Letter",
+    "legal": "Kwestie prawne",
+    "tabloid": "Tabloid",
+    "ansi_a": "ANSI A",
+    "ansi_b": "ANSI B",
+    "ansi_c": "ANSI C",
+    "ansi_d": "ANSI D",
+    "ansi_e": "ANSI E"
+  },
+  "snapshot": {
+    "snapshot_complete": "Pomyślnie utworzono migawkę.",
+    "snapshot_failed": "Utworzenie migawki nie powiodło się.",
+    "snapshot_append": "Migawka",
+    "utc": "UTC"
+  },
+  "statisticsChart": {
+    "enlarge": "Powiększ",
+    "setting": "Ustawienie",
+    "count": "Liczba",
+    "horizontalAxis": "Oś pozioma",
+    "verticalAxis": "Oś pionowa",
+    "dataLabels": "Etykiety danych",
+    "color": "Kolor"
+  },
+  "frameworkDatasource": {
+    "setDataSource": "Skonfiguruj źródło danych",
+    "customDataSource": "Dodatkowe źródło danych",
+    "selectCustomDataTip": "Wybierz źródło danych z tej aplikacji.",
+    "widgetOutputs": "Dane wynikowe widżetu",
+    "noExtraDsAvailable": "Brak dodatkowych źródeł danych.",
+    "addExtraDsTip": "Przejdź na kartę Atrybut kreatora i kliknij przycisk Dodatkowe źródło danych, aby dodać dane.",
+    "widgetOutpusListTip": "Dane wynikowe widżetów także są tutaj wyświetlane."
+  },
+  "gridLayout": {
+    "addWidgetTip": "Dodaj widżety w tym miejscu z poziomu karty Widżet",
+    "modifyLayout": "Modyfikuj kompozycję",
+    "dragToAdd": "Przeciągnij, aby dodać",
+    "mapArea": "OBSZAR MAPY"
+  },
+  "noEditPrivileges": "Twoje konto nie ma uprawnień do tworzenia ani modyfikowania danych.",
+  "invalidConfiguration": "Widżet nie został skonfigurowany lub warstwy w tej konfiguracji nie znajdują się już na mapie. Otwórz aplikację w trybie kreatora i ponownie skonfiguruj widżet."
 });

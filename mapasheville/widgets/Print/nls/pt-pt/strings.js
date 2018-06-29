@@ -1,9 +1,11 @@
 define({
   "_widgetLabel": "Imprimir",
-  "title": "Título do Mapa",
+  "title": "Título do mapa",
   "format": "Formato",
   "layout": "Layout",
   "settings": "Avançado",
+  "labels": "Rótulos",
+  "showLabels": "Exibir rótulos",
   "mapScaleExtent": "Escala/extensão do mapa",
   "preserve": "Preservar",
   "mapScale": "escala do mapa",
@@ -17,7 +19,7 @@ define({
   "scaleBarUnitsMetric": "Unidades de barra de escala métricas",
   "scaleBarUnitsNonMetric": "Unidades de barra de escala não-métricas",
   "unitsMiles": "Milhas",
-  "unitsKilometers": "Quilômetros",
+  "unitsKilometers": "Quilómetros",
   "unitsMeters": "Metros",
   "unitsFeet": "Pés",
   "unitsYards": "Jardas",
@@ -29,7 +31,7 @@ define({
   "width": "Largura (px)",
   "height": "Altura (px)",
   "print": "Imprimir",
-  "clearList": "Limpar Impressões",
-  "creatingPrint": "Criando Impressão",
+  "clearList": "Limpar impressões",
+  "creatingPrint": "A criar impressão",
   "printError": "Erro, tente novamente"
 });

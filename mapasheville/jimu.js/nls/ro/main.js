@@ -6,6 +6,7 @@ define({
     "yes": "Da",
     "no": "Nu",
     "next": "Următor",
+    "previous": "Anterior",
     "back": "Înapoi",
     "selected": "selectat",
     "name": "Nume",
@@ -48,11 +49,34 @@ define({
     "scene": "Scenă",
     "reset": "Resetare",
     "icon": "Pictogramă",
+    "folder": "Director",
     "share": "Partajare",
     "view": "Vizualizare",
     "newText": "Nou",
     "edit": "Editare",
-    "wkid": "WKID"
+    "wkid": "WKID",
+    "table": "Tabel",
+    "zoomIn": "Mărire",
+    "zoomOut": "Micşorare",
+    "continue1": "Continuare",
+    "longitude": "Longitudine",
+    "latitude": "Latitudine",
+    "custom": "Personalizat",
+    "image": "Imagine",
+    "font": "Font",
+    "text": "Text",
+    "all": "Toate",
+    "number": "Număr",
+    "percentage": "Procentaj",
+    "unit": "Unitate",
+    "thousand": "Mie",
+    "billion": "Miliard",
+    "million": "Milion",
+    "none": "Niciunul",
+    "field": "Câmp",
+    "operation": "Operaţie",
+    "disableUpdateGeometry": "Dezactivare actualizare geometrie",
+    "preview": "Previzualizare"
   },
   "errorCode": "Cod",
   "errorMessage": "Mesaj",
@@ -96,7 +120,10 @@ define({
     "dash": "Linie",
     "dot": "Punct",
     "dashDot": "Linie punct",
-    "dashDotDot": "Linie punct punct"
+    "dashDotDot": "Linie punct punct",
+    "customImage": "Imagine particularizată",
+    "chooseFile": "Alegere fişier",
+    "noFileChoosen": "Niciun fişier selectat."
   },
   "transparency": {
     "opaque": "Opac",
@@ -106,10 +133,10 @@ define({
     "domain": "Domeniu",
     "use": "Utilizare",
     "singleSymbol": "Un singur simbol",
-    "uniqueSymbol": "Simboluri unice",
+    "uniqueSymbol": "Simboluri separate",
     "color": "Culoare",
     "size": "Dimensiune",
-    "toShow": "Pentru afişare",
+    "toShow": "De afişare",
     "colors": "Culori",
     "classes": "Clase",
     "symbolSize": "Dimensiune simbol",
@@ -131,7 +158,7 @@ define({
     "circle": "Cerc",
     "ellipse": "Elipsă",
     "polygon": "Poligon",
-    "freehandPolygon": "Poligon trasat manual",
+    "freehandPolygon": "Poligon liber-definit",
     "text": "Text",
     "clear": "Golire"
   },
@@ -176,8 +203,8 @@ define({
     "invalidUrl": "URL nevalid."
   },
   "filterBuilder": {
-    "addAnotherExpression": "Adăugare expresie de filtrare",
-    "addSet": "Adăugare set pentru expresie",
+    "addAnotherExpression": "Adăugare expresie",
+    "addSet": "Adăugare set",
     "matchMsg": "Obţinere obiecte spaţiale în stratul tematic care se potrivesc cu ${any_or_all} dintre următoarele expresii",
     "matchMsgSet": "${any_or_all} dintre următoarele expresii din acest set sunt adevărate",
     "all": "Toate",
@@ -188,7 +215,7 @@ define({
     "none": "Niciunul",
     "and": "şi",
     "valueTooltip": "Introducere valoare",
-    "fieldTooltip": "Alegere din câmpul existent",
+    "fieldTooltip": "Alegere dintr-un câmp existent",
     "uniqueValueTooltip": "Alegeţi dintre valorile unice din câmpul selectat",
     "stringOperatorIs": "este",
     "stringOperatorIsNot": "nu este",
@@ -202,9 +229,14 @@ define({
     "dateOperatorIsNotOn": "nu este pe",
     "dateOperatorIsBefore": "este înainte de",
     "dateOperatorIsAfter": "este după",
+    "dateOperatorIsOnOrBefore": "este pe sau înainte de",
+    "dateOperatorIsOnOrAfter": "este pe sau după",
+    "dateOperatorMinutes": "minute",
+    "dateOperatorHours": "ore",
     "dateOperatorDays": "zile",
     "dateOperatorWeeks": "săptămâni",
     "dateOperatorMonths": "luni",
+    "dateOperatorYears": "ani",
     "dateOperatorInTheLast": "în ultimele",
     "dateOperatorNotInTheLast": "nu este în ultimele",
     "dateOperatorIsBetween": "este între",
@@ -230,51 +262,56 @@ define({
     "error": {
       "invalidParams": "Parametri nevalizi.",
       "invalidUrl": "URL nevalid.",
-      "noFilterFields": "Stratul tematic nu conţine câmpuri ce pot fi folosite pentru filtru.",
+      "noFilterFields": "Stratul tematic nu conţine câmpuri ce pot fi folosite pentru crearea de filtre.",
       "invalidSQL": "Expresie SQL nevalidă.",
       "cantParseSQL": "Expresia SQL nu poate fi analizată."
     },
     "caseSensitive": "Sensibil la majuscule/minuscule",
     "notSupportCaseSensitiveTip": "Serviciile găzduite nu acceptă interogările care depind de majuscule/minuscule.",
-    "setFilterTip": "Setaţi corect filtrul."
+    "setFilterTip": "Setaţi corect filtrele.",
+    "listValues": "Valori listă",
+    "cascadeFilterTip": "Afişaţi doar valorile filtrate de expresiile anterioare.",
+    "noneCascadeFilterTip": "Toate valorile unice ale acestui câmp",
+    "previousCascadeFilterTip": "Valori filtrate de expresiile anterioare",
+    "allCascadeFilterTip": "Valori filtrate de toate celelalte expresii"
   },
   "featureLayerSource": {
     "layer": "Strat tematic",
     "browse": "Parcurgere",
-    "selectFromMap": "Selectare din hartă",
-    "selectFromPortal": "Adăugare din Portal for ArcGIS",
-    "addServiceUrl": "Adăugare URL serviciu",
+    "selectFromMap": "Hartă",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "URL serviciu",
     "inputLayerUrl": "URL strat tematic de intrare",
     "selectLayer": "Selectaţi un strat tematic de obiecte spaţiale din harta actuală.",
     "chooseItem": "Selectaţi un element strat tematic de obiecte spaţiale.",
-    "setServiceUrl": "Introduceţi adresa URL a serviciului de obiecte spaţiale sau a serviciului de hartă.",
-    "selectFromOnline": "Adăugare din ArcGIS Online",
+    "setServiceUrl": "Introduceţi URL-ul unui serviciu de obiecte spaţiale sau al unui serviciu de hartă.",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Selectaţi un strat tematic de obiecte spaţiale."
   },
   "queryableLayerSource": {
     "layer": "Strat tematic",
     "browse": "Parcurgere",
-    "selectFromMap": "Selectare din hartă",
-    "selectFromPortal": "Adăugare din Portal for ArcGIS",
-    "addServiceUrl": "Adăugare URL serviciu",
+    "selectFromMap": "Hartă",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "URL serviciu",
     "inputLayerUrl": "URL strat tematic de intrare",
     "selectLayer": "Selectaţi un strat tematic din harta actuală.",
     "chooseItem": "Selectaţi un element.",
     "setServiceUrl": "Introduceţi adresa URL a serviciului.",
-    "selectFromOnline": "Adăugare din ArcGIS Online",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Alegeţi un strat tematic."
   },
   "gpSource": {
-    "selectFromPortal": "Adăugare din Portal for ArcGIS",
-    "addServiceUrl": "Adăugare URL serviciu",
-    "selectFromOnline": "Adăugare din ArcGIS Online",
-    "setServiceUrl": "Introduceţi adresa URL a serviciului de geoprocesare.",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "URL serviciu",
+    "selectFromOnline": "ArcGIS Online",
+    "setServiceUrl": "Introduceţi adresa URL a unui serviciu de geoprocesare.",
     "chooseItem": "Selectaţi un element de tip serviciu de geoprocesare.",
     "chooseTask": "Selectaţi o operaţie de geoprocesare."
   },
   "itemSelector": {
     "map": "Hartă",
-    "selectWebMap": "Selectare hartă Web",
+    "selectWebMap": "Alegere hartă web",
     "addMapFromOnlineOrPortal": "Găsiţi şi adăugaţi o hartă web în aplicaţie din resurse ArcGIS Online publice sau din conţinutul dvs. privat din ArcGIS Online sau Portal.",
     "searchMapName": "Căutare după numele hărţii...",
     "searchNone": "Nu am putut găsi ceea ce căutaţi. Încercaţi din nou.",
@@ -293,7 +330,11 @@ define({
     "owner": "proprietar",
     "signInTo": "Autentificare la",
     "lastModified": "Ultima modificare",
-    "moreDetails": "Mai multe detalii"
+    "moreDetails": "Mai multe detalii",
+    "mostRecent": "Cele mai recente",
+    "mostViewed": "Cele mai vizualizate",
+    "highestRated": "Calificativul cel mai mare",
+    "viewItemDetails": "Vizualizaţi detaliile elementului"
   },
   "featureLayerChooserFromPortal": {
     "notSupportQuery": "Serviciul nu permite interogări."
@@ -313,16 +354,16 @@ define({
     "itemMoveDown": "Deplasare în jos",
     "itemDesc": "Descriere",
     "itemDownload": "Descărcare",
-    "itemToAttributeTable": "Deschidere tabel de atribute"
+    "itemToAttributeTable": "Vizualizare în tabelul de atribute"
   },
   "imageChooser": {
-    "unsupportReaderAPI": "Acţiune: Browserul nu suportă API-ul pentru citirea fişierului",
+    "unsupportReaderAPI": "Acţiune: Browserul nu acceptă API-ul pentru citirea fişierului",
     "readError": "Nu s-a reuşit citirea fişierului.",
     "unknowError": "imposibil de finalizat operaţiunile",
     "invalidType": "Tip de fişier nevalid.",
     "cropImage": "Decupare imagine",
     "exceed": "Dimensiunea fişierului nu poate depăşi 1024 KB",
-    "enableFlash": "Acţiune: activaţi funcţia flash.",
+    "enableFlash": "Activaţi Adobe Flash înainte de a naviga la o imagine.",
     "cropWaining": "Alegeţi o fotografie cu dimensiunea de cel puţin ${width} x ${height} pixeli.",
     "toolTip": "Pentru cel mai bun rezultat, imaginea trebuie să aibă ${width} pixeli lăţime şi ${height} pixeli înălţime. Alte dimensiuni vor fi ajustate pentru a se încadra. Formatele de imagine acceptate sunt: PNG, GIF şi JPEG."
   },
@@ -339,7 +380,7 @@ define({
   "exportTo": {
     "exportTo": "Export",
     "toCSV": "Export în fişier CSV",
-    "toFeatureCollection": "Export către Colecția de obiecte spațiale",
+    "toFeatureCollection": "Export către colecția de obiecte spațiale",
     "toGeoJSON": "Export către GeoJSON"
   },
   "appState": {
@@ -347,17 +388,22 @@ define({
     "restoreMap": "Apăsaţi pentru a restaura extinderea hărţii şi vizibilitatea straturilor tematice de unde aţi rămas."
   },
   "featureActions": {
+    "featureActions": "Acţiuni obiecte spaţiale",
     "ZoomTo": "Transfocare la",
     "PanTo": "Panoramare la",
     "Flash": "Flash",
-    "ShowPopup": "Afişare pop-up",
+    "ShowPopup": "Afişare fereastră pop-up",
     "CreateLayer": "Creare strat tematic",
     "ShowStatistics": "Statistici...",
     "ClearSelection": "Golire selecţie",
     "ExportToCSV": "Export în fişier CSV",
     "ShowSelectedFeature": "Afişare obiecte spaţiale selectate",
-    "ExportToFeatureCollection": "Export către Colecția de obiecte spațiale",
-    "ExportToGeoJSON": "Export către GeoJSON"
+    "ExportToFeatureCollection": "Export către colecția de obiecte spațiale",
+    "ExportToGeoJSON": "Export către GeoJSON",
+    "EditAttributes": "Editare atribute",
+    "AddMarker": "Adăugare marcaj",
+    "RemoveMarker": "Eliminare marcaj",
+    "SaveToMyContent": "Salvare în Resursele mele"
   },
   "spatialFilterByFeatures": {
     "relatedLayer": "Strat tematic corelat",
@@ -373,11 +419,37 @@ define({
   },
   "units": {
     "miles": "Mile",
+    "milesAbbr": "mi",
     "kilometers": "Kilometri",
+    "kilometersAbbr": "km",
     "feet": "Ft",
+    "feetAbbr": "ft",
     "meters": "Metri",
+    "metersAbbr": "m",
     "yards": "Yarzi",
-    "nauticalMiles": "Mile marine"
+    "yardsAbbr": "yd",
+    "acres": "Acri",
+    "acresAbbr": "acri",
+    "nauticalMiles": "Mile marine",
+    "nauticalMilesAbbr": "nmi",
+    "uSSurveyFeet": "Picior topografic SUA",
+    "uSSurveyFeetAbbr": "ftUS",
+    "decimalDegree": "Grade zecimale",
+    "decimalDegreeAbbr": "grd zecimale",
+    "degreeMinuteSeconds": "Grad minut secunde",
+    "degreeMinuteSecondsAbbr": "g-m-s",
+    "squareMiles": "Mile pătrate",
+    "squareMilesAbbr": "mi pătrate",
+    "squareKilometer": "Kilometri pătraţi",
+    "squareKilometerAbbr": "km pătraţi",
+    "squareFeet": "Ft. la pătrat",
+    "squareFeetAbbr": "ft2",
+    "squareMeters": "Metri pătraţi",
+    "squareMetersAbbr": "m2",
+    "squareYards": "Yd. la pătrat",
+    "squareYardsAbbr": "Yd pătraţi",
+    "squareUSSurveyFeet": "Picior topografic SUA pătrat",
+    "squareUSSurveyFeetAbbr": "ftUS pătrat"
   },
   "featureSetChooser": {
     "select": "Selectare",
@@ -389,7 +461,13 @@ define({
     "addSelectionTip": "Adăugare la selecţie",
     "removeSelectionTip": "Eliminare din selecţie",
     "selectFromCurrentSelectionTip": "Selectaţi din selecţia curentă",
-    "unselectAllSelectionTip": "Deselectaţi toate obiectele spaţiale selectate curent"
+    "unselectAllSelectionTip": "Deselectaţi toate obiectele spaţiale selectate curent",
+    "selectByPolygon": "Selectaţi prin trasare poligon",
+    "selectByCircle": "Selectaţi prin trasare cerc",
+    "selectByLine": "Selectaţi prin trasare linie",
+    "chooseSelectingTools": "Alegeţi instrumentele de selectare",
+    "darw": "Trasare",
+    "drawShap": "Trasarea unei forme"
   },
   "widgetManager": {
     "createWidgetError": "Eroare creare widget",
@@ -448,5 +526,86 @@ define({
   },
   "webSceneLoader": {
     "webglSupportTip": "Aplicaţiile web 3D nu sunt acceptate în browserul dvs."
-  }
+  },
+  "map": {
+    "basemapNotAvailable": "Harta fundal nu este disponibilă.",
+    "displayDefaultBasemap": "Se afişează în loc harta de fundal implicită.",
+    "layerLoadedError": "Stratul tematic, ${layers}, nu poate fi adăugat la hartă."
+  },
+  "popup": {
+    "relatedTables": "Tabele corelate:",
+    "relatedRecords": "Înregistrări corelate:",
+    "noRelatedRecotds": "Nu s-au găsit înregistrări corelate.",
+    "chooseFieldTip": "Alegeţi un atribut pentru a afişa lista",
+    "saveAsPopupTitle": "La fel ca titlul pop-up"
+  },
+  "queryFeatures": {
+    "tooManyFeaturesTip": "În selecţia dvs. se află prea multe obiecte spaţiale. Preluarea şi afişarea acestora pe hartă poate dura un timp mai îndelungat.",
+    "askForContinue": "Continuaţi?"
+  },
+  "colorPalette": {
+    "transparent": "Transparent",
+    "custom": "Personalizat"
+  },
+  "temperature": {
+    "celsius": "Celsius",
+    "fahrenheit": "Fahrenheit"
+  },
+  "report": {
+    "printButtonLabel": "Imprimare",
+    "reportDimensionsMsg": "Acest raport este conceput pentru a fi imprimat pe hârtie ${paperSize}",
+    "unableToPrintMapMsg": "A apărut o eroare la imprimarea hărţii (hărţilor).",
+    "notesHint": "Introduceţi comentarii aici",
+    "landscape": "Peisaj",
+    "portrait": "Portret",
+    "mapOnly": "MAP_ONLY",
+    "a0": "A0",
+    "a1": "A1",
+    "a2": "A2",
+    "a3": "A3",
+    "a4": "A4",
+    "a5": "A5",
+    "letterANSIA": "Letter ANSI A",
+    "tabloidANSIB": "Tabloid ANSI B",
+    "letter": "Letter",
+    "legal": "Legal",
+    "tabloid": "Tabloid",
+    "ansi_a": "ANSI A",
+    "ansi_b": "ANSI B",
+    "ansi_c": "ANSI C",
+    "ansi_d": "ANSI D",
+    "ansi_e": "ANSI E"
+  },
+  "snapshot": {
+    "snapshot_complete": "Snapshot creat cu succes.",
+    "snapshot_failed": "Eşec la crearea unui snapshot.",
+    "snapshot_append": "Snapshot",
+    "utc": "UTC"
+  },
+  "statisticsChart": {
+    "enlarge": "Mărire",
+    "setting": "Configurare",
+    "count": "Cont",
+    "horizontalAxis": "Axă orizontală",
+    "verticalAxis": "Axă verticală",
+    "dataLabels": "Etichete date",
+    "color": "Culoare"
+  },
+  "frameworkDatasource": {
+    "setDataSource": "Setare sursă de date",
+    "customDataSource": "Sursă de date suplimentare",
+    "selectCustomDataTip": "Selectaţi o sursă de date din această aplicaţie.",
+    "widgetOutputs": "Ieşiri widget",
+    "noExtraDsAvailable": "Nu există surse de date suplimentare disponibile.",
+    "addExtraDsTip": "Accesaţi fila Atribut din instrumentul de dezvoltare şi faceţi clic pe sursa de date Extra pentru a adăuga date.",
+    "widgetOutpusListTip": "Ieşirile de tip widget (dacă este cazul) sunt şi ele listate aici."
+  },
+  "gridLayout": {
+    "addWidgetTip": "Adăugaţi widgeturi aici prin intermediul filei Widget",
+    "modifyLayout": "Modificare aspect",
+    "dragToAdd": "Trageţi pentru a adăuga",
+    "mapArea": "SUPRAFAŢĂ HARTĂ"
+  },
+  "noEditPrivileges": "Contul dumneavoastră nu are permisiunea de a crea sau modifica date.",
+  "invalidConfiguration": "Widgetul nu este configurat sau straturile tematice din configuraţie nu se mai află pe hartă.  Deschideţi aplicaţia în modul de creare şi reconfiguraţi widgetul."
 });

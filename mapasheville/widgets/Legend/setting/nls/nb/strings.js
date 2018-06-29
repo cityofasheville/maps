@@ -1,6 +1,6 @@
 define({
-  "left": "Juster mot venstre",
-  "right": "Juster mot høyre",
+  "left": "Venstrejuster",
+  "right": "Høyrejuster",
   "arrangement": "Plassering",
   "autoUpdate": "Automatisk oppdatering",
   "respectCurrentMapScale": "Respekter gjeldende kartmålestokk"

@@ -2,17 +2,22 @@
   "name": "eSearch",
   "label": "Enhanced Search",
   "platform": "HTML",
-  "version": "2.1.2",
-  "wabVersion": "2.1",
+  "version": "2.7",
+  "wabVersion": "2.7",
   "author": "Robert Scheitlin & Esri R&D Center Beijing",
   "description": "This enhanced search widget offers the ability to search by a string, geometry and spatial relationship.",
-  "copyright": "2016",
+  "copyright": "2018",
   "license": "http://www.apache.org/licenses/LICENSE-2.0",
   "properties": {
     "hasVersionManager": true
   },
-  "featureActions": [{
-    "name": "eShowStatistics",
-    "uri": "featureActions/eShowStatistics"
-  }]
+  "featureActions": [
+    {
+      "name": "eShowStatistics",
+      "uri": "featureActions/eShowStatistics"
+    }, {
+      "name": "eZoomTo",
+      "uri": "featureActions/eZoomTo"
+    }
+  ]
 }

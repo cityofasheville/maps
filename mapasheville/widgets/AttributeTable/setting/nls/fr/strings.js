@@ -6,7 +6,7 @@ define({
   "field": "Champ",
   "alias": "Alias",
   "visible": "Visible",
-  "linkField": "Champ de lien",
+  "linkField": "Hyperlien",
   "noLayers": "Aucune couche d'entités disponible",
   "back": "Retour",
   "exportCSV": "Autoriser l'export au format CSV",
@@ -25,5 +25,6 @@ define({
   "fieldName": "Nom",
   "fieldAlias": "Alias",
   "fieldVisibility": "Visibilité",
-  "fieldActions": "Actions"
+  "fieldActions": "Actions",
+  "showAttachments": "Afficher les pièces jointes"
 });

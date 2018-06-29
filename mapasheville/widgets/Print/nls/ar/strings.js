@@ -4,6 +4,8 @@ define({
   "format": "تنسيق",
   "layout": "المخطط",
   "settings": "متقدم",
+  "labels": "تسميات",
+  "showLabels": "إظهار لافتات التسمية",
   "mapScaleExtent": "مقياس رسم/نطاق الخريطة",
   "preserve": "المحافظة على",
   "mapScale": "مقياس رسم الخريطة",
@@ -21,7 +23,7 @@ define({
   "unitsMeters": "مترات",
   "unitsFeet": "قدم",
   "unitsYards": "ياردات",
-  "unitsNauticalMiles": "ميل بحري",
+  "unitsNauticalMiles": "أميال بحرية",
   "lncludeLegend": "تضمين وسيلة الإيضاح",
   "printQualityOptions": "جودة الطباعة",
   "dpi": "DPI",
@@ -30,6 +32,6 @@ define({
   "height": "الارتفاع (px)",
   "print": "طباعة",
   "clearList": "مسح الطباعة",
-  "creatingPrint": "إنشاء الطباعة",
+  "creatingPrint": "مسح الطباعة",
   "printError": "خطأ، الرجاء إعادة المحاولة"
 });

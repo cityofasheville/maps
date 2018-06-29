@@ -21,7 +21,7 @@ define({
   "Kilometers": "Kilometry",
   "Decimeters": "Decimetry",
   "Decimal_Degrees": "Stupně",
-  "Degree_Minutes_Seconds": "Stupně, minuty, vteřiny",
+  "Degree_Minutes_Seconds": "Stupně minuty vteřiny",
   "MGRS": "MGRS",
   "USNG": "USNG"
 });

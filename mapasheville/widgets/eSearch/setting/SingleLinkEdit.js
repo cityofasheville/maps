@@ -17,10 +17,10 @@ define([
   'dijit/Tooltip',
   'dojo/text!./SingleLinkEdit.html',
   'dijit/form/TextBox',
-  'widgets/eSearch/setting/LayerFieldChooser',
+  './LayerFieldChooser',
   'esri/request',
   'jimu/dijit/CheckBox',
-  'widgets/eSearch/setting/AddFieldBtn'
+  './AddFieldBtn'
 ],
 function(declare,lang,array,html,query,on,Deferred,json,_WidgetBase,_TemplatedMixin,_WidgetsInTemplateMixin,
   Tooltip,template,TextBox,LayerFieldChooser,esriRequest,CheckBox,AddFieldBtn) {/*jshint unused: false*/
@@ -37,6 +37,8 @@ function(declare,lang,array,html,query,on,Deferred,json,_WidgetBase,_TemplatedMi
 
     postCreate:function(){
       this.inherited(arguments);
+      this.linkContentAddButton = new AddFieldBtn({}, this.linkContentAddButtonDiv);
+      this.linkIconContentAddButton = new AddFieldBtn({}, this.linkIconContentAddButtonDiv);
       this._bindEvents();
       this.setConfig(this.config);
       this.getLayerInfo();

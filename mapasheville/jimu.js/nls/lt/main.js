@@ -6,6 +6,7 @@ define({
     "yes": "Taip",
     "no": "Ne",
     "next": "Kitas",
+    "previous": "Ankstesnis",
     "back": "Atgal",
     "selected": "pažymėta",
     "name": "Pavadinimas",
@@ -48,11 +49,34 @@ define({
     "scene": "Scena",
     "reset": "Atkurti",
     "icon": "Piktograma",
+    "folder": "Katalogas",
     "share": "Bendrinti",
     "view": "Peržiūrėti",
     "newText": "Naujas",
     "edit": "Redaguoti",
-    "wkid": "WKID"
+    "wkid": "WKID",
+    "table": "Lentelė",
+    "zoomIn": "Artinti",
+    "zoomOut": "Tolinti",
+    "continue1": "Tęsti",
+    "longitude": "Ilguma",
+    "latitude": "Platuma",
+    "custom": "Adaptuotas",
+    "image": "Vaizdas",
+    "font": "Šriftas",
+    "text": "Tekstas",
+    "all": "Viskas",
+    "number": "Skaičius",
+    "percentage": "Procentinė dalis",
+    "unit": "Vienetai",
+    "thousand": "Tūkstantis",
+    "billion": "Milijardas",
+    "million": "Milijonas",
+    "none": "Nėra",
+    "field": "Laukas",
+    "operation": "Veiksmas",
+    "disableUpdateGeometry": "Išjungti geometrijos atnaujinimą",
+    "preview": "Peržiūra"
   },
   "errorCode": "Kodas",
   "errorMessage": "Pranešimas",
@@ -75,7 +99,7 @@ define({
     "arrows": "Rodyklės",
     "business": "Verslas",
     "cartographic": "Kartografijos",
-    "nationalParkService": "Nacionalinių parkų tarnyba",
+    "nationalParkService": "Nacionalinių parkų paslaugos",
     "outdoorRecreation": "Pramogos lauke",
     "peoplePlaces": "Žmonių susibūrimo vietos",
     "safetyHealth": "Sauga ir sveikata",
@@ -96,7 +120,10 @@ define({
     "dash": "Brūkšnys",
     "dot": "Taškas",
     "dashDot": "Brūkšnys taškas",
-    "dashDotDot": "Brūkšnys taškas taškas"
+    "dashDotDot": "Brūkšnys taškas taškas",
+    "customImage": "Adaptuotas vaizdas",
+    "chooseFile": "Pasirinkite failą",
+    "noFileChoosen": "Nepasirinktas joks failas."
   },
   "transparency": {
     "opaque": "Nepermatomas",
@@ -105,8 +132,8 @@ define({
   "rendererChooser": {
     "domain": "Domenas",
     "use": "Naudoti",
-    "singleSymbol": "Vieną simbolį",
-    "uniqueSymbol": "Skirtingus simbolius",
+    "singleSymbol": "Vienas simbolis",
+    "uniqueSymbol": "Unikalūs simboliai",
     "color": "Spalva",
     "size": "Dydis",
     "toShow": "Rodyti",
@@ -167,7 +194,7 @@ define({
   "basicServiceChooser": {
     "validate": "Tikrinti",
     "example": "Pavyzdys",
-    "set": "Grupė"
+    "set": "Nustatyti"
   },
   "urlInput": {
     "invalidUrl": "Neleistinas URL."
@@ -176,8 +203,8 @@ define({
     "invalidUrl": "Neleistinas URL."
   },
   "filterBuilder": {
-    "addAnotherExpression": "Pridėti filtro sąlygą",
-    "addSet": "Pridėti išraiškų rinkinį",
+    "addAnotherExpression": "Pridėti išraišką",
+    "addSet": "Pridėti grupę",
     "matchMsg": "Gauti elementus sluoksnyje, kurie atitinka šias sąlygas: ${any_or_all}",
     "matchMsgSet": "${any_or_all} iš grupėje esančių sąlygų yra teisinga (-os)",
     "all": "Viskas",
@@ -202,9 +229,14 @@ define({
     "dateOperatorIsNotOn": "yra ne ant",
     "dateOperatorIsBefore": "yra prieš",
     "dateOperatorIsAfter": "yra po",
+    "dateOperatorIsOnOrBefore": "yra ant arba prieš",
+    "dateOperatorIsOnOrAfter": "yra ant arba po",
+    "dateOperatorMinutes": "min.",
+    "dateOperatorHours": "valandos",
     "dateOperatorDays": "dienos",
     "dateOperatorWeeks": "savaitės",
     "dateOperatorMonths": "mėnesiai",
+    "dateOperatorYears": "metai",
     "dateOperatorInTheLast": "yra paskutinis",
     "dateOperatorNotInTheLast": "nėra paskutinis",
     "dateOperatorIsBetween": "yra tarp",
@@ -222,7 +254,7 @@ define({
     "numberOperatorIsBlank": "yra tuščias",
     "numberOperatorIsNotBlank": "nėra tuščias",
     "string": "Eilutė",
-    "number": "Skaičius",
+    "number": "Skaičiai",
     "date": "Data",
     "askForValues": "Klausti reikšmių",
     "prompt": "Įveskite",
@@ -230,51 +262,56 @@ define({
     "error": {
       "invalidParams": "Neleistini parametrai.",
       "invalidUrl": "Neleistinas URL.",
-      "noFilterFields": "Sluoksnyje nėra laukų, kurie gali būti naudojami filtravimui.",
+      "noFilterFields": "Sluoksnyje nėra laukų, kurie gali būti naudojami filtrams kurti.",
       "invalidSQL": "Neleistina SQL sąlyga.",
       "cantParseSQL": "Nepavyksta išanalizuoti SQL sąlygos."
     },
-    "caseSensitive": "Didžiosios ir mažosios raidės skirtingos",
+    "caseSensitive": "Skiriamos didžiosios ir mažosios raidės",
     "notSupportCaseSensitiveTip": "Patalpintos paslaugos nepalaiko užklausos, kurioje skiriamos didžiosios ir mažosios raidės.",
-    "setFilterTip": "Nustatykite filtrą tinkamai."
+    "setFilterTip": "Nustatykite filtrus tinkamai.",
+    "listValues": "Sąrašo reikšmės",
+    "cascadeFilterTip": "Rodyti tik ankstesnių išraiškų atrinktas reikšmes.",
+    "noneCascadeFilterTip": "Visos unikalios šio lauko reikšmės",
+    "previousCascadeFilterTip": "Reikšmės išfiltruotos pagal ankstesnes išraiškas",
+    "allCascadeFilterTip": "Reikšmės išfiltruotos pagal visas kitas išraiškas"
   },
   "featureLayerSource": {
     "layer": "Sluoksnis",
     "browse": "Parinkti",
-    "selectFromMap": "Pasirinkti iš žemėlapio",
-    "selectFromPortal": "Pridėti iš Portal for ArcGIS",
-    "addServiceUrl": "Pridėti paslaugos URL",
+    "selectFromMap": "Žemėlapis",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Paslaugos URL",
     "inputLayerUrl": "Įvesties sluoksnio URL",
     "selectLayer": "Pasirinkite elementų sluoksnį iš dabartinio žemėlapio.",
     "chooseItem": "Pasirinkite elementų sluoksnio elementą.",
-    "setServiceUrl": "Įveskite elementų paslaugos arba žemėlapių paslaugos URL.",
-    "selectFromOnline": "Pridėti iš ArcGIS Online",
+    "setServiceUrl": "Įveskite elementų arba žemėlapio paslaugos URL adresą.",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Pasirinkite elementų sluoksnį."
   },
   "queryableLayerSource": {
     "layer": "Sluoksnis",
     "browse": "Parinkti",
-    "selectFromMap": "Pasirinkti iš žemėlapio",
-    "selectFromPortal": "Pridėti iš Portal for ArcGIS",
-    "addServiceUrl": "Pridėti paslaugos URL",
+    "selectFromMap": "Žemėlapis",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Paslaugos URL",
     "inputLayerUrl": "Įvesties sluoksnio URL",
     "selectLayer": "Pasirinkite sluoksnį iš esamo žemėlapio.",
     "chooseItem": "Pasirinkite elementą.",
     "setServiceUrl": "Įveskite paslaugos URL.",
-    "selectFromOnline": "Pridėti iš ArcGIS Online",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Pasirinkite sluoksnį."
   },
   "gpSource": {
-    "selectFromPortal": "Pridėti iš Portal for ArcGIS",
-    "addServiceUrl": "Pridėti paslaugos URL",
-    "selectFromOnline": "Pridėti iš ArcGIS Online",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Paslaugos URL",
+    "selectFromOnline": "ArcGIS Online",
     "setServiceUrl": "Įveskite geoduomenų apdorojimo paslaugos URL.",
     "chooseItem": "Pasirinkite geoduomenų apdorojimo paslaugos elementą.",
     "chooseTask": "Pasirinkite geoduomenų apdorojimo užduotį."
   },
   "itemSelector": {
     "map": "Žemėlapis",
-    "selectWebMap": "Pasirinkti žemėlapį",
+    "selectWebMap": "Pasirinkite internetinį žemėlapį",
     "addMapFromOnlineOrPortal": "ArcGIS Online viešuosiuose ištekliuose arba privačiame turinyje, esančiame ArcGIS Online arba Portal, raskite ir pridėkite aplikacijoje interneto žemėlapį.",
     "searchMapName": "Ieškoti pagal žemėlapio pavadinimą...",
     "searchNone": "Nepavyko rasti jūsų ieškomo elemento. Bandykite dar kartą.",
@@ -293,7 +330,11 @@ define({
     "owner": "savininkas",
     "signInTo": "Prisijungti į",
     "lastModified": "Pakeitimo data",
-    "moreDetails": "Išsamiau"
+    "moreDetails": "Išsamiau",
+    "mostRecent": "Naujausi",
+    "mostViewed": "Dažniausiai žiūrimi",
+    "highestRated": "Aukščiausiai įvertinti",
+    "viewItemDetails": "Elemento aprašas"
   },
   "featureLayerChooserFromPortal": {
     "notSupportQuery": "Paslauga nepalaiko užklausos."
@@ -303,7 +344,7 @@ define({
   },
   "layerInfosMenu": {
     "titleBasemap": "Pagrindo žemėlapiai",
-    "titleLayers": "Darbiniai sluoksniai",
+    "titleLayers": "Veiklos sluoksniai",
     "labelLayer": "Sluoksnio pavadinimas",
     "itemZoomTo": "Parodyti visą",
     "itemTransparency": "Permatomumas",
@@ -313,16 +354,16 @@ define({
     "itemMoveDown": "Nuleisti žemyn",
     "itemDesc": "Aprašas",
     "itemDownload": "Atsiųsti",
-    "itemToAttributeTable": "Atidaryti atributų lentelę"
+    "itemToAttributeTable": "Peržiūrėti atributų lentelėje"
   },
   "imageChooser": {
-    "unsupportReaderAPI": "UŽDUOTIS: naršyklė nepalaiko failo skaitytuvo API",
+    "unsupportReaderAPI": "Užduotis: naršyklė nepalaiko failo skaitytuvo API",
     "readError": "Nepavyko nuskaityti failo.",
     "unknowError": "nepavyko įvykdyti operacijų",
     "invalidType": "Neleistinas failo tipas.",
     "cropImage": "Apkarpyti atvaizdą",
     "exceed": "Failo dydis negali viršyti 1024 KB",
-    "enableFlash": "UŽDUOTIS: įjunkite „flash“.",
+    "enableFlash": "Prieš naršydami vaizdą įjunkite Adobe Flash.",
     "cropWaining": "Pasirinkite bent ${width} x ${height} pikselių dydžio nuotrauką.",
     "toolTip": "Geriausiam rezultatui naudokite paveikslėlį, kuris būtų ${width} piks. pločio ${height} piks. ilgio. Kitų išmatavimų paveikslėliai talpinimo metu bus automatiškai pakoreguoti. Tinkami paveikslėlių formatai: PNG, GIF ir JPEG."
   },
@@ -347,17 +388,22 @@ define({
     "restoreMap": "Spustelėkite, kad atkurtumėte naudotą žemėlapio aprėptį ir matomus sluoksnius"
   },
   "featureActions": {
+    "featureActions": "Elementų veiksmai",
     "ZoomTo": "Parodyti visą",
     "PanTo": "Pereiti į",
     "Flash": "Blykstė",
     "ShowPopup": "Rodyti iškylantį langą",
     "CreateLayer": "Kurti sluoksnį",
     "ShowStatistics": "Statistika...",
-    "ClearSelection": "Valyti atranką",
+    "ClearSelection": "Valyti išranką",
     "ExportToCSV": "Eksportuoti į CSV formato failą",
     "ShowSelectedFeature": "Rodyti pažymėtus elementus",
     "ExportToFeatureCollection": "Eksportuoti į elementų rinkinį",
-    "ExportToGeoJSON": "Eksportuoti į GeoJSON"
+    "ExportToGeoJSON": "Eksportuoti į GeoJSON",
+    "EditAttributes": "Redaguoti atributus",
+    "AddMarker": "Pridėti ženklą",
+    "RemoveMarker": "Pašalinti ženklą",
+    "SaveToMyContent": "Įrašyti į Turinį"
   },
   "spatialFilterByFeatures": {
     "relatedLayer": "Susijęs sluoksnis",
@@ -373,11 +419,37 @@ define({
   },
   "units": {
     "miles": "Mylios",
+    "milesAbbr": "mi.",
     "kilometers": "Kilometrai",
+    "kilometersAbbr": "km",
     "feet": "Pėdos",
+    "feetAbbr": "pėdos",
     "meters": "Metrai",
+    "metersAbbr": "m",
     "yards": "Jardai",
-    "nauticalMiles": "Jūrmylės"
+    "yardsAbbr": "jard.",
+    "acres": "Akrai",
+    "acresAbbr": "akrai",
+    "nauticalMiles": "Jūrmylės",
+    "nauticalMilesAbbr": "nmi",
+    "uSSurveyFeet": "JAV vietovės matavimo pėda",
+    "uSSurveyFeetAbbr": "JAV pėd.",
+    "decimalDegree": "Dešimtainiai laipsniai",
+    "decimalDegreeAbbr": "dd",
+    "degreeMinuteSeconds": "Laipsnis minutė sekundės",
+    "degreeMinuteSecondsAbbr": "d-m-s",
+    "squareMiles": "Kvadratinės mylios",
+    "squareMilesAbbr": "kv. mi.",
+    "squareKilometer": "Kvadratiniai kilometrai",
+    "squareKilometerAbbr": "kv. km.",
+    "squareFeet": "Kvadratinė pėda",
+    "squareFeetAbbr": "kv. pėd.",
+    "squareMeters": "Kvadratiniai metrai",
+    "squareMetersAbbr": "kv. m.",
+    "squareYards": "Kvadratiniai jardai",
+    "squareYardsAbbr": "kv.jard.",
+    "squareUSSurveyFeet": "Kvadratinė JAV vietovės matavimo pėda",
+    "squareUSSurveyFeetAbbr": "Kv. JAV pėda"
   },
   "featureSetChooser": {
     "select": "Pažymėti",
@@ -389,7 +461,13 @@ define({
     "addSelectionTip": "Pridėti prie atrankos",
     "removeSelectionTip": "Panaikinti atranką",
     "selectFromCurrentSelectionTip": "Pasirinkti iš esamos atrankos",
-    "unselectAllSelectionTip": "Panaikinti visų šiuo metu pažymėtų elementų atranką"
+    "unselectAllSelectionTip": "Panaikinti visų šiuo metu pažymėtų elementų atranką",
+    "selectByPolygon": "Pasirinkti pagal poligoną",
+    "selectByCircle": "Pasirinkti pagal apskritimą",
+    "selectByLine": "Pasirinkti pagal liniją",
+    "chooseSelectingTools": "Nurodykite pasirinkimo įrankius",
+    "darw": "Piešti",
+    "drawShap": "Piešti figūrą"
   },
   "widgetManager": {
     "createWidgetError": "Klaida kuriant valdiklį",
@@ -413,7 +491,7 @@ define({
     "shareGooglePlus": "Google+",
     "EmbedTips": "Įterpti šią aplikaciją į interneto svetainę",
     "shareEmailSubject": "Internetinės aplikacijos bendrinimas:",
-    "shareEmailTxt1": "Ši internetinė aplikacija bendrinama su jumis naudojanat Web AppBuilder for ArcGIS.",
+    "shareEmailTxt1": "Ši internetinė aplikacija bendrinama su jumis naudojant Web AppBuilder for ArcGIS.",
     "shareEmailTxt2": "Galite kurti ir bendrinti savo internetines aplikacijas naudodami Esri Web AppBuilder for ArcGIS.",
     "shareEmailTxt3": "Daugiau informacijos rasite http://www.esri.com/software/web-appbuilder.",
     "smallSize": "Mažas",
@@ -422,7 +500,7 @@ define({
     "customSize": "Adaptuotas",
     "embed": "Įterpti šią aplikaciją į interneto svetainę",
     "more": "Įterpti parinktis",
-    "changeShareSettings": "Keisti bendrinimo parametrus",
+    "changeShareSettings": "Keisti bendro naudojimo parametrus",
     "shareLinkText": "Bendrinti nuorodą į šią aplikaciją",
     "linkOptions": "Nuorodos parinktys",
     "linkOptionsUrlParameters": "Pasirinkite URL parametrus, įtrauktus į nuorodą",
@@ -448,5 +526,86 @@ define({
   },
   "webSceneLoader": {
     "webglSupportTip": "3D interenetinės aplikacijos jūsų naršyklėje nepalaikomos."
-  }
+  },
+  "map": {
+    "basemapNotAvailable": "Pagrindo žemėlapis nepasiekiamas.",
+    "displayDefaultBasemap": "Vietoje to rodyti numatytąjį pagrindo žemėlapį.",
+    "layerLoadedError": "Sluoksnio ${layer} negalima įkelti į žemėlapį."
+  },
+  "popup": {
+    "relatedTables": "Susijusios lentelės:",
+    "relatedRecords": "Susiję įrašai:",
+    "noRelatedRecotds": "Susijusių įrašų nerasta.",
+    "chooseFieldTip": "Pasirinkite sąraše rodytiną atributą",
+    "saveAsPopupTitle": "Toks pat kaip iššokantis pavadinimas"
+  },
+  "queryFeatures": {
+    "tooManyFeaturesTip": "Jūsų pasirinkime per daug elementų. Gali užtrukti, kol bus jie bus nuskaityti ir parodyti žemėlapyje.",
+    "askForContinue": "Ar norite tęsti?"
+  },
+  "colorPalette": {
+    "transparent": "Permatomas",
+    "custom": "Adaptuotas"
+  },
+  "temperature": {
+    "celsius": "Celsijaus laipsniai",
+    "fahrenheit": "Farenheito laipsniai"
+  },
+  "report": {
+    "printButtonLabel": "Spausdinti",
+    "reportDimensionsMsg": "Šią ataskaitą reikia spausdinti ant ${paperSize} popieriaus",
+    "unableToPrintMapMsg": "Spausdinant žemėlapį (-ius) įvyko klaida.",
+    "notesHint": "Komentarus įveskite čia",
+    "landscape": "Horizontalus",
+    "portrait": "Vertikalus",
+    "mapOnly": "MAP_ONLY",
+    "a0": "A0",
+    "a1": "A1",
+    "a2": "A2",
+    "a3": "A3",
+    "a4": "A4",
+    "a5": "A5",
+    "letterANSIA": "Laiškas ANSI A",
+    "tabloidANSIB": "Nedidelis formatas ANSI B",
+    "letter": "Laiškas",
+    "legal": "Teisės",
+    "tabloid": "Nedidelis formatas",
+    "ansi_a": "ANSI A",
+    "ansi_b": "ANSI B",
+    "ansi_c": "ANSI C",
+    "ansi_d": "ANSI D",
+    "ansi_e": "ANSI E"
+  },
+  "snapshot": {
+    "snapshot_complete": "SnapShot sukurtas sėkmingai.",
+    "snapshot_failed": "Nepavyko sukurti SnapShot.",
+    "snapshot_append": "SnapShot",
+    "utc": "UTC"
+  },
+  "statisticsChart": {
+    "enlarge": "Išplėsti",
+    "setting": "Nustatymas",
+    "count": "Skaičius",
+    "horizontalAxis": "Horizontali ašis",
+    "verticalAxis": "Vertikali ašis",
+    "dataLabels": "Duomenų žymės",
+    "color": "Spalva"
+  },
+  "frameworkDatasource": {
+    "setDataSource": "Nustatykite duomenų šaltinį",
+    "customDataSource": "Papildomas duomenų šaltinis",
+    "selectCustomDataTip": "Pasirinkite duomenų šaltinį iš šios aplikacijos.",
+    "widgetOutputs": "Valdiklio išvestys",
+    "noExtraDsAvailable": "Papildomi duomenų šaltiniai nepasiekiami.",
+    "addExtraDsTip": "Eikite į kūrimo priemonės skirtuką Atributai ir paspauskite Papildomas duomenų šaltinis, kad pridėtumėte duomenų.",
+    "widgetOutpusListTip": "Valdiklio išvestys (jei yra) taip pat pateikiamos čia."
+  },
+  "gridLayout": {
+    "addWidgetTip": "Įtraukite valdiklius čia naudodami skirtuką Valdiklis",
+    "modifyLayout": "Modifikuoti maketą",
+    "dragToAdd": "Nuvilkite norėdami pridėti",
+    "mapArea": "ŽEMĖLAPIO PLOTAS"
+  },
+  "noEditPrivileges": "Jūsų paskyra neturi teisės kurti arba modifikuoti duomenų.",
+  "invalidConfiguration": "Valdiklis nesukonfigūruotas arba konfigūracijos sluoksnių žemėlapyje nebėra. Atidarykite aplikaciją kūrimo režime ir iš naujo sukonfigūruokite valdiklį."
 });

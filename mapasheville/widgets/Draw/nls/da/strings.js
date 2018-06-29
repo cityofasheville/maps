@@ -30,6 +30,7 @@ define({
   "meters": "Meter",
   "feet": "Fod",
   "yards": "Yards",
+  "nauticalmiles": "Sømil",
   "squareKilometers": "Kvadratkilometer",
   "squareMiles": "Square miles",
   "acres": "Acres",

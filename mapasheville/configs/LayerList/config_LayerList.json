@@ -1,0 +1,373 @@
+{
+  "showLegend": true,
+  "contextMenu": {
+    "ZoomTo": true,
+    "Transparency": true,
+    "EnableOrDisablePopup": true,
+    "MoveupOrMovedown": true,
+    "OpenAttributeTable": true,
+    "DescriptionOrShowItemDetailsOrDownload": true
+  },
+  "layerOptions": {
+    "AshevilleCityLimits_6858": {
+      "display": true
+    },
+    "AnnexationHistory_1732": {
+      "display": true
+    },
+    "BuncombeCountyProperty_3449": {
+      "display": true
+    },
+    "BuncombeCountyAddresses_964": {
+      "display": true
+    },
+    "StreetNetwork_8697": {
+      "display": true
+    },
+    "BuncombeCountyProperty_1199": {
+      "display": true
+    },
+    "InnovationDistricts_431": {
+      "display": true
+    },
+    "AshevilleZoning_5297": {
+      "display": true
+    },
+    "TRC_Points_9653": {
+      "display": true
+    },
+    "BC_School_Districts_3301": {
+      "display": true
+    },
+    "Hydrants_8068": {
+      "display": true
+    },
+    "TransportationLayers_6335": {
+      "display": true
+    },
+    "TransportationLayers_477": {
+      "display": true
+    },
+    "Greenways_8263": {
+      "display": true
+    },
+    "StreetMaintenanceResponsibility_6556": {
+      "display": true
+    },
+    "BrushWeek_3174": {
+      "display": true
+    },
+    "RecycleWeek_8352": {
+      "display": true
+    },
+    "SanitationDistricts_2189": {
+      "display": true
+    },
+    "SnowMapper_6684": {
+      "display": true
+    },
+    "SnowMapper_1955": {
+      "display": true
+    },
+    "Railways_6839": {
+      "display": true
+    },
+    "AshevillePermits_7819": {
+      "display": true
+    },
+    "PermitInspections_5377": {
+      "display": true
+    },
+    "StormwaterStructures_5002": {
+      "display": true
+    },
+    "StormwaterPipes_7321": {
+      "display": true
+    },
+    "Parks_7574": {
+      "display": true
+    },
+    "AshevilleNeighborhoods_7042": {
+      "display": true
+    },
+    "FireResponseArea_9879": {
+      "display": true
+    },
+    "LawDistricts_2831": {
+      "display": true
+    },
+    "MSDStructures_5567": {
+      "display": true
+    },
+    "MSDPipes_6994": {
+      "display": true
+    },
+    "Hydrography_5145": {
+      "display": true
+    },
+    "CensusACS2016Racebyblockgroup_1026": {
+      "display": true
+    },
+    "DEM20ft_Contours_8982": {
+      "display": true
+    },
+    "DEM20ft_Contours_8982_0": {
+      "display": true
+    },
+    "DEM20ft_Contours_8982_1": {
+      "display": true
+    },
+    "DEM20ft_Contours_8982_2": {
+      "display": true
+    },
+    "DEM20ft_Contours_8982_3": {
+      "display": true
+    },
+    "Hydrography_4438": {
+      "display": true
+    },
+    "Hydrography_4438_0": {
+      "display": true
+    },
+    "Hydrography_4438_1": {
+      "display": true
+    },
+    "Hydrography_4438_2": {
+      "display": true
+    },
+    "Hydrography_4438_3": {
+      "display": true
+    },
+    "Hydrography_4438_4": {
+      "display": true
+    },
+    "Hydrography_4438_5": {
+      "display": true
+    },
+    "Hydrography_4438_6": {
+      "display": true
+    },
+    "BikeRoutes_3297": {
+      "display": true
+    },
+    "BikeRoutes_3297_0": {
+      "display": true
+    },
+    "FloodData_5470": {
+      "display": true
+    },
+    "FloodData_5470_0": {
+      "display": true
+    },
+    "FloodData_5470_1": {
+      "display": true
+    },
+    "FloodData_5470_2": {
+      "display": true
+    },
+    "StreetNetwork_7173": {
+      "display": true
+    },
+    "StreetNetwork_7173_0": {
+      "display": true
+    },
+    "StreetNetwork_7173_1": {
+      "display": true
+    },
+    "StreetNetwork_7173_2": {
+      "display": true
+    },
+    "StreetNetwork_7173_3": {
+      "display": true
+    },
+    "StreetNetwork_7173_4": {
+      "display": true
+    },
+    "StreetNetwork_7173_5": {
+      "display": true
+    },
+    "StreetNetwork_7173_6": {
+      "display": true
+    },
+    "StreetNetwork_7173_7": {
+      "display": true
+    },
+    "HistoricDistricts_1279": {
+      "display": true
+    },
+    "HistoricDistricts_1279_0": {
+      "display": true
+    },
+    "HistoricDistricts_1279_1": {
+      "display": true
+    },
+    "HistoricDistricts_1279_2": {
+      "display": true
+    },
+    "Zoning_Overlays_8708": {
+      "display": true
+    },
+    "Zoning_Overlays_8708_0": {
+      "display": true
+    },
+    "Zoning_Overlays_8708_1": {
+      "display": true
+    },
+    "Zoning_Overlays_8708_2": {
+      "display": true
+    },
+    "Zoning_Overlays_8708_3": {
+      "display": true
+    },
+    "Zoning_Overlays_8708_4": {
+      "display": true
+    },
+    "Zoning_Overlays_8708_5": {
+      "display": true
+    },
+    "Zoning_Overlays_8708_6": {
+      "display": true
+    },
+    "Zoning_Overlays_8708_7": {
+      "display": true
+    },
+    "Zoning_Overlays_8708_8": {
+      "display": true
+    },
+    "Zoning_Overlays_8708_9": {
+      "display": true
+    },
+    "Zoning_Overlays_8708_10": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_0": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_1": {
+      "display": false
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_2": {
+      "display": false
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_3": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_4": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_5": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_6": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_7": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_8": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_9": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_10": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_11": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_12": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_13": {
+      "display": false
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_14": {
+      "display": false
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_15": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_16": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_17": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_18": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_19": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_20": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_21": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_22": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_23": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_24": {
+      "display": false
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_25": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_26": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_27": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_28": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_29": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_30": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_31": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_32": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_33": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_34": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_35": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_36": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_37": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_38": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_39": {
+      "display": true
+    },
+    "NetworkInfrastructureEXTWABHTML_2669_40": {
+      "display": true
+    },
+    "Orthoimagery_2015_3392": {
+      "display": true
+    }
+  }
+}

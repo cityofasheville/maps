@@ -6,6 +6,7 @@ define({
     "yes": "Jā",
     "no": "Nē",
     "next": "Tālāk",
+    "previous": "Iepriekšējais",
     "back": "Atpakaļ",
     "selected": "izvēlēts",
     "name": "Nosaukums",
@@ -48,11 +49,34 @@ define({
     "scene": "Scēna",
     "reset": "Atiestatīt",
     "icon": "Ikona",
+    "folder": "Mape",
     "share": "Kopīgot",
     "view": "Skats",
     "newText": "Jaunais",
     "edit": "Rediģēt",
-    "wkid": "WKID"
+    "wkid": "WKID",
+    "table": "Tabula",
+    "zoomIn": "Pietuvināt",
+    "zoomOut": "Attālināt",
+    "continue1": "Turpināt",
+    "longitude": "Garums",
+    "latitude": "Platums",
+    "custom": "Pielāgots",
+    "image": "Attēls",
+    "font": "Fonts",
+    "text": "Teksts",
+    "all": "Visi",
+    "number": "Numurs",
+    "percentage": "Procenti",
+    "unit": "Vienība",
+    "thousand": "Tūkstoši",
+    "billion": "Miljardi",
+    "million": "Miljoni",
+    "none": "Nav",
+    "field": "Lauks",
+    "operation": "Operācija",
+    "disableUpdateGeometry": "Deaktivizēt ģeometrijas atjaunināšanu",
+    "preview": "Priekšskatījums"
   },
   "errorCode": "Kods",
   "errorMessage": "Ziņojums",
@@ -75,13 +99,13 @@ define({
     "arrows": "Bultiņas",
     "business": "Bizness",
     "cartographic": "Kartogrāfisks",
-    "nationalParkService": "Nacionālo parku pakalpojums",
+    "nationalParkService": "Nacionālā parka serviss",
     "outdoorRecreation": "Aktīvā atpūta",
-    "peoplePlaces": "Personu vietas",
-    "safetyHealth": "Drošība un veselība",
+    "peoplePlaces": "Cilvēki, vietas",
+    "safetyHealth": "Veselība, drošība",
     "shapes": "Formas",
     "transportation": "Transports",
-    "symbolSize": "Simbola lielums",
+    "symbolSize": "Simbola izmērs",
     "color": "Krāsa",
     "alpha": "Alfa",
     "outlineColor": "Kontūras krāsa",
@@ -90,13 +114,16 @@ define({
     "width": "Platums",
     "text": "Teksts",
     "fontColor": "Fonta krāsa",
-    "fontSize": "Fonta lielums",
+    "fontSize": "Fonta izmērs",
     "transparency": "Caurspīdīgums",
     "solid": "Tīrtoņa",
     "dash": "Svītra",
     "dot": "Punkts",
-    "dashDot": "Svītra punkts",
-    "dashDotDot": "Svītra punkts punkts"
+    "dashDot": "Svītra, punkts",
+    "dashDotDot": "Svītra, punkts, punkts",
+    "customImage": "Pielāgots attēls",
+    "chooseFile": "Izvēlēties failu",
+    "noFileChoosen": "Nav izvēlēts neviens fails."
   },
   "transparency": {
     "opaque": "Necaurredzams",
@@ -109,14 +136,14 @@ define({
     "uniqueSymbol": "Unikāli simboli",
     "color": "Krāsa",
     "size": "Lielums",
-    "toShow": "Lai rādītu",
+    "toShow": "Lai parādītu",
     "colors": "Krāsas",
     "classes": "Klases",
-    "symbolSize": "Simbola lielums",
+    "symbolSize": "Simbola izmērs",
     "addValue": "Pievienot vērtību",
     "setDefaultSymbol": "Iestatīt noklusējuma simbolu",
     "defaultSymbol": "Noklusējuma simbols",
-    "selectedSymbol": "Atlasītais simbols",
+    "selectedSymbol": "Izvēlētais simbols",
     "value": "Vērtība",
     "label": "Kartes teksts",
     "range": "Diapazons"
@@ -152,16 +179,16 @@ define({
     "loading": "Ielādē"
   },
   "basicServiceBrowser": {
-    "noServicesFound": "Nav atrasts neviens pakalpojums.",
+    "noServicesFound": "Nav atrasts neviens serviss.",
     "unableConnectTo": "Nevar izveidot savienojumu ar",
     "invalidUrlTip": "Jūsu ievadītais URL nav derīgs vai tam nevar piekļūt."
   },
   "serviceBrowser": {
-    "noGpFound": "Nav atrasts neviens ģeodatu apstrādes pakalpojums.",
+    "noGpFound": "Nav atrasts neviens ģeodatu apstrādes serviss.",
     "unableConnectTo": "Nevar izveidot savienojumu ar"
   },
   "layerServiceBrowser": {
-    "noServicesFound": "Nav atrasts neviens karšu serviss vai elementu serviss",
+    "noServicesFound": "Nav atrasts neviens karšu serviss vai elementu serviss.",
     "unableConnectTo": "Nevar izveidot savienojumu ar"
   },
   "basicServiceChooser": {
@@ -176,8 +203,8 @@ define({
     "invalidUrl": "Nederīgs URL."
   },
   "filterBuilder": {
-    "addAnotherExpression": "Pievienot filtra izteiksmi",
-    "addSet": "Pievienot izteiksmju kopu",
+    "addAnotherExpression": "Pievienot izteiksmi",
+    "addSet": "Pievienot kopu",
     "matchMsg": "Iegūt slāņa elementus, kas atbilst ${any_or_all} no šādām izteiksmēm",
     "matchMsgSet": "${any_or_all} no šādām izteiksmēm šajā kopā ir patiesi",
     "all": "Visi",
@@ -185,11 +212,11 @@ define({
     "value": "Vērtība",
     "field": "Lauks",
     "unique": "Unikāls",
-    "none": "Nav",
+    "none": "Neviens",
     "and": "un",
     "valueTooltip": "Ievadiet vērtību",
-    "fieldTooltip": "Izmeklēt no esošajiem laukiem",
-    "uniqueValueTooltip": "Izmeklēt unikālas vērtības no izvēlētā lauka",
+    "fieldTooltip": "Izmeklēt no esošā lauka",
+    "uniqueValueTooltip": "Izmeklēt unikālas vērtības no atlasītā lauka",
     "stringOperatorIs": "ir",
     "stringOperatorIsNot": "nav",
     "stringOperatorStartsWith": "sākas ar",
@@ -202,9 +229,14 @@ define({
     "dateOperatorIsNotOn": "nav šajā datumā",
     "dateOperatorIsBefore": "ir pirms",
     "dateOperatorIsAfter": "ir pēc",
+    "dateOperatorIsOnOrBefore": "ir uz vai pirms",
+    "dateOperatorIsOnOrAfter": "ir uz vai pēc",
+    "dateOperatorMinutes": "minūtes",
+    "dateOperatorHours": "stundas",
     "dateOperatorDays": "dienas",
     "dateOperatorWeeks": "nedēļas",
     "dateOperatorMonths": "mēneši",
+    "dateOperatorYears": "gadi",
     "dateOperatorInTheLast": "pagātnē",
     "dateOperatorNotInTheLast": "nav pagātnē",
     "dateOperatorIsBetween": "ir starp",
@@ -222,7 +254,7 @@ define({
     "numberOperatorIsBlank": "ir tukšs",
     "numberOperatorIsNotBlank": "nav tukšs",
     "string": "Virkne",
-    "number": "Numurs",
+    "number": "Skaitlis",
     "date": "Datums",
     "askForValues": "Jautāt vērtības",
     "prompt": "Uzvedne",
@@ -230,51 +262,56 @@ define({
     "error": {
       "invalidParams": "Nederīgi parametri.",
       "invalidUrl": "Nederīgs URL.",
-      "noFilterFields": "Slānī nav lauku, ko var izmantot filtram.",
+      "noFilterFields": "Slānī nav lauku, ko var izmantot filtru veidošanai.",
       "invalidSQL": "Nederīga SQL izteiksme.",
       "cantParseSQL": "SQL izteiksmi nevar parsēt."
     },
     "caseSensitive": "Reģistrjutīgs",
     "notSupportCaseSensitiveTip": "Viesotie servisi neatbalsta reģistrjutīgu vaicājumu.",
-    "setFilterTip": "Lūdzu, pareizi iestatiet filtru."
+    "setFilterTip": "Lūdzu, pareizi iestatiet filtrus.",
+    "listValues": "Vērtību saraksts",
+    "cascadeFilterTip": "Rādīt tikai iepriekšējo izteiksmju filtrētās vērtības.",
+    "noneCascadeFilterTip": "Visas šī lauka unikālās vērtības",
+    "previousCascadeFilterTip": "Iepriekšējo izteiksmju filtrētās vērtības",
+    "allCascadeFilterTip": "Visu citu izteiksmju filtrētās vērtības"
   },
   "featureLayerSource": {
     "layer": "Slānis",
     "browse": "Pārlūkot",
-    "selectFromMap": "Izvēlēties no kartes",
-    "selectFromPortal": "Pievienot no Portal for ArcGIS",
-    "addServiceUrl": "Pievienot pakalpojuma vietrādi URL",
+    "selectFromMap": "Karte",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Servisa URL",
     "inputLayerUrl": "Ievadīt slāņa URL",
     "selectLayer": "Izvēlieties elementu slāni no pašreizējās kartes.",
     "chooseItem": "Izvēlieties elementu slāņa vienību.",
-    "setServiceUrl": "Ievadiet elementu pakalpojuma vai kartes pakalpojuma vietrādi URL.",
-    "selectFromOnline": "Pievienot no ArcGIS Online",
+    "setServiceUrl": "Ievadiet elementu servisa vai karšu pakalpojuma URL.",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Izvēlieties elementu slāni."
   },
   "queryableLayerSource": {
     "layer": "Slānis",
     "browse": "Pārlūks",
-    "selectFromMap": "Izvēlēties no kartes",
-    "selectFromPortal": "Pievienot no Portal for ArcGIS",
-    "addServiceUrl": "Pievienot pakalpojuma vietrādi URL",
+    "selectFromMap": "Karte",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Servisa URL",
     "inputLayerUrl": "Ievadīt slāņa URL",
     "selectLayer": "Atlasiet slāni no pašreizējās kartes.",
     "chooseItem": "Izvēlieties vienumu.",
     "setServiceUrl": "Ievadiet pakalpojuma URL.",
-    "selectFromOnline": "Pievienot no ArcGIS Online",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Izvēlieties slāni."
   },
   "gpSource": {
-    "selectFromPortal": "Pievienot no Portal for ArcGIS",
-    "addServiceUrl": "Pievienot pakalpojuma vietrādi URL",
-    "selectFromOnline": "Pievienot no ArcGIS Online",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Servisa URL",
+    "selectFromOnline": "ArcGIS Online",
     "setServiceUrl": "Ievadiet ģeogrāfisko datu apstrādes pakalpojuma vietrādi URL.",
     "chooseItem": "Izvēlieties ģeogrāfisko datu apstrādes pakalpojuma vienumu.",
     "chooseTask": "Izvēlieties ģeogrāfisko datu apstrādes uzdevumu."
   },
   "itemSelector": {
     "map": "Karte",
-    "selectWebMap": "Izvēlieties web karti",
+    "selectWebMap": "Izvēlēties tīmekļa karti",
     "addMapFromOnlineOrPortal": "Atrodiet un pievienojiet web karti aplikācijā no ArcGIS Online publiskajiem resursiem vai sava privātā satura pakalpojumā ArcGIS Online vai Portal.",
     "searchMapName": "Meklēt pēc kartes nosaukuma...",
     "searchNone": "Neizdevās atrast to, ko meklējāt. Mēģiniet vēlreiz.",
@@ -292,8 +329,12 @@ define({
     "noneThumbnail": "Sīktēls nav pieejams",
     "owner": "īpašnieks",
     "signInTo": "Pierakstīties",
-    "lastModified": "Pēdējā modificēšana",
-    "moreDetails": "Papildu detalizētā informācija"
+    "lastModified": "Pēdējo reizi modificēts",
+    "moreDetails": "Vairāk detaļu",
+    "mostRecent": "Jaunākās izmaiņas",
+    "mostViewed": "Visvairāk skatījumu",
+    "highestRated": "Augstākais novērtējums",
+    "viewItemDetails": "Skatīt detalizētu informāciju par vienumu"
   },
   "featureLayerChooserFromPortal": {
     "notSupportQuery": "Pakalpojums neatbalsta vaicājumu."
@@ -313,16 +354,16 @@ define({
     "itemMoveDown": "Pārvietot uz leju",
     "itemDesc": "Apraksts",
     "itemDownload": "Lejupielāde",
-    "itemToAttributeTable": "Atvērt atribūtu tabulu"
+    "itemToAttributeTable": "Skatīt atribūtu tabulā"
   },
   "imageChooser": {
-    "unsupportReaderAPI": "TODO: pārlūks neatbalsta faila lasītāja API",
+    "unsupportReaderAPI": "Todo: pārlūks neatbalsta faila lasītāja API",
     "readError": "Neizdevās nolasīt failu.",
     "unknowError": "nevar pabeigt darbības",
     "invalidType": "Nederīgs faila tips.",
     "cropImage": "Apgriezt attēlu",
     "exceed": "Faila lielums nedrīkst pārsniegt 1024 KB",
-    "enableFlash": "TODO: lūdzu, aktivizējiet flash.",
+    "enableFlash": "Lai pārlūkotu uz attēlu, aktivizējiet Adobe Flash.",
     "cropWaining": "Lūdzu, izvēlieties fotoattēlu, kura izmēri ir vismaz ${width} x ${height} pikseļi.",
     "toolTip": "Lai sasniegtu labākos rezultātus, attēla platumam jābūt ${width} pikseļiem un tā augstumam jābūt ${height} pikseļiem. Citi izmēri tiks pielāgoti, lai atbilstu. Akceptētie attēla formāti ir: PNG, GIF un JPEG."
   },
@@ -343,21 +384,26 @@ define({
     "toGeoJSON": "Eksportēt uz GeoJSON"
   },
   "appState": {
-    "title": "Aplikācijas stāvoklis",
+    "title": "Lietotnes stāvoklis",
     "restoreMap": "Noklikšķiniet, lai atjaunotu kartes pārklājumu un slāņu redzamību kāda tā bija, kad pārtraucāt darbu."
   },
   "featureActions": {
+    "featureActions": "Elementu darbības",
     "ZoomTo": "Pietuvināt",
     "PanTo": "Pārbīdīt uz",
     "Flash": "Izgaismošana",
     "ShowPopup": "Rādīt uznirstošo logu",
     "CreateLayer": "Izveidot slāni",
     "ShowStatistics": "Statistika...",
-    "ClearSelection": "Notīrīt izvēlēto",
+    "ClearSelection": "Notīrīt izvēli",
     "ExportToCSV": "Eksports uz CSV failu",
     "ShowSelectedFeature": "Rādīt atlasītos elementus",
     "ExportToFeatureCollection": "Eksportēt uz elementu kolekciju",
-    "ExportToGeoJSON": "Eksportēt uz GeoJSON"
+    "ExportToGeoJSON": "Eksportēt uz GeoJSON",
+    "EditAttributes": "Rediģēt atribūtus",
+    "AddMarker": "Pievienot marķieri",
+    "RemoveMarker": "Noņemt marķieri",
+    "SaveToMyContent": "Saglabāšana sadaļā Mans saturs"
   },
   "spatialFilterByFeatures": {
     "relatedLayer": "Saistītais slānis",
@@ -373,11 +419,37 @@ define({
   },
   "units": {
     "miles": "Jūdzes",
+    "milesAbbr": "jūdzes",
     "kilometers": "Kilometri",
+    "kilometersAbbr": "km",
     "feet": "Pēdas",
+    "feetAbbr": "pēdas",
     "meters": "Metri",
+    "metersAbbr": "m",
     "yards": "Jardi",
-    "nauticalMiles": "Jūras jūdzes"
+    "yardsAbbr": "jardi",
+    "acres": "Akri",
+    "acresAbbr": "akri",
+    "nauticalMiles": "Jūras jūdzes",
+    "nauticalMilesAbbr": "jūras jūdzes",
+    "uSSurveyFeet": "ASV mērāmā pēda",
+    "uSSurveyFeetAbbr": "ASV pēda",
+    "decimalDegree": "Decimālie grādi",
+    "decimalDegreeAbbr": "dg",
+    "degreeMinuteSeconds": "Grādi minūtes sekundes",
+    "degreeMinuteSecondsAbbr": "g° m’ s’’",
+    "squareMiles": "Kvadrātjūdzes",
+    "squareMilesAbbr": "kv jūdzes",
+    "squareKilometer": "Kvadrātkilometri",
+    "squareKilometerAbbr": "kv km",
+    "squareFeet": "Kvadrātpēdas",
+    "squareFeetAbbr": "kv pēdas",
+    "squareMeters": "Kvadrātmetri",
+    "squareMetersAbbr": "kv m",
+    "squareYards": "Kvadrātjardi",
+    "squareYardsAbbr": "kv jardi",
+    "squareUSSurveyFeet": "ASV mērāmā kvadrātpēda",
+    "squareUSSurveyFeetAbbr": "ASV kv pēda"
   },
   "featureSetChooser": {
     "select": "Izvēlēties",
@@ -389,7 +461,13 @@ define({
     "addSelectionTip": "Pievienot izvēlētajam",
     "removeSelectionTip": "Izņemt no izvēles",
     "selectFromCurrentSelectionTip": "Izvēlēties no pašreizējās izvēles",
-    "unselectAllSelectionTip": "Noņemt izvēli visiem pašreiz izvēlētajiem elementiem"
+    "unselectAllSelectionTip": "Noņemt izvēli visiem pašreiz izvēlētajiem elementiem",
+    "selectByPolygon": "Atlasīt pēc laukuma",
+    "selectByCircle": "Atlasīt pēc apļa",
+    "selectByLine": "Atlasīt pēc līnijas",
+    "chooseSelectingTools": "Izvēlēties atlases rīkus",
+    "darw": "Zīmēt",
+    "drawShap": "Uzzīmēt formu"
   },
   "widgetManager": {
     "createWidgetError": "Izveidot logrīka kļūdu",
@@ -447,6 +525,87 @@ define({
     "shareToWebTips": "Šī lietojumprogramma netiek koplietota publiski. Iespējams, personas nevarēs to skatīt."
   },
   "webSceneLoader": {
-    "webglSupportTip": "Jūsu pārlūkā netiek atbalstītas 3D tīmekļa lietojumprogrammas."
-  }
+    "webglSupportTip": "Jūsu pārlūkā netiek atbalstītas 3D tīmekļa lietotnes."
+  },
+  "map": {
+    "basemapNotAvailable": "Pamatkarte nav pieejama.",
+    "displayDefaultBasemap": "Tā vietā tiek rādīta noklusējuma pamatkarte.",
+    "layerLoadedError": "Slāni ${layer} nevar pievienot kartei."
+  },
+  "popup": {
+    "relatedTables": "Saistītās tabulas:",
+    "relatedRecords": "Saistītie ieraksti:",
+    "noRelatedRecotds": "Nav atrasts neviens saistīts ieraksts.",
+    "chooseFieldTip": "Izvēlieties atribūtu saraksta rādīšanai",
+    "saveAsPopupTitle": "Tāds pats kā uznirstošais virsraksts"
+  },
+  "queryFeatures": {
+    "tooManyFeaturesTip": "Jūsu izvēlē ir pārāk daudz elementu. Iespējams, būs nepieciešams ilgs laiks, lai tos izgūtu un parādītu kartē.",
+    "askForContinue": "Vai vēlaties turpināt?"
+  },
+  "colorPalette": {
+    "transparent": "Caurspīdīgs",
+    "custom": "Pielāgots"
+  },
+  "temperature": {
+    "celsius": "Celsija",
+    "fahrenheit": "Fārenheita"
+  },
+  "report": {
+    "printButtonLabel": "Drukāt",
+    "reportDimensionsMsg": "Šis pārskats ir plānots drukāšanai uz ${paperSize} formāta papīra",
+    "unableToPrintMapMsg": "Drukājot karti(-es), radās kļūda.",
+    "notesHint": "Šeit ievadiet komentārus",
+    "landscape": "Ainava",
+    "portrait": "Portrets",
+    "mapOnly": "MAP_ONLY",
+    "a0": "A0",
+    "a1": "A1",
+    "a2": "A2",
+    "a3": "A3",
+    "a4": "A4",
+    "a5": "A5",
+    "letterANSIA": "Letter ANSI A",
+    "tabloidANSIB": "Tabloid ANSI B",
+    "letter": "Letter",
+    "legal": "Legal",
+    "tabloid": "Tabloid",
+    "ansi_a": "ANSI A",
+    "ansi_b": "ANSI B",
+    "ansi_c": "ANSI C",
+    "ansi_d": "ANSI D",
+    "ansi_e": "ANSI E"
+  },
+  "snapshot": {
+    "snapshot_complete": "Momentuzņēmums veiksmīgi izveidots.",
+    "snapshot_failed": "Neizdevās izveidot momentuzņēmumu.",
+    "snapshot_append": "Momentuzņēmums",
+    "utc": "UTC"
+  },
+  "statisticsChart": {
+    "enlarge": "Palielināt",
+    "setting": "Iestatījums",
+    "count": "Skaits",
+    "horizontalAxis": "Horizontālā ass",
+    "verticalAxis": "Vertikālā ass",
+    "dataLabels": "Datu nosaukumi",
+    "color": "Krāsa"
+  },
+  "frameworkDatasource": {
+    "setDataSource": "Iestatīt datu avotu",
+    "customDataSource": "Papildu datu avots",
+    "selectCustomDataTip": "Atlasiet datu avotu no šīs lietotnes.",
+    "widgetOutputs": "Logrīku attēlošana",
+    "noExtraDsAvailable": "Nav pieejami papildu datu avoti.",
+    "addExtraDsTip": "Dodieties uz veidotāja cilni Atribūts un noklikšķiniet uz Papildu datu avots, lai pievienotu datus.",
+    "widgetOutpusListTip": "Šeit ir norādītas arī logrīku izvades, ja tādas ir."
+  },
+  "gridLayout": {
+    "addWidgetTip": "Pievienojiet šeit logrīkus, izmantojot cilni Logrīki",
+    "modifyLayout": "Modificēt izkārtojumu",
+    "dragToAdd": "Velciet, lai pievienotu",
+    "mapArea": "KARTES LAUKUMS"
+  },
+  "noEditPrivileges": "Jūsu kontam nav piešķirta atļauja izveidot vai modificēt datus.",
+  "invalidConfiguration": "Logrīks nav konfigurēts vai konfigurētie slāņi vairs nav kartē. Lūdzu, atveriet programmu veidotāja režīmā un konfigurējiet logrīku atkārtoti."
 });

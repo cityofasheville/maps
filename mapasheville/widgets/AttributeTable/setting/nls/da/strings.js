@@ -6,12 +6,12 @@ define({
   "field": "Felt",
   "alias": "Alias",
   "visible": "Synlig",
-  "linkField": "LinkFelt",
+  "linkField": "Link-felt",
   "noLayers": "Der er ingen tilgængelige vektorlag",
   "back": "Tilbage",
   "exportCSV": "Tillad eksport til CSV",
   "expand": "Udvid først widget'en",
-  "filterByExtent": "Aktivér Filtrér efter kortudstrækning som standard",
+  "filterByExtent": "Aktivér filter efter kortudstrækning som standard",
   "restore": "Gendan standardværdien",
   "ok": "OK",
   "cancel": "Annuller",
@@ -25,5 +25,6 @@ define({
   "fieldName": "Navn",
   "fieldAlias": "Alias",
   "fieldVisibility": "Synlighed",
-  "fieldActions": "Handlinger"
+  "fieldActions": "Handlinger",
+  "showAttachments": "Vis vedhæftninger"
 });

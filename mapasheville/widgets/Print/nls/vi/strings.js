@@ -1,9 +1,11 @@
 define({
   "_widgetLabel": "In",
-  "title": "Tên Bản đồ",
+  "title": "Tiêu đề bản đồ",
   "format": "Định dạng",
   "layout": "Bố cục",
   "settings": "Nâng cao",
+  "labels": "Nhãn",
+  "showLabels": "Hiển thị nhãn",
   "mapScaleExtent": "Phạm vi/tỷ lệ bản đồ",
   "preserve": "Bảo tồn",
   "mapScale": "tỷ lệ bản đồ",
@@ -29,7 +31,7 @@ define({
   "width": "Chiều rộng (px)",
   "height": "Chiều cao (px)",
   "print": "In",
-  "clearList": "Xóa Bản in",
-  "creatingPrint": "Tạo Bản in",
+  "clearList": "Xóa bản in",
+  "creatingPrint": "Đang tạo bản in",
   "printError": "Lỗi, thử lại"
 });

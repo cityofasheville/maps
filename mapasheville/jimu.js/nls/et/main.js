@@ -6,6 +6,7 @@ define({
     "yes": "Jah",
     "no": "Ei",
     "next": "Järgmine",
+    "previous": "Eelmine",
     "back": "Tagasi",
     "selected": "valitud",
     "name": "Nimi",
@@ -48,11 +49,34 @@ define({
     "scene": "Stseen",
     "reset": "Lähtesta",
     "icon": "Ikoon",
+    "folder": "Kaust",
     "share": "Jaga",
     "view": "Vaatamine",
     "newText": "Uus",
     "edit": "Muuda",
-    "wkid": "WKID"
+    "wkid": "WKID",
+    "table": "Tabel",
+    "zoomIn": "Suurenda",
+    "zoomOut": "Vähenda",
+    "continue1": "Jätka",
+    "longitude": "Pikkuskraad",
+    "latitude": "Laiuskraad",
+    "custom": "Kohandatud",
+    "image": "Pilt",
+    "font": "Font",
+    "text": "Tekst",
+    "all": "Kõik",
+    "number": "Number",
+    "percentage": "Protsent",
+    "unit": "Ühik",
+    "thousand": "Tuhat",
+    "billion": "Miljard",
+    "million": "Miljon",
+    "none": "Puudub",
+    "field": "Väli",
+    "operation": "Toiming",
+    "disableUpdateGeometry": "Keela geomeetria uuendamine",
+    "preview": "Eelvaade"
   },
   "errorCode": "Kood",
   "errorMessage": "Sõnum",
@@ -77,7 +101,7 @@ define({
     "cartographic": "Kartograafia",
     "nationalParkService": "Rahvuspargi teenus",
     "outdoorRecreation": "Rekreatsioon",
-    "peoplePlaces": "Inimeste asukohad",
+    "peoplePlaces": "Inimeste paigad",
     "safetyHealth": "Tervishoid",
     "shapes": "Kujundid",
     "transportation": "Transport",
@@ -96,7 +120,10 @@ define({
     "dash": "Katkendlik",
     "dot": "Punktiir",
     "dashDot": "Katkendlik punktiga",
-    "dashDotDot": "Katkendlik kahe punktiga"
+    "dashDotDot": "Katkendlik kahe punktiga",
+    "customImage": "Kohandatud pilt",
+    "chooseFile": "Vali fail",
+    "noFileChoosen": "Faili pole valitud."
   },
   "transparency": {
     "opaque": "Läbipaistmatu",
@@ -106,7 +133,7 @@ define({
     "domain": "Domeen",
     "use": "Kasutus",
     "singleSymbol": "Üks sümbol",
-    "uniqueSymbol": "Unikaalne sümbol",
+    "uniqueSymbol": "Unikaalsed sümbolid",
     "color": "Värv",
     "size": "Suurus",
     "toShow": "Näita",
@@ -131,7 +158,7 @@ define({
     "circle": "Ring",
     "ellipse": "Ellips",
     "polygon": "Pind",
-    "freehandPolygon": "Vabakäeline pind",
+    "freehandPolygon": "Vabakäeline polügoon",
     "text": "Tekst",
     "clear": "Puhasta"
   },
@@ -161,7 +188,7 @@ define({
     "unableConnectTo": "Ei õnnestu luua ühendust"
   },
   "layerServiceBrowser": {
-    "noServicesFound": "Kaardi- või objektiteenuseid ei leitud",
+    "noServicesFound": "Kaardi- või objektiteenuseid ei leitud.",
     "unableConnectTo": "Ei õnnestu luua ühendust"
   },
   "basicServiceChooser": {
@@ -176,8 +203,8 @@ define({
     "invalidUrl": "Vigane URL."
   },
   "filterBuilder": {
-    "addAnotherExpression": "Lisa filtriavaldis",
-    "addSet": "Lisa avaldise kirjeldus.",
+    "addAnotherExpression": "Lisa väljend",
+    "addSet": "Lisa tingimus",
     "matchMsg": "Too kihi objektid, millega ühtivad ${any_or_all} järgmised avaldised",
     "matchMsgSet": "${any_or_all} järgmistest avaldistest on tõesed",
     "all": "Kõik",
@@ -185,7 +212,7 @@ define({
     "value": "Väärtus",
     "field": "Väli",
     "unique": "Unikaalne",
-    "none": "Pole",
+    "none": "Puudub",
     "and": "ja",
     "valueTooltip": "Sisesta väärtus",
     "fieldTooltip": "Vali olemasolevast väljast",
@@ -202,9 +229,14 @@ define({
     "dateOperatorIsNotOn": "ei ole",
     "dateOperatorIsBefore": "on enne",
     "dateOperatorIsAfter": "on pärast",
+    "dateOperatorIsOnOrBefore": "on võrdne või enne",
+    "dateOperatorIsOnOrAfter": "on võrdne või peale",
+    "dateOperatorMinutes": "minutit",
+    "dateOperatorHours": "tundi",
     "dateOperatorDays": "päeva",
     "dateOperatorWeeks": "nädalat",
     "dateOperatorMonths": "kuud",
+    "dateOperatorYears": "aastat",
     "dateOperatorInTheLast": "viimases",
     "dateOperatorNotInTheLast": "mitte viimases",
     "dateOperatorIsBetween": "on vahemikus",
@@ -230,51 +262,56 @@ define({
     "error": {
       "invalidParams": "Vigased parameetrid.",
       "invalidUrl": "Vigane URL.",
-      "noFilterFields": "Kihil puuduvad väljad, mida saaks filtreerimiseks kasutada.",
+      "noFilterFields": "Kihil puuduvad väljad, mida saaks filtrite loomiseks kasutada.",
       "invalidSQL": "Vigane SQL-avaldis.",
       "cantParseSQL": "SQL-avaldise parsimine ei õnnestu."
     },
     "caseSensitive": "Tõstutundlik",
     "notSupportCaseSensitiveTip": "Majutatud teenused ei toeta tõstutundlikke päringuid.",
-    "setFilterTip": "Määrake filter õigesti."
+    "setFilterTip": "Määrake filtrid õigesti.",
+    "listValues": "Loendi väärtused",
+    "cascadeFilterTip": "Kuva ainult eelmiste avaldiste alusel filtreeritud väärtused.",
+    "noneCascadeFilterTip": "Sellel välja kõik kordumatud väärtused",
+    "previousCascadeFilterTip": "Eelmiste avaldiste alusel filtreeritud väärtused",
+    "allCascadeFilterTip": "Kõigi muude avaldiste alusel filtreeritud väärtused"
   },
   "featureLayerSource": {
     "layer": "Kiht",
     "browse": "Sirvi",
-    "selectFromMap": "Vali kaardilt",
-    "selectFromPortal": "Lisa Portal for ArcGIS-ist",
-    "addServiceUrl": "Lisa teenuse URL",
+    "selectFromMap": "Kaart",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Teenuse URL",
     "inputLayerUrl": "Sisendkihi URL",
     "selectLayer": "Vali praeguse kaardi objektikiht.",
     "chooseItem": "Vali objektikihi sisu.",
     "setServiceUrl": "Sisesta objekti- või kaarditeenuse URL.",
-    "selectFromOnline": "Lisa ArcGIS Online’ist",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Valige objektikiht."
   },
   "queryableLayerSource": {
     "layer": "Kiht",
     "browse": "Sirvi",
-    "selectFromMap": "Vali kaardilt",
-    "selectFromPortal": "Lisa Portal for ArcGIS-ist",
-    "addServiceUrl": "Lisa teenuse URL",
+    "selectFromMap": "Kaart",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Teenuse URL",
     "inputLayerUrl": "Sisendkihi URL",
     "selectLayer": "Valige kiht praeguselt kaardilt.",
     "chooseItem": "Valige sisuüksus.",
     "setServiceUrl": "Sisestage teenuse URL.",
-    "selectFromOnline": "Lisa ArcGIS Online’ist",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Vali kiht."
   },
   "gpSource": {
-    "selectFromPortal": "Lisa Portal for ArcGIS-ist",
-    "addServiceUrl": "Lisa teenuse URL",
-    "selectFromOnline": "Lisa ArcGIS Online’ist",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Teenuse URL",
+    "selectFromOnline": "ArcGIS Online",
     "setServiceUrl": "Sisestage geotöötlusteenuse URL.",
     "chooseItem": "Valige geotöötlusteenuse objekt.",
     "chooseTask": "Valige geotöötluse ülesanne."
   },
   "itemSelector": {
     "map": "Kaart",
-    "selectWebMap": "Vali veebikaart",
+    "selectWebMap": "Valige veebikaart",
     "addMapFromOnlineOrPortal": "Saate rakenduses veebikaarti otsida ja selle lisada ArcGIS Online’i avalike ressursside kaudu või ArcGIS Online’i või Portali isikliku sisu kaudu.",
     "searchMapName": "Otsi kaardi nime järgi...",
     "searchNone": "Me ei leidnud seda, mida otsisite. Proovige uuesti.",
@@ -293,7 +330,11 @@ define({
     "owner": "omanik",
     "signInTo": "Logi sisse",
     "lastModified": "Viimati muudetud",
-    "moreDetails": "Rohkem infot"
+    "moreDetails": "Täpsemalt",
+    "mostRecent": "Kõige uuem",
+    "mostViewed": "Enim vaadatud",
+    "highestRated": "Kõrgeima hinnanguga",
+    "viewItemDetails": "Vaata üksuse detaile"
   },
   "featureLayerChooserFromPortal": {
     "notSupportQuery": "Teenus ei toeta päringut."
@@ -313,16 +354,16 @@ define({
     "itemMoveDown": "Liiguta allapoole",
     "itemDesc": "Kirjeldus",
     "itemDownload": "Laadi alla",
-    "itemToAttributeTable": "Ava atribuuditabel"
+    "itemToAttributeTable": "Vaata atribuuditabelis"
   },
   "imageChooser": {
-    "unsupportReaderAPI": "MÄRKUS. Brauser ei toeta faililugemise liidest.",
+    "unsupportReaderAPI": "Märkus. Brauser ei toeta faililugemise liidest.",
     "readError": "Faili lugemine nurjus.",
     "unknowError": "toiminguid ei saanud lõpule viia",
     "invalidType": "Sobimatut tüüpi fail",
     "cropImage": "Kärbi pilti",
     "exceed": "Faili maht võib olla kuni 1024 KB.",
-    "enableFlash": "Märkus. Lubage Flash.",
+    "enableFlash": "Enne pildini sirvimist lubage Adobe Flash.",
     "cropWaining": "Palun valige foto, mille mõõdud on vähemalt ${width} x ${height} pikslit.",
     "toolTip": "Parima tulemuse saamiseks peaks pildi laius olema ${width} pikslit ning kõrgus ${height} pikslit. Muud suurused kohandatakse parajaks. Sobivad pildiformaadid on PNG, GIF ja JPEG."
   },
@@ -339,7 +380,7 @@ define({
   "exportTo": {
     "exportTo": "Ekspordi",
     "toCSV": "Ekspordi CSV failiks",
-    "toFeatureCollection": "Eksport objektide kogumisse",
+    "toFeatureCollection": "Ekspordi objektide kogumisse",
     "toGeoJSON": "Eksport GeoJSON formaati"
   },
   "appState": {
@@ -347,17 +388,22 @@ define({
     "restoreMap": "Klõpsake kaardi ulatuse ja kihtide nähtavuse taastamiseks poolelijäänud kohas."
   },
   "featureActions": {
+    "featureActions": "Objektide tegevused",
     "ZoomTo": "Suumi",
     "PanTo": "Liiguta",
     "Flash": "Välgutamine",
-    "ShowPopup": "Kuva hüpikaken",
+    "ShowPopup": "Näita hüpikakent",
     "CreateLayer": "Loo kiht",
     "ShowStatistics": "Statistika...",
-    "ClearSelection": "Tühista valik",
+    "ClearSelection": "Puhasta valik",
     "ExportToCSV": "Ekspordi CSV failiks",
     "ShowSelectedFeature": "Kuva valitud objektid",
-    "ExportToFeatureCollection": "Eksport objektide kogumisse",
-    "ExportToGeoJSON": "Eksport GeoJSON formaati"
+    "ExportToFeatureCollection": "Ekspordi objektide kogumisse",
+    "ExportToGeoJSON": "Eksport GeoJSON formaati",
+    "EditAttributes": "Muuda atribuute",
+    "AddMarker": "Lisa tähis",
+    "RemoveMarker": "Eemalda tähis",
+    "SaveToMyContent": "Salvesta jaotisse Minu Sisu"
   },
   "spatialFilterByFeatures": {
     "relatedLayer": "Seotud kiht",
@@ -373,11 +419,37 @@ define({
   },
   "units": {
     "miles": "Miili",
+    "milesAbbr": "mi",
     "kilometers": "Kilomeetrit",
+    "kilometersAbbr": "km",
     "feet": "Jalga",
+    "feetAbbr": "jl",
     "meters": "Meetrit",
+    "metersAbbr": "m",
     "yards": "Jardi",
-    "nauticalMiles": "Meremiili"
+    "yardsAbbr": "jr",
+    "acres": "Aakrit",
+    "acresAbbr": "aakrit",
+    "nauticalMiles": "Meremiili",
+    "nauticalMilesAbbr": "NM",
+    "uSSurveyFeet": "USA jalg",
+    "uSSurveyFeetAbbr": "jlUS",
+    "decimalDegree": "Kümnendkraadid",
+    "decimalDegreeAbbr": "g",
+    "degreeMinuteSeconds": "Kraad minutid sekundid",
+    "degreeMinuteSecondsAbbr": "k-m-s",
+    "squareMiles": "Ruutmiili",
+    "squareMilesAbbr": "mi²",
+    "squareKilometer": "Ruutkilomeetrit",
+    "squareKilometerAbbr": "km²",
+    "squareFeet": "Ruutjalga",
+    "squareFeetAbbr": "jl²",
+    "squareMeters": "Ruutmeetrit",
+    "squareMetersAbbr": "m²",
+    "squareYards": "Ruutjardi",
+    "squareYardsAbbr": "jr²",
+    "squareUSSurveyFeet": "USA ruutjalg",
+    "squareUSSurveyFeetAbbr": "ruutjlUS"
   },
   "featureSetChooser": {
     "select": "Vali",
@@ -389,7 +461,13 @@ define({
     "addSelectionTip": "Lisa valikule",
     "removeSelectionTip": "Eemalda valikust",
     "selectFromCurrentSelectionTip": "Vali praegusest valikust",
-    "unselectAllSelectionTip": "Tühista kõigi praegu valitud objektide selekteering"
+    "unselectAllSelectionTip": "Tühista kõigi praegu valitud objektide selekteering",
+    "selectByPolygon": "Vali polügooni järgi",
+    "selectByCircle": "Vali ringi järgi",
+    "selectByLine": "Vali joone järgi",
+    "chooseSelectingTools": "Vali selekteerimise tööriistad",
+    "darw": "Joonista",
+    "drawShap": "Joonista kujund"
   },
   "widgetManager": {
     "createWidgetError": "Vidina loomise viga",
@@ -448,5 +526,86 @@ define({
   },
   "webSceneLoader": {
     "webglSupportTip": "Teie brauser ei toeta 3D-veebirakendusi."
-  }
+  },
+  "map": {
+    "basemapNotAvailable": "Aluskaart ei ole kättesaadav.",
+    "displayDefaultBasemap": "Selle asemel kuvatakse vaikimisi aluskaart.",
+    "layerLoadedError": "Kihti ${layers} ei saa lisada kaardile."
+  },
+  "popup": {
+    "relatedTables": "Seotud tabelid:",
+    "relatedRecords": "Seotud kirjed:",
+    "noRelatedRecotds": "Seotud kirjeid ei leitud.",
+    "chooseFieldTip": "Valige loendi kuvamiseks atribuut",
+    "saveAsPopupTitle": "Sama, mis hüpikakna nimi"
+  },
+  "queryFeatures": {
+    "tooManyFeaturesTip": "Valikus on liiga palju objekte. Nende toomine ja kaardil kuvamine võib kaua aega võtta.",
+    "askForContinue": "Kas soovite jätkata?"
+  },
+  "colorPalette": {
+    "transparent": "Läbipaistev",
+    "custom": "Kohandatud"
+  },
+  "temperature": {
+    "celsius": "Celsius",
+    "fahrenheit": "Fahrenheit"
+  },
+  "report": {
+    "printButtonLabel": "Prindi",
+    "reportDimensionsMsg": "See aruanne on ettenähtud printimiseks ${paperSize} formaadis paberile",
+    "unableToPrintMapMsg": "Kaardi või kaartide printimisel ilmnes tõrge.",
+    "notesHint": "Sisestage kommentaar siia",
+    "landscape": "Horisontaalpaigutus",
+    "portrait": "Vertikaalpaigutus",
+    "mapOnly": "MAP_ONLY",
+    "a0": "A0",
+    "a1": "A1",
+    "a2": "A2",
+    "a3": "A3",
+    "a4": "A4",
+    "a5": "A5",
+    "letterANSIA": "Kiri ANSI A",
+    "tabloidANSIB": "Tabloid ANSI B",
+    "letter": "Kiri",
+    "legal": "Litsents",
+    "tabloid": "Tabloid",
+    "ansi_a": "ANSI A",
+    "ansi_b": "ANSI B",
+    "ansi_c": "ANSI C",
+    "ansi_d": "ANSI D",
+    "ansi_e": "ANSI E"
+  },
+  "snapshot": {
+    "snapshot_complete": "Hetktõmmise loomine õnnestus.",
+    "snapshot_failed": "Hetktõmmise loomine nurjus.",
+    "snapshot_append": "Hetktõmmis",
+    "utc": "UTC"
+  },
+  "statisticsChart": {
+    "enlarge": "Kasvav",
+    "setting": "Seade",
+    "count": "Koguarv",
+    "horizontalAxis": "Horisontaaltelg",
+    "verticalAxis": "Vertikaaltelg",
+    "dataLabels": "Andmete märgised",
+    "color": "Värv"
+  },
+  "frameworkDatasource": {
+    "setDataSource": "Määra andmeallikas",
+    "customDataSource": "Täiendav andmeallikas",
+    "selectCustomDataTip": "Valige rakendusest andmeallikas.",
+    "widgetOutputs": "Vidina väljundid",
+    "noExtraDsAvailable": "Täiendavaid andmeallikaid pole saadaval.",
+    "addExtraDsTip": "Avage koosturi vahekaart „Atribuut“ ja klõpsake andmete lisamiseks nuppu „Täiendav andmeallikas“.",
+    "widgetOutpusListTip": "Siin loetletakse ka vidina väljundid, kui neid on."
+  },
+  "gridLayout": {
+    "addWidgetTip": "Lisage siia vidin vidina vahekaardi kaudu",
+    "modifyLayout": "Muuda paigutust",
+    "dragToAdd": "Lisamiseks lohistage",
+    "mapArea": "KAARDI KUVAULATUS"
+  },
+  "noEditPrivileges": "Teie kontol puudub andmete loomise või muutmise õigus.",
+  "invalidConfiguration": "Vidin on konfigureerimata või pole konfiguratsioonis sisalduvad kihid enam kaardil. Avage rakendus koosturirežiimis ja konfigureerige vidin uuesti."
 });

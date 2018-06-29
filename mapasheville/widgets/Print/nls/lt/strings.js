@@ -4,6 +4,8 @@ define({
   "format": "Formatuoti",
   "layout": "Maketas",
   "settings": "Išplėstinis",
+  "labels": "Žymės",
+  "showLabels": "Rodyti žymes",
   "mapScaleExtent": "Žemėlapio mastelis / aprėptis",
   "preserve": "Išlaikyti",
   "mapScale": "žemėlapio mastelis",
@@ -29,7 +31,7 @@ define({
   "width": "Plotis (piks.)",
   "height": "Aukštis (piks.)",
   "print": "Spausdinti",
-  "clearList": "Išvalyti spausdinius",
-  "creatingPrint": "Kuriamas spausdinys",
+  "clearList": "Išvalyti spaudinius",
+  "creatingPrint": "Kuriamas spaudinys",
   "printError": "Klaida, bandykite dar kartą"
 });

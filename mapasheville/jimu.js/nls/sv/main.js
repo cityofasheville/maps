@@ -6,6 +6,7 @@ define({
     "yes": "Ja",
     "no": "Nej",
     "next": "Nästa",
+    "previous": "Föregående",
     "back": "Bakåt",
     "selected": "valt",
     "name": "Namn",
@@ -48,11 +49,34 @@ define({
     "scene": "Scen",
     "reset": "Återställ",
     "icon": "Ikon",
+    "folder": "Mapp",
     "share": "Dela",
     "view": "Visa",
     "newText": "Nytt",
     "edit": "Redigera",
-    "wkid": "WKID"
+    "wkid": "WKID",
+    "table": "Tabell",
+    "zoomIn": "Zooma in",
+    "zoomOut": "Zooma ut",
+    "continue1": "Fortsätt",
+    "longitude": "Longitud",
+    "latitude": "Latitud",
+    "custom": "Anpassat",
+    "image": "Bild",
+    "font": "Teckensnitt",
+    "text": "Text",
+    "all": "Alla",
+    "number": "Nummer",
+    "percentage": "Procentandel",
+    "unit": "Enhet",
+    "thousand": "Tusen",
+    "billion": "Miljard",
+    "million": "Miljon",
+    "none": "Inga",
+    "field": "Fält",
+    "operation": "Åtgärd",
+    "disableUpdateGeometry": "Inaktivera Uppdatera geometri",
+    "preview": "Förhandsgranska"
   },
   "errorCode": "Kod",
   "errorMessage": "Meddelande",
@@ -96,7 +120,10 @@ define({
     "dash": "Streck",
     "dot": "Punkt",
     "dashDot": "Streck punkt",
-    "dashDotDot": "Streck punkt punkt"
+    "dashDotDot": "Streck punkt punkt",
+    "customImage": "Anpassad bild",
+    "chooseFile": "Välj fil",
+    "noFileChoosen": "Ingen fil har valts."
   },
   "transparency": {
     "opaque": "Opak",
@@ -109,7 +136,7 @@ define({
     "uniqueSymbol": "Unika symboler",
     "color": "Färg",
     "size": "Storlek",
-    "toShow": "För att visa",
+    "toShow": "Att visa",
     "colors": "Färger",
     "classes": "Klasser",
     "symbolSize": "Symbolstorlek",
@@ -161,7 +188,7 @@ define({
     "unableConnectTo": "Det gick inte att ansluta till"
   },
   "layerServiceBrowser": {
-    "noServicesFound": "Inga karttjänster eller geoobjekttjänster hittades",
+    "noServicesFound": "Inga karttjänster eller geoobjekttjänster hittades.",
     "unableConnectTo": "Det gick inte att ansluta till"
   },
   "basicServiceChooser": {
@@ -176,8 +203,8 @@ define({
     "invalidUrl": "Ogiltig URL."
   },
   "filterBuilder": {
-    "addAnotherExpression": "Lägg till ett filteruttryck",
-    "addSet": "Lägg till en uttrycksuppsättning",
+    "addAnotherExpression": "Lägg till uttryck",
+    "addSet": "Lägg till en uppsättning",
     "matchMsg": "Hämta geoobjekt i lagret som matchar ${any_or_all} av följande uttryck",
     "matchMsgSet": "${any_or_all} av följande uttryck i uppsättningen är sanna",
     "all": "Alla",
@@ -185,10 +212,10 @@ define({
     "value": "Värde",
     "field": "Fält",
     "unique": "Unik",
-    "none": "Ingen",
+    "none": "Inga",
     "and": "och",
     "valueTooltip": "Ange värde",
-    "fieldTooltip": "Välj i befintligt fält",
+    "fieldTooltip": "Välj i ett befintligt fält",
     "uniqueValueTooltip": "Välj bland unika värden i det valda fältet",
     "stringOperatorIs": "är",
     "stringOperatorIsNot": "är inte",
@@ -202,9 +229,14 @@ define({
     "dateOperatorIsNotOn": "är inte",
     "dateOperatorIsBefore": "är före",
     "dateOperatorIsAfter": "är efter",
+    "dateOperatorIsOnOrBefore": "är på eller före",
+    "dateOperatorIsOnOrAfter": "är på eller efter",
+    "dateOperatorMinutes": "minuter",
+    "dateOperatorHours": "timmar",
     "dateOperatorDays": "dagar",
     "dateOperatorWeeks": "veckor",
     "dateOperatorMonths": "månader",
+    "dateOperatorYears": "år",
     "dateOperatorInTheLast": "i den sista",
     "dateOperatorNotInTheLast": "inte i den sista",
     "dateOperatorIsBetween": "är mellan",
@@ -230,44 +262,49 @@ define({
     "error": {
       "invalidParams": "Ogiltiga parametrar.",
       "invalidUrl": "Ogiltig URL.",
-      "noFilterFields": "Lagret innehåller inga fält som kan användas för filter.",
+      "noFilterFields": "Lagret innehåller inga fält som kan användas för att skapa filter.",
       "invalidSQL": "Ogiltigt SQL-uttryck.",
       "cantParseSQL": "Det går inte att tolka SQL-uttrycket."
     },
     "caseSensitive": "Skiftlägeskänsligt",
     "notSupportCaseSensitiveTip": "Värdbaserade tjänster stöder inte skiftlägeskänsliga frågor.",
-    "setFilterTip": "Ange filtret korrekt."
+    "setFilterTip": "Ange filtren korrekt.",
+    "listValues": "Listvärden",
+    "cascadeFilterTip": "Visa endast värden som filtrerats av tidigare uttryck.",
+    "noneCascadeFilterTip": "Alla unika värden för det här fältet",
+    "previousCascadeFilterTip": "Värden som filtrerats av tidigare uttryck",
+    "allCascadeFilterTip": "Värden som filtrerats av alla andra uttryck"
   },
   "featureLayerSource": {
     "layer": "Lager",
     "browse": "Bläddra",
-    "selectFromMap": "Välj från karta",
-    "selectFromPortal": "Lägg till från Portal for ArcGIS",
-    "addServiceUrl": "Lägg till tjänst-URL",
+    "selectFromMap": "Karta",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Tjänste-URL",
     "inputLayerUrl": "Indatalager-URL",
     "selectLayer": "Välj ett geoobjektlager i den aktuella kartan.",
     "chooseItem": "Välj ett objekt i geoobjektlagret.",
-    "setServiceUrl": "Ange URL till karttjänsten eller geoobjekttjänsten.",
-    "selectFromOnline": "Lägg till från ArcGIS Online",
+    "setServiceUrl": "Ange URL:en till en geoobjekttjänst eller karttjänst.",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Välj ett geoobjektslager."
   },
   "queryableLayerSource": {
     "layer": "Lager",
     "browse": "Bläddra",
-    "selectFromMap": "Välj från karta",
-    "selectFromPortal": "Lägg till från Portal for ArcGIS",
-    "addServiceUrl": "Lägg till tjänst-URL",
+    "selectFromMap": "Karta",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Tjänste-URL",
     "inputLayerUrl": "Indatalager-URL",
     "selectLayer": "Välj ett lager i den aktuella kartan.",
     "chooseItem": "Välj ett objekt.",
     "setServiceUrl": "Ange webbadressen till tjänsten.",
-    "selectFromOnline": "Lägg till från ArcGIS Online",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Välj ett lager."
   },
   "gpSource": {
-    "selectFromPortal": "Lägg till från Portal for ArcGIS",
-    "addServiceUrl": "Lägg till tjänst-URL",
-    "selectFromOnline": "Lägg till från ArcGIS Online",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Tjänste-URL",
+    "selectFromOnline": "ArcGIS Online",
     "setServiceUrl": "Ange webbadressen till geobearbetningstjänsten.",
     "chooseItem": "Välj ett objekt från geobearbetningstjänsten.",
     "chooseTask": "Välj en geobearbetningsåtgärd."
@@ -293,7 +330,11 @@ define({
     "owner": "ägare",
     "signInTo": "Logga in på",
     "lastModified": "Senast ändrad",
-    "moreDetails": "Mer information"
+    "moreDetails": "Fler detaljer",
+    "mostRecent": "Senaste",
+    "mostViewed": "Mest visade",
+    "highestRated": "Högst rankade",
+    "viewItemDetails": "Visa objektinformation"
   },
   "featureLayerChooserFromPortal": {
     "notSupportQuery": "Tjänsten stöder inte frågor."
@@ -313,16 +354,16 @@ define({
     "itemMoveDown": "Flytta nedåt",
     "itemDesc": "Beskrivning",
     "itemDownload": "Hämta",
-    "itemToAttributeTable": "Öppna attributtabell"
+    "itemToAttributeTable": "Visa i attributtabell"
   },
   "imageChooser": {
-    "unsupportReaderAPI": "TODO: webbläsaren har inte stöd för filläsnings-API",
+    "unsupportReaderAPI": "Todo: webbläsaren har inte stöd för filläsnings-API",
     "readError": "Det gick inte att läsa filen.",
     "unknowError": "det gick inte att slutföra åtgärderna",
     "invalidType": "Ogiltig filtyp.",
     "cropImage": "Beskär bild",
     "exceed": "Filstorleken får inte överskrida 1 024 KB",
-    "enableFlash": "TODO: aktivera flash.",
+    "enableFlash": "Aktivera Adobe Flash innan du bläddrar till en bild.",
     "cropWaining": "Välj ett foto som är på minst ${width} x ${height} pixlar.",
     "toolTip": "För bästa resultat ska bilden vara ${width} bildpunkter bred och ${height} bildpunkter hög. Andra storlekar justeras för att passa in. Tillåtna bildformat är: PNG, GIF och JPEG."
   },
@@ -339,7 +380,7 @@ define({
   "exportTo": {
     "exportTo": "Exportera",
     "toCSV": "Exportera till CSV-fil",
-    "toFeatureCollection": "Exportera till geoobjektssamling",
+    "toFeatureCollection": "Exportera till geoobjektsamling",
     "toGeoJSON": "Exportera till GeoJSON"
   },
   "appState": {
@@ -347,17 +388,22 @@ define({
     "restoreMap": "Klicka om du vill återställa kartutbredningen och lagrens synlighet där du slutade."
   },
   "featureActions": {
+    "featureActions": "Geoobjektsåtgärder",
     "ZoomTo": "Zooma till",
     "PanTo": "Panorera till",
     "Flash": "Blinka",
     "ShowPopup": "Visa popupfönster",
     "CreateLayer": "Skapa lager",
     "ShowStatistics": "Statistik...",
-    "ClearSelection": "Rensa val",
+    "ClearSelection": "Rensa markering",
     "ExportToCSV": "Exportera till CSV-fil",
     "ShowSelectedFeature": "Visa valda geoobjekt",
-    "ExportToFeatureCollection": "Exportera till geoobjektssamling",
-    "ExportToGeoJSON": "Exportera till GeoJSON"
+    "ExportToFeatureCollection": "Exportera till geoobjektsamling",
+    "ExportToGeoJSON": "Exportera till GeoJSON",
+    "EditAttributes": "Redigera attribut",
+    "AddMarker": "Lägg till en markering",
+    "RemoveMarker": "Ta bort markering",
+    "SaveToMyContent": "Spara i Mitt innehåll"
   },
   "spatialFilterByFeatures": {
     "relatedLayer": "Relaterat lager",
@@ -373,23 +419,55 @@ define({
   },
   "units": {
     "miles": "Mile",
+    "milesAbbr": "mi",
     "kilometers": "Kilometer",
+    "kilometersAbbr": "km",
     "feet": "Fot",
+    "feetAbbr": "fot",
     "meters": "Meter",
+    "metersAbbr": "m",
     "yards": "Yard",
-    "nauticalMiles": "Nautiska mil"
+    "yardsAbbr": "yd",
+    "acres": "Tunnland",
+    "acresAbbr": "tunnland",
+    "nauticalMiles": "Nautiska mil",
+    "nauticalMilesAbbr": "nmi",
+    "uSSurveyFeet": "US survey feet",
+    "uSSurveyFeetAbbr": "ftUS",
+    "decimalDegree": "Decimalgrader",
+    "decimalDegreeAbbr": "dd",
+    "degreeMinuteSeconds": "Grader minuter sekunder",
+    "degreeMinuteSecondsAbbr": "d-m-s",
+    "squareMiles": "Square miles",
+    "squareMilesAbbr": "eng. kv.m",
+    "squareKilometer": "Kvadratkilometer",
+    "squareKilometerAbbr": "kv.km",
+    "squareFeet": "Square feet",
+    "squareFeetAbbr": "kvft",
+    "squareMeters": "Kvadratmeter",
+    "squareMetersAbbr": "kvm",
+    "squareYards": "Square yards",
+    "squareYardsAbbr": "kvyd",
+    "squareUSSurveyFeet": "Kvadrat-US survey feet",
+    "squareUSSurveyFeetAbbr": "sq ftUS"
   },
   "featureSetChooser": {
     "select": "Välj",
     "dragBox": "Dra",
     "dragMouse": "Dra med musen",
-    "selectByRectangle": "Välj efter rektangel",
+    "selectByRectangle": "Välj med rektangel",
     "selectFeaturesTip": "Välj geoobjekt genom att dra en ruta runt dem på kartan med muspekaren",
     "newSelectionTip": "Skapa nytt urval",
     "addSelectionTip": "Lägg till i urval",
     "removeSelectionTip": "Remove from selection",
     "selectFromCurrentSelectionTip": "Välj från aktuellt urval",
-    "unselectAllSelectionTip": "Avmarkera alla markerade geoobjekt"
+    "unselectAllSelectionTip": "Avmarkera alla markerade geoobjekt",
+    "selectByPolygon": "Välj med polygon",
+    "selectByCircle": "Välj med cirkel",
+    "selectByLine": "Välj med linje",
+    "chooseSelectingTools": "Välj markeringsverktyg",
+    "darw": "Rita",
+    "drawShap": "Rita en form"
   },
   "widgetManager": {
     "createWidgetError": "Det uppstod ett fel när widgeten skapades",
@@ -447,6 +525,87 @@ define({
     "shareToWebTips": "Den här appen delas inte publikt. Andra kanske inte kan visa den."
   },
   "webSceneLoader": {
-    "webglSupportTip": "3D-webbappar kan inte visas i din webbläsare."
-  }
+    "webglSupportTip": "3D-webbappar stöds inte i din webbläsare."
+  },
+  "map": {
+    "basemapNotAvailable": "Baskartan är inte tillgänglig.",
+    "displayDefaultBasemap": "Visa standardbaskartan i stället.",
+    "layerLoadedError": "Lagret ${layers} kan inte läggas till på kartan."
+  },
+  "popup": {
+    "relatedTables": "Relaterade tabeller:",
+    "relatedRecords": "Relaterade poster:",
+    "noRelatedRecotds": "Inga relaterade poster hittades.",
+    "chooseFieldTip": "Välj ett attribut för att visa listan",
+    "saveAsPopupTitle": "Samma som popuprubriken"
+  },
+  "queryFeatures": {
+    "tooManyFeaturesTip": "Det finns för många geoobjekt i din markering. Det kan ta lång tid att hämta och visa dem på kartan.",
+    "askForContinue": "Vill du fortsätta?"
+  },
+  "colorPalette": {
+    "transparent": "Transparent",
+    "custom": "Anpassat"
+  },
+  "temperature": {
+    "celsius": "Celsius",
+    "fahrenheit": "Fahrenheit"
+  },
+  "report": {
+    "printButtonLabel": "Skriv ut",
+    "reportDimensionsMsg": "Den här rapporten är utformad för att skrivas ut på ${paperSize}-papper",
+    "unableToPrintMapMsg": "Ett fel uppstod vid kartutskriften",
+    "notesHint": "Ange kommentarer här",
+    "landscape": "Liggande",
+    "portrait": "Stående",
+    "mapOnly": "MAP_ONLY",
+    "a0": "A0",
+    "a1": "A1",
+    "a2": "A2",
+    "a3": "A3",
+    "a4": "A4",
+    "a5": "A5",
+    "letterANSIA": "Letter ANSI A",
+    "tabloidANSIB": "Tabloid ANSI B",
+    "letter": "Letter",
+    "legal": "Juridisk information",
+    "tabloid": "Tabloid",
+    "ansi_a": "ANSI A",
+    "ansi_b": "ANSI B",
+    "ansi_c": "ANSI C",
+    "ansi_d": "ANSI D",
+    "ansi_e": "ANSI E"
+  },
+  "snapshot": {
+    "snapshot_complete": "Ögonblicksbilden har skapats.",
+    "snapshot_failed": "Det gick inte att skapa ögonblicksbilden.",
+    "snapshot_append": "Ögonblicksbild",
+    "utc": "UTC"
+  },
+  "statisticsChart": {
+    "enlarge": "Förstora",
+    "setting": "Inställning",
+    "count": "Antal",
+    "horizontalAxis": "Horisontell axel",
+    "verticalAxis": "Vertikal axel",
+    "dataLabels": "Dataetiketter",
+    "color": "Färg"
+  },
+  "frameworkDatasource": {
+    "setDataSource": "Ange datakälla",
+    "customDataSource": "Extra datakälla",
+    "selectCustomDataTip": "Välj en datakälla från i den här appen.",
+    "widgetOutputs": "Utdata från widget",
+    "noExtraDsAvailable": "Ingen extra datakällor är tillgängliga.",
+    "addExtraDsTip": "Gå till fliken Attribut i byggverktyget och klicka på Extra datakälla för att lägga till data.",
+    "widgetOutpusListTip": "Widget-utdata (om det finns några) anges också här."
+  },
+  "gridLayout": {
+    "addWidgetTip": "Lägg till widgetar här via fliken Widget",
+    "modifyLayout": "Ändra layout",
+    "dragToAdd": "Dra för att lägga till",
+    "mapArea": "KARTOMRÅDE"
+  },
+  "noEditPrivileges": "Ditt konto har inte behörighet att skapa eller ändra data.",
+  "invalidConfiguration": "Widgeten är antingen inte konfigurerad eller så finns lagren i konfigurationen inte längre i kartan. Öppna appen i byggläge och konfigurera om widgeten."
 });

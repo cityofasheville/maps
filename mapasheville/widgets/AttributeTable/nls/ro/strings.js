@@ -16,13 +16,14 @@ define({
   "selectPage": "Selectare înregistrări din pagina curentă",
   "clearSelection": "Golire selecţie",
   "filter": "Filtru",
-  "setFilterTip": "Setaţi corect filtrul.",
-  "noFilterTip": "Fără a avea expresia de filtrare definită, această operaţie de interogare va lista toate obiectele spaţiale din sursa de date specificată.",
+  "setFilterTip": "Setaţi corect filtrele.",
+  "noFilterTip": "Fără a avea expresiile de filtrare definite, această operaţie de interogare va lista toate obiectele spaţiale din sursa de date specificată.",
   "filterByExtent": "Filtrare după extinderea hărţii",
   "showSelectedRecords": "Afişare înregistrări selectate",
   "showAllRecords": "Afişare toate înregistrările",
-  "showRelatedRecords": "Afişare înregistrări asociate",
+  "showRelatedRecords": "Afişare înregistrări corelate",
   "noRelatedRecords": "Nu au fost găsite înregistrări corelate",
+  "attachmentColumn": "Fotografii şi fişiere",
   "refresh": "Reîmprospătare",
   "features": "obiecte spaţiale",
   "records": "înregistrări",
@@ -37,5 +38,7 @@ define({
   "closeTableTip": "Ascundere tabel de atribute",
   "sortAsc": "Sortare ascendentă",
   "sortDes": "Sortare descendentă",
-  "statistics": "Statistică"
+  "statistics": "Statistică",
+  "attachments": "Ataşări",
+  "files": "fişiere"
 });

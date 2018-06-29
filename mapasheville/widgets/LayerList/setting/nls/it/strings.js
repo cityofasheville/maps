@@ -5,7 +5,7 @@ define({
   "transparency": "Trasparenza",
   "controlPopup": "Abilita/Disabilita popup",
   "moveUpAndDown": "Sposta su/Sposta giù",
-  "attributeTable": "Apri tabella attributi",
+  "attributeTable": "Visualizza nella tabella degli attributi",
   "url": "Descrizione/Mostra dettagli elemento/Download",
   "layerSelectorTitle": "Scegliere quali layer verranno visualizzati nell'elenco."
 });

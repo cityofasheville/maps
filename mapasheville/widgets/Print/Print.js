@@ -26,6 +26,8 @@ define([
   'jimu/dijit/LoadingShelter',
   'jimu/dijit/Message',
   'jimu/utils',
+  'dojo/on',
+  'dijit/popup',
   'dijit/form/ValidationTextBox',
   'dijit/form/Form',
   'dijit/form/Select',
@@ -36,6 +38,7 @@ define([
   'dijit/form/DropDownButton',
   'dijit/TooltipDialog',
   'dijit/form/RadioButton',
+  'dijit/form/SimpleTextarea',
   'esri/IdentityManager',
   'dojo/store/Memory'
 ], function(
@@ -66,6 +69,8 @@ define([
   LoadingShelter,
   Message,
   utils,
+  on,
+  popup,
   ValidationTextBox) {
   // Main print dijit
   var PrintDijit = declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
@@ -85,6 +90,8 @@ define([
     printTaskURL: null,
     printTask: null,
     async: false,
+    // showAdvancedOption: true,
+    _showSettings: false,
 
     _currentTemplateInfo: null,
 
@@ -98,7 +105,8 @@ define([
       this.printTask = new PrintTask(this.printTaskURL, printParams);
       this.printparams = new PrintParameters();
       this.printparams.map = this.map;
-      this.printparams.outSpatialReference = this.map.spatialReference;
+      //fix issue #7141
+      // this.printparams.outSpatialReference = this.map.spatialReference;
 
       this.shelter = new LoadingShelter({
         hidden: true
@@ -119,6 +127,20 @@ define([
       var extentRadio = query('input', this.printWidgetMapExtent.domNode)[0];
       utils.combineRadioCheckBoxWithLabel(scaleRadio, this.printWidgetMapScaleLabel);
       utils.combineRadioCheckBoxWithLabel(extentRadio, this.printWidgetMapExtentLabel);
+
+      if (this.defaultLayout === 'MAP_ONLY') {
+        html.setStyle(this.titleTr, 'display', 'none');
+      } else {
+        html.setStyle(this.titleTr, 'display', '');
+      }
+
+      if (this._hasLabelLayer()) {
+        html.setStyle(this.labelsFormDijit.domNode, 'display', '');
+        html.setStyle(this.labelsTitleNode, 'display', '');
+      } else {
+        html.setStyle(this.labelsFormDijit.domNode, 'display', 'none');
+        html.setStyle(this.labelsTitleNode, 'display', 'none');
+      }
 
       LayerInfos.getInstance(this.map, this.map.itemInfo)
         .then(lang.hitch(this, function(layerInfosObj) {
@@ -174,6 +196,13 @@ define([
           lang.hitch(this, '_excludeInvalidLegend')
         );
       }
+    },
+
+    _hasLabelLayer: function() {
+      return array.some(this.map.graphicsLayerIds, function(glid) {
+        var l = this.map.getLayer(glid);
+        return l && l.declaredClass === 'esri.layers.LabelLayer';
+      }, this);
     },
 
     _getPrintTaskInfo: function() {
@@ -273,6 +302,13 @@ define([
       }
 
       if (this.printTask.allLayerslegend) {
+        var legends = arcgisUtils.getLegendLayers({map: this.map, itemInfo: this.map.itemInfo});
+        var legendLayersOfWebmap = array.map(legends, function(legend) {
+          return {
+            id: legend.layer.id
+          };
+        });
+
         var legendArray = this.printTask.allLayerslegend;
         var arr = [];
         for (var i = 0; i < legendArray.length; i++) {
@@ -292,6 +328,19 @@ define([
             arr.push(legendLayer);
           }
         }
+
+        // fix issue 6072
+        array.forEach(legendLayersOfWebmap, lang.hitch(this, function(legend) {
+          var inLegends = array.some(arr, lang.hitch(this, function(l) {
+            return l.id === legend.id;
+          }));
+          var layerInfo = this.layerInfosObj.getLayerInfoById(legend.id);
+          var showLegend = layerInfo && layerInfo.getShowLegendOfWebmap() &&
+            layerInfo.isShowInMap();
+          if (!inLegends && showLegend) {
+            arr.push(legend);
+          }
+        }));
         this.printTask.allLayerslegend = arr;
       }
       return opLayers;
@@ -321,19 +370,23 @@ define([
           "layoutOptions.customTextElements",
           false, templateInfo);
         if (customTextElements && customTextElements.length > 0) {
+          var textNames = [];
           array.forEach(customTextElements, lang.hitch(this, function(cte) {
             for (var p in cte) {
-              var row = this.customTextElementsTable.insertRow(-1);
-              var cell0 = row.insertCell(-1);
-              cell0.appendChild(html.toDom(p + ': '));
-              var cell1 = row.insertCell(-1);
-              cell1.appendChild((new ValidationTextBox({
-                name: p,
-                trim: true,
-                required: false,
-                value: cte[p],
-                style: 'width:100%'
-              })).domNode);
+              if (textNames.indexOf(p) < 0) {
+                var row = this.customTextElementsTable.insertRow(-1);
+                var cell0 = row.insertCell(-1);
+                cell0.appendChild(html.toDom(p + ': '));
+                var cell1 = row.insertCell(-1);
+                cell1.appendChild((new ValidationTextBox({
+                  name: p,
+                  trim: true,
+                  required: false,
+                  value: cte[p],
+                  style: 'width:100%'
+                })).domNode);
+                textNames.push(p);
+              }
             }
           }));
         }
@@ -402,16 +455,49 @@ define([
       }
     },
 
+    showSettings: function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      if (this._showSettings) {
+        popup.close(this.settingsDialog);
+        this._showSettings = false;
+      } else {
+        popup.open({
+          popup: this.settingsDialog,
+          around: this.advancedButtonDijit
+        });
+        this._showSettings = true;
+      }
+    },
+
     _handlePrintInfo: function(rData) {
       if (!rData.isGPPrint) {
         domStyle.set(this.layoutDijit.domNode.parentNode.parentNode, 'display', 'none');
         domStyle.set(this.formatDijit.domNode.parentNode.parentNode, 'display', 'none');
-        domStyle.set(this.advancedButtonDijit.domNode, 'display', 'none');
+        domStyle.set(this.advancedButtonDijit, 'display', 'none');
       } else {
         var data = rData.data;
         domStyle.set(this.layoutDijit.domNode.parentNode.parentNode, 'display', '');
         domStyle.set(this.formatDijit.domNode.parentNode.parentNode, 'display', '');
-        domStyle.set(this.advancedButtonDijit.domNode, 'display', '');
+        domStyle.set(this.advancedButtonDijit, 'display', '');
+
+        this.own(on(document.body, 'click', lang.hitch(this, function (event) {
+          if (!this._showSettings) {
+            return;
+          }
+          var target = event.target || event.srcElement;
+          var node = this.settingsDialog.domNode;
+          var isInternal = target === node || html.isDescendant(target, node);
+          if (!isInternal) {
+            popup.close(this.settingsDialog);
+            this._showSettings = false;
+          }
+        })));
+        // if (this.showAdvancedOption) {
+        //   domStyle.set(this.advancedButtonDijit.domNode, 'display', '');
+        // } else {
+        //   domStyle.set(this.advancedButtonDijit.domNode, 'display', 'none');
+        // }
         var Layout_Template = array.filter(data.parameters, function(param) {
           return param.name === "Layout_Template";
         });
@@ -464,6 +550,7 @@ define([
       if (this.printSettingsFormDijit.isValid()) {
         var form = this.printSettingsFormDijit.get('value');
         lang.mixin(form, this.layoutMetadataDijit.get('value'));
+        lang.mixin(form, this.labelsFormDijit.get('value'));
         this.preserve = this.preserveFormDijit.get('value');
         lang.mixin(form, this.preserve);
         this.layoutForm = this.layoutFormDijit.get('value');
@@ -483,18 +570,7 @@ define([
         var hasAuthorText = lang.getObject('layoutOptions.hasAuthorText', false, templateInfo);
         var hasCopyrightText = lang.getObject('layoutOptions.hasCopyrightText',
           false, templateInfo);
-        var hasLegend = lang.getObject('layoutOptions.hasLegend', false, templateInfo);
         var hasTitleText = lang.getObject('layoutOptions.hasTitleText', false, templateInfo);
-        var legendLayers = [];
-        if (hasLegend &&
-            this.layoutForm.legend.length > 0 && this.layoutForm.legend[0]) {
-          var legends = arcgisUtils.getLegendLayers({map: this.map, itemInfo: this.map.itemInfo});
-          legendLayers = array.map(legends, function(legend) {
-            return {
-              layerId: legend.layer.id
-            };
-          });
-        }
 
         var template = new PrintTemplate();
         template.format = form.format;
@@ -502,10 +578,11 @@ define([
         template.preserveScale = (form.preserveScale === 'true' || form.preserveScale === 'force');
         template.label = form.title;
         template.exportOptions = mapOnlyForm;
+        template.showLabels = form.showLabels && form.showLabels[0];
         template.layoutOptions = {
           authorText: hasAuthorText ? form.author : "",
           copyrightText: hasCopyrightText ? (form.copyright || this._getMapAttribution()) : "",
-          legendLayers: legendLayers,
+          legendLayers: this._getLegendLayers(), // fix issue 7744
           titleText: hasTitleText ? form.title : "",
           customTextElements: cteArray
         };
@@ -528,6 +605,27 @@ define([
         this.count++;
       } else {
         this.printSettingsFormDijit.validate();
+      }
+    },
+
+    _getLegendLayers: function() {
+      var hasLegend = lang.getObject('layoutOptions.hasLegend', false, this._currentTemplateInfo);
+      var enabledLegend = this.layoutForm.legend.length > 0 && this.layoutForm.legend[0];
+      if (this.printTask && !this.printTask._createOperationalLayers) {
+        // if don't have _createOptionalLayers function
+        var legendLayers = [];
+        if (hasLegend && enabledLegend) {
+          var legends = arcgisUtils.getLegendLayers({map: this.map, itemInfo: this.map.itemInfo});
+          legendLayers = array.map(legends, function(legend) {
+            return {
+              layerId: legend.layer.id
+            };
+          });
+        }
+
+        return legendLayers;
+      } else {
+        return (hasLegend && enabledLegend) ? null : [];
       }
     },
 

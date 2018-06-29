@@ -22,6 +22,7 @@ define([
   'esri/lang',
   'dojo/date/locale',
   '../PagingQueryTask',
+  './SimpleTable',
   'jimu/utils',
   'esri/layers/CodedValueDomain',
   'esri/layers/Domain',
@@ -32,7 +33,7 @@ define([
   'jimu/dijit/CheckBox'
 ],
 function(declare, lang, array, html, query, on, json, Memory, Deferred, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
-  Tooltip, template, TextBox, esriRequest, esriLang, locale, PagingQueryTask, jimuUtils, CodedValueDomain, Domain) {
+  Tooltip, template, TextBox, esriRequest, esriLang, locale, PagingQueryTask, eSimpleTable, jimuUtils, CodedValueDomain, Domain) {
   return declare([_WidgetBase,_TemplatedMixin,_WidgetsInTemplateMixin], {
     baseClass: 'widget-esearch-singlevalue-setting',
     templateString:template,
@@ -74,6 +75,8 @@ function(declare, lang, array, html, query, on, json, Memory, Deferred, _WidgetB
       dateOperatorIsNotOn:'dateOperatorIsNotOn',
       dateOperatorIsBefore:'dateOperatorIsBefore',
       dateOperatorIsAfter:'dateOperatorIsAfter',
+      dateOperatorIsBeforeOrOn:'dateOperatorIsBeforeOrOn',
+      dateOperatorIsAfterOrOn:'dateOperatorIsAfterOrOn',
       dateOperatorDays:'dateOperatorDays',
       dateOperatorWeeks:'dateOperatorWeeks',
       dateOperatorMonths:'dateOperatorMonths',
@@ -105,6 +108,18 @@ function(declare, lang, array, html, query, on, json, Memory, Deferred, _WidgetB
 
     postCreate:function(){
       this.inherited(arguments);
+      this.uservaluesTable = new eSimpleTable({
+        _rowHeight: 40,
+        autoHeight: true,
+        selectable: true,
+        fields: [
+          {name:'userlabel',title:this.nls.predefinedLabel,type:'text',editable:true},
+          {name:'uservalue',title:this.nls.predefinedValue,type:'text',editable:true},
+          {name:'actions',title:this.nls.actions,width:'120px',type:'actions',actions:['delete','up','down']}
+        ]
+      }, this.uservaluesTableDiv);
+      this.uservaluesTable.startup();
+      html.addClass(this.uservaluesTable.domNode, "user-values-table");
       this._bindEvents();
     },
 
@@ -510,38 +525,46 @@ function(declare, lang, array, html, query, on, json, Memory, Deferred, _WidgetB
     _getOperatorsByShortType:function(shortType){
       var operators = [];
       if(shortType === 'string'){
-        operators = [this.OPERATORS.stringOperatorIs,
-        this.OPERATORS.stringOperatorIsNot,
-        this.OPERATORS.stringOperatorStartsWith,
-        this.OPERATORS.stringOperatorEndsWith,
-        this.OPERATORS.stringOperatorContains,
-        this.OPERATORS.stringOperatorDoesNotContain,
-        this.OPERATORS.stringOperatorIsBlank,
-        this.OPERATORS.stringOperatorIsNotBlank,
-        this.OPERATORS.stringOperatorIn];
+        operators = [
+          this.OPERATORS.stringOperatorIs,
+          this.OPERATORS.stringOperatorIsNot,
+          this.OPERATORS.stringOperatorStartsWith,
+          this.OPERATORS.stringOperatorEndsWith,
+          this.OPERATORS.stringOperatorContains,
+          this.OPERATORS.stringOperatorDoesNotContain,
+          this.OPERATORS.stringOperatorIsBlank,
+          this.OPERATORS.stringOperatorIsNotBlank,
+          this.OPERATORS.stringOperatorIn
+        ];
       }
       else if(shortType === 'number'){
-        operators = [this.OPERATORS.numberOperatorIs,
-        this.OPERATORS.numberOperatorIsNot,
-        this.OPERATORS.numberOperatorIsAtLeast,
-        this.OPERATORS.numberOperatorIsLessThan,
-        this.OPERATORS.numberOperatorIsAtMost,
-        this.OPERATORS.numberOperatorIsGreaterThan,
-        this.OPERATORS.numberOperatorIsBetween,
-        this.OPERATORS.numberOperatorIsNotBetween,
-        this.OPERATORS.numberOperatorIsBlank,
-        this.OPERATORS.numberOperatorIsNotBlank,
-        this.OPERATORS.numberOperatorIn];
+        operators = [
+          this.OPERATORS.numberOperatorIs,
+          this.OPERATORS.numberOperatorIsNot,
+          this.OPERATORS.numberOperatorIsAtLeast,
+          this.OPERATORS.numberOperatorIsLessThan,
+          this.OPERATORS.numberOperatorIsAtMost,
+          this.OPERATORS.numberOperatorIsGreaterThan,
+          this.OPERATORS.numberOperatorIsBetween,
+          this.OPERATORS.numberOperatorIsNotBetween,
+          this.OPERATORS.numberOperatorIsBlank,
+          this.OPERATORS.numberOperatorIsNotBlank,
+          this.OPERATORS.numberOperatorIn
+        ];
       }
       else if(shortType === 'date'){
-        operators = [this.OPERATORS.dateOperatorIsOn,
-        this.OPERATORS.dateOperatorIsNotOn,
-        this.OPERATORS.dateOperatorIsBefore,
-        this.OPERATORS.dateOperatorIsAfter,
-        this.OPERATORS.dateOperatorIsBetween,
-        this.OPERATORS.dateOperatorIsNotBetween,
-        this.OPERATORS.dateOperatorIsBlank,
-        this.OPERATORS.dateOperatorIsNotBlank];
+        operators = [
+          this.OPERATORS.dateOperatorIsOn,
+          this.OPERATORS.dateOperatorIsNotOn,
+          this.OPERATORS.dateOperatorIsBeforeOrOn,
+          this.OPERATORS.dateOperatorIsAfterOrOn,
+          this.OPERATORS.dateOperatorIsBefore,
+          this.OPERATORS.dateOperatorIsAfter,
+          this.OPERATORS.dateOperatorIsBetween,
+          this.OPERATORS.dateOperatorIsNotBetween,
+          this.OPERATORS.dateOperatorIsBlank,
+          this.OPERATORS.dateOperatorIsNotBlank
+        ];
       }
       return operators;
     },
@@ -1022,8 +1045,14 @@ function(declare, lang, array, html, query, on, json, Memory, Deferred, _WidgetB
           whereClause = fieldInfo.name + " > " +
              (this.isHosted ? "" : "timestamp ") + "'" + (this.cbxAskValues.getValue() ? "[value]" : this.formatDate(this.addDay(value))) + "'";
           break;
-          //case this.OPERATORS.dateOperatorInTheLast:
-          //case this.OPERATORS.dateOperatorNotInTheLast:
+        case this.OPERATORS.dateOperatorIsBeforeOrOn:
+          whereClause = fieldInfo.name + " <= " +
+             (this.isHosted ? "" : "timestamp ") + "'" + (this.cbxAskValues.getValue() ? "[value]" : this.formatDate(value)) + "'";
+          break;
+        case this.OPERATORS.dateOperatorIsAfterOrOn:
+          whereClause = fieldInfo.name + " >= " +
+             (this.isHosted ? "" : "timestamp ") + "'" + (this.cbxAskValues.getValue() ? "[value]" : this.formatDate(this.addDay(value))) + "'";
+          break;
         case this.OPERATORS.dateOperatorIsBetween:
           whereClause = fieldInfo.name + " BETWEEN " +
              (this.isHosted ? "" : "timestamp ") +

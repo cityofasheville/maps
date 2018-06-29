@@ -1,0 +1,287 @@
+{
+  "layers": [
+    {
+      "name": "Parcels",
+      "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Properties_Addresses/BuncombeCountyProperty/MapServer/0",
+      "definitionexpression": "",
+      "spatialsearchlayer": false,
+      "export2Csv": true,
+      "export2Geo": false,
+      "export2FC": false,
+      "zoomScale": 10000,
+      "forceZoomScale": false,
+      "shareResult": true,
+      "addToAttrib": false,
+      "expressions": {
+        "expression": []
+      },
+      "titlefield": null,
+      "fields": {
+        "all": false,
+        "field": [
+          {
+            "name": "owner",
+            "alias": "owner"
+          },
+          {
+            "name": "address",
+            "alias": "address"
+          },
+          {
+            "name": "cityname",
+            "alias": "cityname"
+          },
+          {
+            "name": "zipcode",
+            "alias": "zipcode"
+          },
+          {
+            "name": "pinnum",
+            "alias": "pinnum"
+          }
+        ]
+      },
+      "links": {
+        "link": []
+      },
+      "relates": {
+        "relate": []
+      },
+      "orderByFields": null,
+      "showattachments": false,
+      "autozoomtoresults": false,
+      "disablePopups": false,
+      "layersymbolfrom": "layer"
+    },
+    {
+      "name": "Buncombe County Addresses",
+      "url": "https://arcgis.ashevillenc.gov/arcgis/rest/services/Properties_Addresses/BuncombeCountyAddresses/MapServer/0",
+      "definitionexpression": "",
+      "spatialsearchlayer": false,
+      "export2Csv": true,
+      "export2Geo": false,
+      "export2FC": false,
+      "zoomScale": 10000,
+      "forceZoomScale": false,
+      "shareResult": false,
+      "addToAttrib": false,
+      "expressions": {
+        "expression": []
+      },
+      "titlefield": null,
+      "fields": {
+        "all": false,
+        "field": [
+          {
+            "name": "address",
+            "alias": "address"
+          },
+          {
+            "name": "apt",
+            "alias": "apt"
+          },
+          {
+            "name": "city",
+            "alias": "city"
+          },
+          {
+            "name": "zipcode",
+            "alias": "zipcode",
+            "isnumber": true
+          },
+          {
+            "name": "pinnum",
+            "alias": "pinnum"
+          }
+        ]
+      },
+      "links": {
+        "link": []
+      },
+      "relates": {
+        "relate": []
+      },
+      "orderByFields": null,
+      "showattachments": false,
+      "autozoomtoresults": false,
+      "disablePopups": false,
+      "layersymbolfrom": "server"
+    }
+  ],
+  "bufferDefaults": {
+    "autoZoom": true,
+    "addtolegend": false,
+    "bufferUnits": {
+      "bufferUnit": [
+        {
+          "name": "UNIT_FOOT",
+          "label": "Feet"
+        },
+        {
+          "name": "UNIT_STATUTE_MILE",
+          "label": "Miles"
+        },
+        {
+          "name": "UNIT_METER",
+          "label": "Meter"
+        }
+      ]
+    },
+    "bufferDefaultValue": 5,
+    "bufferWKID": 102003,
+    "simplefillsymbol": {
+      "color": [
+        1,
+        185,
+        253,
+        128
+      ],
+      "outline": {
+        "color": [
+          1,
+          185,
+          253,
+          204
+        ],
+        "width": 0.75,
+        "type": "esriSLS",
+        "style": "esriSLSSolid",
+        "marker": null
+      },
+      "type": "esriSFS",
+      "style": "esriSFSSolid"
+    }
+  },
+  "spatialrelationships": {
+    "spatialrelationship": [
+      {
+        "name": "esriSpatialRelContains",
+        "label": "entirely contained in"
+      },
+      {
+        "name": "esriSpatialRelIntersects",
+        "label": "intersected by"
+      },
+      {
+        "name": "esriSpatialRelEnvelopeIntersects",
+        "label": "intersected by envelope of"
+      }
+    ]
+  },
+  "graphicalsearchoptions": {
+    "enablepointselect": true,
+    "enablelineselect": true,
+    "enablepolylineselect": true,
+    "enableextentselect": true,
+    "enablecircleselect": true,
+    "enablepolyselect": true,
+    "showmultigraphicsgraphicaloption": false,
+    "showaddtolerancegraphicaloption": false,
+    "showaddsqltextgraphicaloption": false,
+    "showbuffergraphicaloption": true,
+    "buffercheckedbydefaultgraphicaloption": false,
+    "multipartgraphicsearchchecked": false,
+    "addpointtolerancechecked": false,
+    "toleranceforpointgraphicalselection": 6,
+    "keepgraphicalsearchenabled": false
+  },
+  "symbols": {
+    "simplemarkersymbol": {
+      "color": [
+        73,
+        213,
+        189,
+        128
+      ],
+      "size": 19.5,
+      "angle": 0,
+      "xoffset": 0,
+      "yoffset": 0,
+      "type": "esriSMS",
+      "style": "esriSMSCircle",
+      "outline": {
+        "color": [
+          0,
+          0,
+          128,
+          255
+        ],
+        "width": 0.75,
+        "type": "esriSLS",
+        "style": "esriSLSSolid",
+        "marker": null
+      }
+    },
+    "picturemarkersymbol": null,
+    "simplelinesymbol": {
+      "color": [
+        255,
+        0,
+        0,
+        204
+      ],
+      "width": 2.25,
+      "type": "esriSLS",
+      "style": "esriSLSSolid",
+      "marker": null
+    },
+    "simplefillsymbol": {
+      "color": [
+        255,
+        0,
+        0,
+        128
+      ],
+      "outline": {
+        "color": [
+          255,
+          0,
+          0,
+          204
+        ],
+        "width": 1.5,
+        "type": "esriSLS",
+        "style": "esriSLSSolid",
+        "marker": null
+      },
+      "type": "esriSFS",
+      "style": "esriSFSSolid"
+    }
+  },
+  "resultFormat": {
+    "attTitlesymbol": {
+      "bold": false,
+      "italic": true,
+      "underline": false,
+      "color": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "attValuesymbol": {
+      "bold": false,
+      "italic": false,
+      "underline": false,
+      "color": [
+        0,
+        0,
+        0,
+        255
+      ]
+    }
+  },
+  "initialView": "graphical",
+  "selectfilter": "contains",
+  "enablePopupsOnResultClick": true,
+  "disablePopups": false,
+  "disableuvcache": false,
+  "exportsearchurlchecked": false,
+  "limitsearch2mapextentchecked": false,
+  "autozoomtoresults": true,
+  "mouseovergraphics": false,
+  "datedisplayformat": "d MMM yyyy",
+  "zoomFactor": 0.9,
+  "containsword": false
+}

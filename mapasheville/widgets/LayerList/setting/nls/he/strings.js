@@ -5,7 +5,7 @@ define({
   "transparency": "שקיפות",
   "controlPopup": "הפעל / השבת חלון קופץ",
   "moveUpAndDown": "הזז למעלה / הזז למטה",
-  "attributeTable": "פתח טבלת מאפיינים",
+  "attributeTable": "הצג בטבלת מאפיינים",
   "url": "תיאור / הצגת פרטי פריט / הורדה",
   "layerSelectorTitle": "בחר אילו שכבות יוצגו ברשימה."
 });

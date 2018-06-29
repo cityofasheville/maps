@@ -8,16 +8,17 @@ define(['dojo/_base/declare',
   'dijit/_TemplatedMixin',
   'dojo/_base/lang',
   'dojo/_base/html',
-  'dojo/on',
-  'dojo/i18n!./nls/strings'
+  'dojo/on'
   ],
-  function (declare, _WidgetBase, _TemplatedMixin, lang, html, on, mainNls) {
+  function (declare, _WidgetBase, _TemplatedMixin, lang, html, on) {
     return declare([_WidgetBase, _TemplatedMixin], {
-      baseClass: 'widgets-Search-setting-include-all-button',
+      baseClass: 'widgets-Search-setting-include-button',
       templateString: '<div><span nowrap style="white-space:nowrap;">${nls.include}' +
         '</span><div class="include-arrow"></div></div>',
+      nls: null,
+
       postMixInProperties: function () {
-        this.nls = mainNls;
+        this.inherited(arguments);
       },
 
       postCreate: function () {

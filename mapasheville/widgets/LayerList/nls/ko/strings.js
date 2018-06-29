@@ -11,7 +11,7 @@ define({
   "itemMoveDown": "아래로 이동",
   "itemDesc": "설명",
   "itemDownload": "다운로드",
-  "itemToAttributeTable": "속성 테이블 열기",
+  "itemToAttributeTable": "속성 테이블에서 보기",
   "itemShowItemDetails": "항목 세부정보 보기",
   "empty": "비어 있음",
   "removePopup": "팝업 비활성화",
@@ -22,6 +22,6 @@ define({
   "collapseAlllayers": "모든 레이어 축소",
   "turnAllLabelsOff": "모든 레이블 끄기",
   "turnAllLabelsOn": "모든 레이블 켜기",
-  "showLabels": "레이블 표시",
+  "showLabels": "레이블 보기",
   "hideLables": "레이블 숨기기"
 });

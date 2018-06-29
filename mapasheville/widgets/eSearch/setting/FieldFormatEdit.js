@@ -47,6 +47,7 @@ define(
       formatArray: null,
       returnfieldInfo: null,
       tr: null,
+      isRelate: false,
 
       postCreate: function(){
         this.inherited(arguments);
@@ -71,6 +72,20 @@ define(
           this.useStatCbx.setValue(true);
         }else{
           this.useStatCbx.setValue(false);
+        }
+        if(this.isRelate){
+          var curr = query('.currency', this.inputTable);
+          array.forEach(curr, function(tr) {
+            domStyle.set(tr, "display", "none");
+          });
+          var sum = query('.sum', this.inputTable);
+          array.forEach(sum, function(tr) {
+            domStyle.set(tr, "display", "none");
+          });
+          var stats = query('.stats', this.inputTable);
+          array.forEach(stats, function(tr) {
+            domStyle.set(tr, "display", "none");
+          });
         }
         if(fieldInfo.isdate || this._isDateType(fieldInfo.type)){
           var numerics = query('.numeric', this.inputTable);

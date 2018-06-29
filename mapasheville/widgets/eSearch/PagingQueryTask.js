@@ -7,14 +7,13 @@ define(['dojo/_base/declare',
   'dojo/on',
   'dojo/_base/lang',
   'dojo/_base/html',
-  'esri/request',
   'esri/tasks/query',
   'esri/tasks/QueryTask',
   'esri/tasks/FeatureSet',
   'dojo/keys',
   'dojo/date/locale'
 ],
-  function (declare, Evented, on, lang, html, esriRequest, Query, QueryTask, FeatureSet, keys, locale) {
+  function (declare, Evented, on, lang, html, Query, QueryTask, FeatureSet, keys, locale) {
     return declare([Evented], {
       baseClass: 'search-paging-query-task',
       uri: '',
@@ -37,7 +36,7 @@ define(['dojo/_base/declare',
       uniqueValues: [],
       esc: false,
       isRequired: false,
-      maxRecordCount: 500,
+      maxRecordCount: 250,
 
       //events:
       //pagingComplete
@@ -74,6 +73,7 @@ define(['dojo/_base/declare',
           this.emit('pagingFault');
           return;
         }
+        // console.info(this.uri);
         this.queryTask = new QueryTask(this.uri);
         if (this.version >= 10.1) {
           //need to check if the feature count is over maxRecordCount

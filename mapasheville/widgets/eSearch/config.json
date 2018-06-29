@@ -291,6 +291,7 @@
   "toleranceforpointgraphicalselection": 6,
   "disableuvcache": false,
   "bufferDefaults": {
+    "autoZoom": true,
     "addtolegend": false,
     "bufferUnits": {
       "bufferUnit": [

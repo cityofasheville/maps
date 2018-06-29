@@ -2,7 +2,7 @@ define({
   "instruction": "Выбрать и настроить слои, которые будут изначально видны в таблице атрибутов.",
   "label": "Слой",
   "show": "Показать",
-  "actions": "Настроить поля слоя",
+  "actions": "Настройка полей слоя",
   "field": "Поле",
   "alias": "Псевдоним",
   "visible": "Видимый",
@@ -25,5 +25,6 @@ define({
   "fieldName": "Имя",
   "fieldAlias": "Псевдоним",
   "fieldVisibility": "Видимость",
-  "fieldActions": "Действия"
+  "fieldActions": "Действия",
+  "showAttachments": "Показать вложения"
 });

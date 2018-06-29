@@ -1,4 +1,4 @@
 define({
   "_themeLabel": "Θέμα Dart",
-  "_layout_default": "Προκαθορισμένη διάταξη"
+  "_layout_default": "Προεπιλεγμένη διάταξη"
 });

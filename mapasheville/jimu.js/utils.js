@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 Esri. All Rights Reserved.
+// Copyright © 2014 - 2016 Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ define([
     'dojo/query',
     'dojo/NodeList-traverse',
     'dojo/Deferred',
+    'dojo/promise/all',
     'dojo/on',
     'dojo/json',
     'dojo/cookie',
@@ -46,17 +47,18 @@ define([
     'esri/symbols/PictureMarkerSymbol',
     'esri/urlUtils',
     'esri/request',
+    'esri/tasks/query',
+    'esri/tasks/QueryTask',
     'esri/graphicsUtils',
     'jimu/portalUrlUtils',
     './shared/utils'
   ],
 
-function(lang, array, html, has, config, ioQuery, query, nlt, Deferred, on, json, cookie,
+function(lang, array, html, has, config, ioQuery, query, nlt, Deferred, all, on, json, cookie,
   dojoNumber, dateLocale, nlsBundle, base64, esriLang, arcgisUtils, PopupTemplate, SpatialReference,
-  Extent, Multipoint,
-  Polyline, Polygon, webMercatorUtils, GeometryService, ProjectParameters, FeatureSet,
-  PictureMarkerSymbol,
-  esriUrlUtils, esriRequest, graphicsUtils, portalUrlUtils, sharedUtils) {
+  Extent, Multipoint, Polyline, Polygon, webMercatorUtils, GeometryService, ProjectParameters, FeatureSet,
+  PictureMarkerSymbol, esriUrlUtils, esriRequest, EsriQuery, QueryTask, graphicsUtils, portalUrlUtils, sharedUtils
+) {
   /* global esriConfig, dojoConfig, ActiveXObject, testLoad */
   var mo = {};
 
@@ -207,6 +209,9 @@ function(lang, array, html, has, config, ioQuery, query, nlt, Deferred, on, json
       m2 = m[i].match(/(url\(["|']?)(.*)((?:['|"]?)\))/i);
       if(m2.length >= 4){
         var path = m2[2];
+        if(/^data:image\/.*;/.test(path)){
+          continue;
+        }
         if(!rpath.endWith('/')){
           rpath = rpath + '/';
         }
@@ -749,53 +754,30 @@ function(lang, array, html, has, config, ioQuery, query, nlt, Deferred, on, json
   };
 
   ///////////////////widget json(in app config json) processing
+
+  mo.getUriInfo = function getUriInfo(uri) {
+    var pos, firstSeg, info = {},
+      amdFolder;
+
+    pos = uri.indexOf('/');
+    firstSeg = uri.substring(0, pos);
+
+    //config using package
+    amdFolder = uri.substring(0, uri.lastIndexOf('/') + 1);
+    info.folderUrl = require(mo.getRequireConfig()).toUrl(amdFolder);
+    info.amdFolder = amdFolder;
+
+    info.url = info.folderUrl;//for backward compatibility
+
+    if(/^http(s)?:\/\//.test(uri) || /^\/\//.test(uri)){
+      info.isRemote = true;
+    }
+
+    return info;
+  };
+
   mo.widgetJson = (function(){
     var ret = {};
-
-    /**
-     * get uri info from the configured uri property,
-     * the info contains: folderUrl, name
-     */
-    function getUriInfo(uri) {
-      var pos, firstSeg, info = {},
-        amdFolder;
-
-      pos = uri.indexOf('/');
-      firstSeg = uri.substring(0, pos);
-
-      //config using package
-      amdFolder = uri.substring(0, uri.lastIndexOf('/') + 1);
-      info.folderUrl = require(mo.getRequireConfig()).toUrl(amdFolder);
-      info.amdFolder = amdFolder;
-      return info;
-    }
-
-    function processRemoteUri(widgetJson){
-      if(!widgetJson.uri.toLowerCase().endWith('.js')){
-        widgetJson.uri = widgetJson.uri + '.js';
-      }
-    }
-
-    ret.processWidgetJson = function(widgetJson) {
-      if (!widgetJson.uri) {
-        return widgetJson;
-      }
-      if(widgetJson.uri.toLowerCase().startWith('http')){
-        widgetJson.isRemote = true;
-        processRemoteUri(widgetJson);
-      }
-      lang.mixin(widgetJson, getUriInfo(widgetJson.uri));
-
-      if (!widgetJson.icon) {
-        widgetJson.icon = widgetJson.amdFolder + 'images/icon.png?wab_dv=' + window.deployVersion;
-      }
-      if (!widgetJson.thumbnail) {
-        widgetJson.thumbnail = widgetJson.amdFolder + 'images/thumbnail.png';
-      }
-
-      //widgetJson.label has been processed when loading config.
-      return widgetJson;
-    };
 
     ret.addManifest2WidgetJson = function(widgetJson, manifest){
       lang.mixin(widgetJson, manifest.properties);
@@ -804,9 +786,24 @@ function(lang, array, html, has, config, ioQuery, query, nlt, Deferred, on, json
         widgetJson.label = manifest.label;
       }
       widgetJson.manifest = manifest;
+      widgetJson.isRemote = manifest.isRemote;
+      if(widgetJson.isRemote){
+        widgetJson.itemId = manifest.itemId;
+      }
       if(manifest.featureActions){
         widgetJson.featureActions = manifest.featureActions;
       }
+
+      if (!widgetJson.icon) {
+        widgetJson.icon = manifest.icon;
+      }
+
+      if (!widgetJson.thumbnail) {
+        widgetJson.thumbnail = manifest.thumbnail;
+      }
+
+      widgetJson.folderUrl = manifest.folderUrl;
+      widgetJson.amdFolder = manifest.amdFolder;
     };
 
     ret.removeManifestFromWidgetJson = function(widgetJson){
@@ -1333,7 +1330,13 @@ function(lang, array, html, has, config, ioQuery, query, nlt, Deferred, on, json
     }
 
     ret.addManifestProperies = function(manifest) {
-      manifest.icon = manifest.url + 'images/icon.png?wab_dv=' + window.deployVersion;
+      if(!manifest.icon){
+        manifest.icon = manifest.folderUrl + 'images/icon.png?wab_dv=' + window.deployVersion;
+      }
+
+      if (!manifest.thumbnail) {
+        manifest.thumbnail = manifest.folderUrl + 'images/thumbnail.png';
+      }
 
       if(manifest.category === "theme") {
         addThemeManifestProperies(manifest);
@@ -1383,7 +1386,7 @@ function(lang, array, html, has, config, ioQuery, query, nlt, Deferred, on, json
 
       //theme or widget label
       var nlsFile;
-      if(manifest.amdFolder.toLowerCase().startWith('http')){
+      if(manifest.isRemote){
         nlsFile = manifest.amdFolder + 'nls/strings.js';
       }else{
         nlsFile = manifest.amdFolder + 'nls/strings';
@@ -1401,16 +1404,154 @@ function(lang, array, html, has, config, ioQuery, query, nlt, Deferred, on, json
     return ret;
   })();
 
-  mo.getUniqueValues = function(url, fieldName){
+  //return [{value,label}]
+  mo.getUniqueValues = function(featureOrImageLayerUrl, fieldName, where, _layerDefinition){
+    function getLayerDefinition(){
+      var def = new Deferred();
+      if(_layerDefinition){
+        def.resolve(_layerDefinition);
+      }else{
+        def = esriRequest({
+          url: featureOrImageLayerUrl,
+          content: {
+            f: 'json'
+          },
+          handleAs: 'json',
+          callbackParamName: 'callback'
+        });
+      }
+      return def;
+    }
+    return getLayerDefinition().then(function(layerDefinition){
+      return mo._getUniqueValues(featureOrImageLayerUrl, fieldName, where, layerDefinition).then(function(values){
+        var valueLabels = [];
+        var fieldInfo = mo.getFieldInfoByFieldName(layerDefinition.fields, fieldName);
+        var codedValueObj = null;//{value:label}
+        var numberFieldTypes = [
+          'esriFieldTypeOID',
+          'esriFieldTypeSmallInteger',
+          'esriFieldTypeInteger',
+          'esriFieldTypeSingle',
+          'esriFieldTypeDouble'
+        ];
+        var isNumberField = numberFieldTypes.indexOf(fieldInfo.type) >= 0;
+        if(fieldInfo){
+          if(isNumberField){
+            values = array.map(values, function(v){
+              var r = parseFloat(v);
+              if(isNaN(r)){
+                r = null;
+              }
+              return r;
+            });
+          }
+          if(fieldInfo.domain && fieldInfo.domain.codedValues && fieldInfo.domain.codedValues.length > 0){
+            codedValueObj = {};
+            array.forEach(fieldInfo.domain.codedValues, function(item){
+              codedValueObj[item.code] = item.name;
+            });
+          }else if(layerDefinition.typeIdField === fieldName){
+            codedValueObj = {};
+            array.forEach(layerDefinition.types, function(item){
+              codedValueObj[item.id] = item.name;
+            });
+          }
+        }
+        valueLabels = array.map(values, function(value){
+          var label = null;
+          if(value === null || value === undefined){
+            label = '<Null>';
+          }else{
+            if(codedValueObj && codedValueObj.hasOwnProperty(value)){
+              label = codedValueObj[value];
+            }else{
+              if(isNumberField){
+                label = mo.localizeNumber(value);
+              }else{
+                label = value;
+              }
+            }
+          }
+          return {
+            value: value,
+            label: label
+          };
+        });
+        return valueLabels;
+      });
+    });
+  };
+
+  mo._getUniqueValues = function(featureOrImageLayerUrl, fieldName, where, layerDefinition){
     var def = new Deferred();
-    var reqUrl = url.replace(/\/*$/g, '') + "/generateRenderer";
+    var url = featureOrImageLayerUrl.replace(/\/*$/g, '');
+    if(!where){
+      where = '1=1';
+    }
+
+    //MapService and FeatureServie both support QueryTask and generateRenderer.
+    //But QueryTask has the maxRecordCount limit, generateRenderer doesn't.
+    //ImageServer only supports QueryTask.
+    var reg = /\/ImageServer$/gi;
+    var isImageService = reg.test(url);
+    if(isImageService){
+      def = mo._getUniqueValuesByQueryTask(url, fieldName, where);
+    }else{
+      var fieldInfo = mo.getFieldInfoByFieldName(layerDefinition.fields, fieldName);
+      var codedValuesOrTypesCount = mo._getCodedValuesOrTypesCount(fieldInfo, layerDefinition);
+      if(codedValuesOrTypesCount > 0){
+        def = mo._getUniqueValuesByQueryTask(url, fieldName, where);
+      }else{
+        def = mo._getUniqueValuesByGenerateRenderer(url, fieldName, where);
+      }
+    }
+
+    return def;
+  };
+
+  mo._getCodedValuesOrTypesCount = function(fieldInfo, layerDefinition) {
+    if (fieldInfo) {
+      if (fieldInfo.domain && fieldInfo.domain.type === 'codedValue' && fieldInfo.domain.codedValues) {
+        return fieldInfo.domain.codedValues.length;
+      }
+      if (layerDefinition.typeIdField === fieldInfo.name && layerDefinition.types) {
+        return layerDefinition.types.length;
+      }
+    }
+    return 0;
+  };
+
+  mo._getUniqueValuesByQueryTask = function(url, fieldName, where){
+    var queryParams = new EsriQuery();
+    queryParams.where = where;
+    queryParams.returnDistinctValues = true;
+    queryParams.returnGeometry = false;
+    queryParams.outFields = [fieldName];
+    var queryTask = new QueryTask(url);
+    return queryTask.execute(queryParams).then(function(response){
+      var values = [];
+      if(response.features && response.features.length > 0){
+        array.forEach(response.features, function(feature){
+          if(feature && feature.attributes){
+            values.push(feature.attributes[fieldName]);
+          }
+        });
+      }
+      return values;
+    });
+  };
+
+  mo._getUniqueValuesByGenerateRenderer = function(featureLayerUrl, fieldName, where){
+    var def = new Deferred();
+    var reqUrl = featureLayerUrl.replace(/\/*$/g, '') + "/generateRenderer";
     var classificationDef = {"type":"uniqueValueDef", "uniqueValueFields":[fieldName]};
     var str = json.stringify(classificationDef);
     esriRequest({
       url: reqUrl,
       content: {
         classificationDef: str,
-        f: 'json'
+        f: 'json',
+        where: where
       },
       handleAs: 'json',
       callbackParamName:'callback'
@@ -1427,6 +1568,11 @@ function(lang, array, html, has, config, ioQuery, query, nlt, Deferred, on, json
       def.reject(err);
     }));
     return def;
+  };
+
+  mo.isCodedValuesSupportFilter = function(layerDefinition, codedValueLength){
+    var version = parseFloat(layerDefinition.currentVersion);
+    return codedValueLength <= parseFloat(layerDefinition.maxRecordCount) && version > 10.1;
   };
 
   mo.combineRadioCheckBoxWithLabel = function(inputDom, labelDom){
@@ -1818,6 +1964,9 @@ function(lang, array, html, has, config, ioQuery, query, nlt, Deferred, on, json
             if (e === -1) {
               e = str.length;
             }
+            var nl = str.indexOf('\r\n', s) > -1 ? str.indexOf('\r\n', s) :
+              str.indexOf('\n', s) > -1 ? str.indexOf('\n', s) : e;
+            e = nl < e ? nl : e;
             var link = str.substring(s, e);
             str = str.substring(0, s) +
               '<A href="' + link + '" target="_blank">' + link + '</A>' +
@@ -1825,7 +1974,12 @@ function(lang, array, html, has, config, ioQuery, query, nlt, Deferred, on, json
           }
         }
       }
-      return str || "";
+
+      if(typeof str === undefined || str === null){
+        return '';
+      }
+
+      return str;
     },
 
     getFormattedNumber: function(num, format) {
@@ -2048,15 +2202,28 @@ function(lang, array, html, has, config, ioQuery, query, nlt, Deferred, on, json
           }
         }, this);
       }else{
-        array.forEach(os2.groups, function(group2, i){
-          if(group2.panel && group2.panel.position &&
-            !group2.panel.position.relativeTo){
-            group2.panel.position.relativeTo = 'map';
-          }
-          if(os1.groups[i] && group2.panel.position){
-            os1.groups[i].panel.position = group2.panel.position;
-          }
-        });
+        var managerName;
+        if(config1.layoutDefinition){
+          managerName = config1.layoutDefinition.manager;
+        }else{
+          managerName = 'jimu/layoutManagers/AbsolutePositionLayoutManager';
+        }
+
+        if(managerName === 'jimu/layoutManagers/AbsolutePositionLayoutManager'){
+          array.forEach(os2.groups, function(group2, i){
+            if(group2.panel && group2.panel.position &&
+              !group2.panel.position.relativeTo){
+              group2.panel.position.relativeTo = 'map';
+            }
+            if(os1.groups[i] && group2.panel && group2.panel.position){
+              os1.groups[i].panel.position = group2.panel.position;
+            }
+          });
+        }else if(managerName === 'jimu/layoutManagers/GridLayoutManager'){
+          os1.groups = handleGridLayoutOnScreenGroupChange(os1.groups, os2.groups.map(function(g){
+            return g.id;
+          }));
+        }
       }
     }
 
@@ -2081,6 +2248,49 @@ function(lang, array, html, has, config, ioQuery, query, nlt, Deferred, on, json
     }
     return mixinConfig;
   };
+
+  function handleGridLayoutOnScreenGroupChange(oldGroups, newGroupIds){
+    var oldGroupIds = oldGroups.map(function(g){
+      return g.id;
+    });
+
+    array.forEach(newGroupIds, function(gId){
+      if(oldGroupIds.indexOf(gId) < 0){// new add group
+        oldGroups.push({
+          id: gId,
+          widgets: []
+        });
+      }
+    }, this);
+
+    var removedGroups = [];
+    oldGroups = array.filter(oldGroups, function(g){
+      if(newGroupIds.indexOf(g.id) < 0){// group is removed
+        removedGroups.push(g);
+        return false;
+      }else{
+        return true;
+      }
+    }, this);
+
+    if(oldGroups.length === 0){
+      return [];
+    }
+    //put widgets in removed groups into the last group
+    var toAddGroup = oldGroups[oldGroups.length - 1];
+    array.forEach(removedGroups, function(removedGroup){
+      toAddGroup.widgets = toAddGroup.widgets.concat(removedGroup.widgets);
+    }, this);
+
+    oldGroups = oldGroups.sort(function(g1, g2){
+      return newGroupIds.indexOf(g1.id) - newGroupIds.indexOf(g2.id);
+    });
+
+    return oldGroups;
+  }
+
+  mo.handleGridLayoutOnScreenGroupChange = handleGridLayoutOnScreenGroupChange;
+
   /**********************************
    * About template
    **********************************/
@@ -2561,6 +2771,15 @@ function(lang, array, html, has, config, ioQuery, query, nlt, Deferred, on, json
     }
   };
 
+  mo.encodeHTML = function (source) {
+    return String(source)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  };
+
   mo.removeSuffixSlashes = function(url){
     return url.replace(/\/*$/g, '');
   };
@@ -2866,6 +3085,18 @@ function(lang, array, html, has, config, ioQuery, query, nlt, Deferred, on, json
     }
   };
 
+  mo.inMobileSize = function(){
+    var layoutBox = html.getMarginBox(document.body);
+    if (layoutBox.w <= window.jimuConfig.breakPoints[0] ||
+      layoutBox.h <= window.jimuConfig.breakPoints[0]) {
+      html.addClass(window.jimuConfig.layoutId, 'jimu-ismobile');
+      return true;
+    } else {
+      html.removeClass(window.jimuConfig.layoutId, 'jimu-ismobile');
+      return false;
+    }
+  };
+
   mo.getObjectIdField = function(layerDefinition){
     if(layerDefinition.objectIdField){
       return layerDefinition.objectIdField;
@@ -2884,10 +3115,16 @@ function(lang, array, html, has, config, ioQuery, query, nlt, Deferred, on, json
   //if browser(such as Chrome50) have window.isSecureContext, and not in https origin, return true
   //for example: if true===isNendHttpsButNot(), MyLocateButton should be disabled
   mo.isNeedHttpsButNot = function() {
-    if (window.hasOwnProperty("isSecureContext") && !window.isSecureContext) {
+    //copy from: https://devtopia.esri.com/WebGIS/arcgis-js-api/issues/6614
+    var hasGeolocation = navigator.geolocation;
+    var hasSecureContext = window.hasOwnProperty("isSecureContext");
+    var isSecureContext = (hasSecureContext && window.isSecureContext) ||
+      (!hasSecureContext && window.location.protocol === "https:");
+    if (!isSecureContext || !hasGeolocation) {
       return true;
+    } else {
+      return false;
     }
-    return false;
   };
 
   /**
@@ -3147,6 +3384,340 @@ function(lang, array, html, has, config, ioQuery, query, nlt, Deferred, on, json
 
     return result;
   }());
+
+  mo.isInConfigOrPreviewWindow = function(){
+    var b = false;
+    try{
+      b = !window.isBuilder && window.parent && window.parent !== window &&
+        window.parent.isBuilder;
+    }catch(e){
+      console.log(e);
+      b = false;
+    }
+    return !!b;
+  };
+
+  //for cross-origin frame
+  mo.getAppHref = function(){
+    var href = "";
+    if (mo.isInConfigOrPreviewWindow()) {
+      href = window.parent.location.href;
+    } else {
+      href = window.location.href;
+    }
+    return href;
+  };
+
+  mo.getAppIdFromUrl = function() {
+    var isDeployedApp = true,
+      href = mo.getAppHref();// window.top.location.href;
+    if (href.indexOf("id=") !== -1 || href.indexOf("appid=") !== -1 ||
+      href.indexOf("apps") !== -1) {
+      isDeployedApp = false;
+    }
+
+    if (isDeployedApp === true) {
+      // deployed app use pathname as key
+      return href;
+    } else {
+      // xt or integration use id of app as key
+      var urlParams = this.urlToObject(window.location.href);
+      if (urlParams.query) {
+        if (urlParams.query.id || urlParams.query.appid) {
+          return urlParams.query.id || urlParams.query.appid;
+        }
+      }
+
+      // if there is no id/appid in url
+      if (window.appInfo) {
+        if (window.appInfo.id) {
+          //id in appInfo
+          return window.appInfo.id;
+        } else if (window.appInfo.appPath) {
+          //parse id from appPath
+          var list = window.appInfo.appPath.split("/");
+          if (list.length && list.length > 2) {
+            return list[list.length - 2];
+          }
+        } else {
+          console.error("CAN NOT getAppIdFromUrl");
+        }
+      }
+    }
+  };
+
+  mo.getEditorContentHeight = function(content, dom, domParam) {
+    var def = new Deferred();
+    this._content = content;
+    this._dom = dom;
+    this._domParam = domParam;
+    var timeoutHandler = setTimeout(lang.hitch(this, function() {
+      clearTimeout(timeoutHandler);
+      timeoutHandler = null;
+
+      var h = 0;
+      var scrollerWidth = 20;
+      var polyfill = 8;
+      var contentWidth = this._domParam.contentWidth;//defaultWidth - marginLeftRight;
+      try {
+        var fakeContent = document.createElement('div');
+        fakeContent.setAttribute('id', 'fakeContent');
+        html.setStyle(fakeContent, "background-size", "contain");
+        fakeContent.innerHTML = this._content;
+        this._dom.appendChild(fakeContent);
+        if (fakeContent) {
+          //to adjust images
+          var contentImgs = query('img', fakeContent);
+          if (contentImgs && contentImgs.length) {
+            contentImgs.style({
+              maxWidth: (contentWidth - scrollerWidth) + 'px'
+            });
+          }
+
+          html.setStyle(fakeContent, "position", "absolute");
+          html.setStyle(fakeContent, "width", contentWidth + "px");
+          html.setStyle(fakeContent, "left", "-99999px");
+          html.setStyle(fakeContent, "top", "-99999px");
+          html.setStyle(fakeContent, "visibility", "hidden");
+
+          var box = html.getContentBox(fakeContent);
+          if (box.h) {
+            //content height
+            h = box.h;
+            //+ content margin top + content margin bottom + polyfill
+            h += (this._domParam.contentMarginTop + this._domParam.footerHeight + polyfill);
+          }
+          //TODO delete
+          // if (h) {
+          //   this._dom.removeChild(fakeContent);
+          // }
+        }
+      } catch (err) {
+        console.error("can't getEditorContentHeight" + err);
+        h = 200;
+      }
+
+      def.resolve(h);
+    }), 1500);
+    return def;
+  };
+
+  mo.getBase64Data = function(url) {
+    var def = new Deferred();
+    if (url && url.startWith('data:image')) {
+      def.resolve(url);
+    } else {
+      try {
+        esriRequest({
+          url: url,
+          handleAs: 'arraybuffer'
+        }).then(function(response){
+          var reader = new FileReader();
+          reader.onloadend = function () {
+            def.resolve(reader.result);
+          };
+          reader.onerror = function () {
+            def.resolve(null);
+          };
+          reader.readAsDataURL(new Blob([response], {
+            type: 'image/png'
+          }));
+        }, function(){
+          def.resolve(null);
+        });
+      }catch(err) {
+        console.warn(err);
+        def.resolve(null);
+      }
+    }
+    return def;
+  };
+
+  mo.getEditorTextColor = function(colorRecordID, forceAttr) {
+    return {
+      name: "dijit.editor.plugins.EditorTextColor",
+      custom: {
+        recordUID: mo.getColorRecordName(colorRecordID),
+        forceAttr: forceAttr
+      }
+    };
+  };
+  mo.getEditorBackgroundColor = function(colorRecordID) {
+    return {
+      name: "dijit.editor.plugins.EditorBackgroundColor",
+      custom: {
+        recordUID: mo.getColorRecordName(colorRecordID)
+      }
+    };
+  };
+  mo.getColorRecordName = function(id){
+    return "wab_cr_" + (id || "");
+  };
+  mo.b64toBlob = function(b64Data, contentType, sliceSize) {
+    contentType = contentType || '';
+    sliceSize = sliceSize || 512;
+    var byteCharacters = window.atob(b64Data.replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, ''));
+    var byteArrays = [];
+    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      var slice = byteCharacters.slice(offset, offset + sliceSize);
+      var byteNumbers = new Array(slice.length);
+      for (var i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+      var byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+    var blob = new Blob(byteArrays, {
+      type: contentType
+    });
+    return blob;
+  };
+  mo.subtractionArray = function(arr1, arr2) {
+    //return arr1 = arr1 - arr2
+    for (var i = arr1.length - 1; i >= 0; i--) {
+      var a = arr1[i];
+      for (var j = arr2.length - 1; j >= 0; j--) {
+        var b = arr2[j];
+        if (a === b) {
+          arr1.splice(i, 1);
+          arr2.splice(j, 1);
+          break;
+        }
+      }
+    }
+    return arr1;
+  };
+  mo.resourcesUrlToBlob = function(resourcesUrl) {
+    return esriRequest({
+      url: resourcesUrl,
+      handleAs: "blob"
+    });
+  };
+  mo.processItemResourceOfAppConfig = function(appConfig, cb){
+    //Traverse appConfig and get all the data that matches the cb.test,
+    //along with its direct parent object, passed to the callback function(cb.func)
+
+    //cb:{test,func}
+    //args:all parameters that need to be passed to the callback function(cb.func)
+    //
+    //Return: if cb.func return a promise(defs.length > 0),this function will return a deferred
+    //        else return {appConfig,normalReturnValues}
+    var normalReturnValues = [];
+    var defs = [];
+    var callbackReturn;
+
+    function processObject(obj) {
+      for (var key in obj) {
+        if (typeof obj[key] === 'object') {
+          if (Array.isArray(obj[key])) {
+            processArray(obj, key);
+          } else {
+            processObject(obj[key]);
+          }
+        } else if (typeof obj[key] === 'string') {
+          processString(obj, key);
+        }
+      }
+    }
+
+    function processString(obj, key, i){
+      if(typeof i === 'number'){
+        if (cb.test(obj[key][i])) {
+          callbackReturn = cb.func({
+            obj: obj,
+            key: key,
+            i:i
+          });
+          if(typeof callbackReturn.then === 'function'){
+            defs.push(callbackReturn);
+          }else{
+            normalReturnValues.push(callbackReturn);
+          }
+        }
+      }else{
+        if (cb.test(obj[key])) {
+          callbackReturn = cb.func({
+            obj: obj,
+            key: key
+          });
+          if(typeof callbackReturn.then === 'function'){
+            defs.push(callbackReturn);
+          }else{
+            normalReturnValues.push(callbackReturn);
+          }
+        }
+      }
+    }
+
+    function processArray(obj, key){
+      for (var i = 0; i < obj[key].length; i++) {
+        if (typeof obj[key][i] === 'string') {
+          processString(obj, key, i);
+        }else if (typeof obj[key][i] === 'object') {
+          processObject(obj[key][i]);
+        }
+      }
+    }
+
+    processObject(appConfig);
+
+    if(defs.length > 0){
+      return all(defs).then(function(result){
+        if(normalReturnValues.length > 0){
+          result = result.concat(normalReturnValues);
+        }
+        return {
+          appConfig: appConfig,
+          result: result
+        };
+      });
+    }else{
+      return {
+        appConfig: appConfig,
+        result: normalReturnValues
+      };
+    }
+  };
+  mo.isEsriDomain = function(url){
+    return /^https?:\/\/(?:[\w\-\_]+\.)+(?:esri|arcgis)\.com/.test(url);
+  };
+  mo.uniqueArray = function(array) {
+    var n = [];
+    for (var i = 0; i < array.length; i++) {
+      if (n.indexOf(array[i]) === -1) {
+        n.push(array[i]);
+      }
+    }
+    return n;
+  };
+  mo.isNotEmptyObject = function(obj, includeArray) {
+    if(!!includeArray){
+      return mo.isObject(obj) && Object.keys(obj).length > 0 && Array.isArray(obj);
+    }else{
+      return mo.isObject(obj) && Object.keys(obj).length > 0;
+    }
+  };
+  mo.getMinOfArray = function(array) {
+    return Number(Math.min.apply(Math, array));
+  };
+  mo.getDataSchemaFromLayerDefinition = function(layerDefinition){
+    var oIdField = layerDefinition.fields.filter(function(f){
+      return f.type === 'esriFieldTypeOID';
+    });
+    if(oIdField.length > 0){
+      oIdField = oIdField[0];
+    }else{
+      oIdField = null;
+    }
+
+    return {
+      geometryType: layerDefinition.geometryType,
+      fields: layerDefinition.fields,
+      displayField: layerDefinition.displayField,
+      objectIdField: oIdField,
+      typeIdField: layerDefinition.typeIdField
+    };
+  };
 
   return mo;
 });

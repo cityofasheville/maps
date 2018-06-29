@@ -6,5 +6,8 @@ define({
   "defaultFormat": "Noklusējuma formāts",
   "defaultLayout": "Noklusējuma izkārtojums",
   "warning": "Nepareiza ievade",
+  "urlNotAvailable": "Vietrādis URL nav pieejams",
+  "notPrintTask": "Vietrādis URL nav drukas uzdevums",
+  "advancedOption": "Rādīt papildu opcijas",
   "ok": "Labi"
 });

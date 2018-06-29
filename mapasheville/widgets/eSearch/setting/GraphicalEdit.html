@@ -45,9 +45,33 @@
     <tbody>
       <tr>
         <td style="vertical-align:text-top;padding-right: 8px;">${nls.pointTolerance}</td>
-        <td style="vertical-align:text-top;">
+        <td style="vertical-align:text-top;padding-right: 8px;">
           <input type="text" data-dojo-attach-point="pointTolerance" data-dojo-type="dijit/form/NumberTextBox"
             data-dojo-props="style:{width:'150px'},required:true,value:6,constraints:{min:0,places:0,max:30}" />
+        </td>
+        <td style="vertical-align:text-top;width:50%">
+          <table style="width:100%">
+            <tbody>
+              <tr>
+                <div>
+                  <span>${nls.defaultactivetool}: </span>
+                  <select data-dojo-attach-point="selectDefaultTool" data-dojo-type="dijit/form/Select" data-dojo-props="style:{width:'150px'}">
+                    <option value="point" selected="selected">${dnls.point}</option>
+                    <option value="line">${dnls.line}</option>
+                    <option value="polyline">${dnls.polyline}</option>
+                    <option value="freehand_polyline">${dnls.freehandPolyline}</option>
+                    <option value="extent">${dnls.extent}</option>
+                    <option value="circle">${dnls.circle}</option>
+                    <option value="ellipse">${dnls.ellipse}</option>
+                    <option value="polygon">${dnls.polygon}</option>
+                    <option value="freehand_polygon">${dnls.freehandPolygon}</option>
+                    <option value="triangle">${dnls.triangle}</option>
+                    <option value="none">${nls.none}</option>
+                  </select>
+                </div>
+              </tr>
+            </tbody>
+          </table>
         </td>
       </tr>
     </tbody>

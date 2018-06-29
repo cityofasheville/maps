@@ -18,5 +18,19 @@ define({
   "invalidTitle2": "' findes i forvejen. Vælg en anden titel.",
   "invalidBasemapUrl1": "Denne type lag kan ikke bruges som baggrundskort.",
   "invalidBasemapUrl2": "Det baggrundskort, du er ved at tilføje, har en anden spatial reference end det aktuelle kort.",
-  "addBaselayer": "Tilføj baggrundskortlag"
+  "addBaselayer": "Tilføj baggrundskortlag",
+  "repectOnline": "Synkronisér altid med organisationens Baggrundskortgalleri-indstilling",
+  "customBasemap": "Konfigurér brugerdefinerede baggrundskort",
+  "basemapTips": "Klik på \"${import}\" eller \"${createNew}\" for at tilføje baggrundskort.",
+  "importBasemap": "Importér",
+  "createBasemap": "Opret ny",
+  "importTitle": "Importér baggrundskort",
+  "createTitle": "Nyt baggrundskort",
+  "selectGroupTip": "Vælg en gruppe, hvis webkort kan bruges som baggrundskort.",
+  "noBasemaps": "Ingen baggrundskort.",
+  "defaultGroup": "Esri-standard",
+  "defaultOrgGroup": "Organisationsstandard",
+  "warningTitle": "Advarsel",
+  "confirmDelete": "Vil du slette de valgte baggrundskort?",
+  "noBasemapAvailable": "Ingen baggrundskort er tilgængelige, eller alle baggrundskort har en anden spatial reference eller et andet tile-skema end det aktuelle kort."
 });

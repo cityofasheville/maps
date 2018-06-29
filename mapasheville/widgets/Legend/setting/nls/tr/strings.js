@@ -1,7 +1,7 @@
 define({
-  "left": "Sola Hizala",
-  "right": "Sağa Hizala",
+  "left": "Sola hizala",
+  "right": "Sağa hizala",
   "arrangement": "Yerleştirme",
-  "autoUpdate": "Otomatik Güncelle",
-  "respectCurrentMapScale": "Geçerli Harita Ölçeğine Öncelik Ver"
+  "autoUpdate": "Otomatik güncelle",
+  "respectCurrentMapScale": "Geçerli harita ölçeğine öncelik ver"
 });

@@ -6,7 +6,6 @@ define([
   'dojo/query',
   'dojo/Deferred',
   'jimu/dijit/DropMenu',
-  'jimu/dijit/LoadingIndicator',
   'dijit/_TemplatedMixin',
   'dijit/form/HorizontalSlider',
   'dijit/form/HorizontalRuleLabels',
@@ -14,7 +13,7 @@ define([
   'dojo/dom-style',
   './NlsStrings',
   './PopupMenuInfo'
-], function(declare, array, html, lang, query, Deferred, DropMenu, LoadingIndicator,
+], function(declare, array, html, lang, query, Deferred, DropMenu,
   _TemplatedMixin, HorizSlider, HorzRuleLabels, template, domStyle, NlsStrings, PopupMenuInfo) {
   return declare([DropMenu, _TemplatedMixin], {
     templateString: template,
@@ -30,13 +29,14 @@ define([
     postCreate: function() {
       this.inherited(arguments);
       this._initDeniedItems();
-      this.loading = new LoadingIndicator({
-        hidden: true
-      });
-      this.loading.placeAt(this.popupMenuNode);
-      if(!this.hasContentMenu()) {
-        this.hide();
-      }
+      this.loading = html.create('div', {
+        'class': 'popup-menu-loading'
+      }, this.popupMenuNode);
+
+      // if(!this.hasContentMenu()) {
+      //   this.hide();
+      //   domStyle.set(this.popupMenuNode, 'display', 'none');
+      // }
     },
 
     _initDeniedItems: function() {
@@ -158,11 +158,29 @@ define([
           html.setAttr(itemNode, 'innerHTML', this.nls.enablePopup);
         }
       }
+      //handle controlLabels item.
+      itemNode = query("[itemid=controlLabels]", this.dropMenuNode)[0];
+      if (itemNode && this._layerInfo.canShowLabel()) {
+        if (this._layerInfo.isShowLabels()) {
+          html.setAttr(itemNode, 'innerHTML', this.nls.hideLables);
+        } else {
+          html.setAttr(itemNode, 'innerHTML', this.nls.showLabels);
+        }
+      }
+
+    },
+
+    _switchLoadingState: function(isShow) {
+      if(isShow) {
+        html.setStyle(this.loading, 'display', 'block');
+      } else {
+        html.setStyle(this.loading, 'display', 'none');
+      }
     },
 
     selectItem: function(item, evt) {
       var found = false;
-      for (var i = 1; i < this._deniedItems.length; i++) {
+      for (var i = 0; i < this._deniedItems.length; i++) {
         if (this._deniedItems[i].key === item.key) {
           found = true;
           break;
@@ -177,7 +195,7 @@ define([
     openDropMenu: function() {
       var inheritedCallBack = lang.hitch(this, this.inherited, arguments);
       var popupMenuInfoDef = new Deferred();
-      this.loading.show();
+      this._switchLoadingState(true);
       if (!this.dropMenuNode) {
         // create popupMenuInfo first.
         PopupMenuInfo.create(this._layerInfo, this.layerListWidget)
@@ -200,12 +218,12 @@ define([
           this._refresh();
           // display dropMenuNode.
           inheritedCallBack(arguments);
-          this.loading.hide();
+          this._switchLoadingState(false);
         }), lang.hitch(this, function() {
-          this.loading.hide();
+          this._switchLoadingState(false);
         }));
       }), lang.hitch(this, function() {
-        this.loading.hide();
+        this._switchLoadingState(false);
       }));
     },
 
@@ -267,8 +285,9 @@ define([
 
     show: function() {
       domStyle.set(this.domNode, 'display', 'block');
-    },
+    }
 
+    /*
     hasContentMenu: function() {
       var hasContentMenu = false;
       var item;
@@ -284,5 +303,6 @@ define([
       }
       return hasContentMenu;
     }
+    */
   });
 });

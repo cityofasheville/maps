@@ -6,7 +6,7 @@ define({
   "field": "Veld",
   "alias": "Alias",
   "visible": "Zichtbaar",
-  "linkField": "Koppelingsveld",
+  "linkField": "Linkveld",
   "noLayers": "Er zijn geen objectlagen beschikbaar",
   "back": "Vorige",
   "exportCSV": "Exporteren naar CSV",
@@ -25,5 +25,6 @@ define({
   "fieldName": "Naam",
   "fieldAlias": "Alias",
   "fieldVisibility": "Zichtbaarheid",
-  "fieldActions": "Acties"
+  "fieldActions": "Acties",
+  "showAttachments": "Bijlagen weergeven"
 });

@@ -5,7 +5,7 @@ define({
   "transparency": "Läbipaistvus",
   "controlPopup": "Luba / Keela hüpikaknad",
   "moveUpAndDown": "Liigu üles / Liigu alla",
-  "attributeTable": "Ava atribuuditabel",
+  "attributeTable": "Vaata atribuuditabelis",
   "url": "Kirjeldus / Kuva sisuüksuse detailid / Allalaadimine",
   "layerSelectorTitle": "Valige loendis kuvatavad kihid."
 });

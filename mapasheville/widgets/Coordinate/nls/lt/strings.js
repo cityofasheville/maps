@@ -21,7 +21,7 @@ define({
   "Kilometers": "Kilometrai",
   "Decimeters": "Decimetrai",
   "Decimal_Degrees": "Laipsniai",
-  "Degree_Minutes_Seconds": "Laipsniai Minutės Sekundės",
+  "Degree_Minutes_Seconds": "Laipsniai minutės sekundės",
   "MGRS": "MGRS",
   "USNG": "USNG"
 });

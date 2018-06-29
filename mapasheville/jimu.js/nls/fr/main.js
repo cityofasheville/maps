@@ -6,6 +6,7 @@ define({
     "yes": "Oui",
     "no": "Non",
     "next": "Suivant",
+    "previous": "Précédent",
     "back": "Retour",
     "selected": "Les entités sélectionnées",
     "name": "Nom",
@@ -48,11 +49,34 @@ define({
     "scene": "Scène",
     "reset": "Réinitialiser",
     "icon": "Icône",
+    "folder": "Dossier",
     "share": "Partager",
     "view": "Afficher",
     "newText": "Nouveau",
     "edit": "Modifier",
-    "wkid": "WKID"
+    "wkid": "WKID",
+    "table": "Table",
+    "zoomIn": "Zoom avant",
+    "zoomOut": "Zoom arrière",
+    "continue1": "Poursuivre",
+    "longitude": "Longitude",
+    "latitude": "Latitude",
+    "custom": "Personnalisé",
+    "image": "Image",
+    "font": "Police",
+    "text": "Texte",
+    "all": "Tout",
+    "number": "Nombre",
+    "percentage": "Pourcentage",
+    "unit": "Unité",
+    "thousand": "Mille",
+    "billion": "Milliard",
+    "million": "Million",
+    "none": "Aucun",
+    "field": "Champ",
+    "operation": "Opération",
+    "disableUpdateGeometry": "Désactiver la mise à jour de la géométrie",
+    "preview": "Aperçu"
   },
   "errorCode": "Code",
   "errorMessage": "Message",
@@ -76,15 +100,15 @@ define({
     "business": "Entreprises",
     "cartographic": "Cartographie",
     "nationalParkService": "Service des parcs nationaux",
-    "outdoorRecreation": "Activités de plein air",
-    "peoplePlaces": "Personnes Lieux",
-    "safetyHealth": "Sécurité Santé",
+    "outdoorRecreation": "Activités en plein air",
+    "peoplePlaces": "Personnes lieux",
+    "safetyHealth": "Sécurité santé",
     "shapes": "Formes",
     "transportation": "Transports",
     "symbolSize": "Taille du symbole",
     "color": "Couleur",
     "alpha": "Alpha",
-    "outlineColor": "Couleur du contour",
+    "outlineColor": "Couleur de contour",
     "outlineWidth": "Largeur du contour",
     "style": "Style",
     "width": "Largeur",
@@ -96,7 +120,10 @@ define({
     "dash": "Tiret",
     "dot": "Point",
     "dashDot": "Tiret-point",
-    "dashDotDot": "Tiret-point-point"
+    "dashDotDot": "Tiret-point-point",
+    "customImage": "Image personnalisée",
+    "chooseFile": "Choisir le fichier",
+    "noFileChoosen": "Aucun fichier sélectionné."
   },
   "transparency": {
     "opaque": "Opaque",
@@ -106,7 +133,7 @@ define({
     "domain": "Domaine",
     "use": "Utiliser",
     "singleSymbol": "Un seul symbole",
-    "uniqueSymbol": "Des symboles uniques",
+    "uniqueSymbol": "Symboles uniques",
     "color": "Couleur",
     "size": "Taille",
     "toShow": "A afficher",
@@ -152,16 +179,16 @@ define({
     "loading": "Chargement en cours"
   },
   "basicServiceBrowser": {
-    "noServicesFound": "Aucun service n’a été trouvé.",
+    "noServicesFound": "Aucun service n'a été trouvé.",
     "unableConnectTo": "Connexion impossible à",
     "invalidUrlTip": "L'URL que vous avez saisie est incorrecte ou inaccessible."
   },
   "serviceBrowser": {
-    "noGpFound": "Aucun service de géotraitement n’a été trouvé.",
+    "noGpFound": "Aucun service de géotraitement n'a été trouvé.",
     "unableConnectTo": "Connexion impossible à"
   },
   "layerServiceBrowser": {
-    "noServicesFound": "Aucun service de carte ou service d’entités n’a été trouvé",
+    "noServicesFound": "Aucun service de carte ni service d'entités n'a été trouvé.",
     "unableConnectTo": "Connexion impossible à"
   },
   "basicServiceChooser": {
@@ -176,11 +203,11 @@ define({
     "invalidUrl": "URL non valide."
   },
   "filterBuilder": {
-    "addAnotherExpression": "Ajouter une expression de filtre",
-    "addSet": "Ajouter un jeu d’expressions",
+    "addAnotherExpression": "Ajouter une expression",
+    "addSet": "Ajouter un jeu",
     "matchMsg": "Obtenir les entités de la couche qui correspondent à ${any_or_all} des expressions suivantes",
     "matchMsgSet": "${any_or_all} des expressions suivantes dans ce jeu sont vraies",
-    "all": "Tout",
+    "all": "Toutes",
     "any": "Certaines",
     "value": "Valeur",
     "field": "Champ",
@@ -188,8 +215,8 @@ define({
     "none": "Aucun",
     "and": "et",
     "valueTooltip": "Entrer une valeur",
-    "fieldTooltip": "Choisissez dans le champ existant",
-    "uniqueValueTooltip": "Choisissez une des valeurs uniques dans le champ sélectionné",
+    "fieldTooltip": "Choisir dans un champ existant",
+    "uniqueValueTooltip": "Choisir parmi les valeurs uniques du champ sélectionné",
     "stringOperatorIs": "est",
     "stringOperatorIsNot": "n'est pas",
     "stringOperatorStartsWith": "commence par",
@@ -202,9 +229,14 @@ define({
     "dateOperatorIsNotOn": "n'est pas le",
     "dateOperatorIsBefore": "est avant",
     "dateOperatorIsAfter": "est après",
+    "dateOperatorIsOnOrBefore": "est à cette date ou avant",
+    "dateOperatorIsOnOrAfter": "est le ou après",
+    "dateOperatorMinutes": "minutes",
+    "dateOperatorHours": "heures",
     "dateOperatorDays": "jours",
     "dateOperatorWeeks": "semaines",
     "dateOperatorMonths": "mois",
+    "dateOperatorYears": "ans",
     "dateOperatorInTheLast": "au cours des derniers",
     "dateOperatorNotInTheLast": "pas au cours des derniers",
     "dateOperatorIsBetween": "est entre",
@@ -230,51 +262,56 @@ define({
     "error": {
       "invalidParams": "Paramètres non valides.",
       "invalidUrl": "URL non valide.",
-      "noFilterFields": "La couche ne possède aucun champ pouvant être utilisé pour le filtrage.",
+      "noFilterFields": "La couche ne possède aucun champ pouvant être utilisé pour créer des filtres.",
       "invalidSQL": "Expression SQL non valide.",
       "cantParseSQL": "Impossible d’analyser l’expression SQL."
     },
-    "caseSensitive": "Respecter la casse",
+    "caseSensitive": "Sensible à la casse",
     "notSupportCaseSensitiveTip": "Les services hébergés ne prennent pas en charge les requêtes respectant la casse.",
-    "setFilterTip": "Définissez le filtre correctement."
+    "setFilterTip": "Définissez les filtres correctement.",
+    "listValues": "Valeurs de liste",
+    "cascadeFilterTip": "Afficher uniquement les valeurs filtrées par les expressions précédentes.",
+    "noneCascadeFilterTip": "Toutes les valeurs uniques de ce champ",
+    "previousCascadeFilterTip": "Valeurs filtrées selon des expressions précédentes",
+    "allCascadeFilterTip": "Valeurs filtrées selon toutes les autres expressions"
   },
   "featureLayerSource": {
     "layer": "Couche",
     "browse": "Parcourir",
-    "selectFromMap": "Sélectionner dans la carte",
-    "selectFromPortal": "Ajouter depuis Portal for ArcGIS",
-    "addServiceUrl": "Ajouter une URL de service",
+    "selectFromMap": "Carte",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "URL du service",
     "inputLayerUrl": "URL de la couche en entrée",
     "selectLayer": "Sélectionnez une couche d’entités dans la carte actuelle.",
     "chooseItem": "Choisissez un élément de couche d’entités.",
-    "setServiceUrl": "Entrez l’URL du service d’entités ou du service de carte.",
-    "selectFromOnline": "Ajouter depuis ArcGIS Online",
+    "setServiceUrl": "Entrez l'URL d'un service d'entités ou d'un service de carte.",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Choisissez une couche d’entités."
   },
   "queryableLayerSource": {
     "layer": "Couche",
     "browse": "Parcourir",
-    "selectFromMap": "Sélectionner dans la carte",
-    "selectFromPortal": "Ajouter depuis Portal for ArcGIS",
-    "addServiceUrl": "Ajouter une URL de service",
+    "selectFromMap": "Carte",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "URL du service",
     "inputLayerUrl": "URL de la couche en entrée",
     "selectLayer": "Sélectionnez une couche dans la carte actuelle.",
     "chooseItem": "Choisissez un élément.",
     "setServiceUrl": "Saisissez l'URL du service.",
-    "selectFromOnline": "Ajouter depuis ArcGIS Online",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Choisissez une couche."
   },
   "gpSource": {
-    "selectFromPortal": "Ajouter depuis Portal for ArcGIS",
-    "addServiceUrl": "Ajouter une URL de service",
-    "selectFromOnline": "Ajouter depuis ArcGIS Online",
-    "setServiceUrl": "Saisissez l'URL du service de géotraitement.",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "URL du service",
+    "selectFromOnline": "ArcGIS Online",
+    "setServiceUrl": "Entrez l'URL d'un service de géotraitement.",
     "chooseItem": "Choisissez un élément de service de géotraitement.",
     "chooseTask": "Choisissez une tâche de géotraitement."
   },
   "itemSelector": {
     "map": "Carte",
-    "selectWebMap": "Choisir une carte Web",
+    "selectWebMap": "Choisir la carte web",
     "addMapFromOnlineOrPortal": "Recherchez et ajoutez une carte Web dans l'application à partir des ressources publiques d'ArcGIS Online ou de votre contenu privé dans ArcGIS Online ou Portal for ArcGIS.",
     "searchMapName": "Rechercher par nom de carte...",
     "searchNone": "Votre recherche n’a pas abouti. Réessayez.",
@@ -285,7 +322,7 @@ define({
     "publicMap": "Public",
     "myOrganization": "Organisation",
     "myGroup": "Mes groupes",
-    "myContent": "Contenus",
+    "myContent": "Mon contenu",
     "count": "Effectif",
     "fromPortal": "depuis le portail",
     "fromOnline": "depuis ArcGIS.com",
@@ -293,7 +330,11 @@ define({
     "owner": "propriétaire",
     "signInTo": "Se connecter à",
     "lastModified": "Dernière modification",
-    "moreDetails": "Plus de détails"
+    "moreDetails": "Plus de détails",
+    "mostRecent": "La plus récente",
+    "mostViewed": "Les plus consultées",
+    "highestRated": "Les mieux évaluées",
+    "viewItemDetails": "Afficher les détails de l'élément"
   },
   "featureLayerChooserFromPortal": {
     "notSupportQuery": "Le service ne prend pas en charge l'interrogation."
@@ -313,16 +354,16 @@ define({
     "itemMoveDown": "Descendre",
     "itemDesc": "Description",
     "itemDownload": "Télécharger",
-    "itemToAttributeTable": "Ouvrir la table attributaire"
+    "itemToAttributeTable": "Afficher dans la table attributaire"
   },
   "imageChooser": {
-    "unsupportReaderAPI": "A FAIRE : le navigateur ne prend pas en charge l'API du lecteur de fichiers",
+    "unsupportReaderAPI": "A faire : le navigateur ne prend pas en charge l'API du lecteur de fichiers",
     "readError": "Echec de la lecture du fichier.",
     "unknowError": "impossible d'exécuter les opérations",
     "invalidType": "Type de fichier non valide.",
     "cropImage": "Rogner l'image",
     "exceed": "La taille du fichier ne peut pas dépasser 1 024 Ko",
-    "enableFlash": "A FAIRE : activez Flash.",
+    "enableFlash": "Activez Adobe Flash avant de naviguer vers une image.",
     "cropWaining": "Choisissez une photo d'au moins ${width} x ${height} pixels.",
     "toolTip": "Pour optimiser les résultats, l'image doit être de ${width} pixels en largeur sur ${height} pixels en hauteur. Les autres tailles sont ajustées en conséquence. Les formats d'image acceptables sont : PNG, GIF et JPEG."
   },
@@ -339,7 +380,7 @@ define({
   "exportTo": {
     "exportTo": "Exporter",
     "toCSV": "Exporter vers un fichier CSV",
-    "toFeatureCollection": "Exporter vers la collection d'entités",
+    "toFeatureCollection": "Exporter vers une collection d'entités",
     "toGeoJSON": "Exporter vers GeoJSON"
   },
   "appState": {
@@ -347,17 +388,22 @@ define({
     "restoreMap": "Cliquez pour restaurer l’étendue de la carte et la visibilité des couches là où vous en étiez resté."
   },
   "featureActions": {
+    "featureActions": "Actions des entités",
     "ZoomTo": "Zoom",
     "PanTo": "Déplacer sur",
     "Flash": "Clignoter",
-    "ShowPopup": "Afficher le menu contextuel",
+    "ShowPopup": "Afficher la fenêtre contextuelle",
     "CreateLayer": "Créer une couche",
     "ShowStatistics": "Statistiques...",
-    "ClearSelection": "Effacer la sélection",
+    "ClearSelection": "Vider la sélection",
     "ExportToCSV": "Exporter vers un fichier CSV",
     "ShowSelectedFeature": "Afficher les entités sélectionnées",
-    "ExportToFeatureCollection": "Exporter vers la collection d'entités",
-    "ExportToGeoJSON": "Exporter vers GeoJSON"
+    "ExportToFeatureCollection": "Exporter vers une collection d'entités",
+    "ExportToGeoJSON": "Exporter vers GeoJSON",
+    "EditAttributes": "Modifier des attributs",
+    "AddMarker": "Ajouter un symbole ponctuel",
+    "RemoveMarker": "Supprimer un symbole ponctuel",
+    "SaveToMyContent": "Enregistrer dans Mon contenu"
   },
   "spatialFilterByFeatures": {
     "relatedLayer": "Couche associée",
@@ -373,11 +419,37 @@ define({
   },
   "units": {
     "miles": "Milles",
+    "milesAbbr": "mi",
     "kilometers": "Kilomètres",
+    "kilometersAbbr": "km",
     "feet": "Pieds",
+    "feetAbbr": "pi",
     "meters": "Mètres",
+    "metersAbbr": "m",
     "yards": "Yards",
-    "nauticalMiles": "Milles nautiques"
+    "yardsAbbr": "yd",
+    "acres": "Ares",
+    "acresAbbr": "acres",
+    "nauticalMiles": "Milles marins",
+    "nauticalMilesAbbr": "miln",
+    "uSSurveyFeet": "Pieds d'arpentage US",
+    "uSSurveyFeetAbbr": "ftUS",
+    "decimalDegree": "Degrés décimaux",
+    "decimalDegreeAbbr": "jj",
+    "degreeMinuteSeconds": "Degré minute secondes",
+    "degreeMinuteSecondsAbbr": "d-m-s",
+    "squareMiles": "Miles carrés",
+    "squareMilesAbbr": "mi²",
+    "squareKilometer": "Kilomètres carrés",
+    "squareKilometerAbbr": "km²",
+    "squareFeet": "Pieds carrés",
+    "squareFeetAbbr": "ft²",
+    "squareMeters": "Mètres carrés",
+    "squareMetersAbbr": "m²",
+    "squareYards": "Yards carrés",
+    "squareYardsAbbr": "yd²",
+    "squareUSSurveyFeet": "Pieds d'arpentage américains carrés",
+    "squareUSSurveyFeetAbbr": "pi² US"
   },
   "featureSetChooser": {
     "select": "Sélectionner",
@@ -389,7 +461,13 @@ define({
     "addSelectionTip": "Ajouter à la sélection",
     "removeSelectionTip": "Supprimer de la sélection",
     "selectFromCurrentSelectionTip": "Sélectionner dans la sélection actuelle",
-    "unselectAllSelectionTip": "Permet de désélectionner toutes les entités actuellement sélectionnées"
+    "unselectAllSelectionTip": "Permet de désélectionner toutes les entités actuellement sélectionnées",
+    "selectByPolygon": "Sélectionner par polygone",
+    "selectByCircle": "Sélectionner par cercle",
+    "selectByLine": "Sélectionner par ligne",
+    "chooseSelectingTools": "Choisir des outils de sélection",
+    "darw": "Dessin",
+    "drawShap": "Dessiner une forme"
   },
   "widgetManager": {
     "createWidgetError": "Erreur de création du widget",
@@ -447,6 +525,87 @@ define({
     "shareToWebTips": "Cette application n'est pas partagée avec le public. Certaines personnes risquent de ne pas pouvoir l'afficher."
   },
   "webSceneLoader": {
-    "webglSupportTip": "Les applications Web 3D ne sont pas prises en charge dans votre navigateur."
-  }
+    "webglSupportTip": "Les applications web 3D ne sont pas prises en charge dans votre navigateur."
+  },
+  "map": {
+    "basemapNotAvailable": "Ce fond de carte n'est pas disponible.",
+    "displayDefaultBasemap": "Affichage du fond de carte par défaut.",
+    "layerLoadedError": "Impossible d'ajouter la couche ${layers} à la carte."
+  },
+  "popup": {
+    "relatedTables": "Tables associées :",
+    "relatedRecords": "Enregistrements associés :",
+    "noRelatedRecotds": "Enregistrements associés introuvables.",
+    "chooseFieldTip": "Choisir un attribut pour afficher la liste",
+    "saveAsPopupTitle": "Identique au titre de la fenêtre contextuelle"
+  },
+  "queryFeatures": {
+    "tooManyFeaturesTip": "Votre sélection comporte trop d'entités. La récupération et l'affichage des données sur la carte risque de prendre beaucoup de temps.",
+    "askForContinue": "Souhaitez-vous continuer ?"
+  },
+  "colorPalette": {
+    "transparent": "Transparent",
+    "custom": "Personnalisé"
+  },
+  "temperature": {
+    "celsius": "Celsius",
+    "fahrenheit": "Fahrenheit"
+  },
+  "report": {
+    "printButtonLabel": "Imprimer",
+    "reportDimensionsMsg": "Ce rapport est conçu pour une impression sur papier ${paperSize}",
+    "unableToPrintMapMsg": "Une erreur s'est produite lors de l'impression des cartes.",
+    "notesHint": "Entrez des commentaires ici",
+    "landscape": "Paysage",
+    "portrait": "Portrait",
+    "mapOnly": "MAP_ONLY",
+    "a0": "A0",
+    "a1": "A1",
+    "a2": "A2",
+    "a3": "A3",
+    "a4": "A4",
+    "a5": "A5",
+    "letterANSIA": "Lettre ANSI A",
+    "tabloidANSIB": "Tabloid ANSI B",
+    "letter": "Lettre US",
+    "legal": "Légal",
+    "tabloid": "Tabloid US",
+    "ansi_a": "ANSI A",
+    "ansi_b": "ANSI B",
+    "ansi_c": "ANSI C",
+    "ansi_d": "ANSI D",
+    "ansi_e": "ANSI E"
+  },
+  "snapshot": {
+    "snapshot_complete": "Capture d'écran créée avec succès.",
+    "snapshot_failed": "Échec de la création de la capture d'écran.",
+    "snapshot_append": "Capture d'écran",
+    "utc": "UTC"
+  },
+  "statisticsChart": {
+    "enlarge": "Agrandir",
+    "setting": "Paramètre",
+    "count": "Total",
+    "horizontalAxis": "Axe horizontal",
+    "verticalAxis": "Axe vertical",
+    "dataLabels": "Etiquettes de données",
+    "color": "Couleur"
+  },
+  "frameworkDatasource": {
+    "setDataSource": "Définir la source de données",
+    "customDataSource": "Source de données supplémentaire",
+    "selectCustomDataTip": "Sélectionnez une source de données dans cette application.",
+    "widgetOutputs": "Sorties de widget",
+    "noExtraDsAvailable": "Aucune source de données supplémentaire n'est disponible.",
+    "addExtraDsTip": "Accédez à l'onglet Attribut du générateur, et cliquez sur Source de données supplémentaire pour ajouter des données.",
+    "widgetOutpusListTip": "Les sorties de widget (le cas échéant) sont également répertoriées ici."
+  },
+  "gridLayout": {
+    "addWidgetTip": "Ajouter ici des widgets via l'onglet Widget",
+    "modifyLayout": "Modifier la mise en page",
+    "dragToAdd": "Faire glisser pour ajouter",
+    "mapArea": "MAP AREA"
+  },
+  "noEditPrivileges": "Votre compte ne dispose pas des autorisations de création ou de modification des données.",
+  "invalidConfiguration": "Le widget n'est pas configuré ou les couches de la configuration ne figurent plus sur la carte. Ouvrez l'application en mode de générateur et reconfigurez le widget."
 });

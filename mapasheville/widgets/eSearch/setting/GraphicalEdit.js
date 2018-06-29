@@ -98,6 +98,7 @@ define(
           "name": "enableeLocateselect",
           "label": this.nls.enableelocateselect
         }];
+        this.selectDefaultTool.set('value', this.config.autoactivatedtool || 'none');
         this._initGraphicalTable();
       },
 
@@ -158,6 +159,12 @@ define(
 
         graOps.toleranceforpointgraphicalselection = this.pointTolerance.get('value');
         graOps.keepgraphicalsearchenabled = this.keepGraphicalEnabledCbx.getValue();
+
+        if(this.selectDefaultTool.get('value') !== 'none'){
+          graOps.autoactivatedtool = this.selectDefaultTool.get('value');
+        }else{
+          delete graOps.autoactivatedtool;
+        }
 
         return graOps;
       }

@@ -3,5 +3,5 @@ define({
   "right": "Högerjustera",
   "arrangement": "Placering",
   "autoUpdate": "Uppdatera automatiskt",
-  "respectCurrentMapScale": "Respektera aktuell kartskala"
+  "respectCurrentMapScale": "Ta hänsyn till aktuell kartskala"
 });

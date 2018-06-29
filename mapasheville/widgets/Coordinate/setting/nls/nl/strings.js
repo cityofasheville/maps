@@ -13,7 +13,7 @@ define({
   "spinnerLabel": "Coördinaten afronden op: ",
   "decimalPlace": "decimalen",
   "separator": "Scheidingsteken voor duizendtallen weergeven",
-  "getVersionError": "Kan de versie van de Geometrieservice niet vinden",
+  "getVersionError": "Kan de versie van de geometrieservice niet vinden",
   "add": "Uitvoercoördinatensysteem toevoegen",
   "edit": "Coördinatensysteem bewerken",
   "output": "Uitvoercoördinatensysteem",
@@ -39,7 +39,11 @@ define({
   "Kilometers": "Kilometer",
   "Decimeters": "Decimeter",
   "Decimal_Degrees": "Decimale graden",
+  "Degrees_Decimal_Minutes": "Graden decimaal minuten",
   "Degree_Minutes_Seconds": "Graden minuten seconden",
   "MGRS": "MGRS",
-  "USNG": "USNG"
+  "USNG": "USNG",
+  "displayOrderLonLatTips": "Weergavevolgorde van coordinaten",
+  "lonLatTips": "Lengtegraad / Breedtegraad(X,Y)",
+  "latLonTips": "Breedtegraad / Lengtegraad(Y, X)"
 });

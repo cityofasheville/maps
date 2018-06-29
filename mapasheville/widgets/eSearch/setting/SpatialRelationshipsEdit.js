@@ -45,7 +45,7 @@ define(
         "label": "index intersected by"
       },{
         "name": "esriSpatialRelOverlaps",
-        "label": "overlaped by"
+        "label": "overlapped by"
       },{
         "name": "esriSpatialRelTouches",
         "label": "touched by"
@@ -78,7 +78,7 @@ define(
           this._checkSelections();
         }));
         var spatRels = this.config;
-        console.info(this.config);
+        //console.info(this.config);
         array.forEach(this._spatialrelationship, lang.hitch(this, function(spatialRel) {
           var args = {
             config:spatialRel,

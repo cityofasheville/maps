@@ -8,8 +8,8 @@ define({
   "maxText": "maksimum",
   "attachText": "Navedite koji ugao mape da prikačite ovom vidžetu.",
   "expandText": "Inicijalno proširi vidžet",
-  "topLeft": "Gornji levi",
-  "topRight": "Gornji desni",
-  "bottomLeft": "Donji levi",
-  "bottomRight": "Donji desni"
+  "topLeft": "Gore levo",
+  "topRight": "Gore desno",
+  "bottomLeft": "Dole levo",
+  "bottomRight": "Dole desno"
 });

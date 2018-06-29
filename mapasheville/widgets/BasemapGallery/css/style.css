@@ -1,3 +1,7 @@
+.jimu-widget-basemapgallery {
+  height: 100%;
+}
+
 .jimu-widget-basemapgallery .esriBasemapGalleryNode:hover{
   color: #51B1FE;
 }
@@ -13,12 +17,12 @@
   /*background-color: #D9DDE0;*/
   color: #51B1FE;
 }
-.jimu-widget-basemapgallery .esriBasemapGallerySelectedNode .esriBasemapGalleryLabelContainer{
-  /*background-color: #D9DDE0;*/
+.jimu-widget-basemapgallery .esriBasemapGalleryLabelContainer{
+  padding-top: 2px;
 }
 
 .jimu-widget-basemapgallery .esriBasemapGalleryThumbnail{
-  width: 84px;
+  width: 100px;
   height: 67px;
 }
 .jimu-widget-basemapgallery .esriBasemapGallerySelectedNode .esriBasemapGalleryThumbnail{

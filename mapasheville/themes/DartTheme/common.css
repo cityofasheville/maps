@@ -120,6 +120,16 @@ strong {
   background-image: url(dijit-css/icons/Icon_Checkmark_16.png) !important;
 }*/
 
+.jimu-simple-table .simple-table-row .editable-div,
+.jimu-simple-table .simple-table-row .normal-text-div {
+  color: #000000 !important;
+  outline: none;
+}
+
+.claro .dijitDateTextBox .dijitArrowButton:before {
+    content:none!important;
+}
+
 .claro .dijitTextBox {
   height: 30px;
   border-color: #a6a6a6;
@@ -239,7 +249,8 @@ strong {
   background-color: #000000 !important;
 }
 
-.simpleDirections .esriActivateButton {
+.simpleDirections .esriActivateButton,
+.simpleDirections .esriLineBarrierButton {
   width: 24px !important;
   height: 24px !important;
 }
@@ -535,12 +546,23 @@ strong {
 .jimu-widget-edit  .jimu-widget-FilterEditor .flDropDown{
   background-color: #4c4c4c !important;
 }
+
+
+.jimu-widget-edit-infoWindow .previos-btn.feature-action {
+  color: rgba(0, 0, 0,0.5) !important;
+}
+
+.jimu-widget-edit-infoWindow .previos-btn.feature-action:hover {
+  color: rgba(0, 0, 0, 1) !important;
+}
+
   /****about inspector****/
 .jimu-widget-edit-infoWindow .esriAttributeInspector .dijitTextBoxHover{
   background-color: grey;
   background-image: none;
   border-color: grey !important;
 }
+
 
 /***********end Edit Widget**************/
 
@@ -714,13 +736,19 @@ strong {
 }
 
 /*share start*/
-.DartTheme .share-container .shareLink .backBtn{
+.DartTheme .share-container .shareLink .backBtn,
+.jimu-rtl .DartTheme .share-container .shareLink .backBtn {
   background: url("images/share/arrow-back.svg") no-repeat;
   background-position: 50% 50%;
 }
-.DartTheme .share-container .shareLink .backBtn:hover {
+.DartTheme .share-container .shareLink .backBtn:hover,
+.jimu-rtl .DartTheme .share-container .shareLink .backBtn:hover {
   background: url("images/share/arrow-back_hover.svg") no-repeat;
   background-position: 50% 50%;
+}
+.jimu-rtl .shareLink .backBtn{
+  transform: scaleX(-1);
+  filter: FlipH;
 }
 .DartTheme .share-container .shareLink .optionsRow .markers {
   background: url("images/share/marker.svg") no-repeat;
@@ -763,3 +791,29 @@ strong {
   height: 16px;
 }
 /*share end*/
+
+/*splash start*/
+.DartTheme .jimu-widget-splash .envelope .splash-container .footer .checkbox {
+  background-color: transparent;
+}
+/*splash end*/
+
+.DartTheme .jimu-widget-analysis .esriAnalysis .esriAnalysisSubmitButton.dijitButton>span.dijitButtonNode,
+.DartTheme .jimu-widget-analysis .esriAnalysis .dijitButton.calcite > span.dijitButtonNode{
+  background: rgba(0, 0, 0, 0.5);
+  border: none !important;
+  padding: 0 10px !important;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.DartTheme .jimu-widget-analysis .esriAnalysis .esriAnalysisSubmitButton.dijitButton>span.dijitButtonNode .dijitButtonText,
+.DartTheme .jimu-widget-analysis .esriAnalysis .dijitButton.calcite > span.dijitButtonNode .dijitButtonText {
+  line-height: 33px;
+}
+
+.DartTheme .jimu-widget-analysis .esriAnalysis .esriAnalysisSubmitButton.dijitButtonHover>span.dijitButtonNode,
+.DartTheme .jimu-widget-analysis .esriAnalysis .dijitButton.calcite.dijitButtonHover>span.dijitButtonNode{
+  background-color: rgba(0, 0, 0, 0.75) !important;
+}

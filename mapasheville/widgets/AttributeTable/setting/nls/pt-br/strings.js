@@ -2,11 +2,11 @@ define({
   "instruction": "Selecione e configure camadas que serão mostradas na Tabela de Atributos inicialmente.",
   "label": "Camada",
   "show": "Mostrar",
-  "actions": "Configurar Campos da Camada",
+  "actions": "Configurar campos de camada",
   "field": "Campo",
   "alias": "Nome Alternativo",
   "visible": "Visível",
-  "linkField": "LinkField",
+  "linkField": "Campo de vínculo",
   "noLayers": "Nenhuma camada de feição está disponível",
   "back": "Voltar",
   "exportCSV": "Permitir exportação para CSV",
@@ -25,5 +25,6 @@ define({
   "fieldName": "Nome",
   "fieldAlias": "Nome Alternativo",
   "fieldVisibility": "Visibilidade",
-  "fieldActions": "Ações"
+  "fieldActions": "Ações",
+  "showAttachments": "Mostrar anexos"
 });

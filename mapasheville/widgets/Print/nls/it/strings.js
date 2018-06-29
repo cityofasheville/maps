@@ -4,6 +4,8 @@ define({
   "format": "Formato",
   "layout": "Layout",
   "settings": "Avanzato",
+  "labels": "Etichette",
+  "showLabels": "Mostra etichette",
   "mapScaleExtent": "Scala/estensione mappa",
   "preserve": "Mantieni",
   "mapScale": "scala mappa",
@@ -29,7 +31,7 @@ define({
   "width": "Larghezza (px)",
   "height": "Altezza (px)",
   "print": "Stampa",
-  "clearList": "Cancella stampe",
+  "clearList": "Elimina stampe",
   "creatingPrint": "Creazione stampa",
   "printError": "Errore. Riprovare"
 });

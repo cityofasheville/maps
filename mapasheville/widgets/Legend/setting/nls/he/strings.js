@@ -2,6 +2,6 @@ define({
   "left": "יישר לשמאל",
   "right": "יישר לימין",
   "arrangement": "סידור",
-  "autoUpdate": "עדכונים אוטומטים",
+  "autoUpdate": "עדכון אוטומטי",
   "respectCurrentMapScale": "התחשב בקנה המידה הנוכחי של המפה"
 });

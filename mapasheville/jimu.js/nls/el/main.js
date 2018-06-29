@@ -6,6 +6,7 @@ define({
     "yes": "Ναι",
     "no": "Όχι",
     "next": "Επόμενο",
+    "previous": "ΠΡΟΗΓΟΥΜΕΝΟ",
     "back": "Πίσω",
     "selected": "επιλέχθηκε",
     "name": "Όνομα",
@@ -48,11 +49,34 @@ define({
     "scene": "3D Προβολή",
     "reset": "Επαναφορά",
     "icon": "Εικονίδιο",
+    "folder": "Φάκελος",
     "share": "Κοινοποίηση",
     "view": "Προβολή",
     "newText": "Νέο",
     "edit": "Επεξεργασία",
-    "wkid": "WKID"
+    "wkid": "WKID",
+    "table": "Πίνακας",
+    "zoomIn": "Εστίαση σε μεγαλύτερη κλίμακα",
+    "zoomOut": "Απομάκρυνση σε μικρότερη κλίμακα",
+    "continue1": "Συνέχεια",
+    "longitude": "Γεωγραφικό μήκος",
+    "latitude": "Γεωγραφικό πλάτος",
+    "custom": "Προσαρμοσμένο",
+    "image": "Εικόνα",
+    "font": "Γραμματοσειρά",
+    "text": "Κείμενο",
+    "all": "Όλες",
+    "number": "Αριθμός",
+    "percentage": "Ποσοστό",
+    "unit": "Μονάδα",
+    "thousand": "Χίλια",
+    "billion": "Δισεκατομμύριο",
+    "million": "Εκατομμύριο",
+    "none": "Κανένα",
+    "field": "Πεδίο",
+    "operation": "Λειτουργία",
+    "disableUpdateGeometry": "Απενεργοποίηση ενημέρωσης γεωμετρίας",
+    "preview": "Προεπισκόπηση"
   },
   "errorCode": "Κωδικός",
   "errorMessage": "Μήνυμα",
@@ -96,7 +120,10 @@ define({
     "dash": "Παύλα",
     "dot": "Τελεία",
     "dashDot": "Παύλα τελεία",
-    "dashDotDot": "Παύλα τελεία τελεία"
+    "dashDotDot": "Παύλα τελεία τελεία",
+    "customImage": "Προσαρμοσμένη εικόνα",
+    "chooseFile": "Επιλογή αρχείου",
+    "noFileChoosen": "Δεν επιλέχθηκε αρχείο."
   },
   "transparency": {
     "opaque": "Αδιαφανές",
@@ -105,7 +132,7 @@ define({
   "rendererChooser": {
     "domain": "Τομέας",
     "use": "Χρήση",
-    "singleSymbol": "Ένα μόνο σύμβολο",
+    "singleSymbol": "Μονό σύμβολο",
     "uniqueSymbol": "Μοναδικά σύμβολα",
     "color": "Χρώμα",
     "size": "Μέγεθος",
@@ -115,7 +142,7 @@ define({
     "symbolSize": "Μέγεθος συμβόλου",
     "addValue": "Προσθήκη τιμής",
     "setDefaultSymbol": "Ορισμός προκαθορισμένου συμβόλου",
-    "defaultSymbol": "Προκαθορισμένο σύμβολο",
+    "defaultSymbol": "Προεπιλεγμένο σύμβολο",
     "selectedSymbol": "Επιλεγμένο σύμβολο",
     "value": "Τιμή",
     "label": "Ετικέτα",
@@ -125,7 +152,7 @@ define({
     "point": "Σημείο",
     "line": "Γραμμή",
     "polyline": "Γραμμή πολλαπλών τμημάτων",
-    "freehandPolyline": "Γραμμή ελεύθερης σχεδίασης",
+    "freehandPolyline": "Γραμμή πολλαπλών τμημάτων ελεύθερης σχεδίασης",
     "triangle": "Τρίγωνο",
     "extent": "Έκταση",
     "circle": "Κύκλος",
@@ -176,8 +203,8 @@ define({
     "invalidUrl": "Μη έγκυρο URL."
   },
   "filterBuilder": {
-    "addAnotherExpression": "Προσθήκη έκφρασης φίλτρου",
-    "addSet": "Προσθήκη συνόλου εκφράσεων",
+    "addAnotherExpression": "Προσθήκη έκφρασης",
+    "addSet": "Προσθήκη συνόλου",
     "matchMsg": "Βρείτε τα στοιχρία του θεματικού επιπέδου που συμφωνούν με ${any_or_all} τις παρακάτω εκφράσεις",
     "matchMsgSet": "${any_or_all} από τις παρακάτω εκφράσεις σε αυτό το σύνολο έχουν τιμή true",
     "all": "Όλες",
@@ -189,7 +216,7 @@ define({
     "and": "και",
     "valueTooltip": "Εισαγωγή τιμής",
     "fieldTooltip": "Επιλογή από υπάρχον πεδίο",
-    "uniqueValueTooltip": "Επιλογή από μοναδικές τιμές σε επιλεγμένο πεδίο",
+    "uniqueValueTooltip": "Επιλογή από μοναδικές τιμές στο επιλεγμένο πεδίο",
     "stringOperatorIs": "είναι",
     "stringOperatorIsNot": "δεν είναι",
     "stringOperatorStartsWith": "ξεκινάει με",
@@ -202,9 +229,14 @@ define({
     "dateOperatorIsNotOn": "δεν είναι στις",
     "dateOperatorIsBefore": "είναι πριν από",
     "dateOperatorIsAfter": "είναι μετά από",
+    "dateOperatorIsOnOrBefore": "στις ή πριν από τις",
+    "dateOperatorIsOnOrAfter": "στις ή μετά τις",
+    "dateOperatorMinutes": "λεπτά",
+    "dateOperatorHours": "ώρες",
     "dateOperatorDays": "ημέρες",
     "dateOperatorWeeks": "εβδομάδες",
     "dateOperatorMonths": "μήνες",
+    "dateOperatorYears": "έτη",
     "dateOperatorInTheLast": "τους τελευταίους/τις τελευταίες",
     "dateOperatorNotInTheLast": "όχι τους τελευταίους/τις τελευταίες",
     "dateOperatorIsBetween": "είναι μεταξύ",
@@ -230,51 +262,56 @@ define({
     "error": {
       "invalidParams": "Μη έγκυρες παράμετροι.",
       "invalidUrl": "Μη έγκυρο URL.",
-      "noFilterFields": "Το θεματικό επίπεδο δεν διαθέτει πεδία που μπορούν να χρησιμοποιηθούν για φίλτρο.",
+      "noFilterFields": "Το θεματικό επίπεδο δεν διαθέτει πεδία που μπορούν να χρησιμοποιηθούν για τη δημιουργία φίλτρων.",
       "invalidSQL": "Μη έγκυρη έκφραση SQL.",
       "cantParseSQL": "Δεν είναι δυνατή η ανάλυση της έκφρασης SQL."
     },
     "caseSensitive": "Διάκριση πεζών-κεφαλαίων",
     "notSupportCaseSensitiveTip": "Οι hosted υπηρεσίες δεν υποστηρίζουν ερωτήματα με διάκριση πεζών-κεφαλαίων.",
-    "setFilterTip": "Ορίστε σωστά το φίλτρο."
+    "setFilterTip": "Ορίστε σωστά τα φίλτρα.",
+    "listValues": "Τιμές λίστας",
+    "cascadeFilterTip": "Εμφανίστε μόνο τις τιμές που φιλτράρονται από προηγούμενες εκφράσεις.",
+    "noneCascadeFilterTip": "Όλες οι μοναδικές τιμές αυτού του πεδίου",
+    "previousCascadeFilterTip": "Οι τιμές φιλτράρονται από προηγούμενες εκφράσεις",
+    "allCascadeFilterTip": "Οι τιμές φιλτράρονται από όλες τις εκφράσεις"
   },
   "featureLayerSource": {
-    "layer": "Θεματικό επίπεδο",
+    "layer": "Θεματικό Επίπεδο",
     "browse": "Περιήγηση",
-    "selectFromMap": "Επιλογή από το χάρτη",
-    "selectFromPortal": "Προσθήκη από το Portal for ArcGIS",
-    "addServiceUrl": "Προσθήκη Service URL",
+    "selectFromMap": "Χάρτης",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "URL υπηρεσίας",
     "inputLayerUrl": "URL θεματικού επιπέδου εισόδου",
     "selectLayer": "Επιλέξτε ένα feature layer από τον τρέχοντα χάρτη.",
     "chooseItem": "Επιλέξτε ένα αντικείμενο τύπου feature layer.",
-    "setServiceUrl": "Καταχωρίστε το URL του feature service ή του map service.",
-    "selectFromOnline": "Προσθήκη από το ArcGIS Online",
+    "setServiceUrl": "Εισαγάγετε το URL ενός feature service ή ενός map service.",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Επιλέξτε ένα feature layer."
   },
   "queryableLayerSource": {
     "layer": "Θεματικό επίπεδο",
     "browse": "Αναζήτηση",
-    "selectFromMap": "Επιλογή από το χάρτη",
-    "selectFromPortal": "Προσθήκη από το Portal for ArcGIS",
-    "addServiceUrl": "Προσθήκη Service URL",
+    "selectFromMap": "Χάρτης",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "URL υπηρεσίας",
     "inputLayerUrl": "URL θεματικού επιπέδου εισόδου",
     "selectLayer": "Επιλέξτε θεματικό επίπεδο από τον τρέχοντα χάρτη.",
     "chooseItem": "Διαλέξτε ένα αντικείμενο.",
     "setServiceUrl": "Καταχωρίστε το URL της υπηρεσίας.",
-    "selectFromOnline": "Προσθήκη από το ArcGIS Online",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Διαλέξτε θεματικό επίπεδο."
   },
   "gpSource": {
-    "selectFromPortal": "Προσθήκη από το Portal for ArcGIS",
-    "addServiceUrl": "Προσθήκη URL υπηρεσίας",
-    "selectFromOnline": "Προσθήκη από το ArcGIS Online",
-    "setServiceUrl": "Καταχωρίστε το URL του geoprocessing service.",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "URL υπηρεσίας",
+    "selectFromOnline": "ArcGIS Online",
+    "setServiceUrl": "Εισαγάγετε το URL του geoprocessing service.",
     "chooseItem": "Επιλέξτε ένα αντικείμενο τύπου geoprocessing service.",
     "chooseTask": "Επιλέξτε μια εργασία γεωεπεξεργασίας."
   },
   "itemSelector": {
     "map": "Χάρτης",
-    "selectWebMap": "Επιλογή Web χάρτη",
+    "selectWebMap": "Επιλογή web χάρτη",
     "addMapFromOnlineOrPortal": "Εντοπίστε και προσθέστε έναν web χάρτη στην εφαρμογή από τους δημόσιους πόρους του ArcGIS Online ή από το ιδιωτικό σας περιεχόμενο στο ArcGIS Online ή το Portal.",
     "searchMapName": "Αναζήτηση ανά όνομα χάρτη...",
     "searchNone": "Δεν ήταν δυνατή η εύρεση του στοιχείου που αναζητήσατε. Προσπαθήστε ξανά.",
@@ -289,11 +326,15 @@ define({
     "count": "Πλήθος",
     "fromPortal": "από το Portal",
     "fromOnline": "από το ArcGIS.com",
-    "noneThumbnail": "Δεν υπάρχουν διαθέσιμες μικρογραφίες",
+    "noneThumbnail": "Η μικρογραφία δεν είναι διαθέσιμη",
     "owner": "κάτοχος",
     "signInTo": "Είσοδος σε",
     "lastModified": "Τελευταία τροποποίηση",
-    "moreDetails": "Περισσότερες λεπτομέρειες"
+    "moreDetails": "Περισσότερες λεπτομέρειες",
+    "mostRecent": "Πιο πρόσφατο",
+    "mostViewed": "Περισσότερες προβολές",
+    "highestRated": "Με την υψηλότερη αξιολόγηση",
+    "viewItemDetails": "Προβολή λεπτομερειών αντικειμένου"
   },
   "featureLayerChooserFromPortal": {
     "notSupportQuery": "Η υπηρεσία δεν υποστηρίζει ερωτήματα."
@@ -303,7 +344,7 @@ define({
   },
   "layerInfosMenu": {
     "titleBasemap": "Υπόβαθρα",
-    "titleLayers": "Επιχειρησιακά επίπεδα",
+    "titleLayers": "Επιχειρησιακά Επίπεδα",
     "labelLayer": "Όνομα θεματικού επιπέδου",
     "itemZoomTo": "Εστίαση",
     "itemTransparency": "Διαφάνεια",
@@ -313,16 +354,16 @@ define({
     "itemMoveDown": "Μετακίνηση προς τα κάτω",
     "itemDesc": "Περιγραφή",
     "itemDownload": "Λήψη",
-    "itemToAttributeTable": "Άνοιγμα Πίνακα Περιγραφικών Γνωρισμάτων"
+    "itemToAttributeTable": "Προβολή στον πίνακα περιγραφικών γνωρισμάτων"
   },
   "imageChooser": {
-    "unsupportReaderAPI": "TODO: Το πρόγραμμα περιήγησης δεν υποστηρίζει το API του προγράμματος ανάγνωσης αρχείων",
+    "unsupportReaderAPI": "Todo: Το πρόγραμμα περιήγησης δεν υποστηρίζει το API του προγράμματος ανάγνωσης αρχείων",
     "readError": "Απέτυχε η ανάγνωση του αρχείου.",
     "unknowError": "δεν είναι δυνατή η ολοκλήρωση ενεργειών",
     "invalidType": "Μη έγκυρος τύπος αρχείου.",
     "cropImage": "Περικοπή εικόνας",
     "exceed": "Το μέγεθος αρχείου δεν μπορεί να υπερβαίνει τα 1024 KB",
-    "enableFlash": "TODO: ενεργοποιήστε το flash.",
+    "enableFlash": "Πριν από την αναζήτηση εικόνας, ενεργοποιήστε το Adobe Flash.",
     "cropWaining": "Διαλέξτε μια φωτογραφία με διαστάσεις τουλάχιστον ${πλάτος} x ${ύψος} pixel.",
     "toolTip": "Για το καλύτερο αποτέλεσμα, η εικόνα πρέπει να έχει πλάτος ${width} pixel και ύψος ${height} pixel. Τα άλλα μεγέθη θα προσαρμοστούν αναλόγως για σωστή εμφάνιση. Οι αποδεκτοι μορφότυποι εικόνας είναι οι εξής: PNG, GIF και JPEG."
   },
@@ -339,7 +380,7 @@ define({
   "exportTo": {
     "exportTo": "Εξαγωγή",
     "toCSV": "Εξαγωγή σε αρχείο CSV",
-    "toFeatureCollection": "Εξαγωγή σε Feature Collection",
+    "toFeatureCollection": "Εξαγωγή σε feature collection",
     "toGeoJSON": "Εξαγωγή σε GeoJSON"
   },
   "appState": {
@@ -347,6 +388,7 @@ define({
     "restoreMap": "Κάντε κλικ για να επαναφέρετε την έκταση του χάρτη και την ορατότητα των θεματικών επιπέδων στο σημείο που σταματήσατε."
   },
   "featureActions": {
+    "featureActions": "Ενέργειες στοιχείων",
     "ZoomTo": "Εστίαση",
     "PanTo": "Μετατόπιση",
     "Flash": "Φλας",
@@ -356,8 +398,12 @@ define({
     "ClearSelection": "Απαλοιφή επιλογής",
     "ExportToCSV": "Εξαγωγή σε αρχείο CSV",
     "ShowSelectedFeature": "Εμφάνιση επιλεγμένων στοιχείων",
-    "ExportToFeatureCollection": "Εξαγωγή σε Feature Collection",
-    "ExportToGeoJSON": "Εξαγωγή σε GeoJSON"
+    "ExportToFeatureCollection": "Εξαγωγή σε feature collection",
+    "ExportToGeoJSON": "Εξαγωγή σε GeoJSON",
+    "EditAttributes": "Επεξεργασία περιγραφικών γνωρισμάτων",
+    "AddMarker": "Προσθήκη δείκτη",
+    "RemoveMarker": "Κατάργηση δείκτη",
+    "SaveToMyContent": "Αποθήκευση στο Περιεχόμενο"
   },
   "spatialFilterByFeatures": {
     "relatedLayer": "Συσχετιζόμενο θεματικό επίπεδο",
@@ -373,11 +419,37 @@ define({
   },
   "units": {
     "miles": "Μίλια",
+    "milesAbbr": "μίλ",
     "kilometers": "Χιλιόμετρα",
+    "kilometersAbbr": "χλμ",
     "feet": "Πόδια",
+    "feetAbbr": "πόδ",
     "meters": "Μέτρα",
+    "metersAbbr": "μ.",
     "yards": "Γιάρδες",
-    "nauticalMiles": "Ναυτικά μίλια"
+    "yardsAbbr": "γρδ.",
+    "acres": "Έικρ",
+    "acresAbbr": "έικρ",
+    "nauticalMiles": "Ναυτικά μίλια",
+    "nauticalMilesAbbr": "ν.μ.",
+    "uSSurveyFeet": "Τοπογραφικά πόδια US",
+    "uSSurveyFeetAbbr": "τοπ. πόδια US",
+    "decimalDegree": "Δεκαδικές μοίρες",
+    "decimalDegreeAbbr": "δεκ. μοίρες",
+    "degreeMinuteSeconds": "Μοίρες λεπτά δευτερόλεπτα",
+    "degreeMinuteSecondsAbbr": "μ-λ-δ",
+    "squareMiles": "Τετραγωνικά μίλια",
+    "squareMilesAbbr": "τετρ. μίλ.",
+    "squareKilometer": "Τετραγωνικά χιλιόμετρα",
+    "squareKilometerAbbr": "τετρ. χλμ.",
+    "squareFeet": "Τετραγωνικά πόδια",
+    "squareFeetAbbr": "τετρ. πόδ.",
+    "squareMeters": "Τετραγωνικά μέτρα",
+    "squareMetersAbbr": "τετρ. μ.",
+    "squareYards": "Τετραγωνικές γιάρδες",
+    "squareYardsAbbr": "τετρ. γρδ.",
+    "squareUSSurveyFeet": "Τετραγωνικά τοπογραφικά πόδια US",
+    "squareUSSurveyFeetAbbr": "τετρ. τοπ. πόδια US"
   },
   "featureSetChooser": {
     "select": "Επιλογή",
@@ -389,7 +461,13 @@ define({
     "addSelectionTip": "Προσθήκη στην επιλογή",
     "removeSelectionTip": "Κατάργηση από την επιλογή",
     "selectFromCurrentSelectionTip": "Επιλέξτε από την τρέχουσα επιλογή",
-    "unselectAllSelectionTip": "Αποεπιλέξτε όλα τα τρέχοντα επιλεγμένα στοιχεία"
+    "unselectAllSelectionTip": "Αποεπιλέξτε όλα τα τρέχοντα επιλεγμένα στοιχεία",
+    "selectByPolygon": "Επιλογή με πολύγωνο",
+    "selectByCircle": "Επιλογή με κύκλο",
+    "selectByLine": "Επιλογή με γραμμή",
+    "chooseSelectingTools": "Ενεργοποίηση εργαλείων επιλογής",
+    "darw": "Σχεδίαση",
+    "drawShap": "Σχεδίαση σχήματος"
   },
   "widgetManager": {
     "createWidgetError": "Σφάλμα δημιουργίας του widget",
@@ -448,5 +526,86 @@ define({
   },
   "webSceneLoader": {
     "webglSupportTip": "Δεν υποστηρίζονται 3D web εφαρμογές στο πρόγραμμα περιήγησης που χρησιμοποιείτε."
-  }
+  },
+  "map": {
+    "basemapNotAvailable": "Το υπόβαθρο δεν είναι διαθέσιμο.",
+    "displayDefaultBasemap": "Γίνεται εμφάνιση του προεπιλεγμένου υπόβαθρου αντί αυτού.",
+    "layerLoadedError": "Δεν είναι δυνατή η προσθήκη του θεματικού επιπέδου ${layers} στο χάρτη."
+  },
+  "popup": {
+    "relatedTables": "Σχετικοί πίνακες:",
+    "relatedRecords": "Σχετικές εγγραφές:",
+    "noRelatedRecotds": "Δεν βρέθηκαν σχετικές εγγραφές.",
+    "chooseFieldTip": "Επιλέξτε ένα γνώρισμα για εμφάνιση της λίστας",
+    "saveAsPopupTitle": "Ίδιο με τον αναδυόμενο τίτλο"
+  },
+  "queryFeatures": {
+    "tooManyFeaturesTip": "Υπάρχουν υπερβολικά πολλά στοιχεία στην επιλογή σας. Ίσως χρειαστεί αρκετό διάστημα για την ανάκτηση και την εμφάνισή τους στο χάρτη.",
+    "askForContinue": "Θέλετε οπωσδήποτε να συνεχίσετε;"
+  },
+  "colorPalette": {
+    "transparent": "Διαφανές",
+    "custom": "Προσαρμοσμένο"
+  },
+  "temperature": {
+    "celsius": "Κελσίου",
+    "fahrenheit": "Φαρενάιτ"
+  },
+  "report": {
+    "printButtonLabel": "Εκτύπωση",
+    "reportDimensionsMsg": "Αυτή η αναφορά έχει σχεδιαστεί για εκτύπωση σε χαρτί μεγέθους ${paperSize}",
+    "unableToPrintMapMsg": "Προέκυψε κάποιο σφάλμα κατά την εκτύπωση των χαρτών.",
+    "notesHint": "Εισαγάγετε σχόλια εδώ",
+    "landscape": "Οριζόντιος",
+    "portrait": "Κατακόρυφος",
+    "mapOnly": "MAP_ONLY",
+    "a0": "A0",
+    "a1": "A1",
+    "a2": "A2",
+    "a3": "A3",
+    "a4": "A4",
+    "a5": "A5",
+    "letterANSIA": "Letter ANSI A",
+    "tabloidANSIB": "Tabloid ANSI B",
+    "letter": "Letter",
+    "legal": "Legal",
+    "tabloid": "Tabloid",
+    "ansi_a": "ANSI A",
+    "ansi_b": "ANSI B",
+    "ansi_c": "ANSI C",
+    "ansi_d": "ANSI D",
+    "ansi_e": "ANSI E"
+  },
+  "snapshot": {
+    "snapshot_complete": "Επιτυχημένη δημιουργία στιγμιότυπου.",
+    "snapshot_failed": "Δεν δημιουργήθηκε στιγμιότυπο.",
+    "snapshot_append": "Στιγμιότυπο",
+    "utc": "UTC"
+  },
+  "statisticsChart": {
+    "enlarge": "Μεγέθυνση",
+    "setting": "Ρύθμιση",
+    "count": "Πλήθος",
+    "horizontalAxis": "Οριζόντιος άξονας",
+    "verticalAxis": "Κατακόρυφος άξονας",
+    "dataLabels": "Ετικέτες δεδομένων",
+    "color": "Χρώμα"
+  },
+  "frameworkDatasource": {
+    "setDataSource": "Ορισμός προέλευσης δεδομένων",
+    "customDataSource": "Επιπλέον προέλευση δεδομένων",
+    "selectCustomDataTip": "Επιλέξτε προέλευση δεδομένων από αυτήν την εφαρμογή.",
+    "widgetOutputs": "Αποτελέσματα widget",
+    "noExtraDsAvailable": "Δεν υπάρχουν επιπλέον διαθέσιμες προελεύσεις δεδομένων.",
+    "addExtraDsTip": "Μεταβείτε στην καρτέλα γνωρισμάτων του εργαλείου δημιουργίας και κάντε κλικ στην επιλογή «Επιπλέον προέλευση δεδομένων» για να προσθέσετε δεδομένα.",
+    "widgetOutpusListTip": "Τα αποτελέσματα widget (αν υπάρχουν) επίσης εμφανίζονται εδώ."
+  },
+  "gridLayout": {
+    "addWidgetTip": "Προσθέστε widget εδώ μέσω της καρτέλας Widget",
+    "modifyLayout": "Τροποποίηση θεματικού επιπέδου",
+    "dragToAdd": "Σύρετε για προσθήκη",
+    "mapArea": "ΠΕΡΙΟΧΗ ΧΑΡΤΗ"
+  },
+  "noEditPrivileges": "Ο λογαριασμός σας δεν έχει δικαίωμα δημιουργίας ή τροποποίησης δεδομένων.",
+  "invalidConfiguration": "To widget δεν είναι διαμορφωμένο ή τα θεματικά επίπεδα στη διαμόρφωση δεν βρίσκονται πλέον στο χάρτη. Ανοίξτε την εφαρμογή στη λειτουργία Εργαλείο δημιουργίας και αναδιαμορφώστε το widget."
 });

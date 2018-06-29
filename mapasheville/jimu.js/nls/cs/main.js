@@ -6,6 +6,7 @@ define({
     "yes": "Ano",
     "no": "Ne",
     "next": "Další",
+    "previous": "Předchozí",
     "back": "Zpět",
     "selected": "vybrané",
     "name": "Název",
@@ -48,11 +49,34 @@ define({
     "scene": "Scéna",
     "reset": "Obnovit",
     "icon": "Ikona",
+    "folder": "Složka",
     "share": "Sdílet",
     "view": "Zobrazit",
     "newText": "Nový",
     "edit": "Upravit",
-    "wkid": "WKID"
+    "wkid": "WKID",
+    "table": "Tabulka",
+    "zoomIn": "Přiblížit",
+    "zoomOut": "Oddálit",
+    "continue1": "Pokračovat",
+    "longitude": "Zeměpisná délka",
+    "latitude": "Zeměpisná šířka",
+    "custom": "Vlastní",
+    "image": "Obrázek",
+    "font": "Písmo",
+    "text": "Text",
+    "all": "Všechny",
+    "number": "Číslo",
+    "percentage": "Procenta",
+    "unit": "Jednotka",
+    "thousand": "Tisíc",
+    "billion": "Miliarda",
+    "million": "Milion",
+    "none": "Žádná",
+    "field": "Pole",
+    "operation": "Operace",
+    "disableUpdateGeometry": "Zakázat aktualizaci geometrie",
+    "preview": "Náhled"
   },
   "errorCode": "Kód",
   "errorMessage": "Zpráva",
@@ -75,10 +99,10 @@ define({
     "arrows": "Šipky",
     "business": "Obchod",
     "cartographic": "Kartografický",
-    "nationalParkService": "úřad National Park Service",
-    "outdoorRecreation": "Rekreace ve volné přírodě",
-    "peoplePlaces": "Lidé a místa",
-    "safetyHealth": "Bezpečnost a zdraví",
+    "nationalParkService": "National Park Service",
+    "outdoorRecreation": "Venkovní rekreace",
+    "peoplePlaces": "Turistické body zájmu",
+    "safetyHealth": "Bezpečnost zdraví",
     "shapes": "Tvary",
     "transportation": "Doprava",
     "symbolSize": "Velikost symbolu",
@@ -96,7 +120,10 @@ define({
     "dash": "Přerušovaná",
     "dot": "Tečkovaná",
     "dashDot": "Čerchovaná",
-    "dashDotDot": "Dvojčerchovaná"
+    "dashDotDot": "Dvojčerchovaná",
+    "customImage": "Vlastní obrázek",
+    "chooseFile": "Vybrat soubor",
+    "noFileChoosen": "Není vybrán žádný soubor."
   },
   "transparency": {
     "opaque": "Neprůhledná",
@@ -106,10 +133,10 @@ define({
     "domain": "Doména",
     "use": "Použít",
     "singleSymbol": "Jeden symbol",
-    "uniqueSymbol": "Unikátní symboly",
+    "uniqueSymbol": "Jedinečné symboly",
     "color": "Barva",
     "size": "Velikost",
-    "toShow": "Zobrazit",
+    "toShow": "Ukázat",
     "colors": "Barvy",
     "classes": "třídami",
     "symbolSize": "Velikost symbolu",
@@ -125,7 +152,7 @@ define({
     "point": "Bod",
     "line": "Linie",
     "polyline": "Polylinie",
-    "freehandPolyline": "Polylinie od ruky",
+    "freehandPolyline": "Linie od ruky",
     "triangle": "Trojúhelník",
     "extent": "Rozsah",
     "circle": "Kruh",
@@ -152,16 +179,16 @@ define({
     "loading": "Načítání"
   },
   "basicServiceBrowser": {
-    "noServicesFound": "Nebyly nalezeny žádné služby.",
+    "noServicesFound": "Nebyla nalezena žádná služba.",
     "unableConnectTo": "Nelze se připojit k",
     "invalidUrlTip": "Zadaná adresa URL je neplatná nebo nepřístupná."
   },
   "serviceBrowser": {
-    "noGpFound": "Nebyly nalezeny žádné geoprocessingové služby",
+    "noGpFound": "Nebyla nalezena žádná služba zpracování geografických dat.",
     "unableConnectTo": "Nelze se připojit k"
   },
   "layerServiceBrowser": {
-    "noServicesFound": "Nebyly nalezeny žádné mapové služby ani služby prvků.",
+    "noServicesFound": "Nebyly nalezeny žádné mapové služby ani Feature služby.",
     "unableConnectTo": "Nelze se připojit k"
   },
   "basicServiceChooser": {
@@ -176,8 +203,8 @@ define({
     "invalidUrl": "Neplatná adresa URL"
   },
   "filterBuilder": {
-    "addAnotherExpression": "Přidat výraz filtru",
-    "addSet": "Přidat sadu výrazů",
+    "addAnotherExpression": "Přidat výraz",
+    "addSet": "Přidat sadu",
     "matchMsg": "Získat prvky vrstvy, které odpovídají ${any_or_all} z následujících výrazů.",
     "matchMsgSet": "${any_or_all} z následujících výrazů v této sadě platí.",
     "all": "Všechny",
@@ -185,7 +212,7 @@ define({
     "value": "Hodnota",
     "field": "Pole",
     "unique": "Unikátní",
-    "none": "Žádné",
+    "none": "Žádná",
     "and": "a",
     "valueTooltip": "Vložit hodnotu",
     "fieldTooltip": "Vybrat z existujícího pole",
@@ -202,9 +229,14 @@ define({
     "dateOperatorIsNotOn": "není na",
     "dateOperatorIsBefore": "je před",
     "dateOperatorIsAfter": "je za",
+    "dateOperatorIsOnOrBefore": "je v termínu nebo před",
+    "dateOperatorIsOnOrAfter": "je v termínu nebo po",
+    "dateOperatorMinutes": "minuty",
+    "dateOperatorHours": "hodiny",
     "dateOperatorDays": "dní",
     "dateOperatorWeeks": "týdnů",
     "dateOperatorMonths": "měsíců",
+    "dateOperatorYears": "roky",
     "dateOperatorInTheLast": "za posledních",
     "dateOperatorNotInTheLast": "ne za posledních",
     "dateOperatorIsBetween": "je mezi",
@@ -230,45 +262,50 @@ define({
     "error": {
       "invalidParams": "Neplatné parametry.",
       "invalidUrl": "Neplatná adresa URL",
-      "noFilterFields": "Ve vrstvě nejsou žádná pole, která by bylo možno využít k filtrování.",
+      "noFilterFields": "Ve vrstvě nejsou žádná pole, která by bylo možné využít k vytvoření filtrů.",
       "invalidSQL": "Neplatný výraz SQL.",
       "cantParseSQL": "SQL výraz nelze analyzovat."
     },
     "caseSensitive": "Rozlišovat malá a velká písmena",
     "notSupportCaseSensitiveTip": "Hostované služby nepodporují dotazy rozlišující velikost písmen.",
-    "setFilterTip": "Nastavte filtr správně."
+    "setFilterTip": "Nastavte filtr správně.",
+    "listValues": "Zobrazit hodnoty",
+    "cascadeFilterTip": "Zobrazí pouze hodnoty filtrované předchozími výrazy.",
+    "noneCascadeFilterTip": "Všechny jedinečné hodnoty tohoto pole",
+    "previousCascadeFilterTip": "Hodnoty filtrované předchozími výrazy",
+    "allCascadeFilterTip": "Hodnoty filtrované všemi ostatními výrazy"
   },
   "featureLayerSource": {
     "layer": "Vrstva",
     "browse": "Procházet",
-    "selectFromMap": "Vybrat z mapy",
-    "selectFromPortal": "Přidat z Portal for ArcGIS",
-    "addServiceUrl": "Přidat adresu URL služby",
+    "selectFromMap": "Mapa",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Adresa URL služby",
     "inputLayerUrl": "Adresa URL vstupní vrstvy",
     "selectLayer": "Zvolte vrstvu prvků z aktuální mapy.",
     "chooseItem": "Zvolte položku vrstvy prvků.",
-    "setServiceUrl": "Zadejte adresu URL služby prvků nebo mapové služby.",
-    "selectFromOnline": "Přidat z ArcGIS Online",
+    "setServiceUrl": "Zadejte adresu URL Feature služby nebo mapové služby.",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Zvolte vrstvu prvků."
   },
   "queryableLayerSource": {
     "layer": "Vrstva",
     "browse": "Procházet",
-    "selectFromMap": "Vybrat z mapy",
-    "selectFromPortal": "Přidat z Portal for ArcGIS",
-    "addServiceUrl": "Přidat adresu URL služby",
+    "selectFromMap": "Mapa",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Adresa URL služby",
     "inputLayerUrl": "Adresa URL vstupní vrstvy",
     "selectLayer": "Zvolte vrstvu ze současné mapy.",
     "chooseItem": "Zvolte položku.",
     "setServiceUrl": "Zadejte adresu URL služby.",
-    "selectFromOnline": "Přidat z ArcGIS Online",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Zvolte vrstvu."
   },
   "gpSource": {
-    "selectFromPortal": "Přidat z Portal for ArcGIS",
-    "addServiceUrl": "Přidat URL adresu služby",
-    "selectFromOnline": "Přidat z ArcGIS Online",
-    "setServiceUrl": "Zadejte adresu URL geoprocessingové služby.",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "Adresa URL služby",
+    "selectFromOnline": "ArcGIS Online",
+    "setServiceUrl": "Zadejte adresu URL služby zpracování geografických dat.",
     "chooseItem": "Zvolte položku geoprocessingové služby.",
     "chooseTask": "Zvolte geoprocessingovou úlohu."
   },
@@ -293,7 +330,11 @@ define({
     "owner": "vlastník",
     "signInTo": "Přihlásit se do",
     "lastModified": "Naposledy upraveno",
-    "moreDetails": "Další podrobnosti"
+    "moreDetails": "Další informace",
+    "mostRecent": "Poslední",
+    "mostViewed": "Nejčastěji zobrazené",
+    "highestRated": "Nejlépe hodnocené",
+    "viewItemDetails": "Zobrazit podrobnosti položky"
   },
   "featureLayerChooserFromPortal": {
     "notSupportQuery": "Tato služba nepodporuje dotazování."
@@ -304,7 +345,7 @@ define({
   "layerInfosMenu": {
     "titleBasemap": "Podkladové mapy",
     "titleLayers": "Operační vrstvy",
-    "labelLayer": "Název vrstvy",
+    "labelLayer": "Jméno vrstvy",
     "itemZoomTo": "Přiblížit na",
     "itemTransparency": "Průhlednost",
     "itemTransparent": "Průhledná",
@@ -313,16 +354,16 @@ define({
     "itemMoveDown": "Přesunout dolů",
     "itemDesc": "Popis",
     "itemDownload": "Stáhnout",
-    "itemToAttributeTable": "Otevřít atributovou tabulku"
+    "itemToAttributeTable": "Zobrazit v atributové tabulce"
   },
   "imageChooser": {
-    "unsupportReaderAPI": "ÚKOL: Prohlížeč nepodporuje API průzkumníka souborů.",
+    "unsupportReaderAPI": "Úkol: Prohlížeč nepodporuje API průzkumníka souborů.",
     "readError": "Soubor se nepodařilo načíst.",
     "unknowError": "Operace nelze dokončit",
     "invalidType": "Neplatný typ souboru.",
     "cropImage": "Oříznout obrázek",
     "exceed": "Velikost souboru nesmí překročit 1024 KB.",
-    "enableFlash": "ÚKOL: Povolit Flash.",
+    "enableFlash": "Před nalistováním obrázku prosím povolte modul Adobe Flash.",
     "cropWaining": "Zvolte prosím fotografii s rozměry alespoň ${width}×${height} pixelů.",
     "toolTip": "V zájmu dosažení nejlepších výsledků by měl být obrázek ${width} pixelů široký a ${height} pixelů vysoký. Obrázky jiných rozměrů budou upraveny. Lze použít následující formáty: PNG, GIF a JPEG."
   },
@@ -339,7 +380,7 @@ define({
   "exportTo": {
     "exportTo": "Exportovat",
     "toCSV": "Exportovat do souboru CSV",
-    "toFeatureCollection": "Exportovat do sbírky prvků",
+    "toFeatureCollection": "Exportovat do kolekce prvků",
     "toGeoJSON": "Exportovat do GeoJSON"
   },
   "appState": {
@@ -347,17 +388,22 @@ define({
     "restoreMap": "Kliknutím obnovíte rozsah mapy a viditelnost vrstvy tam, kde jste skončili."
   },
   "featureActions": {
+    "featureActions": "Akce prvku",
     "ZoomTo": "Zaostřit",
     "PanTo": "Posunout k",
     "Flash": "Zablikat",
     "ShowPopup": "Zobrazit vyskakovací okno",
     "CreateLayer": "Vytvořit vrstvu",
     "ShowStatistics": "Statistika…",
-    "ClearSelection": "Zrušit výběr",
+    "ClearSelection": "Vymazat výběr",
     "ExportToCSV": "Exportovat do souboru CSV",
     "ShowSelectedFeature": "Zobrazit vybrané prvky",
-    "ExportToFeatureCollection": "Exportovat do sbírky prvků",
-    "ExportToGeoJSON": "Exportovat do GeoJSON"
+    "ExportToFeatureCollection": "Exportovat do kolekce prvků",
+    "ExportToGeoJSON": "Exportovat do GeoJSON",
+    "EditAttributes": "Editovat atributy",
+    "AddMarker": "Přidat značku",
+    "RemoveMarker": "Odstranit značku",
+    "SaveToMyContent": "Uložit do Můj obsah"
   },
   "spatialFilterByFeatures": {
     "relatedLayer": "Související vrstva",
@@ -373,11 +419,37 @@ define({
   },
   "units": {
     "miles": "Míle",
+    "milesAbbr": "mil",
     "kilometers": "Kilometry",
+    "kilometersAbbr": "km",
     "feet": "Stopy",
+    "feetAbbr": "ft",
     "meters": "Metry",
+    "metersAbbr": "m",
     "yards": "Yardy",
-    "nauticalMiles": "Námořní míle"
+    "yardsAbbr": "yd",
+    "acres": "Akry",
+    "acresAbbr": "akry",
+    "nauticalMiles": "Námořní míle",
+    "nauticalMilesAbbr": "nmi",
+    "uSSurveyFeet": "Americké zeměměřičské stopy",
+    "uSSurveyFeetAbbr": "ftUS",
+    "decimalDegree": "Desetinné stupně",
+    "decimalDegreeAbbr": "stup.",
+    "degreeMinuteSeconds": "Stupně, minuty, sekundy",
+    "degreeMinuteSecondsAbbr": "d-m-s",
+    "squareMiles": "Čtvereční míle",
+    "squareMilesAbbr": "čtver. míle",
+    "squareKilometer": "Čtvereční kilometry",
+    "squareKilometerAbbr": "čtver. km",
+    "squareFeet": "Čtvereční stopy",
+    "squareFeetAbbr": "čtver. stop",
+    "squareMeters": "Čtvereční metry",
+    "squareMetersAbbr": "čtver. m",
+    "squareYards": "Čtvereční yardy",
+    "squareYardsAbbr": "čtver. yardů",
+    "squareUSSurveyFeet": "Americká zeměměřická čtvereční stopa",
+    "squareUSSurveyFeetAbbr": "sq ftUS"
   },
   "featureSetChooser": {
     "select": "Vybrat (Select)",
@@ -389,7 +461,13 @@ define({
     "addSelectionTip": "Přidat do výběru",
     "removeSelectionTip": "Odstranit z výběru",
     "selectFromCurrentSelectionTip": "Vybrat ze současného výběru",
-    "unselectAllSelectionTip": "Zruší výběr všech aktuálně vybraných prvků."
+    "unselectAllSelectionTip": "Zruší výběr všech aktuálně vybraných prvků.",
+    "selectByPolygon": "Výběr polygonem",
+    "selectByCircle": "Výběr kružnicí",
+    "selectByLine": "Výběr linií",
+    "chooseSelectingTools": "Zvolit nástroje pro výběr",
+    "darw": "Vykreslit",
+    "drawShap": "Nakreslete tvar"
   },
   "widgetManager": {
     "createWidgetError": "Došlo k chybě při vytváření widgetu.",
@@ -447,6 +525,87 @@ define({
     "shareToWebTips": "Tato aplikace není sdílena s veřejností. Uživatelé ji nemusí být schopni vidět."
   },
   "webSceneLoader": {
-    "webglSupportTip": "3D webové aplikace nejsou podporovány ve vašem webovém prohlížeči."
-  }
+    "webglSupportTip": "3D webové aplikace nejsou ve vašem webovém prohlížeči podporovány."
+  },
+  "map": {
+    "basemapNotAvailable": "Podkladová mapa není k dispozici.",
+    "displayDefaultBasemap": "Místo ní se zobrazuje výchozí podkladová mapa.",
+    "layerLoadedError": "Vrstvu ${layers} nelze přidat do mapy."
+  },
+  "popup": {
+    "relatedTables": "Související tabulky:",
+    "relatedRecords": "Související záznamy:",
+    "noRelatedRecotds": "Nebyly nalezeny žádné související záznamy.",
+    "chooseFieldTip": "Vyberte atribut pro zobrazení seznamu",
+    "saveAsPopupTitle": "Stejné jako název vyskakovacího okna"
+  },
+  "queryFeatures": {
+    "tooManyFeaturesTip": "Výběr obsahuje příliš mnoho prvků. Může trvat dlouho, než se získají a zobrazí na mapě.",
+    "askForContinue": "Chcete pokračovat?"
+  },
+  "colorPalette": {
+    "transparent": "Průhledná",
+    "custom": "Vlastní"
+  },
+  "temperature": {
+    "celsius": "stupně Celsia",
+    "fahrenheit": "stupně Fahrenheita"
+  },
+  "report": {
+    "printButtonLabel": "Tisk",
+    "reportDimensionsMsg": "Tato zpráva je určena k vytištění na formát ${paperSize}.",
+    "unableToPrintMapMsg": "Při tisku map došlo k chybě.",
+    "notesHint": "Sem zadejte komentáře",
+    "landscape": "Na šířku",
+    "portrait": "Na výšku",
+    "mapOnly": "MAP_ONLY",
+    "a0": "A0",
+    "a1": "A1",
+    "a2": "A2",
+    "a3": "A3",
+    "a4": "A4",
+    "a5": "A5",
+    "letterANSIA": "Letter ANSI A",
+    "tabloidANSIB": "Tabloid ANSI B",
+    "letter": "Letter",
+    "legal": "Právní informace",
+    "tabloid": "Tabloid (menší novinový formát)",
+    "ansi_a": "ANSI A",
+    "ansi_b": "ANSI B",
+    "ansi_c": "ANSI C",
+    "ansi_d": "ANSI D",
+    "ansi_e": "ANSI E"
+  },
+  "snapshot": {
+    "snapshot_complete": "Snímek byl úspěšně vytvořen.",
+    "snapshot_failed": "Snímek se nepodařilo vytvořit.",
+    "snapshot_append": "Snímek",
+    "utc": "UTC"
+  },
+  "statisticsChart": {
+    "enlarge": "Zvětšit",
+    "setting": "Nastavení",
+    "count": "Počet",
+    "horizontalAxis": "Vodorovná osa",
+    "verticalAxis": "Svislá osa",
+    "dataLabels": "Popisky dat",
+    "color": "Barva"
+  },
+  "frameworkDatasource": {
+    "setDataSource": "Nastavit zdroj dat",
+    "customDataSource": "Další zdroj dat",
+    "selectCustomDataTip": "Vyberte zdroj dat z této aplikace.",
+    "widgetOutputs": "Výstupy modulu widget",
+    "noExtraDsAvailable": "Nejsou k dispozici žádné další zdroje dat.",
+    "addExtraDsTip": "Přejděte na kartu Atribut ve tvůrci a kliknutím na možnost Další zdroj dat přidejte data.",
+    "widgetOutpusListTip": "Na tomto místě jsou vypsány také výstupy widgetů (pokud existují)."
+  },
+  "gridLayout": {
+    "addWidgetTip": "Na kartě Widget sem můžete přidat widgety",
+    "modifyLayout": "Změnit rozvržení",
+    "dragToAdd": "Přetažením přidejte",
+    "mapArea": "OBLAST MAPY"
+  },
+  "noEditPrivileges": "Váš online účet nemá přístupová práva k vytváření nebo úpravě dat.",
+  "invalidConfiguration": "Widget není nakonfigurován nebo se vrstvy v konfiguraci již nenacházejí v mapě. Spusťte aplikaci v režimu tvorby a upravte konfiguraci widgetu."
 });

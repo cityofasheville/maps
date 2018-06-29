@@ -18,7 +18,7 @@ define([
   'dijit/form/TextBox',
   'dijit/form/ValidationTextBox',
   'jimu/dijit/Popup',
-  'widgets/eSearch/setting/LayerFieldChooser',
+  './LayerFieldChooser',
   'jimu/dijit/SimpleTable',
   'esri/request',
   './SingleValueEdit',

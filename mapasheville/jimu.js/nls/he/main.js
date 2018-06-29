@@ -6,6 +6,7 @@ define({
     "yes": "כן",
     "no": "לא",
     "next": "הבא",
+    "previous": "הקודם",
     "back": "חזור",
     "selected": "נבחר",
     "name": "שם",
@@ -48,16 +49,39 @@ define({
     "scene": "סצנה",
     "reset": "אפס",
     "icon": "סמל",
+    "folder": "תיקייה",
     "share": "שתף",
     "view": "מבט",
     "newText": "חדש",
     "edit": "עריכה",
-    "wkid": "WKID"
+    "wkid": "WKID",
+    "table": "טבלה",
+    "zoomIn": "התמקד פנימה",
+    "zoomOut": "התמקד החוצה",
+    "continue1": "המשך",
+    "longitude": "קו אורך",
+    "latitude": "קו רוחב",
+    "custom": "מותאם",
+    "image": "תמונה",
+    "font": "גופן",
+    "text": "טקסט",
+    "all": "הכל",
+    "number": "מספר",
+    "percentage": "אחוז",
+    "unit": "יחידה",
+    "thousand": "אלף",
+    "billion": "מיליארד",
+    "million": "מיליון",
+    "none": "ללא",
+    "field": "שדה",
+    "operation": "תפעולי",
+    "disableUpdateGeometry": "חסום עדכון גיאומטריה",
+    "preview": "תצוגה מקדימה"
   },
   "errorCode": "קוד",
   "errorMessage": "הודעה",
   "errorDetail": "פרט",
-  "widgetPlaceholderTooltip": "כדי להגדיר זאת, עבור ללשונית: \"וידג'ט\" ולחץ על מספר המיקום המתאים",
+  "widgetPlaceholderTooltip": "כדי להגדיר זאת, עבור ללשונית:\"ווידג'ט\" ולחץ על מספר המיקום המתאים",
   "fieldStatistics": {
     "selectField": "בחר שדה",
     "statistics": "סטטיסטיקה",
@@ -75,16 +99,16 @@ define({
     "arrows": "חיצים",
     "business": "עסקים",
     "cartographic": "קרטוגרפיה",
-    "nationalParkService": "שירות הפארקים הלאומיים",
+    "nationalParkService": "שירות הפארקים הלאומי",
     "outdoorRecreation": "נופש בטבע",
-    "peoplePlaces": "מקומות של אנשים",
-    "safetyHealth": "בטחון הציבור",
+    "peoplePlaces": "מקומות ואנשים",
+    "safetyHealth": "בטיחות ובריאות",
     "shapes": "צורות",
     "transportation": "תחבורה",
     "symbolSize": "גודל סמל",
     "color": "צבע",
     "alpha": "אלפא",
-    "outlineColor": "צבע קו תוחם",
+    "outlineColor": "צבע קו תיחום",
     "outlineWidth": "רוחב קו תוחם",
     "style": "סגנון",
     "width": "רוחב",
@@ -96,7 +120,10 @@ define({
     "dash": "מקווקו",
     "dot": "נקודה",
     "dashDot": "קו נקודה",
-    "dashDotDot": "קו נקודה נקודה"
+    "dashDotDot": "קו נקודה נקודה",
+    "customImage": "תמונה מותאמת אישית",
+    "chooseFile": "בחר קובץ",
+    "noFileChoosen": "לא נבחר קובץ."
   },
   "transparency": {
     "opaque": "אטום",
@@ -109,14 +136,14 @@ define({
     "uniqueSymbol": "סמלים ייחודיים",
     "color": "צבע",
     "size": "גודל",
-    "toShow": "להציג",
+    "toShow": "כדי להציג",
     "colors": "צבעים",
     "classes": "קבוצות",
     "symbolSize": "גודל סמל",
     "addValue": "הוסף ערך",
     "setDefaultSymbol": "הגדר סמל ברירת מחדל",
-    "defaultSymbol": "סימבול ברירת מחדל",
-    "selectedSymbol": "בחר סמל",
+    "defaultSymbol": "סמל ברירת מחדל",
+    "selectedSymbol": "סמל נבחר",
     "value": "ערך",
     "label": "תווית",
     "range": "טווח"
@@ -142,7 +169,7 @@ define({
     "noField": "אין שדה",
     "visibility": "ניראה",
     "name": "שם",
-    "alias": "כינוי לתצוגה",
+    "alias": "כינוי",
     "actions": "פעולות"
   },
   "includeButton": {
@@ -152,16 +179,16 @@ define({
     "loading": "טוען"
   },
   "basicServiceBrowser": {
-    "noServicesFound": "לא נמצא שירות:",
+    "noServicesFound": "לא נמצא שירות.",
     "unableConnectTo": "לא יכול להתחבר",
     "invalidUrlTip": "ה-URL שהזנת לא חוקי או שלא ניתן לגשת אליו."
   },
   "serviceBrowser": {
-    "noGpFound": "לא נמצא שרות geoprocessing.",
+    "noGpFound": "לא נמצא שירות geoprocessing.",
     "unableConnectTo": "לא יכול להתחבר"
   },
   "layerServiceBrowser": {
-    "noServicesFound": "לא נמצאו שירותי מפה או שירותי ישויות",
+    "noServicesFound": "לא נמצאו שירותי מפה או שירותי ישויות.",
     "unableConnectTo": "לא יכול להתחבר"
   },
   "basicServiceChooser": {
@@ -176,8 +203,8 @@ define({
     "invalidUrl": "URL לא חוקי."
   },
   "filterBuilder": {
-    "addAnotherExpression": "הוסף ביטוי לסינון",
-    "addSet": "הוסף קבוצת ביטויים",
+    "addAnotherExpression": "הוסף ביטוי",
+    "addSet": "הוסף סידרה",
     "matchMsg": "קבל ישויות בשכבה שתואמת ${any_or_all} מהביטויים הבאים",
     "matchMsgSet": "${any_or_all} מהביטויים הבאים בסט זה הם נכונים",
     "all": "הכל",
@@ -189,7 +216,7 @@ define({
     "and": "וגם",
     "valueTooltip": "הכנס ערך",
     "fieldTooltip": "בחר מתוך שדה קיים",
-    "uniqueValueTooltip": "בחר מתוך ערכים ייחודיים בשדה נבחר",
+    "uniqueValueTooltip": "בחר מתוך ערכים ייחודיים בשדה הנבחר",
     "stringOperatorIs": "הוא",
     "stringOperatorIsNot": "אינו",
     "stringOperatorStartsWith": "מתחיל עם",
@@ -202,9 +229,14 @@ define({
     "dateOperatorIsNotOn": "אינו ב-",
     "dateOperatorIsBefore": "הוא לפני",
     "dateOperatorIsAfter": "הוא אחרי",
+    "dateOperatorIsOnOrBefore": "חל בתאריך או לפני",
+    "dateOperatorIsOnOrAfter": "חל בתאריך או אחרי",
+    "dateOperatorMinutes": "דקות",
+    "dateOperatorHours": "שעות",
     "dateOperatorDays": "ימים",
     "dateOperatorWeeks": "שבועות",
     "dateOperatorMonths": "חודשים",
+    "dateOperatorYears": "שנים",
     "dateOperatorInTheLast": "בסוף",
     "dateOperatorNotInTheLast": "לא בסוף",
     "dateOperatorIsBetween": "בין",
@@ -230,45 +262,50 @@ define({
     "error": {
       "invalidParams": "פרמטרים לא חוקיים.",
       "invalidUrl": "URL לא חוקי.",
-      "noFilterFields": "לשכבוה אין שדות בהם ניתן להשתמש לסינון.",
+      "noFilterFields": "לשכבה אין שדות בהם ניתן להשתמש ליצירת מסננים.",
       "invalidSQL": "ביטוי SQL לא חוקי.",
       "cantParseSQL": "לא ניתן לפענח את ביטוי ה-SQL."
     },
-    "caseSensitive": "תלוי רישיות",
+    "caseSensitive": "משתנה ממקרה למקרה",
     "notSupportCaseSensitiveTip": "השירותים המתארחים אינם תומכים בשאילתא תלויית רישיות.",
-    "setFilterTip": "הגדר בבקשה סינון תקין."
+    "setFilterTip": "הגדר בבקשה מסננים תקינים.",
+    "listValues": "רשום ערכים",
+    "cascadeFilterTip": "הצג רק ערכים שסוננו לפי ביטויים קודמים.",
+    "noneCascadeFilterTip": "כל הערכים היחודיים של שדה זה",
+    "previousCascadeFilterTip": "ערכים שסוננו לפי ביטויים קודמים",
+    "allCascadeFilterTip": "ערכים שסוננו לפי כל הביטויים האחרים"
   },
   "featureLayerSource": {
     "layer": "שכבה",
     "browse": "דפדף",
-    "selectFromMap": "בחר ממפה",
-    "selectFromPortal": "הוסף מ- Portal for ArcGIS",
-    "addServiceUrl": "הוסף כתובת URL של שירות",
+    "selectFromMap": "מפה",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "URL של השירות",
     "inputLayerUrl": "URL של שכבת הקלט",
     "selectLayer": "בחר שכבת ישויות מהמפה הנוכחית.",
     "chooseItem": "בחר פריט שכבת ישויות.",
-    "setServiceUrl": "הזן את כתובת ה-URL של שירות הישויות או שירות המפות.",
-    "selectFromOnline": "הוסף  מ-ArcGIS Online",
+    "setServiceUrl": "הכנס URL של שירות ישויות או שירות מפה.",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "בחר שכבת ישויות."
   },
   "queryableLayerSource": {
     "layer": "שכבה",
     "browse": "נתב",
-    "selectFromMap": "בחר ממפה",
-    "selectFromPortal": "הוסף מ- Portal for ArcGIS",
-    "addServiceUrl": "הוסף כתובת URL של שירות",
+    "selectFromMap": "מפה",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "URL של השירות",
     "inputLayerUrl": "URL של שכבת הקלט",
     "selectLayer": "בחר שכבה מהמפה הנוכחית.",
     "chooseItem": "בחר פריט.",
     "setServiceUrl": "הזן את כתובת ה-URL של השירות.",
-    "selectFromOnline": "הוסף  מ-ArcGIS Online",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "בחר שכבה."
   },
   "gpSource": {
-    "selectFromPortal": "הוסף מ- Portal for ArcGIS",
-    "addServiceUrl": "הוסף כתובת URL של שירות",
-    "selectFromOnline": "הוסף  מ-ArcGIS Online",
-    "setServiceUrl": "הזן את כתובת ה- URL של שירות העיבוד הגיאוגרפי.",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "URL של השירות",
+    "selectFromOnline": "ArcGIS Online",
+    "setServiceUrl": "הזן את כתובת ה- URL של שירות Geoprocessing.",
     "chooseItem": "בחר פריט שירות של עיבוד גיאוגרפי.",
     "chooseTask": "בחר משימת עיבוד גיאוגרפי."
   },
@@ -293,7 +330,11 @@ define({
     "owner": "יוצר",
     "signInTo": "התחבר אל",
     "lastModified": "שונה לאחרונה",
-    "moreDetails": "פרטים נוספים"
+    "moreDetails": "פרטים נוספים",
+    "mostRecent": "העדכני ביותר",
+    "mostViewed": "הנצפה ביותר",
+    "highestRated": "בעל הדירוג הגבוה ביותר",
+    "viewItemDetails": "הצג תיאור פריט"
   },
   "featureLayerChooserFromPortal": {
     "notSupportQuery": "השירות אינו תומך בשאילתה."
@@ -313,7 +354,7 @@ define({
     "itemMoveDown": "הזז למטה",
     "itemDesc": "תיאור",
     "itemDownload": "הורד",
-    "itemToAttributeTable": "פתח טבלת מאפיינים"
+    "itemToAttributeTable": "הצג בטבלת מאפיינים"
   },
   "imageChooser": {
     "unsupportReaderAPI": "לביצוע: הדפדפן לא תומך ב-API של קריאת קבצים",
@@ -322,7 +363,7 @@ define({
     "invalidType": "סוג קובץ לא חוקי.",
     "cropImage": "חתוך תמונה",
     "exceed": "גודל הקובץ אינו יכול להיות יותר מ-‎1024 KB",
-    "enableFlash": "לביצוע: הפעל Flash.",
+    "enableFlash": "הפעל את Adobe Flash לפני דפדוף לתמונה.",
     "cropWaining": "בחר תמונה שגודלה לפחות ${width}‏ x‏ ${height} פיקסלים.",
     "toolTip": "לקבלת תוצאות מיטביות, הקובץ צריך להיות ברוחב של ${width} פיקסלים ובגובה של ${height} פיקסלים. גדלים אחרים יותאמו. פורמטים של תמונות שיתקבלו הם: PNG,‏ GIF ו-JPEG."
   },
@@ -347,17 +388,22 @@ define({
     "restoreMap": "לחץ כדי לשחזר את תיחום המפה וניראות השכבות היכן שהפסקת."
   },
   "featureActions": {
+    "featureActions": "פעולות על ישות",
     "ZoomTo": "התמקד אל",
     "PanTo": "עבור אל",
     "Flash": "הבהוב",
-    "ShowPopup": "הצג פריט מוקפץ",
+    "ShowPopup": "הצג חלונית קופצת",
     "CreateLayer": "צור שכבה",
     "ShowStatistics": "סטטיסטיקה...",
     "ClearSelection": "נקה בחירה",
     "ExportToCSV": "ייצא לקובץ CSV",
     "ShowSelectedFeature": "הצג ישויות נבחרות",
     "ExportToFeatureCollection": "ייצא לאוסף ישויות",
-    "ExportToGeoJSON": "ייצא אל GeoJSON"
+    "ExportToGeoJSON": "ייצא אל GeoJSON",
+    "EditAttributes": "ערוך מאפיינים",
+    "AddMarker": "הוסף סמן",
+    "RemoveMarker": "הסר סמן",
+    "SaveToMyContent": "שמור בתכולה שלי"
   },
   "spatialFilterByFeatures": {
     "relatedLayer": "שכבה מקושרת",
@@ -373,23 +419,55 @@ define({
   },
   "units": {
     "miles": "מיילים",
+    "milesAbbr": "מייל",
     "kilometers": "קילומטרים",
+    "kilometersAbbr": "ק\"מ",
     "feet": "רגל",
+    "feetAbbr": "רגל",
     "meters": "מטרים",
+    "metersAbbr": "מ'",
     "yards": "יארדים",
-    "nauticalMiles": "מיילים ימיים"
+    "yardsAbbr": "יארד",
+    "acres": "אקרים",
+    "acresAbbr": "אקרים",
+    "nauticalMiles": "מיילים ימיים",
+    "nauticalMilesAbbr": "nmi",
+    "uSSurveyFeet": "US survey feet",
+    "uSSurveyFeetAbbr": "ftUS",
+    "decimalDegree": "מעלות עשרוניות",
+    "decimalDegreeAbbr": "מעלות עשרוניות",
+    "degreeMinuteSeconds": "מעלה דקה שניות",
+    "degreeMinuteSecondsAbbr": "d-m-s",
+    "squareMiles": "מיילים רבועים",
+    "squareMilesAbbr": "מיילים רבועים",
+    "squareKilometer": "קילומטרים רבועים",
+    "squareKilometerAbbr": "קמ''ר",
+    "squareFeet": "רגל רבוע",
+    "squareFeetAbbr": "רגל רבוע",
+    "squareMeters": "מטרים רבועים",
+    "squareMetersAbbr": "מ''ר",
+    "squareYards": "יארד רבוע",
+    "squareYardsAbbr": "יארד רבוע",
+    "squareUSSurveyFeet": "Square US survey feet",
+    "squareUSSurveyFeetAbbr": "sq ftUS"
   },
   "featureSetChooser": {
     "select": "בחר",
     "dragBox": "גרור",
     "dragMouse": "גרור את העכבר",
-    "selectByRectangle": "בחר לפי מלבן",
+    "selectByRectangle": "בחר בעזרת מלבן",
     "selectFeaturesTip": "בחר ישויות על ידי שרטוט מלבן סביבן במפה באמצעות גרירה",
     "newSelectionTip": "צור בחירה חדשה",
     "addSelectionTip": "הוסף לנבחרים",
     "removeSelectionTip": "הסר מהבחירה",
     "selectFromCurrentSelectionTip": "בחר מתוך הרשומות הנבחרות",
-    "unselectAllSelectionTip": "בטל את הבחירה בכל הישויות הנבחרות הנוכחיות"
+    "unselectAllSelectionTip": "בטל את הבחירה בכל הישויות הנבחרות הנוכחיות",
+    "selectByPolygon": "בחירה לפי פוליגון",
+    "selectByCircle": "בחירה לפי מעגל",
+    "selectByLine": "בחירה לפי קו",
+    "chooseSelectingTools": "בחר כלי בחירה",
+    "darw": "שרטוט",
+    "drawShap": "שרטט צורה"
   },
   "widgetManager": {
     "createWidgetError": "שגיאה ביצירת ווידג'ט",
@@ -433,7 +511,7 @@ define({
     "findLocation_inputPlaceholder": "המקום או הישות שלך",
     "queryFeature": "שלח שאילתא לגבי ישות ובצע פעולת התמקדות",
     "addMarker": "הוסף סימול למפה",
-    "addMarker_titlePlaceholder": "כותרת חלון ה-Popup של הסמן",
+    "addMarker_titlePlaceholder": "כותרת חלון קופץ של הסמן",
     "addMarker_symbolURL": "כתובת ה-URL של סמל הסימול",
     "addMarker_label": "תווית סימול",
     "popupTitle": "כותרת חלון קופץ",
@@ -447,6 +525,87 @@ define({
     "shareToWebTips": "אפליקציה זו אינה משותפת עם הציבור. ייתכן שאנשים לא יוכלו להציג אותה."
   },
   "webSceneLoader": {
-    "webglSupportTip": "אפליקציות אינטרנט בתלת-ממד אינו נתמכות בדפדפן שלך."
-  }
+    "webglSupportTip": "אפליקציות אינטרנט בתלת-ממד אינן נתמכות בדפדפן שלך."
+  },
+  "map": {
+    "basemapNotAvailable": "מפת הבסיס לא זמינה.",
+    "displayDefaultBasemap": "מציג במקום זאת את מפת הבסיס שהוגדרה כברירת מחדל.",
+    "layerLoadedError": "לא ניתן להוסיף למפה את השכבה ${layers}."
+  },
+  "popup": {
+    "relatedTables": "טבלאות מקושרות:",
+    "relatedRecords": "רשומות מקושרות:",
+    "noRelatedRecotds": "לא נמצאו רשומות קשורות.",
+    "chooseFieldTip": "בחר מאפיין להצגת הרשימה",
+    "saveAsPopupTitle": "זהה לכותרת החלון הקופץ"
+  },
+  "queryFeatures": {
+    "tooManyFeaturesTip": "יש יותר מדי ישויות בבחירה. ייתכן שאחזורם והצגתם על המפה יימשך זמן רב.",
+    "askForContinue": "האם ברצונך להמשיך?"
+  },
+  "colorPalette": {
+    "transparent": "שקוף",
+    "custom": "מותאם"
+  },
+  "temperature": {
+    "celsius": "צלזיוס",
+    "fahrenheit": "פרנהייט"
+  },
+  "report": {
+    "printButtonLabel": "הדפס",
+    "reportDimensionsMsg": "דוח זה תוכנן להדפסה על-גבי נייר ${paperSize}",
+    "unableToPrintMapMsg": "אירעה שגיאה בעת הדפסת המפה/ות.",
+    "notesHint": "הזן הערות כאן",
+    "landscape": "נוף",
+    "portrait": "לאורך",
+    "mapOnly": "MAP_ONLY",
+    "a0": "A0",
+    "a1": "A1",
+    "a2": "A2",
+    "a3": "A3",
+    "a4": "A4",
+    "a5": "A5",
+    "letterANSIA": "Letter ANSI A",
+    "tabloidANSIB": "Tabloid ANSI B",
+    "letter": "Letter",
+    "legal": "Legal",
+    "tabloid": "Tabloid",
+    "ansi_a": "ANSI A",
+    "ansi_b": "ANSI B",
+    "ansi_c": "ANSI C",
+    "ansi_d": "ANSI D",
+    "ansi_e": "ANSI E"
+  },
+  "snapshot": {
+    "snapshot_complete": "הצלחה ביצירת צילום בזק.",
+    "snapshot_failed": "כשל ביצירת צילום בזק.",
+    "snapshot_append": "צילום בזק",
+    "utc": "זמן אוניברסלי מתואם- UTC"
+  },
+  "statisticsChart": {
+    "enlarge": "הגדל",
+    "setting": "הגדרה",
+    "count": "מונה",
+    "horizontalAxis": "ציר אופקי",
+    "verticalAxis": "ציר אנכי",
+    "dataLabels": "תוויות נתונים",
+    "color": "צבע"
+  },
+  "frameworkDatasource": {
+    "setDataSource": "הגדר מקור נתונים",
+    "customDataSource": "מקור נתונים נוסף",
+    "selectCustomDataTip": "בחר מקור נתונים מאפליקציה זו.",
+    "widgetOutputs": "פלט ווידג'ט",
+    "noExtraDsAvailable": "מקורות נתונים נוספים לא זמינים.",
+    "addExtraDsTip": "עבור לכרטיסייה 'מאפיין' של הבונה, ולחץ על 'מקור נתונים נוסף' כדי להוסיף מידע.",
+    "widgetOutpusListTip": "גם ווידג'טים של פלט (אם הם קיימים) רשומים כאן."
+  },
+  "gridLayout": {
+    "addWidgetTip": "הוסף ווידג'טים לכאן דרך הכרטיסיה 'ווידג'ט'",
+    "modifyLayout": "שנה פריסה",
+    "dragToAdd": "גרור כדי להוסיף",
+    "mapArea": "אזור מפה"
+  },
+  "noEditPrivileges": "לחשבונך אין הרשאות ליצור נתונים או לשנות אותם.",
+  "invalidConfiguration": "תצורת הווידג'ט לא הוגדרה או שהשכבות בתצורה אינן נמצאות עוד במפה. פתח את האפליקציה במצב עריכה והגדר מחדש את תצורת הווידג'ט."
 });

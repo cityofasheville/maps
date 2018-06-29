@@ -11,10 +11,10 @@ define({
   "itemMoveDown": "Deplasare în jos",
   "itemDesc": "Descriere",
   "itemDownload": "Descărcare",
-  "itemToAttributeTable": "Deschidere tabel de atribute",
+  "itemToAttributeTable": "Vizualizare în tabelul de atribute",
   "itemShowItemDetails": "Afişare detalii element",
   "empty": "gol",
-  "removePopup": "Dezactivare mesaje pop-up",
+  "removePopup": "Dezactivare pop-up",
   "enablePopup": "Activare pop-up",
   "turnAllLayersOff": "Dezactivaţi toate straturile tematice",
   "turnAllLayersOn": "Activaţi toate straturile tematice",
@@ -22,6 +22,6 @@ define({
   "collapseAlllayers": "Restrângeţi toate straturile tematice",
   "turnAllLabelsOff": "Dezactivaţi toate etichetele",
   "turnAllLabelsOn": "Activaţi toate etichetele",
-  "showLabels": "Afişare etichete",
+  "showLabels": "Afişaţi etichetele",
   "hideLables": "Ascundeţi etichetele"
 });

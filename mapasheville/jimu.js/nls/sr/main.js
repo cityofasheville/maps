@@ -6,6 +6,7 @@ define({
     "yes": "Da",
     "no": "Ne",
     "next": "Sledeće",
+    "previous": "Prethodno",
     "back": "Nazad",
     "selected": "izabrano",
     "name": "Naziv",
@@ -48,11 +49,34 @@ define({
     "scene": "Scena",
     "reset": "Poništi",
     "icon": "Ikona",
+    "folder": "Fascikla",
     "share": "Podeli",
     "view": "Prikaži",
     "newText": "Novo",
     "edit": "Izmeni",
-    "wkid": "WKID"
+    "wkid": "WKID",
+    "table": "Tabela",
+    "zoomIn": "Uvećanje",
+    "zoomOut": "Umanjenje",
+    "continue1": "Nastavi",
+    "longitude": "Geografska dužina",
+    "latitude": "Geografska širina",
+    "custom": "Prilagođeno",
+    "image": "Snimak",
+    "font": "Font",
+    "text": "Tekst",
+    "all": "Sve",
+    "number": "Broj",
+    "percentage": "Procenat",
+    "unit": "Jedinica",
+    "thousand": "Hiljada",
+    "billion": "Milijarda",
+    "million": "Milion",
+    "none": "Ništa",
+    "field": "Polje",
+    "operation": "Radnja",
+    "disableUpdateGeometry": "Onemogući ažuriranje geometrije",
+    "preview": "Pregledaj"
   },
   "errorCode": "Kôd",
   "errorMessage": "Poruka",
@@ -70,7 +94,7 @@ define({
     "stddev": "Standardna devijacija"
   },
   "symbolChooser": {
-    "preview": "Pregledaj",
+    "preview": "Prikaži",
     "basic": "Osnovna verzija",
     "arrows": "Strelice",
     "business": "Privreda",
@@ -84,8 +108,8 @@ define({
     "symbolSize": "Veličina simbola",
     "color": "Boja",
     "alpha": "Alpha",
-    "outlineColor": "Boja konture",
-    "outlineWidth": "Širina konture",
+    "outlineColor": "Boja kontura",
+    "outlineWidth": "Širina kontura",
     "style": "Stil",
     "width": "Širina",
     "text": "Tekst",
@@ -96,7 +120,10 @@ define({
     "dash": "Crta",
     "dot": "Tačka",
     "dashDot": "Crta tačka",
-    "dashDotDot": "Crta tačka tačka"
+    "dashDotDot": "Crta tačka tačka",
+    "customImage": "Prilagođeni snimak",
+    "chooseFile": "Izaberite datoteku",
+    "noFileChoosen": "Nijedna datoteka nije odabrana."
   },
   "transparency": {
     "opaque": "Neprozirno",
@@ -106,7 +133,7 @@ define({
     "domain": "Domen",
     "use": "Koristi",
     "singleSymbol": "Pojedinačan simbol",
-    "uniqueSymbol": "Jedinstveni simbol",
+    "uniqueSymbol": "Jedinstveni simboli",
     "color": "Boja",
     "size": "Veličina",
     "toShow": "Za prikaz",
@@ -125,13 +152,13 @@ define({
     "point": "Tačka",
     "line": "Linija",
     "polyline": "Poligon",
-    "freehandPolyline": "Poligon slobodnom rukom",
+    "freehandPolyline": "Polilinija slobodnom rukom",
     "triangle": "Trougao",
     "extent": "Obuhvat",
     "circle": "Krug",
     "ellipse": "Elipsa",
     "polygon": "Polilinija",
-    "freehandPolygon": "Polilinija slobodnom rukom",
+    "freehandPolygon": "Poligon crtan slobodnom rukom",
     "text": "Tekst",
     "clear": "Izbriši"
   },
@@ -161,7 +188,7 @@ define({
     "unableConnectTo": "Nije moguće povezivanje na"
   },
   "layerServiceBrowser": {
-    "noServicesFound": "Nema pronađenog servisa mape ili servisa geoobjekata",
+    "noServicesFound": "Nema pronađenog servisa mape ili servisa geoobjekata.",
     "unableConnectTo": "Nije moguće povezivanje na"
   },
   "basicServiceChooser": {
@@ -176,8 +203,8 @@ define({
     "invalidUrl": "Nevažeća URL adresa."
   },
   "filterBuilder": {
-    "addAnotherExpression": "Dodaj izraz filtera",
-    "addSet": "Dodaj set izraza",
+    "addAnotherExpression": "Dodaj izraz",
+    "addSet": "Dodaj skup",
     "matchMsg": "Ubaci u sloj geoobjekte koji se podudaraju sa ${any_or_all} od sledećih izraza",
     "matchMsgSet": "${any_or_all} sledeći izrazi u ovom setu su istiniti",
     "all": "Sve",
@@ -202,9 +229,14 @@ define({
     "dateOperatorIsNotOn": "nije na",
     "dateOperatorIsBefore": "je ispred",
     "dateOperatorIsAfter": "je iza",
+    "dateOperatorIsOnOrBefore": "je na ili pre",
+    "dateOperatorIsOnOrAfter": "je na ili posle",
+    "dateOperatorMinutes": "minuti",
+    "dateOperatorHours": "časova",
     "dateOperatorDays": "dani",
     "dateOperatorWeeks": "sedmice",
     "dateOperatorMonths": "meseci",
+    "dateOperatorYears": "godina",
     "dateOperatorInTheLast": "u poslednjih",
     "dateOperatorNotInTheLast": "nije u poslednjih",
     "dateOperatorIsBetween": "je između",
@@ -230,44 +262,49 @@ define({
     "error": {
       "invalidParams": "Nevažeći parametri.",
       "invalidUrl": "Nevažeća URL adresa.",
-      "noFilterFields": "Sloj nema polja koja mogu da budu korišćena za filter.",
+      "noFilterFields": "Sloj nema polja koja mogu da budu korišćena za kreiranje filtera.",
       "invalidSQL": "Nevažeći SQL izraz.",
       "cantParseSQL": "Parsiranje SQL izraza nije moguće."
     },
     "caseSensitive": "Razlikuje velika i mala slova",
     "notSupportCaseSensitiveTip": "Hostovani servisi ne podržavaju upite koji razlikuju velika i mala slova.",
-    "setFilterTip": "Pravilno postavite filter."
+    "setFilterTip": "Pravilno postavite filtere.",
+    "listValues": "Izlistaj vrednosti",
+    "cascadeFilterTip": "Prikažite samo vrednosti filtrirane po prethodnim izrazima.",
+    "noneCascadeFilterTip": "Sve jedinstvene vrednosti u ovom polju",
+    "previousCascadeFilterTip": "Vrednosti filtrirane po prethodnim izrazima.",
+    "allCascadeFilterTip": "Vrednosti filtrirane po svim drugim izrazima."
   },
   "featureLayerSource": {
     "layer": "Sloj",
     "browse": "Pretraži",
-    "selectFromMap": "Izaberi iz mape",
-    "selectFromPortal": "Dodaj iz Portal for ArcGIS",
-    "addServiceUrl": "Dodaj URL adresu servisa",
+    "selectFromMap": "Mapa",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "URL servisa",
     "inputLayerUrl": "URL adresa ulaznog sloja",
     "selectLayer": "Izaberite sloj geoobjekata iz trenutne mape.",
     "chooseItem": "Odaberite stavku sloja geoobjekata.",
     "setServiceUrl": "Unesite URL adresu servisa geoobjekata ili servisa mape.",
-    "selectFromOnline": "Dodaj iz ArcGIS Online",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Odaberite sloj geoobjekata."
   },
   "queryableLayerSource": {
     "layer": "Sloj",
     "browse": "Pretraži",
-    "selectFromMap": "Izaberi iz mape",
-    "selectFromPortal": "Dodaj iz Portal for ArcGIS",
-    "addServiceUrl": "Dodaj URL adresu servisa",
+    "selectFromMap": "Mapa",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "URL servisa",
     "inputLayerUrl": "URL adresa ulaznog sloja",
     "selectLayer": "Izaberi sloj iz trenutne mape.",
     "chooseItem": "Odaberite stavku.",
     "setServiceUrl": "Unesite URL adresu servisa.",
-    "selectFromOnline": "Dodaj iz ArcGIS Online",
+    "selectFromOnline": "ArcGIS Online",
     "chooseLayer": "Odaberite sloj."
   },
   "gpSource": {
-    "selectFromPortal": "Dodaj iz Portal for ArcGIS",
-    "addServiceUrl": "Dodaj URL adresu servisa",
-    "selectFromOnline": "Dodaj iz ArcGIS Online",
+    "selectFromPortal": "Portal for ArcGIS",
+    "addServiceUrl": "URL servisa",
+    "selectFromOnline": "ArcGIS Online",
     "setServiceUrl": "Unesite URL adresu servisa geoprocesiranja.",
     "chooseItem": "Odaberite stavku servisa geoprocesiranja.",
     "chooseTask": "Odaberite zadatak geoprocesiranja."
@@ -293,7 +330,11 @@ define({
     "owner": "vlasnik",
     "signInTo": "Prijavite se na",
     "lastModified": "Poslednja izmena",
-    "moreDetails": "Više detalja"
+    "moreDetails": "Više detalja",
+    "mostRecent": "Najnovije",
+    "mostViewed": "Najviše pregledano",
+    "highestRated": "Najbolje ocenjeno",
+    "viewItemDetails": "Prikaži detalje stavke"
   },
   "featureLayerChooserFromPortal": {
     "notSupportQuery": "Servis ne podržava upit."
@@ -313,7 +354,7 @@ define({
     "itemMoveDown": "Pomeri se na dole",
     "itemDesc": "Opis",
     "itemDownload": "Preuzmi",
-    "itemToAttributeTable": "Otvori tabelu atributa"
+    "itemToAttributeTable": "Prikaži u tabeli atributa"
   },
   "imageChooser": {
     "unsupportReaderAPI": "Zaduženja: pregledač ne podržava API čitač podataka",
@@ -322,7 +363,7 @@ define({
     "invalidType": "Nevažeći tip datoteke.",
     "cropImage": "Izreži snimak",
     "exceed": "Veličina datoteke ne može da premaši 1024 KB",
-    "enableFlash": "Zaduženja: aktivirajte flash.",
+    "enableFlash": "Omogućite Adobe Flash pre nego što potražite snimak.",
     "cropWaining": "Odaberite fotografiju čije su dimenzije najmanje ${width} x ${height} piksela.",
     "toolTip": "Za najbolje rezultate, snimak treba da bude ${width} piksela širok i ${height} piksela visok. Ostale veličine će biti prilagođene da se uklope. Prihvatljivi formati snimaka su: PNG, GIF i JPEG."
   },
@@ -347,17 +388,22 @@ define({
     "restoreMap": "Kliknite da biste vratili obuhvat mape i vidljivost slojeva gde ste stali."
   },
   "featureActions": {
+    "featureActions": "Radnje sa geoobjektima",
     "ZoomTo": "Zumiraj na",
     "PanTo": "Pomeri do",
     "Flash": "Blic",
     "ShowPopup": "Prikaži iskačući prozor",
     "CreateLayer": "Kreiraj sloj",
     "ShowStatistics": "Statistika...",
-    "ClearSelection": "Obriši selekciju",
+    "ClearSelection": "Izbriši izbor",
     "ExportToCSV": "Izvezi u CSV datoteku",
     "ShowSelectedFeature": "Prikaži izabrane geoobjekte",
     "ExportToFeatureCollection": "Izvezi u kolekciju geoobjekata",
-    "ExportToGeoJSON": "Izvezi u GeoJSON"
+    "ExportToGeoJSON": "Izvezi u GeoJSON",
+    "EditAttributes": "Izmeni atribute",
+    "AddMarker": "Dodaj marker",
+    "RemoveMarker": "Ukloni marker",
+    "SaveToMyContent": "Sačuvaj u Mom sadržaju"
   },
   "spatialFilterByFeatures": {
     "relatedLayer": "Povezani sloj",
@@ -365,7 +411,7 @@ define({
     "drawShapesTip": "Nacrtajte oblike da biste izabrali geoobjekte",
     "pleaseDrawShapesTip": "Nacrtajte oblike da biste izabrali geoobjekte",
     "allFeaturesTip": "Svi geoobjekti u sloju",
-    "selectFeaturesOrDrawShapesTip": "Koristite izabrane geoobjekte u ovom sloju ili nacrtajte oblike na mapi da biste ograničili geoobjekte."
+    "selectFeaturesOrDrawShapesTip": "Koristite selektovane geoobjekte u ovom sloju ili nacrtajte oblike na mapi da biste ograničili geoobjekte."
   },
   "searchDistance": {
     "applySearchDistance": "Primeni rastojanje pretrage",
@@ -373,23 +419,55 @@ define({
   },
   "units": {
     "miles": "Milje",
+    "milesAbbr": "mi",
     "kilometers": "Kilometri",
+    "kilometersAbbr": "km",
     "feet": "Stope",
+    "feetAbbr": "ft",
     "meters": "Metri",
+    "metersAbbr": "m",
     "yards": "Jardi",
-    "nauticalMiles": "Nautičke milje"
+    "yardsAbbr": "yd",
+    "acres": "Ari",
+    "acresAbbr": "acres",
+    "nauticalMiles": "Nautičke milje",
+    "nauticalMilesAbbr": "nmi",
+    "uSSurveyFeet": "stope",
+    "uSSurveyFeetAbbr": "ftUS",
+    "decimalDegree": "Decimalni stepeni",
+    "decimalDegreeAbbr": "dd",
+    "degreeMinuteSeconds": "Stepeni minuti sekunde",
+    "degreeMinuteSecondsAbbr": "st-min-sek",
+    "squareMiles": "Kvadratne milje",
+    "squareMilesAbbr": "mi²",
+    "squareKilometer": "Kvadratni kilometri",
+    "squareKilometerAbbr": "km²",
+    "squareFeet": "Kvadratne stope",
+    "squareFeetAbbr": "ft²",
+    "squareMeters": "Kvadratni metri",
+    "squareMetersAbbr": "m²",
+    "squareYards": "Kvadratne jarde",
+    "squareYardsAbbr": "yd²",
+    "squareUSSurveyFeet": "Kvadratne stope",
+    "squareUSSurveyFeetAbbr": "sq ftUS"
   },
   "featureSetChooser": {
     "select": "Izaberi",
     "dragBox": "Prevuci",
     "dragMouse": "Prevucite mišem",
-    "selectByRectangle": "Izaberi pomoću pravougaonika",
+    "selectByRectangle": "Selektuj pomoću pravougaonika",
     "selectFeaturesTip": "Izaberite geoobjekat prevlačenjem pravougaonika oko njih na mapi",
     "newSelectionTip": "Kreiraj novi izbor",
     "addSelectionTip": "Dodaj u izbor",
     "removeSelectionTip": "Ukloni iz izbora",
     "selectFromCurrentSelectionTip": "Izaberi iz trenutnog izbora",
-    "unselectAllSelectionTip": "Poništi sve trenutno izabrane geoobjekte"
+    "unselectAllSelectionTip": "Poništi sve trenutno izabrane geoobjekte",
+    "selectByPolygon": "Selektuj pomoću poligona",
+    "selectByCircle": "Selektuj pomoću kruga",
+    "selectByLine": "Selektuj pomoću linije",
+    "chooseSelectingTools": "Izaberi alate za selekciju",
+    "darw": "Nacrtaj",
+    "drawShap": "Nacrtajte oblik"
   },
   "widgetManager": {
     "createWidgetError": "Greška pri kreiranju vidžeta",
@@ -448,5 +526,86 @@ define({
   },
   "webSceneLoader": {
     "webglSupportTip": "3D veb aplikacije nisu podržane u vašem pregledaču."
-  }
+  },
+  "map": {
+    "basemapNotAvailable": "Pozadinska mapa nije dostupna.",
+    "displayDefaultBasemap": "Prikazuje se podrazumevana pozadinska mapa.",
+    "layerLoadedError": "Sloj, ${layers} nije moguće dodati na mapu."
+  },
+  "popup": {
+    "relatedTables": "Povezane tabele:",
+    "relatedRecords": "Povezani zapisi:",
+    "noRelatedRecotds": "Nema pronađenih povezanih zapisa.",
+    "chooseFieldTip": "Odaberite atribut za prikaz liste",
+    "saveAsPopupTitle": "Isti kao naslov iskačućeg prozora"
+  },
+  "queryFeatures": {
+    "tooManyFeaturesTip": "Vaš izbor sadrži previše geoobjekata. Njihovo preuzimanje i prikazivanje na mapi može da potraje.",
+    "askForContinue": "Želite li da nastavite?"
+  },
+  "colorPalette": {
+    "transparent": "Prozirno",
+    "custom": "Prilagođeno"
+  },
+  "temperature": {
+    "celsius": "Celzijus",
+    "fahrenheit": "Farenhajt"
+  },
+  "report": {
+    "printButtonLabel": "Odštampaj",
+    "reportDimensionsMsg": "Ovaj izveštaj je dizajniran za štampanje na ${paperSize} papiru",
+    "unableToPrintMapMsg": "Došlo je do greške prilikom štampanja mape/mapa.",
+    "notesHint": "Unesite komentare ovde",
+    "landscape": "Pejzaž",
+    "portrait": "Uspravno",
+    "mapOnly": "MAP_ONLY",
+    "a0": "A0",
+    "a1": "A1",
+    "a2": "A2",
+    "a3": "A3",
+    "a4": "A4",
+    "a5": "A5",
+    "letterANSIA": "Pismo ANSI A",
+    "tabloidANSIB": "Tabloid ANSI B",
+    "letter": "Pismo",
+    "legal": "Pravno",
+    "tabloid": "Tabloid",
+    "ansi_a": "ANSI A",
+    "ansi_b": "ANSI B",
+    "ansi_c": "ANSI C",
+    "ansi_d": "ANSI D",
+    "ansi_e": "ANSI E"
+  },
+  "snapshot": {
+    "snapshot_complete": "Uspešno kreiranje snapshot-a.",
+    "snapshot_failed": "Kreiranje snapshot-a nije uspelo.",
+    "snapshot_append": "Snapshot",
+    "utc": "UTC"
+  },
+  "statisticsChart": {
+    "enlarge": "Uvećaj",
+    "setting": "Postavka",
+    "count": "Brojač",
+    "horizontalAxis": "Horizontalna osa",
+    "verticalAxis": "Vertikalna osa",
+    "dataLabels": "Oznake podataka",
+    "color": "Boja"
+  },
+  "frameworkDatasource": {
+    "setDataSource": "Postavi izvor podataka",
+    "customDataSource": "Dodatni izvor podataka",
+    "selectCustomDataTip": "Odaberite izvor podataka iz ove aplikacije.",
+    "widgetOutputs": "Izlazni vidžet",
+    "noExtraDsAvailable": "Nema dostupnih dodatnih izvora podataka.",
+    "addExtraDsTip": "Otvorite karticu Atribut u alatki za izradu, pa kliknite na Dodatni izvor podataka da biste dodali podatke.",
+    "widgetOutpusListTip": "Izlaz vidžeta (ako postoji) takođe se navodi ovde."
+  },
+  "gridLayout": {
+    "addWidgetTip": "Dodajte vidžet ovde pomoću vidžet kartice",
+    "modifyLayout": "Izmenite raspored",
+    "dragToAdd": "Prevucite za dodavanje",
+    "mapArea": "OBLAST MAPE"
+  },
+  "noEditPrivileges": "Vaš nalog nema dozvolu za kreiranje ili izmenu podataka.",
+  "invalidConfiguration": "Vidžet nije konfigurisan ili slojevi u konfiguraciji više nisu na mapi. Otvorite aplikaciju u režimu za izradu i ponovo konfigurišite vidžet."
 });

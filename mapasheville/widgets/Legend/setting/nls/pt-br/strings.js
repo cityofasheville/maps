@@ -1,7 +1,7 @@
 define({
-  "left": "Alinhar à Esquerda",
-  "right": "Alinhar à Direita",
+  "left": "Alinhar à esquerda",
+  "right": "Alinhar à direita",
   "arrangement": "Disposição",
-  "autoUpdate": "Atualização Automática",
-  "respectCurrentMapScale": "Respeitar Escala de Mapa Atual"
+  "autoUpdate": "Atualização automática",
+  "respectCurrentMapScale": "Respeite a escala do mapa atual"
 });

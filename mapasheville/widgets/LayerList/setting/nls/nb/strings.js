@@ -5,7 +5,7 @@ define({
   "transparency": "Gjennomsiktighet",
   "controlPopup": "Aktiver/deaktiver popup",
   "moveUpAndDown": "Flytt opp / Flytt ned",
-  "attributeTable": "Åpne attributtabell",
+  "attributeTable": "Vis i attributtabell",
   "url": "Beskrivelse / Vis elementdetaljer / Last ned",
   "layerSelectorTitle": "Velg hvilke lag som skal vises i listen."
 });

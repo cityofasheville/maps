@@ -25,9 +25,16 @@
 	display: none;
 }
 .jimu-widget-about-setting .editor-container .dijitEditorIFrameContainer{
-	position: absolute;
-	top: 58px;
-	bottom: 0;
-	left: 0;
-	right: 0;
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+}
+.jimu-widget-about-setting .editor-container .dijitEditorIFrameContainer {
+	padding-top: 0;
+}
+.jimu-widget-about-setting .editor-container .dijitEditorIFrameContainer textarea {
+	resize: none;
+}
+.jimu-widget-about-setting .dojoxEditorUploadNorm.dijitButtonDisabled {
+	background: #ccc url(../../css/images/uploadImageIcon_disabled.gif) no-repeat 2px 2px;
 }
