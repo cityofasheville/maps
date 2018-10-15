@@ -194,8 +194,7 @@
         "position": {
           "relativeTo": "map"
         },
-        "index": 4,
-        "openAtStart": false
+        "index": 4
       },
       {
         "name": "BasemapGallery",
@@ -277,7 +276,8 @@
         "uri": "widgets/Query/Widget",
         "config": "configs/Query/config_Park Finder.json",
         "index": 12,
-        "id": "widgets_Query_Widget_50"
+        "id": "widgets_Query_Widget_50",
+        "openAtStart": true
       }
     ],
     "groups": []
