@@ -237,29 +237,11 @@
         "icon": "widgets/Measurement/images/icon.png?wab_dv=2.1"
       },
       {
-        "name": "Draw",
-        "version": "2.5",
-        "uri": "widgets/Draw/Widget",
-        "config": "configs/Draw/config_Draw.json",
-        "index": 9,
-        "id": "widgets_Draw_Widget_33",
-        "icon": "widgets/Draw/images/icon.png?wab_dv=2.1"
-      },
-      {
-        "name": "StreetView",
-        "version": "2.0.1",
-        "uri": "widgets/StreetView/Widget",
-        "config": "configs/StreetView/config_StreetView.json",
-        "index": 10,
-        "id": "widgets_StreetView_Widget_35",
-        "icon": "widgets/StreetView/images/icon.png?wab_dv=2.1"
-      },
-      {
         "name": "Print",
         "version": "2.5",
         "uri": "widgets/Print/Widget",
         "config": "configs/Print/config_Print.json",
-        "index": 11,
+        "index": 9,
         "id": "widgets_Print_Widget_34",
         "icon": "widgets/Print/images/icon.png?wab_dv=2.1"
       },
@@ -267,7 +249,7 @@
         "name": "HomeButton",
         "version": "2.5",
         "uri": "widgets/HomeButton/Widget",
-        "index": 12,
+        "index": 10,
         "id": "widgets_HomeButton_Widget_44",
         "position": {
           "relativeTo": "map"
@@ -279,7 +261,7 @@
         "version": "2.5",
         "uri": "widgets/MyLocation/Widget",
         "config": "configs/MyLocation/config_MyLocation.json",
-        "index": 13,
+        "index": 11,
         "id": "widgets_MyLocation_Widget_45",
         "position": {
           "relativeTo": "map"
@@ -293,7 +275,7 @@
         "icon": "configs\\Query\\icon_Park Finder.png",
         "uri": "widgets/Query/Widget",
         "config": "configs/Query/config_Park Finder.json",
-        "index": 14,
+        "index": 12,
         "id": "widgets_Query_Widget_50",
         "openAtStart": true
       }
@@ -327,332 +309,515 @@
       "widget~widgets_Query_Widget_50~0": {
         "id": "widget~widgets_Query_Widget_50~0",
         "type": "Features",
-        "label": "Dog Park",
+        "label": "Dog Parks",
         "dataSchema": {
           "geometryType": "esriGeometryPoint",
           "fields": [
             {
-              "name": "objectid",
+              "name": "OBJECTID",
               "type": "esriFieldTypeOID",
               "alias": "objectid",
-              "domain": null,
+              "sqlType": "sqlTypeOther",
+              "nullable": false,
               "editable": false,
-              "nullable": false
+              "domain": null,
+              "defaultValue": null
             },
             {
               "name": "parkname",
               "type": "esriFieldTypeString",
               "alias": "parkname",
-              "domain": null,
-              "editable": true,
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 50
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             },
             {
-              "name": "housenumbe",
+              "name": "full_desc",
               "type": "esriFieldTypeString",
-              "alias": "housenumbe",
-              "domain": null,
-              "editable": true,
+              "alias": "full_desc",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 50
-            },
-            {
-              "name": "streetname",
-              "type": "esriFieldTypeString",
-              "alias": "streetname",
-              "domain": null,
               "editable": true,
-              "nullable": true,
-              "length": 50
-            },
-            {
-              "name": "acres",
-              "type": "esriFieldTypeDouble",
-              "alias": "acres",
               "domain": null,
-              "editable": true,
-              "nullable": true
+              "defaultValue": null
             },
             {
               "name": "address",
               "type": "esriFieldTypeString",
-              "alias": "Address",
-              "domain": null,
-              "editable": true,
+              "alias": "address",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "recreation",
-              "type": "esriFieldTypeString",
-              "alias": "Recreation",
-              "domain": null,
               "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "specialize",
-              "type": "esriFieldTypeString",
-              "alias": "Specialize",
               "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "restrooms",
-              "type": "esriFieldTypeString",
-              "alias": "Restrooms",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "picnic_tables",
-              "type": "esriFieldTypeString",
-              "alias": "picnic_tables",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "picnic_shelter",
-              "type": "esriFieldTypeString",
-              "alias": "picnic_shelter",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "playground",
-              "type": "esriFieldTypeString",
-              "alias": "playground",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "wi_fi",
-              "type": "esriFieldTypeString",
-              "alias": "WI_FI",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "baseball_football",
-              "type": "esriFieldTypeString",
-              "alias": "baseball_football",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "field",
-              "type": "esriFieldTypeString",
-              "alias": "Field",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "tennis_courts",
-              "type": "esriFieldTypeString",
-              "alias": "tennis_courts",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "multi_use_",
-              "type": "esriFieldTypeString",
-              "alias": "Multi_Use_",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "grills",
-              "type": "esriFieldTypeString",
-              "alias": "Grills",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "basketball",
-              "type": "esriFieldTypeString",
-              "alias": "Basketball",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "dog_park",
-              "type": "esriFieldTypeString",
-              "alias": "Dog_Park",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "cycling",
-              "type": "esriFieldTypeString",
-              "alias": "Cycling",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "hours",
-              "type": "esriFieldTypeString",
-              "alias": "Park Hours",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "disc_golf",
-              "type": "esriFieldTypeString",
-              "alias": "Disc Golf",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "gym",
-              "type": "esriFieldTypeString",
-              "alias": "Gym",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "climbing_w",
-              "type": "esriFieldTypeString",
-              "alias": "climbing_w",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "open_play",
-              "type": "esriFieldTypeString",
-              "alias": "Open Play",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "lawn_bowling",
-              "type": "esriFieldTypeString",
-              "alias": "Lawn Bowling",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "shuffleboard",
-              "type": "esriFieldTypeString",
-              "alias": "Shuffleboard",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "pool",
-              "type": "esriFieldTypeString",
-              "alias": "Pool",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "velodrome",
-              "type": "esriFieldTypeString",
-              "alias": "Velodrome",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "splashevil",
-              "type": "esriFieldTypeString",
-              "alias": "splashevil",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "volleyball",
-              "type": "esriFieldTypeString",
-              "alias": "Volleyball",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "websitelin",
-              "type": "esriFieldTypeString",
-              "alias": "websitelin",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 250
-            },
-            {
-              "name": "imagelink",
-              "type": "esriFieldTypeString",
-              "alias": "Image Link",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 250
+              "defaultValue": null
             },
             {
               "name": "gisid",
               "type": "esriFieldTypeString",
               "alias": "gisid",
-              "domain": null,
-              "editable": true,
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 3
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "hours",
+              "type": "esriFieldTypeString",
+              "alias": "hours",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "img_link",
+              "type": "esriFieldTypeString",
+              "alias": "img_link",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "spec_facil",
+              "type": "esriFieldTypeString",
+              "alias": "spec_facil",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "rec_ctr",
+              "type": "esriFieldTypeString",
+              "alias": "rec_ctr",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "gym",
+              "type": "esriFieldTypeString",
+              "alias": "gym",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "pool",
+              "type": "esriFieldTypeString",
+              "alias": "pool",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "splash",
+              "type": "esriFieldTypeString",
+              "alias": "splash",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "dog_park",
+              "type": "esriFieldTypeString",
+              "alias": "dog_park",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "playground",
+              "type": "esriFieldTypeString",
+              "alias": "playground",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "basket_ct",
+              "type": "esriFieldTypeString",
+              "alias": "basket_ct",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "ball_field",
+              "type": "esriFieldTypeString",
+              "alias": "ball_field",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "ath_field",
+              "type": "esriFieldTypeString",
+              "alias": "ath_field",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "sport_ct",
+              "type": "esriFieldTypeString",
+              "alias": "sport_ct",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "tennis_pra",
+              "type": "esriFieldTypeString",
+              "alias": "tennis_pra",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "volleyball",
+              "type": "esriFieldTypeString",
+              "alias": "volleyball",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "lawn_bowl",
+              "type": "esriFieldTypeString",
+              "alias": "lawn_bowl",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "disc_golf",
+              "type": "esriFieldTypeString",
+              "alias": "disc_golf",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "velodrome",
+              "type": "esriFieldTypeString",
+              "alias": "velodrome",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "hockey",
+              "type": "esriFieldTypeString",
+              "alias": "hockey",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "shuffle_ct",
+              "type": "esriFieldTypeString",
+              "alias": "shuffle_ct",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "climb_wall",
+              "type": "esriFieldTypeString",
+              "alias": "climb_wall",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "visit_pav",
+              "type": "esriFieldTypeString",
+              "alias": "visit_pav",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "clubhouse",
+              "type": "esriFieldTypeString",
+              "alias": "clubhouse",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "amptheatr",
+              "type": "esriFieldTypeString",
+              "alias": "amptheatr",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "water_acc",
+              "type": "esriFieldTypeString",
+              "alias": "water_acc",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "fish_pier",
+              "type": "esriFieldTypeString",
+              "alias": "fish_pier",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "open_play",
+              "type": "esriFieldTypeString",
+              "alias": "open_play",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "garden",
+              "type": "esriFieldTypeString",
+              "alias": "garden",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "trail",
+              "type": "esriFieldTypeString",
+              "alias": "trail",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "loop_walk",
+              "type": "esriFieldTypeString",
+              "alias": "loop_walk",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "shelter",
+              "type": "esriFieldTypeString",
+              "alias": "shelter",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "shelt_link",
+              "type": "esriFieldTypeString",
+              "alias": "shelt_link",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "parking",
+              "type": "esriFieldTypeString",
+              "alias": "parking",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "restrooms",
+              "type": "esriFieldTypeString",
+              "alias": "restrooms",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "picnic_tab",
+              "type": "esriFieldTypeString",
+              "alias": "picnic_tab",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "grills",
+              "type": "esriFieldTypeString",
+              "alias": "grills",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "benches",
+              "type": "esriFieldTypeString",
+              "alias": "benches",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "more_info",
+              "type": "esriFieldTypeString",
+              "alias": "more_info",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "nat_ural",
+              "type": "esriFieldTypeString",
+              "alias": "nat_ural",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "result",
+              "type": "esriFieldTypeString",
+              "alias": "String_concat",
+              "sqlType": "sqlTypeOther",
+              "length": 2000,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             }
           ],
           "displayField": "parkname",
           "objectIdField": {
-            "name": "objectid",
+            "name": "OBJECTID",
             "type": "esriFieldTypeOID",
             "alias": "objectid",
-            "domain": null,
+            "sqlType": "sqlTypeOther",
+            "nullable": false,
             "editable": false,
-            "nullable": false
+            "domain": null,
+            "defaultValue": null
           },
           "typeIdField": ""
         }
@@ -665,327 +830,510 @@
           "geometryType": "esriGeometryPoint",
           "fields": [
             {
-              "name": "objectid",
+              "name": "OBJECTID",
               "type": "esriFieldTypeOID",
               "alias": "objectid",
-              "domain": null,
+              "sqlType": "sqlTypeOther",
+              "nullable": false,
               "editable": false,
-              "nullable": false
+              "domain": null,
+              "defaultValue": null
             },
             {
               "name": "parkname",
               "type": "esriFieldTypeString",
               "alias": "parkname",
-              "domain": null,
-              "editable": true,
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 50
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             },
             {
-              "name": "housenumbe",
+              "name": "full_desc",
               "type": "esriFieldTypeString",
-              "alias": "housenumbe",
-              "domain": null,
-              "editable": true,
+              "alias": "full_desc",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 50
-            },
-            {
-              "name": "streetname",
-              "type": "esriFieldTypeString",
-              "alias": "streetname",
-              "domain": null,
               "editable": true,
-              "nullable": true,
-              "length": 50
-            },
-            {
-              "name": "acres",
-              "type": "esriFieldTypeDouble",
-              "alias": "acres",
               "domain": null,
-              "editable": true,
-              "nullable": true
+              "defaultValue": null
             },
             {
               "name": "address",
               "type": "esriFieldTypeString",
-              "alias": "Address",
-              "domain": null,
-              "editable": true,
+              "alias": "address",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "recreation",
-              "type": "esriFieldTypeString",
-              "alias": "Recreation",
-              "domain": null,
               "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "specialize",
-              "type": "esriFieldTypeString",
-              "alias": "Specialize",
               "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "restrooms",
-              "type": "esriFieldTypeString",
-              "alias": "Restrooms",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "picnic_tables",
-              "type": "esriFieldTypeString",
-              "alias": "picnic_tables",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "picnic_shelter",
-              "type": "esriFieldTypeString",
-              "alias": "picnic_shelter",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "playground",
-              "type": "esriFieldTypeString",
-              "alias": "playground",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "wi_fi",
-              "type": "esriFieldTypeString",
-              "alias": "WI_FI",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "baseball_football",
-              "type": "esriFieldTypeString",
-              "alias": "baseball_football",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "field",
-              "type": "esriFieldTypeString",
-              "alias": "Field",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "tennis_courts",
-              "type": "esriFieldTypeString",
-              "alias": "tennis_courts",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "multi_use_",
-              "type": "esriFieldTypeString",
-              "alias": "Multi_Use_",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "grills",
-              "type": "esriFieldTypeString",
-              "alias": "Grills",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "basketball",
-              "type": "esriFieldTypeString",
-              "alias": "Basketball",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "dog_park",
-              "type": "esriFieldTypeString",
-              "alias": "Dog_Park",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "cycling",
-              "type": "esriFieldTypeString",
-              "alias": "Cycling",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "hours",
-              "type": "esriFieldTypeString",
-              "alias": "Park Hours",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "disc_golf",
-              "type": "esriFieldTypeString",
-              "alias": "Disc Golf",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "gym",
-              "type": "esriFieldTypeString",
-              "alias": "Gym",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "climbing_w",
-              "type": "esriFieldTypeString",
-              "alias": "climbing_w",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "open_play",
-              "type": "esriFieldTypeString",
-              "alias": "Open Play",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "lawn_bowling",
-              "type": "esriFieldTypeString",
-              "alias": "Lawn Bowling",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "shuffleboard",
-              "type": "esriFieldTypeString",
-              "alias": "Shuffleboard",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "pool",
-              "type": "esriFieldTypeString",
-              "alias": "Pool",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "velodrome",
-              "type": "esriFieldTypeString",
-              "alias": "Velodrome",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "splashevil",
-              "type": "esriFieldTypeString",
-              "alias": "splashevil",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "volleyball",
-              "type": "esriFieldTypeString",
-              "alias": "Volleyball",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "websitelin",
-              "type": "esriFieldTypeString",
-              "alias": "websitelin",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 250
-            },
-            {
-              "name": "imagelink",
-              "type": "esriFieldTypeString",
-              "alias": "Image Link",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 250
+              "defaultValue": null
             },
             {
               "name": "gisid",
               "type": "esriFieldTypeString",
               "alias": "gisid",
-              "domain": null,
-              "editable": true,
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 3
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "hours",
+              "type": "esriFieldTypeString",
+              "alias": "hours",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "img_link",
+              "type": "esriFieldTypeString",
+              "alias": "img_link",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "spec_facil",
+              "type": "esriFieldTypeString",
+              "alias": "spec_facil",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "rec_ctr",
+              "type": "esriFieldTypeString",
+              "alias": "rec_ctr",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "gym",
+              "type": "esriFieldTypeString",
+              "alias": "gym",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "pool",
+              "type": "esriFieldTypeString",
+              "alias": "pool",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "splash",
+              "type": "esriFieldTypeString",
+              "alias": "splash",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "dog_park",
+              "type": "esriFieldTypeString",
+              "alias": "dog_park",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "playground",
+              "type": "esriFieldTypeString",
+              "alias": "playground",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "basket_ct",
+              "type": "esriFieldTypeString",
+              "alias": "basket_ct",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "ball_field",
+              "type": "esriFieldTypeString",
+              "alias": "ball_field",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "ath_field",
+              "type": "esriFieldTypeString",
+              "alias": "ath_field",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "sport_ct",
+              "type": "esriFieldTypeString",
+              "alias": "sport_ct",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "tennis_pra",
+              "type": "esriFieldTypeString",
+              "alias": "tennis_pra",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "volleyball",
+              "type": "esriFieldTypeString",
+              "alias": "volleyball",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "lawn_bowl",
+              "type": "esriFieldTypeString",
+              "alias": "lawn_bowl",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "disc_golf",
+              "type": "esriFieldTypeString",
+              "alias": "disc_golf",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "velodrome",
+              "type": "esriFieldTypeString",
+              "alias": "velodrome",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "hockey",
+              "type": "esriFieldTypeString",
+              "alias": "hockey",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "shuffle_ct",
+              "type": "esriFieldTypeString",
+              "alias": "shuffle_ct",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "climb_wall",
+              "type": "esriFieldTypeString",
+              "alias": "climb_wall",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "visit_pav",
+              "type": "esriFieldTypeString",
+              "alias": "visit_pav",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "clubhouse",
+              "type": "esriFieldTypeString",
+              "alias": "clubhouse",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "amptheatr",
+              "type": "esriFieldTypeString",
+              "alias": "amptheatr",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "water_acc",
+              "type": "esriFieldTypeString",
+              "alias": "water_acc",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "fish_pier",
+              "type": "esriFieldTypeString",
+              "alias": "fish_pier",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "open_play",
+              "type": "esriFieldTypeString",
+              "alias": "open_play",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "garden",
+              "type": "esriFieldTypeString",
+              "alias": "garden",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "trail",
+              "type": "esriFieldTypeString",
+              "alias": "trail",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "loop_walk",
+              "type": "esriFieldTypeString",
+              "alias": "loop_walk",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "shelter",
+              "type": "esriFieldTypeString",
+              "alias": "shelter",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "shelt_link",
+              "type": "esriFieldTypeString",
+              "alias": "shelt_link",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "parking",
+              "type": "esriFieldTypeString",
+              "alias": "parking",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "restrooms",
+              "type": "esriFieldTypeString",
+              "alias": "restrooms",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "picnic_tab",
+              "type": "esriFieldTypeString",
+              "alias": "picnic_tab",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "grills",
+              "type": "esriFieldTypeString",
+              "alias": "grills",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "benches",
+              "type": "esriFieldTypeString",
+              "alias": "benches",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "more_info",
+              "type": "esriFieldTypeString",
+              "alias": "more_info",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "nat_ural",
+              "type": "esriFieldTypeString",
+              "alias": "nat_ural",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "result",
+              "type": "esriFieldTypeString",
+              "alias": "String_concat",
+              "sqlType": "sqlTypeOther",
+              "length": 2000,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             }
           ],
           "displayField": "parkname",
           "objectIdField": {
-            "name": "objectid",
+            "name": "OBJECTID",
             "type": "esriFieldTypeOID",
             "alias": "objectid",
-            "domain": null,
+            "sqlType": "sqlTypeOther",
+            "nullable": false,
             "editable": false,
-            "nullable": false
+            "domain": null,
+            "defaultValue": null
           },
           "typeIdField": ""
         }
@@ -998,327 +1346,510 @@
           "geometryType": "esriGeometryPoint",
           "fields": [
             {
-              "name": "objectid",
+              "name": "OBJECTID",
               "type": "esriFieldTypeOID",
               "alias": "objectid",
-              "domain": null,
+              "sqlType": "sqlTypeOther",
+              "nullable": false,
               "editable": false,
-              "nullable": false
+              "domain": null,
+              "defaultValue": null
             },
             {
               "name": "parkname",
               "type": "esriFieldTypeString",
               "alias": "parkname",
-              "domain": null,
-              "editable": true,
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 50
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             },
             {
-              "name": "housenumbe",
+              "name": "full_desc",
               "type": "esriFieldTypeString",
-              "alias": "housenumbe",
-              "domain": null,
-              "editable": true,
+              "alias": "full_desc",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 50
-            },
-            {
-              "name": "streetname",
-              "type": "esriFieldTypeString",
-              "alias": "streetname",
-              "domain": null,
               "editable": true,
-              "nullable": true,
-              "length": 50
-            },
-            {
-              "name": "acres",
-              "type": "esriFieldTypeDouble",
-              "alias": "acres",
               "domain": null,
-              "editable": true,
-              "nullable": true
+              "defaultValue": null
             },
             {
               "name": "address",
               "type": "esriFieldTypeString",
-              "alias": "Address",
-              "domain": null,
-              "editable": true,
+              "alias": "address",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "recreation",
-              "type": "esriFieldTypeString",
-              "alias": "Recreation",
-              "domain": null,
               "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "specialize",
-              "type": "esriFieldTypeString",
-              "alias": "Specialize",
               "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "restrooms",
-              "type": "esriFieldTypeString",
-              "alias": "Restrooms",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "picnic_tables",
-              "type": "esriFieldTypeString",
-              "alias": "picnic_tables",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "picnic_shelter",
-              "type": "esriFieldTypeString",
-              "alias": "picnic_shelter",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "playground",
-              "type": "esriFieldTypeString",
-              "alias": "playground",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "wi_fi",
-              "type": "esriFieldTypeString",
-              "alias": "WI_FI",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "baseball_football",
-              "type": "esriFieldTypeString",
-              "alias": "baseball_football",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "field",
-              "type": "esriFieldTypeString",
-              "alias": "Field",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "tennis_courts",
-              "type": "esriFieldTypeString",
-              "alias": "tennis_courts",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "multi_use_",
-              "type": "esriFieldTypeString",
-              "alias": "Multi_Use_",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "grills",
-              "type": "esriFieldTypeString",
-              "alias": "Grills",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "basketball",
-              "type": "esriFieldTypeString",
-              "alias": "Basketball",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "dog_park",
-              "type": "esriFieldTypeString",
-              "alias": "Dog_Park",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "cycling",
-              "type": "esriFieldTypeString",
-              "alias": "Cycling",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "hours",
-              "type": "esriFieldTypeString",
-              "alias": "Park Hours",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "disc_golf",
-              "type": "esriFieldTypeString",
-              "alias": "Disc Golf",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "gym",
-              "type": "esriFieldTypeString",
-              "alias": "Gym",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "climbing_w",
-              "type": "esriFieldTypeString",
-              "alias": "climbing_w",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "open_play",
-              "type": "esriFieldTypeString",
-              "alias": "Open Play",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "lawn_bowling",
-              "type": "esriFieldTypeString",
-              "alias": "Lawn Bowling",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "shuffleboard",
-              "type": "esriFieldTypeString",
-              "alias": "Shuffleboard",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "pool",
-              "type": "esriFieldTypeString",
-              "alias": "Pool",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "velodrome",
-              "type": "esriFieldTypeString",
-              "alias": "Velodrome",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "splashevil",
-              "type": "esriFieldTypeString",
-              "alias": "splashevil",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "volleyball",
-              "type": "esriFieldTypeString",
-              "alias": "Volleyball",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "websitelin",
-              "type": "esriFieldTypeString",
-              "alias": "websitelin",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 250
-            },
-            {
-              "name": "imagelink",
-              "type": "esriFieldTypeString",
-              "alias": "Image Link",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 250
+              "defaultValue": null
             },
             {
               "name": "gisid",
               "type": "esriFieldTypeString",
               "alias": "gisid",
-              "domain": null,
-              "editable": true,
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 3
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "hours",
+              "type": "esriFieldTypeString",
+              "alias": "hours",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "img_link",
+              "type": "esriFieldTypeString",
+              "alias": "img_link",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "spec_facil",
+              "type": "esriFieldTypeString",
+              "alias": "spec_facil",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "rec_ctr",
+              "type": "esriFieldTypeString",
+              "alias": "rec_ctr",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "gym",
+              "type": "esriFieldTypeString",
+              "alias": "gym",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "pool",
+              "type": "esriFieldTypeString",
+              "alias": "pool",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "splash",
+              "type": "esriFieldTypeString",
+              "alias": "splash",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "dog_park",
+              "type": "esriFieldTypeString",
+              "alias": "dog_park",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "playground",
+              "type": "esriFieldTypeString",
+              "alias": "playground",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "basket_ct",
+              "type": "esriFieldTypeString",
+              "alias": "basket_ct",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "ball_field",
+              "type": "esriFieldTypeString",
+              "alias": "ball_field",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "ath_field",
+              "type": "esriFieldTypeString",
+              "alias": "ath_field",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "sport_ct",
+              "type": "esriFieldTypeString",
+              "alias": "sport_ct",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "tennis_pra",
+              "type": "esriFieldTypeString",
+              "alias": "tennis_pra",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "volleyball",
+              "type": "esriFieldTypeString",
+              "alias": "volleyball",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "lawn_bowl",
+              "type": "esriFieldTypeString",
+              "alias": "lawn_bowl",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "disc_golf",
+              "type": "esriFieldTypeString",
+              "alias": "disc_golf",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "velodrome",
+              "type": "esriFieldTypeString",
+              "alias": "velodrome",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "hockey",
+              "type": "esriFieldTypeString",
+              "alias": "hockey",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "shuffle_ct",
+              "type": "esriFieldTypeString",
+              "alias": "shuffle_ct",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "climb_wall",
+              "type": "esriFieldTypeString",
+              "alias": "climb_wall",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "visit_pav",
+              "type": "esriFieldTypeString",
+              "alias": "visit_pav",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "clubhouse",
+              "type": "esriFieldTypeString",
+              "alias": "clubhouse",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "amptheatr",
+              "type": "esriFieldTypeString",
+              "alias": "amptheatr",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "water_acc",
+              "type": "esriFieldTypeString",
+              "alias": "water_acc",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "fish_pier",
+              "type": "esriFieldTypeString",
+              "alias": "fish_pier",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "open_play",
+              "type": "esriFieldTypeString",
+              "alias": "open_play",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "garden",
+              "type": "esriFieldTypeString",
+              "alias": "garden",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "trail",
+              "type": "esriFieldTypeString",
+              "alias": "trail",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "loop_walk",
+              "type": "esriFieldTypeString",
+              "alias": "loop_walk",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "shelter",
+              "type": "esriFieldTypeString",
+              "alias": "shelter",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "shelt_link",
+              "type": "esriFieldTypeString",
+              "alias": "shelt_link",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "parking",
+              "type": "esriFieldTypeString",
+              "alias": "parking",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "restrooms",
+              "type": "esriFieldTypeString",
+              "alias": "restrooms",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "picnic_tab",
+              "type": "esriFieldTypeString",
+              "alias": "picnic_tab",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "grills",
+              "type": "esriFieldTypeString",
+              "alias": "grills",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "benches",
+              "type": "esriFieldTypeString",
+              "alias": "benches",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "more_info",
+              "type": "esriFieldTypeString",
+              "alias": "more_info",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "nat_ural",
+              "type": "esriFieldTypeString",
+              "alias": "nat_ural",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "result",
+              "type": "esriFieldTypeString",
+              "alias": "String_concat",
+              "sqlType": "sqlTypeOther",
+              "length": 2000,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             }
           ],
           "displayField": "parkname",
           "objectIdField": {
-            "name": "objectid",
+            "name": "OBJECTID",
             "type": "esriFieldTypeOID",
             "alias": "objectid",
-            "domain": null,
+            "sqlType": "sqlTypeOther",
+            "nullable": false,
             "editable": false,
-            "nullable": false
+            "domain": null,
+            "defaultValue": null
           },
           "typeIdField": ""
         }
@@ -1326,332 +1857,515 @@
       "widget~widgets_Query_Widget_50~3": {
         "id": "widget~widgets_Query_Widget_50~3",
         "type": "Features",
-        "label": "WI-FI",
+        "label": "Playground",
         "dataSchema": {
           "geometryType": "esriGeometryPoint",
           "fields": [
             {
-              "name": "objectid",
+              "name": "OBJECTID",
               "type": "esriFieldTypeOID",
               "alias": "objectid",
-              "domain": null,
+              "sqlType": "sqlTypeOther",
+              "nullable": false,
               "editable": false,
-              "nullable": false
+              "domain": null,
+              "defaultValue": null
             },
             {
               "name": "parkname",
               "type": "esriFieldTypeString",
               "alias": "parkname",
-              "domain": null,
-              "editable": true,
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 50
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             },
             {
-              "name": "housenumbe",
+              "name": "full_desc",
               "type": "esriFieldTypeString",
-              "alias": "housenumbe",
-              "domain": null,
-              "editable": true,
+              "alias": "full_desc",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 50
-            },
-            {
-              "name": "streetname",
-              "type": "esriFieldTypeString",
-              "alias": "streetname",
-              "domain": null,
               "editable": true,
-              "nullable": true,
-              "length": 50
-            },
-            {
-              "name": "acres",
-              "type": "esriFieldTypeDouble",
-              "alias": "acres",
               "domain": null,
-              "editable": true,
-              "nullable": true
+              "defaultValue": null
             },
             {
               "name": "address",
               "type": "esriFieldTypeString",
-              "alias": "Address",
-              "domain": null,
-              "editable": true,
+              "alias": "address",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "recreation",
-              "type": "esriFieldTypeString",
-              "alias": "Recreation",
-              "domain": null,
               "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "specialize",
-              "type": "esriFieldTypeString",
-              "alias": "Specialize",
               "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "restrooms",
-              "type": "esriFieldTypeString",
-              "alias": "Restrooms",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "picnic_tables",
-              "type": "esriFieldTypeString",
-              "alias": "picnic_tables",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "picnic_shelter",
-              "type": "esriFieldTypeString",
-              "alias": "picnic_shelter",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "playground",
-              "type": "esriFieldTypeString",
-              "alias": "playground",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "wi_fi",
-              "type": "esriFieldTypeString",
-              "alias": "WI_FI",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "baseball_football",
-              "type": "esriFieldTypeString",
-              "alias": "baseball_football",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "field",
-              "type": "esriFieldTypeString",
-              "alias": "Field",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "tennis_courts",
-              "type": "esriFieldTypeString",
-              "alias": "tennis_courts",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "multi_use_",
-              "type": "esriFieldTypeString",
-              "alias": "Multi_Use_",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "grills",
-              "type": "esriFieldTypeString",
-              "alias": "Grills",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "basketball",
-              "type": "esriFieldTypeString",
-              "alias": "Basketball",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "dog_park",
-              "type": "esriFieldTypeString",
-              "alias": "Dog_Park",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "cycling",
-              "type": "esriFieldTypeString",
-              "alias": "Cycling",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "hours",
-              "type": "esriFieldTypeString",
-              "alias": "Park Hours",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "disc_golf",
-              "type": "esriFieldTypeString",
-              "alias": "Disc Golf",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "gym",
-              "type": "esriFieldTypeString",
-              "alias": "Gym",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "climbing_w",
-              "type": "esriFieldTypeString",
-              "alias": "climbing_w",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "open_play",
-              "type": "esriFieldTypeString",
-              "alias": "Open Play",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "lawn_bowling",
-              "type": "esriFieldTypeString",
-              "alias": "Lawn Bowling",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "shuffleboard",
-              "type": "esriFieldTypeString",
-              "alias": "Shuffleboard",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "pool",
-              "type": "esriFieldTypeString",
-              "alias": "Pool",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "velodrome",
-              "type": "esriFieldTypeString",
-              "alias": "Velodrome",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "splashevil",
-              "type": "esriFieldTypeString",
-              "alias": "splashevil",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "volleyball",
-              "type": "esriFieldTypeString",
-              "alias": "Volleyball",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "websitelin",
-              "type": "esriFieldTypeString",
-              "alias": "websitelin",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 250
-            },
-            {
-              "name": "imagelink",
-              "type": "esriFieldTypeString",
-              "alias": "Image Link",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 250
+              "defaultValue": null
             },
             {
               "name": "gisid",
               "type": "esriFieldTypeString",
               "alias": "gisid",
-              "domain": null,
-              "editable": true,
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 3
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "hours",
+              "type": "esriFieldTypeString",
+              "alias": "hours",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "img_link",
+              "type": "esriFieldTypeString",
+              "alias": "img_link",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "spec_facil",
+              "type": "esriFieldTypeString",
+              "alias": "spec_facil",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "rec_ctr",
+              "type": "esriFieldTypeString",
+              "alias": "rec_ctr",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "gym",
+              "type": "esriFieldTypeString",
+              "alias": "gym",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "pool",
+              "type": "esriFieldTypeString",
+              "alias": "pool",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "splash",
+              "type": "esriFieldTypeString",
+              "alias": "splash",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "dog_park",
+              "type": "esriFieldTypeString",
+              "alias": "dog_park",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "playground",
+              "type": "esriFieldTypeString",
+              "alias": "playground",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "basket_ct",
+              "type": "esriFieldTypeString",
+              "alias": "basket_ct",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "ball_field",
+              "type": "esriFieldTypeString",
+              "alias": "ball_field",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "ath_field",
+              "type": "esriFieldTypeString",
+              "alias": "ath_field",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "sport_ct",
+              "type": "esriFieldTypeString",
+              "alias": "sport_ct",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "tennis_pra",
+              "type": "esriFieldTypeString",
+              "alias": "tennis_pra",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "volleyball",
+              "type": "esriFieldTypeString",
+              "alias": "volleyball",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "lawn_bowl",
+              "type": "esriFieldTypeString",
+              "alias": "lawn_bowl",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "disc_golf",
+              "type": "esriFieldTypeString",
+              "alias": "disc_golf",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "velodrome",
+              "type": "esriFieldTypeString",
+              "alias": "velodrome",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "hockey",
+              "type": "esriFieldTypeString",
+              "alias": "hockey",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "shuffle_ct",
+              "type": "esriFieldTypeString",
+              "alias": "shuffle_ct",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "climb_wall",
+              "type": "esriFieldTypeString",
+              "alias": "climb_wall",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "visit_pav",
+              "type": "esriFieldTypeString",
+              "alias": "visit_pav",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "clubhouse",
+              "type": "esriFieldTypeString",
+              "alias": "clubhouse",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "amptheatr",
+              "type": "esriFieldTypeString",
+              "alias": "amptheatr",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "water_acc",
+              "type": "esriFieldTypeString",
+              "alias": "water_acc",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "fish_pier",
+              "type": "esriFieldTypeString",
+              "alias": "fish_pier",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "open_play",
+              "type": "esriFieldTypeString",
+              "alias": "open_play",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "garden",
+              "type": "esriFieldTypeString",
+              "alias": "garden",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "trail",
+              "type": "esriFieldTypeString",
+              "alias": "trail",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "loop_walk",
+              "type": "esriFieldTypeString",
+              "alias": "loop_walk",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "shelter",
+              "type": "esriFieldTypeString",
+              "alias": "shelter",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "shelt_link",
+              "type": "esriFieldTypeString",
+              "alias": "shelt_link",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "parking",
+              "type": "esriFieldTypeString",
+              "alias": "parking",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "restrooms",
+              "type": "esriFieldTypeString",
+              "alias": "restrooms",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "picnic_tab",
+              "type": "esriFieldTypeString",
+              "alias": "picnic_tab",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "grills",
+              "type": "esriFieldTypeString",
+              "alias": "grills",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "benches",
+              "type": "esriFieldTypeString",
+              "alias": "benches",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "more_info",
+              "type": "esriFieldTypeString",
+              "alias": "more_info",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "nat_ural",
+              "type": "esriFieldTypeString",
+              "alias": "nat_ural",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "result",
+              "type": "esriFieldTypeString",
+              "alias": "String_concat",
+              "sqlType": "sqlTypeOther",
+              "length": 2000,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             }
           ],
           "displayField": "parkname",
           "objectIdField": {
-            "name": "objectid",
+            "name": "OBJECTID",
             "type": "esriFieldTypeOID",
             "alias": "objectid",
-            "domain": null,
+            "sqlType": "sqlTypeOther",
+            "nullable": false,
             "editable": false,
-            "nullable": false
+            "domain": null,
+            "defaultValue": null
           },
           "typeIdField": ""
         }
@@ -1659,332 +2373,515 @@
       "widget~widgets_Query_Widget_50~4": {
         "id": "widget~widgets_Query_Widget_50~4",
         "type": "Features",
-        "label": "Playground",
+        "label": "Trails or Park Paths",
         "dataSchema": {
           "geometryType": "esriGeometryPoint",
           "fields": [
             {
-              "name": "objectid",
+              "name": "OBJECTID",
               "type": "esriFieldTypeOID",
               "alias": "objectid",
-              "domain": null,
+              "sqlType": "sqlTypeOther",
+              "nullable": false,
               "editable": false,
-              "nullable": false
+              "domain": null,
+              "defaultValue": null
             },
             {
               "name": "parkname",
               "type": "esriFieldTypeString",
               "alias": "parkname",
-              "domain": null,
-              "editable": true,
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 50
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             },
             {
-              "name": "housenumbe",
+              "name": "full_desc",
               "type": "esriFieldTypeString",
-              "alias": "housenumbe",
-              "domain": null,
-              "editable": true,
+              "alias": "full_desc",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 50
-            },
-            {
-              "name": "streetname",
-              "type": "esriFieldTypeString",
-              "alias": "streetname",
-              "domain": null,
               "editable": true,
-              "nullable": true,
-              "length": 50
-            },
-            {
-              "name": "acres",
-              "type": "esriFieldTypeDouble",
-              "alias": "acres",
               "domain": null,
-              "editable": true,
-              "nullable": true
+              "defaultValue": null
             },
             {
               "name": "address",
               "type": "esriFieldTypeString",
-              "alias": "Address",
-              "domain": null,
-              "editable": true,
+              "alias": "address",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "recreation",
-              "type": "esriFieldTypeString",
-              "alias": "Recreation",
-              "domain": null,
               "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "specialize",
-              "type": "esriFieldTypeString",
-              "alias": "Specialize",
               "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "restrooms",
-              "type": "esriFieldTypeString",
-              "alias": "Restrooms",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "picnic_tables",
-              "type": "esriFieldTypeString",
-              "alias": "picnic_tables",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "picnic_shelter",
-              "type": "esriFieldTypeString",
-              "alias": "picnic_shelter",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "playground",
-              "type": "esriFieldTypeString",
-              "alias": "playground",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "wi_fi",
-              "type": "esriFieldTypeString",
-              "alias": "WI_FI",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "baseball_football",
-              "type": "esriFieldTypeString",
-              "alias": "baseball_football",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "field",
-              "type": "esriFieldTypeString",
-              "alias": "Field",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "tennis_courts",
-              "type": "esriFieldTypeString",
-              "alias": "tennis_courts",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "multi_use_",
-              "type": "esriFieldTypeString",
-              "alias": "Multi_Use_",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "grills",
-              "type": "esriFieldTypeString",
-              "alias": "Grills",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "basketball",
-              "type": "esriFieldTypeString",
-              "alias": "Basketball",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "dog_park",
-              "type": "esriFieldTypeString",
-              "alias": "Dog_Park",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "cycling",
-              "type": "esriFieldTypeString",
-              "alias": "Cycling",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "hours",
-              "type": "esriFieldTypeString",
-              "alias": "Park Hours",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "disc_golf",
-              "type": "esriFieldTypeString",
-              "alias": "Disc Golf",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "gym",
-              "type": "esriFieldTypeString",
-              "alias": "Gym",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "climbing_w",
-              "type": "esriFieldTypeString",
-              "alias": "climbing_w",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "open_play",
-              "type": "esriFieldTypeString",
-              "alias": "Open Play",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "lawn_bowling",
-              "type": "esriFieldTypeString",
-              "alias": "Lawn Bowling",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "shuffleboard",
-              "type": "esriFieldTypeString",
-              "alias": "Shuffleboard",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "pool",
-              "type": "esriFieldTypeString",
-              "alias": "Pool",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "velodrome",
-              "type": "esriFieldTypeString",
-              "alias": "Velodrome",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "splashevil",
-              "type": "esriFieldTypeString",
-              "alias": "splashevil",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "volleyball",
-              "type": "esriFieldTypeString",
-              "alias": "Volleyball",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "websitelin",
-              "type": "esriFieldTypeString",
-              "alias": "websitelin",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 250
-            },
-            {
-              "name": "imagelink",
-              "type": "esriFieldTypeString",
-              "alias": "Image Link",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 250
+              "defaultValue": null
             },
             {
               "name": "gisid",
               "type": "esriFieldTypeString",
               "alias": "gisid",
-              "domain": null,
-              "editable": true,
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 3
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "hours",
+              "type": "esriFieldTypeString",
+              "alias": "hours",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "img_link",
+              "type": "esriFieldTypeString",
+              "alias": "img_link",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "spec_facil",
+              "type": "esriFieldTypeString",
+              "alias": "spec_facil",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "rec_ctr",
+              "type": "esriFieldTypeString",
+              "alias": "rec_ctr",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "gym",
+              "type": "esriFieldTypeString",
+              "alias": "gym",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "pool",
+              "type": "esriFieldTypeString",
+              "alias": "pool",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "splash",
+              "type": "esriFieldTypeString",
+              "alias": "splash",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "dog_park",
+              "type": "esriFieldTypeString",
+              "alias": "dog_park",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "playground",
+              "type": "esriFieldTypeString",
+              "alias": "playground",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "basket_ct",
+              "type": "esriFieldTypeString",
+              "alias": "basket_ct",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "ball_field",
+              "type": "esriFieldTypeString",
+              "alias": "ball_field",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "ath_field",
+              "type": "esriFieldTypeString",
+              "alias": "ath_field",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "sport_ct",
+              "type": "esriFieldTypeString",
+              "alias": "sport_ct",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "tennis_pra",
+              "type": "esriFieldTypeString",
+              "alias": "tennis_pra",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "volleyball",
+              "type": "esriFieldTypeString",
+              "alias": "volleyball",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "lawn_bowl",
+              "type": "esriFieldTypeString",
+              "alias": "lawn_bowl",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "disc_golf",
+              "type": "esriFieldTypeString",
+              "alias": "disc_golf",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "velodrome",
+              "type": "esriFieldTypeString",
+              "alias": "velodrome",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "hockey",
+              "type": "esriFieldTypeString",
+              "alias": "hockey",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "shuffle_ct",
+              "type": "esriFieldTypeString",
+              "alias": "shuffle_ct",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "climb_wall",
+              "type": "esriFieldTypeString",
+              "alias": "climb_wall",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "visit_pav",
+              "type": "esriFieldTypeString",
+              "alias": "visit_pav",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "clubhouse",
+              "type": "esriFieldTypeString",
+              "alias": "clubhouse",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "amptheatr",
+              "type": "esriFieldTypeString",
+              "alias": "amptheatr",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "water_acc",
+              "type": "esriFieldTypeString",
+              "alias": "water_acc",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "fish_pier",
+              "type": "esriFieldTypeString",
+              "alias": "fish_pier",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "open_play",
+              "type": "esriFieldTypeString",
+              "alias": "open_play",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "garden",
+              "type": "esriFieldTypeString",
+              "alias": "garden",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "trail",
+              "type": "esriFieldTypeString",
+              "alias": "trail",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "loop_walk",
+              "type": "esriFieldTypeString",
+              "alias": "loop_walk",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "shelter",
+              "type": "esriFieldTypeString",
+              "alias": "shelter",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "shelt_link",
+              "type": "esriFieldTypeString",
+              "alias": "shelt_link",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "parking",
+              "type": "esriFieldTypeString",
+              "alias": "parking",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "restrooms",
+              "type": "esriFieldTypeString",
+              "alias": "restrooms",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "picnic_tab",
+              "type": "esriFieldTypeString",
+              "alias": "picnic_tab",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "grills",
+              "type": "esriFieldTypeString",
+              "alias": "grills",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "benches",
+              "type": "esriFieldTypeString",
+              "alias": "benches",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "more_info",
+              "type": "esriFieldTypeString",
+              "alias": "more_info",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "nat_ural",
+              "type": "esriFieldTypeString",
+              "alias": "nat_ural",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "result",
+              "type": "esriFieldTypeString",
+              "alias": "String_concat",
+              "sqlType": "sqlTypeOther",
+              "length": 2000,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             }
           ],
           "displayField": "parkname",
           "objectIdField": {
-            "name": "objectid",
+            "name": "OBJECTID",
             "type": "esriFieldTypeOID",
             "alias": "objectid",
-            "domain": null,
+            "sqlType": "sqlTypeOther",
+            "nullable": false,
             "editable": false,
-            "nullable": false
+            "domain": null,
+            "defaultValue": null
           },
           "typeIdField": ""
         }
@@ -1992,665 +2889,515 @@
       "widget~widgets_Query_Widget_50~5": {
         "id": "widget~widgets_Query_Widget_50~5",
         "type": "Features",
-        "label": "Multi-Use Trails",
+        "label": "Gymnasiums",
         "dataSchema": {
           "geometryType": "esriGeometryPoint",
           "fields": [
             {
-              "name": "objectid",
+              "name": "OBJECTID",
               "type": "esriFieldTypeOID",
               "alias": "objectid",
-              "domain": null,
+              "sqlType": "sqlTypeOther",
+              "nullable": false,
               "editable": false,
-              "nullable": false
+              "domain": null,
+              "defaultValue": null
             },
             {
               "name": "parkname",
               "type": "esriFieldTypeString",
               "alias": "parkname",
-              "domain": null,
-              "editable": true,
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 50
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             },
             {
-              "name": "housenumbe",
+              "name": "full_desc",
               "type": "esriFieldTypeString",
-              "alias": "housenumbe",
-              "domain": null,
-              "editable": true,
+              "alias": "full_desc",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 50
-            },
-            {
-              "name": "streetname",
-              "type": "esriFieldTypeString",
-              "alias": "streetname",
-              "domain": null,
               "editable": true,
-              "nullable": true,
-              "length": 50
-            },
-            {
-              "name": "acres",
-              "type": "esriFieldTypeDouble",
-              "alias": "acres",
               "domain": null,
-              "editable": true,
-              "nullable": true
+              "defaultValue": null
             },
             {
               "name": "address",
               "type": "esriFieldTypeString",
-              "alias": "Address",
-              "domain": null,
-              "editable": true,
+              "alias": "address",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "recreation",
-              "type": "esriFieldTypeString",
-              "alias": "Recreation",
-              "domain": null,
               "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "specialize",
-              "type": "esriFieldTypeString",
-              "alias": "Specialize",
               "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "restrooms",
-              "type": "esriFieldTypeString",
-              "alias": "Restrooms",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "picnic_tables",
-              "type": "esriFieldTypeString",
-              "alias": "picnic_tables",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "picnic_shelter",
-              "type": "esriFieldTypeString",
-              "alias": "picnic_shelter",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "playground",
-              "type": "esriFieldTypeString",
-              "alias": "playground",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "wi_fi",
-              "type": "esriFieldTypeString",
-              "alias": "WI_FI",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "baseball_football",
-              "type": "esriFieldTypeString",
-              "alias": "baseball_football",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "field",
-              "type": "esriFieldTypeString",
-              "alias": "Field",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "tennis_courts",
-              "type": "esriFieldTypeString",
-              "alias": "tennis_courts",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "multi_use_",
-              "type": "esriFieldTypeString",
-              "alias": "Multi_Use_",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "grills",
-              "type": "esriFieldTypeString",
-              "alias": "Grills",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "basketball",
-              "type": "esriFieldTypeString",
-              "alias": "Basketball",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "dog_park",
-              "type": "esriFieldTypeString",
-              "alias": "Dog_Park",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "cycling",
-              "type": "esriFieldTypeString",
-              "alias": "Cycling",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "hours",
-              "type": "esriFieldTypeString",
-              "alias": "Park Hours",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "disc_golf",
-              "type": "esriFieldTypeString",
-              "alias": "Disc Golf",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "gym",
-              "type": "esriFieldTypeString",
-              "alias": "Gym",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "climbing_w",
-              "type": "esriFieldTypeString",
-              "alias": "climbing_w",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "open_play",
-              "type": "esriFieldTypeString",
-              "alias": "Open Play",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "lawn_bowling",
-              "type": "esriFieldTypeString",
-              "alias": "Lawn Bowling",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "shuffleboard",
-              "type": "esriFieldTypeString",
-              "alias": "Shuffleboard",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "pool",
-              "type": "esriFieldTypeString",
-              "alias": "Pool",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "velodrome",
-              "type": "esriFieldTypeString",
-              "alias": "Velodrome",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "splashevil",
-              "type": "esriFieldTypeString",
-              "alias": "splashevil",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "volleyball",
-              "type": "esriFieldTypeString",
-              "alias": "Volleyball",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "websitelin",
-              "type": "esriFieldTypeString",
-              "alias": "websitelin",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 250
-            },
-            {
-              "name": "imagelink",
-              "type": "esriFieldTypeString",
-              "alias": "Image Link",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 250
+              "defaultValue": null
             },
             {
               "name": "gisid",
               "type": "esriFieldTypeString",
               "alias": "gisid",
-              "domain": null,
-              "editable": true,
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 3
-            }
-          ],
-          "displayField": "parkname",
-          "objectIdField": {
-            "name": "objectid",
-            "type": "esriFieldTypeOID",
-            "alias": "objectid",
-            "domain": null,
-            "editable": false,
-            "nullable": false
-          },
-          "typeIdField": ""
-        }
-      },
-      "widget~widgets_Query_Widget_50~6": {
-        "id": "widget~widgets_Query_Widget_50~6",
-        "type": "Features",
-        "label": "Disc Golf",
-        "dataSchema": {
-          "geometryType": "esriGeometryPoint",
-          "fields": [
-            {
-              "name": "objectid",
-              "type": "esriFieldTypeOID",
-              "alias": "objectid",
+              "editable": true,
               "domain": null,
-              "editable": false,
-              "nullable": false
+              "defaultValue": null
             },
             {
-              "name": "parkname",
+              "name": "hours",
               "type": "esriFieldTypeString",
-              "alias": "parkname",
-              "domain": null,
-              "editable": true,
+              "alias": "hours",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 50
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             },
             {
-              "name": "housenumbe",
+              "name": "img_link",
               "type": "esriFieldTypeString",
-              "alias": "housenumbe",
-              "domain": null,
-              "editable": true,
+              "alias": "img_link",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 50
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             },
             {
-              "name": "streetname",
+              "name": "spec_facil",
               "type": "esriFieldTypeString",
-              "alias": "streetname",
-              "domain": null,
-              "editable": true,
+              "alias": "spec_facil",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 50
-            },
-            {
-              "name": "acres",
-              "type": "esriFieldTypeDouble",
-              "alias": "acres",
-              "domain": null,
               "editable": true,
-              "nullable": true
+              "domain": null,
+              "defaultValue": null
             },
             {
-              "name": "address",
+              "name": "rec_ctr",
               "type": "esriFieldTypeString",
-              "alias": "Address",
-              "domain": null,
-              "editable": true,
+              "alias": "rec_ctr",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 254
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             },
             {
-              "name": "recreation",
+              "name": "gym",
               "type": "esriFieldTypeString",
-              "alias": "Recreation",
-              "domain": null,
-              "editable": true,
+              "alias": "gym",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 254
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             },
             {
-              "name": "specialize",
+              "name": "pool",
               "type": "esriFieldTypeString",
-              "alias": "Specialize",
-              "domain": null,
-              "editable": true,
+              "alias": "pool",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 254
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             },
             {
-              "name": "restrooms",
+              "name": "splash",
               "type": "esriFieldTypeString",
-              "alias": "Restrooms",
-              "domain": null,
-              "editable": true,
+              "alias": "splash",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 254
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             },
             {
-              "name": "picnic_tables",
+              "name": "dog_park",
               "type": "esriFieldTypeString",
-              "alias": "picnic_tables",
-              "domain": null,
-              "editable": true,
+              "alias": "dog_park",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "picnic_shelter",
-              "type": "esriFieldTypeString",
-              "alias": "picnic_shelter",
-              "domain": null,
               "editable": true,
-              "nullable": true,
-              "length": 254
+              "domain": null,
+              "defaultValue": null
             },
             {
               "name": "playground",
               "type": "esriFieldTypeString",
               "alias": "playground",
-              "domain": null,
-              "editable": true,
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 254
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             },
             {
-              "name": "wi_fi",
+              "name": "basket_ct",
               "type": "esriFieldTypeString",
-              "alias": "WI_FI",
-              "domain": null,
-              "editable": true,
+              "alias": "basket_ct",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 254
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             },
             {
-              "name": "baseball_football",
+              "name": "ball_field",
               "type": "esriFieldTypeString",
-              "alias": "baseball_football",
-              "domain": null,
-              "editable": true,
+              "alias": "ball_field",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 254
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             },
             {
-              "name": "field",
+              "name": "ath_field",
               "type": "esriFieldTypeString",
-              "alias": "Field",
-              "domain": null,
-              "editable": true,
+              "alias": "ath_field",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 254
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             },
             {
-              "name": "tennis_courts",
+              "name": "sport_ct",
               "type": "esriFieldTypeString",
-              "alias": "tennis_courts",
-              "domain": null,
-              "editable": true,
+              "alias": "sport_ct",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 254
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             },
             {
-              "name": "multi_use_",
+              "name": "tennis_pra",
               "type": "esriFieldTypeString",
-              "alias": "Multi_Use_",
-              "domain": null,
-              "editable": true,
+              "alias": "tennis_pra",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "grills",
-              "type": "esriFieldTypeString",
-              "alias": "Grills",
-              "domain": null,
               "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "basketball",
-              "type": "esriFieldTypeString",
-              "alias": "Basketball",
               "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "dog_park",
-              "type": "esriFieldTypeString",
-              "alias": "Dog_Park",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "cycling",
-              "type": "esriFieldTypeString",
-              "alias": "Cycling",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "hours",
-              "type": "esriFieldTypeString",
-              "alias": "Park Hours",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "disc_golf",
-              "type": "esriFieldTypeString",
-              "alias": "Disc Golf",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "gym",
-              "type": "esriFieldTypeString",
-              "alias": "Gym",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "climbing_w",
-              "type": "esriFieldTypeString",
-              "alias": "climbing_w",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "open_play",
-              "type": "esriFieldTypeString",
-              "alias": "Open Play",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "lawn_bowling",
-              "type": "esriFieldTypeString",
-              "alias": "Lawn Bowling",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "shuffleboard",
-              "type": "esriFieldTypeString",
-              "alias": "Shuffleboard",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "pool",
-              "type": "esriFieldTypeString",
-              "alias": "Pool",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "velodrome",
-              "type": "esriFieldTypeString",
-              "alias": "Velodrome",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
-            },
-            {
-              "name": "splashevil",
-              "type": "esriFieldTypeString",
-              "alias": "splashevil",
-              "domain": null,
-              "editable": true,
-              "nullable": true,
-              "length": 254
+              "defaultValue": null
             },
             {
               "name": "volleyball",
               "type": "esriFieldTypeString",
-              "alias": "Volleyball",
-              "domain": null,
-              "editable": true,
+              "alias": "volleyball",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 254
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             },
             {
-              "name": "websitelin",
+              "name": "lawn_bowl",
               "type": "esriFieldTypeString",
-              "alias": "websitelin",
-              "domain": null,
-              "editable": true,
+              "alias": "lawn_bowl",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 250
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             },
             {
-              "name": "imagelink",
+              "name": "disc_golf",
               "type": "esriFieldTypeString",
-              "alias": "Image Link",
-              "domain": null,
-              "editable": true,
+              "alias": "disc_golf",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 250
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             },
             {
-              "name": "gisid",
+              "name": "velodrome",
               "type": "esriFieldTypeString",
-              "alias": "gisid",
-              "domain": null,
-              "editable": true,
+              "alias": "velodrome",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
               "nullable": true,
-              "length": 3
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "hockey",
+              "type": "esriFieldTypeString",
+              "alias": "hockey",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "shuffle_ct",
+              "type": "esriFieldTypeString",
+              "alias": "shuffle_ct",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "climb_wall",
+              "type": "esriFieldTypeString",
+              "alias": "climb_wall",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "visit_pav",
+              "type": "esriFieldTypeString",
+              "alias": "visit_pav",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "clubhouse",
+              "type": "esriFieldTypeString",
+              "alias": "clubhouse",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "amptheatr",
+              "type": "esriFieldTypeString",
+              "alias": "amptheatr",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "water_acc",
+              "type": "esriFieldTypeString",
+              "alias": "water_acc",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "fish_pier",
+              "type": "esriFieldTypeString",
+              "alias": "fish_pier",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "open_play",
+              "type": "esriFieldTypeString",
+              "alias": "open_play",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "garden",
+              "type": "esriFieldTypeString",
+              "alias": "garden",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "trail",
+              "type": "esriFieldTypeString",
+              "alias": "trail",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "loop_walk",
+              "type": "esriFieldTypeString",
+              "alias": "loop_walk",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "shelter",
+              "type": "esriFieldTypeString",
+              "alias": "shelter",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "shelt_link",
+              "type": "esriFieldTypeString",
+              "alias": "shelt_link",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "parking",
+              "type": "esriFieldTypeString",
+              "alias": "parking",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "restrooms",
+              "type": "esriFieldTypeString",
+              "alias": "restrooms",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "picnic_tab",
+              "type": "esriFieldTypeString",
+              "alias": "picnic_tab",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "grills",
+              "type": "esriFieldTypeString",
+              "alias": "grills",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "benches",
+              "type": "esriFieldTypeString",
+              "alias": "benches",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "more_info",
+              "type": "esriFieldTypeString",
+              "alias": "more_info",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "nat_ural",
+              "type": "esriFieldTypeString",
+              "alias": "nat_ural",
+              "sqlType": "sqlTypeOther",
+              "length": 1073741822,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
+            },
+            {
+              "name": "result",
+              "type": "esriFieldTypeString",
+              "alias": "String_concat",
+              "sqlType": "sqlTypeOther",
+              "length": 2000,
+              "nullable": true,
+              "editable": true,
+              "domain": null,
+              "defaultValue": null
             }
           ],
           "displayField": "parkname",
           "objectIdField": {
-            "name": "objectid",
+            "name": "OBJECTID",
             "type": "esriFieldTypeOID",
             "alias": "objectid",
-            "domain": null,
+            "sqlType": "sqlTypeOther",
+            "nullable": false,
             "editable": false,
-            "nullable": false
+            "domain": null,
+            "defaultValue": null
           },
           "typeIdField": ""
         }

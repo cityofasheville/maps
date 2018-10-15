@@ -32,6 +32,10 @@
             "alias": "cityname"
           },
           {
+            "name": "state",
+            "alias": "state"
+          },
+          {
             "name": "zipcode",
             "alias": "zipcode"
           },
@@ -47,10 +51,9 @@
       "relates": {
         "relate": []
       },
-      "orderByFields": null,
+      "orderByFields": [],
       "showattachments": false,
       "autozoomtoresults": false,
-      "disablePopups": false,
       "layersymbolfrom": "layer"
     },
     {
